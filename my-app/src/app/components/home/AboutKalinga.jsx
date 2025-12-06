@@ -21,7 +21,7 @@ const AboutKalinga = () => {
         }
       `}} />
       <section className="py-16 ">
-        <div className="container mx-auto px-4 lg:px-6 relative">
+        <div className="container mx-auto px-5 flex justify-center relative">
           {/* Single dark blue panel with overlapping image */}
           <div className="relative bg-[var(--dark-blue)] rounded-2xl p-8 md:p-12 lg:p-16 text-white overflow-visible shadow-2xl w-full max-w-[1254px] h-auto md:min-h-[561px]">
             <div className="grid md:grid-cols-2 gap-8 items-start relative z-10">

@@ -1,7 +1,11 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Image from 'next/image'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
 
 export default function FeatureCards({ 
   isSlider = false,
@@ -39,7 +43,7 @@ export default function FeatureCards({
   imageAlt = "Kalinga students celebrating"
 }) {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const swiperRef = useRef(null)
   
   const displayText = isExpanded ? fullText : truncatedText
  
@@ -99,17 +103,29 @@ export default function FeatureCards({
           {/* Cards row - Grid or Slider */}
           {isSlider ? (
             <div className="relative">
-              {/* Slider container */}
-              <div className="overflow-hidden">
-                <div 
-                  className="flex transition-transform duration-300 ease-in-out"
-                  style={{ transform: `translateX(-${currentIndex * 25}%)` }}
-                >
-                  {cards.map((c) => (
-                    <div
-                      key={c.id}
-                      className="min-w-[25%] max-w-[25%] px-2 sm:px-3 flex-shrink-0"
-                    >
+              {/* Swiper Slider */}
+              <Swiper
+                modules={[Navigation]}
+                spaceBetween={16}
+                slidesPerView={1}
+                breakpoints={{
+                  1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 24,
+                  },
+                }}
+                navigation={{
+                  nextEl: '.feature-cards-swiper-button-next',
+                  prevEl: '.feature-cards-swiper-button-prev',
+                }}
+                onSwiper={(swiper) => {
+                  swiperRef.current = swiper
+                }}
+                className="feature-cards-swiper"
+              >
+                {cards.map((c) => (
+                  <SwiperSlide key={c.id}>
+                    <div className="px-2 sm:px-3 h-full">
                       <div className={`relative rounded-lg p-4 sm:p-5 md:p-5 lg:p-6 shadow-xl h-full ${c.variant === 'amber' ? 'bg-[var(--card-sandal)] text-black' : 'bg-[var(--card-gray)] text-gray-800'}`}>
                         <div className="flex flex-col gap-3 sm:gap-4">
                           <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white/60 flex-shrink-0" />
@@ -120,15 +136,14 @@ export default function FeatureCards({
                         </div>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
               
               {/* Navigation buttons - bottom right */}
               <div className="flex justify-end items-center gap-3 mt-6 sm:mt-8">
                 <button
-                  onClick={() => setCurrentIndex((prev) => (prev - 1 + Math.ceil(cards.length / 4)) % Math.ceil(cards.length / 4))}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] text-white flex items-center justify-center hover:opacity-90 transition-opacity shadow-md"
+                  className="feature-cards-swiper-button-prev w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] text-white flex items-center justify-center hover:opacity-90 transition-opacity shadow-md"
                   aria-label="Previous cards"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -137,8 +152,7 @@ export default function FeatureCards({
                 </button>
                 
                 <button
-                  onClick={() => setCurrentIndex((prev) => (prev + 1) % Math.ceil(cards.length / 4))}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] text-white flex items-center justify-center hover:opacity-90 transition-opacity shadow-md"
+                  className="feature-cards-swiper-button-next w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] text-white flex items-center justify-center hover:opacity-90 transition-opacity shadow-md"
                   aria-label="Next cards"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
