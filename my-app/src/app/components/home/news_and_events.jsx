@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import GlobalArrowButton from '../general/global-arrow_button'
+import FeaturedNewsCard from '../general/featured_news_card'
 
 export default function NewsEvents() {
   const [selectedDay, setSelectedDay] = useState(28)
@@ -70,29 +71,12 @@ export default function NewsEvents() {
             {/* Two column grid for news cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-6">
               {/* Column 1: Featured news */}
-              <div className="w-full">
-            <div className="bg-white overflow-hidden shadow-lg rounded-[9px] w-full h-auto md:h-[380px]">
-              <div className="relative h-64 sm:h-80 md:h-[380px]">
-                <Image 
-                  src={newsItems[0].image} 
-                  alt={newsItems[0].title} 
-                  fill
-                  className="object-cover" 
-                />
-                {/* Bottom overlay - reddish-brown semi-transparent */}
-                <div 
-                  className="absolute bottom-0 left-0 right-0 text-white p-4 sm:p-6 bg-[var(--button-red)]/80 backdrop-blur-lg h-auto min-h-[110px] sm:h-[110px] rounded-b-[9px]"
-                 
-                >
-                  <p className="text-xs sm:text-sm tracking-wide font-light mb-1 sm:mb-[5px] mt-[-10px] sm:mt-[-15px]">Day 5 Highlights</p>
-                  <p className="text-sm sm:text-base md:text-[16px] font-plus-jakarta-sans font-semibold leading-[22px]">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing
-                  </p>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
+              <FeaturedNewsCard
+                image={newsItems[0].image}
+                alt={newsItems[0].title}
+                badgeText="Day 5 Highlights"
+                title="Lorem ipsum dolor sit amet, consectetur adipiscing"
+              />
 
           {/* Column 2: stacked news list */}
           <div className="w-full">
