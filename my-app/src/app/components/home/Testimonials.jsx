@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
+import SectionHeading from '../general/SectionHeading';
 
 // Testimonials data array
 const testimonialsData = [
@@ -136,9 +137,10 @@ export default function Testimonials() {
             {/* Main Container */}
             <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center min-h-[700px]">
                 {/* Section Heading */}
-                <h2 className="text-4xl md:text-5xl font-bold text-[#A82D2D] mb-12 md:mb-16 text-center">
-                    What Our Students Say
-                </h2>
+                <SectionHeading 
+                    subtitle="What Our Students Say"
+                    title="Lorem ipsum dolor sit amet, consectetur"
+                />
                 {/* Slider Track */}
                 <div className="relative w-full flex items-center justify-center h-[500px]" style={{ perspective: '1000px' }}>
                     {testimonialsData.map((item, index) => {
@@ -185,26 +187,36 @@ export default function Testimonials() {
                                         {/* Text Content */}
                                         <div className="flex-1 flex flex-col relative pt-2">
                                             <div className={`mb-6 ${item.theme === 'red' ? 'text-red-500' : 'text-orange-500'}`}>
-                                                <svg 
-                                                    className="w-12 h-12 fill-current rotate-180" 
-                                                    viewBox="0 0 24 24" 
-                                                    fill="none" 
-                                                    stroke="currentColor" 
-                                                    strokeWidth="2" 
-                                                    strokeLinecap="round" 
-                                                    strokeLinejoin="round"
-                                                >
-                                                    <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
-                                                    <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" />
-                                                </svg>
+                                               
+                                            <div className="flex gap-1">
+                                               
+<svg  viewBox="0 0 26 41" xmlns="http://www.w3.org/2000/svg" className=" h-12" fill="#FEC071">
+<path d="M18.2832 40.0727C19.6607 40.0727 20.7877 38.9457 20.7877 37.5682C20.7877 36.6916 20.412 35.9402 19.6607 35.5645C19.5355 35.4393 19.5355 35.4393 19.4102 35.3141C13.1489 31.1816 12.7732 26.2977 13.9002 22.5409H22.5409C23.9184 22.5409 25.0455 21.4139 25.0455 20.0364V2.50455C25.0455 1.12705 23.9184 0 22.5409 0H2.50455C1.12705 0 0 1.12705 0 2.50455V24.795C0 27.9257 1.00182 31.0564 2.88023 33.5609C5.13432 36.5663 9.6425 39.9475 18.2832 40.0727Z" fill="#FEC071"/>
+</svg>
+
+<svg  viewBox="0 0 26 41" xmlns="http://www.w3.org/2000/svg" className=" h-12" fill="#F58220">
+<path d="M18.2832 40.0727C19.6607 40.0727 20.7877 38.9457 20.7877 37.5682C20.7877 36.6916 20.412 35.9402 19.6607 35.5645C19.5355 35.4393 19.5355 35.4393 19.4102 35.3141C13.1489 31.1816 12.7732 26.2977 13.9002 22.5409H22.5409C23.9184 22.5409 25.0455 21.4139 25.0455 20.0364V2.50455C25.0455 1.12705 23.9184 0 22.5409 0H2.50455C1.12705 0 0 1.12705 0 2.50455V24.795C0 27.9257 1.00182 31.0564 2.88023 33.5609C5.13432 36.5663 9.6425 39.9475 18.2832 40.0727Z" fill="#F58220"/>
+</svg>
+</div>
+                                               
                                             </div>
                                             <p className="text-slate-800 text-lg md:text-xl leading-relaxed md:leading-loose font-normal">
                                                 {item.quote}
                                             </p>
                                             <div className="mt-8 md:mt-auto pt-6">
-                                                <h4 className="text-slate-900 text-2xl font-medium tracking-tight">{item.name}</h4>
-                                                <p className="text-slate-500 text-sm font-medium mt-1 uppercase tracking-wide">{item.role}</p>
+                                                <h4 className="text-[var(--red)] text-2xl font-medium ">{item.name}</h4>
+                                                <p className=" text-sm  mt-1">{item.role}</p>
                                             </div>
+                                            <div className="flex justify-end gap-1">
+                                               
+                                               <svg  viewBox="0 0 26 41" xmlns="http://www.w3.org/2000/svg" className=" h-12  rotate-0 rotate-y-180" fill="#FEC071">
+                                               <path d="M18.2832 40.0727C19.6607 40.0727 20.7877 38.9457 20.7877 37.5682C20.7877 36.6916 20.412 35.9402 19.6607 35.5645C19.5355 35.4393 19.5355 35.4393 19.4102 35.3141C13.1489 31.1816 12.7732 26.2977 13.9002 22.5409H22.5409C23.9184 22.5409 25.0455 21.4139 25.0455 20.0364V2.50455C25.0455 1.12705 23.9184 0 22.5409 0H2.50455C1.12705 0 0 1.12705 0 2.50455V24.795C0 27.9257 1.00182 31.0564 2.88023 33.5609C5.13432 36.5663 9.6425 39.9475 18.2832 40.0727Z" fill="#FEC071"/>
+                                               </svg>
+                                               
+                                               <svg  viewBox="0 0 26 41" xmlns="http://www.w3.org/2000/svg" className=" h-12   rotate-0 rotate-y-180" fill="#F58220">
+                                               <path d="M18.2832 40.0727C19.6607 40.0727 20.7877 38.9457 20.7877 37.5682C20.7877 36.6916 20.412 35.9402 19.6607 35.5645C19.5355 35.4393 19.5355 35.4393 19.4102 35.3141C13.1489 31.1816 12.7732 26.2977 13.9002 22.5409H22.5409C23.9184 22.5409 25.0455 21.4139 25.0455 20.0364V2.50455C25.0455 1.12705 23.9184 0 22.5409 0H2.50455C1.12705 0 0 1.12705 0 2.50455V24.795C0 27.9257 1.00182 31.0564 2.88023 33.5609C5.13432 36.5663 9.6425 39.9475 18.2832 40.0727Z" fill="#F58220"/>
+                                               </svg>
+                                               </div>
                                         </div>
                             </div>
                     </div>                  
@@ -214,40 +226,27 @@ export default function Testimonials() {
         </div>
 
                 {/* Navigation Controls (Bottom) */}
-                <div className="mt-12 md:mt-16 flex items-center justify-center gap-4 z-50">
-                    <button
-                        onClick={prevSlide}
-                        className="group bg-[#A82D2D] hover:bg-white hover:text-[#A82D2D] h-[45px] px-6 rounded-xl shadow-lg text-white font-sans text-base font-semibold transition-all duration-300 hover:opacity-90 hover:shadow-2xl cursor-pointer flex items-center justify-center gap-2"
-                        aria-label="Previous testimonial"
-                    >
-                        <svg 
-                            className="w-5 h-5 transition-transform duration-300 group-hover:-translate-x-1" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            viewBox="0 0 24 24"
-                            strokeWidth={2}
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                        </svg>
-                        <span>Previous</span>
-                    </button>
-
-                    <button
-                        onClick={nextSlide}
-                        className="group bg-[#A82D2D] hover:bg-white hover:text-[#A82D2D] h-[45px] px-6 rounded-xl shadow-lg text-white font-sans text-base font-semibold transition-all duration-300 hover:opacity-90 hover:shadow-2xl cursor-pointer flex items-center justify-center gap-2"
-                        aria-label="Next testimonial"
-                    >
-                        <span>Next</span>
-                        <svg 
-                            className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            viewBox="0 0 24 24"
-                            strokeWidth={2}
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
+                <div className="-mt-6 flex items-center justify-center gap-4 z-50">
+                <button
+                  type="button"
+                  onClick={prevSlide}
+                  className="cursor-pointer w-11 h-11 md:w-12 md:h-12 rounded-lg bg-[var(--button-red)] text-white flex items-center justify-center hover:bg-[#A2A2A2] transition-colors shadow-md"
+                  aria-label="Previous placement"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={nextSlide}
+                  className="cursor-pointer w-11 h-11 md:w-12 md:h-12 rounded-lg bg-[var(--button-red)] text-white flex items-center justify-center hover:bg-[#A2A2A2] transition-colors shadow-md"
+                  aria-label="Next placement"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
                 </div>
             </div>
         </div>
