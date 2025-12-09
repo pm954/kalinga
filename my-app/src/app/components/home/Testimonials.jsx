@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import SectionHeading from '../general/SectionHeading';
 
 // Testimonials data array
@@ -50,6 +50,8 @@ const testimonialsData = [
 export default function Testimonials() {
     const [activeIndex, setActiveIndex] = useState(1); // Start at index 1
     const [isMobile, setIsMobile] = useState(false);
+    const [sliderHeight, setSliderHeight] = useState(500);
+    const cardRefs = useRef({});
 
     useEffect(() => {
         const checkMobile = () => {
@@ -60,6 +62,37 @@ export default function Testimonials() {
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
+
+    const recalculateHeight = () => {
+        const isMobileCheck = window.innerWidth < 768;
+        let maxHeight = isMobileCheck ? 400 : 500;
+        Object.values(cardRefs.current).forEach((ref) => {
+            if (ref && ref.current) {
+                const cardHeight = ref.current.offsetHeight;
+                if (cardHeight > maxHeight) {
+                    maxHeight = cardHeight;
+                }
+            }
+        });
+        const padding = isMobileCheck ? 80 : 100;
+        setSliderHeight(Math.max(maxHeight + padding, isMobileCheck ? 400 : 500));
+    };
+
+    useEffect(() => {
+        // Calculate after images load
+        const timer = setTimeout(recalculateHeight, 200);
+        
+        // Recalculate on window resize
+        window.addEventListener('resize', recalculateHeight);
+        
+        // Recalculate when active index changes
+        recalculateHeight();
+
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener('resize', recalculateHeight);
+        };
+    }, [activeIndex, isMobile]);
 
     const getSlideStyles = (index) => {
         const total = testimonialsData.length;
@@ -90,23 +123,23 @@ export default function Testimonials() {
         } else if (diff === -1) {
             // Prev Slide (Left)
             styles.zIndex = 20;
-            styles.opacity = 1;
+            styles.opacity = isMobile ? 0 : 1;
             styles.transform = isMobile 
-                ? 'translate(-50%, -50%) scale(0.9) translateZ(-50px)' 
+                ? 'translate(-50%, -50%) scale(0.85) translateZ(-50px)' 
                 : 'translate(-62%, -50%) scale(0.92)';
             styles.bgColor = '#FBBF58'; // Dark Yellow
-            styles.contentOpacity = 0.4;
-            styles.pointerEvents = 'auto';
+            styles.contentOpacity = isMobile ? 0 : 0.4;
+            styles.pointerEvents = isMobile ? 'none' : 'auto';
         } else if (diff === 1) {
             // Next Slide (Right)
             styles.zIndex = 20;
-            styles.opacity = 1;
+            styles.opacity = isMobile ? 0 : 1;
             styles.transform = isMobile 
-                ? 'translate(-50%, -50%) scale(0.9) translateZ(-50px)' 
+                ? 'translate(-50%, -50%) scale(0.85) translateZ(-50px)' 
                 : 'translate(-38%, -50%) scale(0.92)';
             styles.bgColor = '#FEDCB0'; // Light Yellow
-            styles.contentOpacity = 0.6;
-            styles.pointerEvents = 'auto';
+            styles.contentOpacity = isMobile ? 0 : 0.6;
+            styles.pointerEvents = isMobile ? 'none' : 'auto';
         } else {
             // Hidden / Stacked behind
             styles.zIndex = 10;
@@ -137,12 +170,21 @@ export default function Testimonials() {
             {/* Main Container */}
             <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center">
                 {/* Section Heading */}
-                <SectionHeading 
-                    subtitle="What Our Students Say"
-                    title="Lorem ipsum dolor sit amet, consectetur"
-                />
+                <div className="w-full pt-8">
+                    <SectionHeading 
+                        subtitle="What Our Students Say"
+                        title="Lorem ipsum dolor sit amet, consectetur"
+                    />
+                </div>
                 {/* Slider Track */}
-                <div className="relative w-full flex items-center justify-center h-[500px]" style={{ perspective: '1000px' }}>
+                <div 
+                    className="relative w-full flex items-center justify-center" 
+                    style={{ 
+                        perspective: '1000px',
+                        minHeight: `${sliderHeight}px`,
+                        height: `${sliderHeight}px`
+                    }}
+                >
                     {testimonialsData.map((item, index) => {
                         const styles = getSlideStyles(index);
                         const isActive = index === activeIndex;
@@ -150,7 +192,7 @@ export default function Testimonials() {
                         return (
                             <div
                                 key={item.id}
-                                className="absolute top-1/2 left-1/2 w-full max-w-4xl p-2 transition-all duration-[600ms] origin-center"
+                                className="absolute top-1/2 left-1/2 w-full max-w-[95%] sm:max-w-[90%] md:max-w-4xl p-1 sm:p-2 transition-all duration-[600ms] origin-center"
                                 style={{
                                     zIndex: styles.zIndex,
                                     opacity: styles.opacity,
@@ -162,60 +204,61 @@ export default function Testimonials() {
                                 onClick={() => !isActive && goToSlide(index)}
                             >
                                 <div
-                                    className="w-full h-full rounded-[2rem] overflow-hidden relative transition-colors duration-500 border"
+                                    ref={(el) => {
+                                        if (el) cardRefs.current[`card-${item.id}`] = { current: el };
+                                    }}
+                                    className="w-full rounded-xl sm:rounded-2xl overflow-hidden relative transition-colors duration-500 border"
                                     style={{
                                         backgroundColor: styles.bgColor,
                                         borderColor: isActive ? '#f1f5f9' : 'transparent',
                                     }}
                                 >
                                     <div
-                                        className="flex flex-col md:flex-row gap-6 md:gap-12 p-6 md:p-10 pb-16 md:pb-10 h-full transition-opacity duration-500"
+                                        className="flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-12 p-4 sm:p-6 md:p-10 pb-12 sm:pb-16 md:pb-10 transition-opacity duration-500"
                                         style={{ opacity: styles.contentOpacity }}
                                     >
                                         {/* Image */}
                                         <div className="w-full md:w-5/12 flex-shrink-0 relative">
-                                            <div className="aspect-[4/5] w-full bg-slate-200 rounded-2xl border-[6px] border-white relative overflow-hidden">
+                                            <div className="aspect-[4/5] w-full bg-slate-200 rounded-xl sm:rounded-2xl border-2 sm:border-4 md:border-[6px] border-white relative overflow-hidden">
                                                 <img 
                                                     src={item.image} 
                                                     className="w-full h-full object-cover" 
                                                     alt={item.name}
+                                                    onLoad={() => {
+                                                        // Recalculate height when image loads
+                                                        setTimeout(recalculateHeight, 100);
+                                                    }}
                                                 />
-                            </div>
-                    </div>  
+                                            </div>
+                                        </div>
                     
                                         {/* Text Content */}
                                         <div className="flex-1 flex flex-col relative pt-2">
-                                            <div className={`mb-6 ${item.theme === 'red' ? 'text-red-500' : 'text-orange-500'}`}>
-                                               
-                                            <div className="flex gap-1">
-                                               
-<svg  viewBox="0 0 26 41" xmlns="http://www.w3.org/2000/svg" className=" h-12" fill="#FEC071">
-<path d="M18.2832 40.0727C19.6607 40.0727 20.7877 38.9457 20.7877 37.5682C20.7877 36.6916 20.412 35.9402 19.6607 35.5645C19.5355 35.4393 19.5355 35.4393 19.4102 35.3141C13.1489 31.1816 12.7732 26.2977 13.9002 22.5409H22.5409C23.9184 22.5409 25.0455 21.4139 25.0455 20.0364V2.50455C25.0455 1.12705 23.9184 0 22.5409 0H2.50455C1.12705 0 0 1.12705 0 2.50455V24.795C0 27.9257 1.00182 31.0564 2.88023 33.5609C5.13432 36.5663 9.6425 39.9475 18.2832 40.0727Z" fill="#FEC071"/>
-</svg>
-
-<svg  viewBox="0 0 26 41" xmlns="http://www.w3.org/2000/svg" className=" h-12" fill="#F58220">
-<path d="M18.2832 40.0727C19.6607 40.0727 20.7877 38.9457 20.7877 37.5682C20.7877 36.6916 20.412 35.9402 19.6607 35.5645C19.5355 35.4393 19.5355 35.4393 19.4102 35.3141C13.1489 31.1816 12.7732 26.2977 13.9002 22.5409H22.5409C23.9184 22.5409 25.0455 21.4139 25.0455 20.0364V2.50455C25.0455 1.12705 23.9184 0 22.5409 0H2.50455C1.12705 0 0 1.12705 0 2.50455V24.795C0 27.9257 1.00182 31.0564 2.88023 33.5609C5.13432 36.5663 9.6425 39.9475 18.2832 40.0727Z" fill="#F58220"/>
-</svg>
-</div>
-                                               
+                                            <div className={`mb-4 sm:mb-6 ${item.theme === 'red' ? 'text-red-500' : 'text-orange-500'}`}>
+                                                <div className="flex gap-1">
+                                                    <svg viewBox="0 0 26 41" xmlns="http://www.w3.org/2000/svg" className="h-8 sm:h-10 md:h-12" fill="#FEC071">
+                                                        <path d="M18.2832 40.0727C19.6607 40.0727 20.7877 38.9457 20.7877 37.5682C20.7877 36.6916 20.412 35.9402 19.6607 35.5645C19.5355 35.4393 19.5355 35.4393 19.4102 35.3141C13.1489 31.1816 12.7732 26.2977 13.9002 22.5409H22.5409C23.9184 22.5409 25.0455 21.4139 25.0455 20.0364V2.50455C25.0455 1.12705 23.9184 0 22.5409 0H2.50455C1.12705 0 0 1.12705 0 2.50455V24.795C0 27.9257 1.00182 31.0564 2.88023 33.5609C5.13432 36.5663 9.6425 39.9475 18.2832 40.0727Z" fill="#FEC071"/>
+                                                    </svg>
+                                                    <svg viewBox="0 0 26 41" xmlns="http://www.w3.org/2000/svg" className="h-8 sm:h-10 md:h-12" fill="#F58220">
+                                                        <path d="M18.2832 40.0727C19.6607 40.0727 20.7877 38.9457 20.7877 37.5682C20.7877 36.6916 20.412 35.9402 19.6607 35.5645C19.5355 35.4393 19.5355 35.4393 19.4102 35.3141C13.1489 31.1816 12.7732 26.2977 13.9002 22.5409H22.5409C23.9184 22.5409 25.0455 21.4139 25.0455 20.0364V2.50455C25.0455 1.12705 23.9184 0 22.5409 0H2.50455C1.12705 0 0 1.12705 0 2.50455V24.795C0 27.9257 1.00182 31.0564 2.88023 33.5609C5.13432 36.5663 9.6425 39.9475 18.2832 40.0727Z" fill="#F58220"/>
+                                                    </svg>
+                                                </div>
                                             </div>
-                                            <p className="text-slate-800 text-lg md:text-xl leading-relaxed md:leading-loose font-normal">
+                                            <p className="text-slate-800 text-base sm:text-lg md:text-xl leading-relaxed md:leading-loose font-normal">
                                                 {item.quote}
                                             </p>
-                                            <div className="mt-8 md:mt-auto pt-6">
-                                                <h4 className="text-[var(--red)] text-2xl font-medium ">{item.name}</h4>
-                                                <p className=" text-sm  mt-1">{item.role}</p>
+                                            <div className="mt-6 sm:mt-8 md:mt-auto pt-4 sm:pt-6">
+                                                <h4 className="text-[var(--red)] text-xl sm:text-2xl font-medium">{item.name}</h4>
+                                                <p className="text-xs sm:text-sm mt-1">{item.role}</p>
                                             </div>
-                                            <div className="flex justify-end gap-1">
-                                               
-                                               <svg  viewBox="0 0 26 41" xmlns="http://www.w3.org/2000/svg" className=" h-12  rotate-0 rotate-y-180" fill="#FEC071">
-                                               <path d="M18.2832 40.0727C19.6607 40.0727 20.7877 38.9457 20.7877 37.5682C20.7877 36.6916 20.412 35.9402 19.6607 35.5645C19.5355 35.4393 19.5355 35.4393 19.4102 35.3141C13.1489 31.1816 12.7732 26.2977 13.9002 22.5409H22.5409C23.9184 22.5409 25.0455 21.4139 25.0455 20.0364V2.50455C25.0455 1.12705 23.9184 0 22.5409 0H2.50455C1.12705 0 0 1.12705 0 2.50455V24.795C0 27.9257 1.00182 31.0564 2.88023 33.5609C5.13432 36.5663 9.6425 39.9475 18.2832 40.0727Z" fill="#FEC071"/>
-                                               </svg>
-                                               
-                                               <svg  viewBox="0 0 26 41" xmlns="http://www.w3.org/2000/svg" className=" h-12   rotate-0 rotate-y-180" fill="#F58220">
-                                               <path d="M18.2832 40.0727C19.6607 40.0727 20.7877 38.9457 20.7877 37.5682C20.7877 36.6916 20.412 35.9402 19.6607 35.5645C19.5355 35.4393 19.5355 35.4393 19.4102 35.3141C13.1489 31.1816 12.7732 26.2977 13.9002 22.5409H22.5409C23.9184 22.5409 25.0455 21.4139 25.0455 20.0364V2.50455C25.0455 1.12705 23.9184 0 22.5409 0H2.50455C1.12705 0 0 1.12705 0 2.50455V24.795C0 27.9257 1.00182 31.0564 2.88023 33.5609C5.13432 36.5663 9.6425 39.9475 18.2832 40.0727Z" fill="#F58220"/>
-                                               </svg>
-                                               </div>
+                                            <div className="flex justify-end gap-1 mt-4 sm:mt-0">
+                                                <svg viewBox="0 0 26 41" xmlns="http://www.w3.org/2000/svg" className="h-8 sm:h-10 md:h-12 rotate-0 rotate-y-180" fill="#FEC071">
+                                                    <path d="M18.2832 40.0727C19.6607 40.0727 20.7877 38.9457 20.7877 37.5682C20.7877 36.6916 20.412 35.9402 19.6607 35.5645C19.5355 35.4393 19.5355 35.4393 19.4102 35.3141C13.1489 31.1816 12.7732 26.2977 13.9002 22.5409H22.5409C23.9184 22.5409 25.0455 21.4139 25.0455 20.0364V2.50455C25.0455 1.12705 23.9184 0 22.5409 0H2.50455C1.12705 0 0 1.12705 0 2.50455V24.795C0 27.9257 1.00182 31.0564 2.88023 33.5609C5.13432 36.5663 9.6425 39.9475 18.2832 40.0727Z" fill="#FEC071"/>
+                                                </svg>
+                                                <svg viewBox="0 0 26 41" xmlns="http://www.w3.org/2000/svg" className="h-8 sm:h-10 md:h-12 rotate-0 rotate-y-180" fill="#F58220">
+                                                    <path d="M18.2832 40.0727C19.6607 40.0727 20.7877 38.9457 20.7877 37.5682C20.7877 36.6916 20.412 35.9402 19.6607 35.5645C19.5355 35.4393 19.5355 35.4393 19.4102 35.3141C13.1489 31.1816 12.7732 26.2977 13.9002 22.5409H22.5409C23.9184 22.5409 25.0455 21.4139 25.0455 20.0364V2.50455C25.0455 1.12705 23.9184 0 22.5409 0H2.50455C1.12705 0 0 1.12705 0 2.50455V24.795C0 27.9257 1.00182 31.0564 2.88023 33.5609C5.13432 36.5663 9.6425 39.9475 18.2832 40.0727Z" fill="#F58220"/>
+                                                </svg>
+                                            </div>
                                         </div>
                             </div>
                     </div>                  
@@ -225,24 +268,24 @@ export default function Testimonials() {
         </div>
 
                 {/* Navigation Controls (Bottom) */}
-                <div className="md:-mt-6 mt-12 flex items-center justify-center gap-4 z-50">
+                <div className="md:-mt-6 mt-8 sm:mt-12 flex items-center justify-center gap-3 sm:gap-4 z-50">
                 <button
                   type="button"
                   onClick={prevSlide}
-                  className="cursor-pointer w-11 h-11 md:w-12 md:h-12 rounded-lg bg-[var(--button-red)] text-white flex items-center justify-center hover:bg-[#A2A2A2] transition-colors"
-                  aria-label="Previous placement"
+                  className="cursor-pointer w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-lg bg-[var(--button-red)] text-white flex items-center justify-center hover:bg-[#A2A2A2] transition-colors"
+                  aria-label="Previous testimonial"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
                 <button
                   type="button"
                   onClick={nextSlide}
-                  className="cursor-pointer w-11 h-11 md:w-12 md:h-12 rounded-lg bg-[var(--button-red)] text-white flex items-center justify-center hover:bg-[#A2A2A2] transition-colors"
-                  aria-label="Next placement"
+                  className="cursor-pointer w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-lg bg-[var(--button-red)] text-white flex items-center justify-center hover:bg-[#A2A2A2] transition-colors"
+                  aria-label="Next testimonial"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </button>

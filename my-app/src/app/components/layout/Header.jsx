@@ -269,7 +269,7 @@ const Header = () => {
 
       {/* Main Header */}
       <div className={`transition-all z-[10050] w-full overflow-visible ${isScrolled ? 'fixed top-0 left-0 right-0 bg-white duration-500 shadow-md' : ' duration-500'}`}>
-          <div className="flex items-center justify-around container mx-auto px-4 lg:px-8 py-4 w-full max-w-full !z-[10050] overflow-visible">
+          <div className="flex items-center justify-between container mx-auto px-4 lg:px-8 py-4 w-full max-w-full !z-[10050] overflow-visible">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 relative">
               <div className="w-36 h-12">

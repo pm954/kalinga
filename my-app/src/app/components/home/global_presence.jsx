@@ -16,7 +16,7 @@ const GlobalPresence = ({
   return (
     <section className="py-16">
       <div className="container mx-auto px-4 lg:px-6">
-        <div className={`mx-auto ${backgroundColor} rounded-xl p-4 sm:p-6 md:p-12 text-center text-white relative w-full h-auto min-h-[500px] sm:min-h-[550px] md:h-[571px]`}>
+        <div className={`mx-auto ${backgroundColor} rounded-xl px-4 py-8 sm:p-6 md:p-12 text-center text-white relative w-full h-auto min-h-[500px] sm:min-h-[550px] md:h-[571px]`}>
         <div className="max-w-4xl mx-auto">
           <h5 className={`text-base font-plus-jakarta-sans !sm:text-lg md:text-xl !lg:text-[25px] ${subtitleColor} mb-2 sm:mb-3 font-medium leading-[25px] text-center`}>
             {subtitle}
