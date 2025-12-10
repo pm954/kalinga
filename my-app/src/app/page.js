@@ -22,32 +22,32 @@ const quickLinks = [
   {
     title: "Events",
     href: "/news-and-events",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/marketing-icon.png"
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Flagship+Events.svg"
   },
   {
     title: "Campus Life",
     href: "/students/campus-life",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/school-icon.png"
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/campus+life.svg"
   },
   {
     title: "International",
     href: "/international",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/worldwide-icon.png"
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/international.svg"
   },
   {
     title: "Chat with Student",
     href: "/students",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/student-icon.png"
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/chat+with+students.svg"
   },
   {
     title: "Admission",
     href: "/admissions",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/educational-icon.png"
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/admissions.svg"
   },
   {
     title: "Facilities",
     href: "/facilities",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/educational-icon.png"
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/facility-management.svg"
   },
 
 ]

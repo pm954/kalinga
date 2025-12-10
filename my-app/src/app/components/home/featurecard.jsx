@@ -14,121 +14,141 @@ export default function FeatureCards({
       id: 1, 
       title: 'Global Exposure', 
       body: 'Students from 29+ nationalities create a truly global learning environment. Collaborate, connect, and grow through multi-cultural programs and diverse perspectives.', 
-      variant: 'amber' 
+      variant: 'gray',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Global.svg'
     },
     { 
       id: 2, 
       title: 'Vibrant Campus Life', 
       body: 'Experience an unforgettable college life filled with green spaces, lively events, and a dynamic student community.', 
-      variant: 'gray' 
+      variant: 'amber',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/university.svg'
     },
     { 
       id: 3, 
       title: 'Career Counseling', 
       body: 'Get personalized guidance and support at every stage of your academic journey — from choosing the right path to landing your dream job.', 
-      variant: 'amber' 
+      variant: 'gray',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Career+Counseling.svg'
     },
     { 
       id: 4, 
       title: 'Wide Range of Programs', 
       body: 'Choose from 130+ industry-relevant programs across disciplines — from Computer Science to Pharmacy — and unlock limitless career opportunities.', 
-      variant: 'gray' 
+      variant: 'amber',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Wide+Range+of+Programs.svg'
     },
     { 
       id: 5, 
       title: 'Abundant Scholarships', 
       body: 'Avail up to 100% scholarships through merit, sports, cultural, and achiever categories — rewarding talent and ambition.', 
-      variant: 'amber' 
+      variant: 'gray',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Abundant+Scholarships.svg' 
     },
     { 
       id: 6, 
       title: 'Industry-Relevant Curriculum', 
       body: 'Aligned with the New Education Policy 2020, our curriculum bridges classroom learning with real-world industry needs.', 
-      variant: 'gray' 
+      variant: 'amber',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Industry-Relevant+Curriculum.svg'  
     },
     { 
       id: 7, 
       title: 'Holistic Development', 
       body: 'We focus on nurturing confident, well-rounded individuals ready to make informed life and career decisions.', 
-      variant: 'amber' 
+      variant: 'gray',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Holistic+Development.svg'  
     },
     { 
       id: 8, 
       title: 'Extensive Research Facilities', 
       body: 'With 90+ advanced labs, including IT and CIF labs, Kalinga University leads in innovation and research excellence.', 
-      variant: 'gray' 
+      variant: 'amber',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Extensive+Research+Facilities.svg'  
     },
     { 
       id: 9, 
       title: 'Experienced Faculties', 
       body: 'Learn from highly qualified professors from India and abroad who inspire and guide students toward leadership and success.', 
-      variant: 'amber' 
+      variant: 'gray',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Experienced+Faculties.svg'  
     },
     { 
       id: 10, 
       title: 'Flagship Events', 
       body: 'Celebrate creativity and achievement through exciting events like Hackathons, Kalinga Utsav, Sports Fest, Moot Courts, and Convocation Ceremonies.', 
-      variant: 'gray' 
+      variant: 'amber',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Flagship+Events.svg'  
     },
     { 
       id: 11, 
       title: 'Internships & Industrial Visits', 
       body: 'Gain real-world exposure with internship opportunities and industrial visits that build practical skills and confidence.', 
-      variant: 'amber' 
+      variant: 'gray',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Industrial+Visits.svg'  
     },
     { 
       id: 12, 
       title: 'Improve Employability', 
       body: 'Develop skills employers value — communication, leadership, teamwork, problem-solving, and critical thinking — beyond academics.', 
-      variant: 'gray' 
+      variant: 'amber',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Improve+Employability.svg'  
     },
     { 
       id: 13, 
       title: 'Campus Placement Drives', 
       body: 'With 400+ recruitment partners, students secure placements across top industries and leading organizations.', 
-      variant: 'amber' 
+      variant: 'gary',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Campus+Placement+Drives.svg'  
     },
     { 
       id: 14, 
       title: 'Networking Opportunities', 
       body: 'Engage with industry leaders, alumni, and professionals through workshops, seminars, and conferences that strengthen your career network.', 
-      variant: 'gray' 
+      variant: 'amber',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Networking+Opportunities.svg'  
     },
     { 
       id: 15, 
       title: 'Cultural Celebrations', 
       body: 'Enjoy a vibrant campus culture through festivals, concerts, talent shows, and open mic events that unite students from all backgrounds.', 
-      variant: 'amber' 
+      variant: 'gray',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Cultural+Celebrations.svg'  
     },
     { 
       id: 16, 
       title: 'Community Services', 
       body: 'Join NCC and NSS initiatives and become a socially responsible citizen contributing to meaningful community work.', 
-      variant: 'gray' 
+      variant: 'amber',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Community+Services.svg'  
     },
     { 
       id: 17, 
       title: 'Educational Tours', 
       body: 'Experience learning beyond classrooms through national and international educational tours, including visits to top industries and destinations like Dubai.', 
-      variant: 'amber' 
+      variant: 'gray',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Educational+Tours.svg'  
     },
     { 
       id: 18, 
       title: 'Mentor-Mentee System', 
       body: 'Benefit from personalized guidance through one-on-one mentoring that supports your academic and personal growth.', 
-      variant: 'gray' 
+      variant: 'amber',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Mentor-Mentee+System.svg'  
     },
     { 
       id: 19, 
       title: 'Emotional Well-Being', 
       body: 'Participate in wellness programs designed to support mental health, reduce stress, and promote a positive learning environment.', 
-      variant: 'amber' 
+      variant: 'gray',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Emotional+Well-Being.svg'  
     },
     { 
       id: 20, 
       title: '100% Automation', 
       body: 'Access everything digitally through our student ERP system — from admissions and academics to results, schedules, and notifications.', 
-      variant: 'gray' 
+      variant: 'amber',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/100%25+Automation.svg' 
     },
   ],
   title = "Why is Kalinga University the Right Choice?",
@@ -235,7 +255,18 @@ export default function FeatureCards({
                     <div className="h-full">
                       <div className={`relative rounded-lg p-4 sm:p-5 md:p-5 lg:p-5 shadow-xl h-full flex items-center ${c.variant === 'amber' ? 'bg-[var(--card-sandal)] text-black' : 'bg-[var(--card-gray)] text-gray-800'}`} style={{ minHeight: '260px' }}>
                         <div className="flex flex-col gap-3 sm:gap-4 w-full h-full">
-                          <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white/60 flex-shrink-0" />
+                          {c.image && (
+                            <div className="flex-shrink-0">
+                              <Image
+                                src={c.image}
+                                alt={c.title}
+                                width={48}
+                                height={48}
+                                className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 object-contain"
+                                loading="lazy"
+                              />
+                            </div>
+                          )}
                           <div className="flex-1 flex flex-col">
                             <h4 className="font-semibold !text-base mb-1.5 sm:mb-2">{c.title}</h4>
                             <p
@@ -286,17 +317,25 @@ export default function FeatureCards({
               {cards.map((c) => (
                 <div
                   key={c.id}
-                  className={`relative rounded-lg p-4 sm:p-5 md:p-5 lg:p-6 shadow-xl flex ${c.variant === 'amber' ? 'bg-[var(--card-sandal)] text-black' : 'bg-[var(--card-gray)] text-gray-800'}`} style={{ minHeight: '260px' }}>
+                  className={`relative rounded-lg p-4 sm:p-5 md:p-5 lg:p-6 shadow-xl flex ${c.variant === 'amber' ? 'bg-[var(--card-sandal)] text-black' : 'bg-[var(--card-gray)] text-gray-800'}`} style={{ minHeight: '260px' }}
+                >
                   <div className="flex flex-col gap-3 sm:gap-4 w-full h-full">
                     <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white/60 flex-shrink-0" />
-                    <div className="flex-1 flex flex-col">
-                      <h4 className="font-semibold !text-base mb-1.5 sm:mb-2">{c.title}</h4>
-                      <p
-                        className="text-xs sm:text-sm leading-relaxed text-[0.75rem] sm:text-[0.8rem] md:text-[0.85rem] flex-1"
-                        style={cardExpanded[c.id] ? undefined : collapsedTextStyle}
-                      >
-                        {c.body}
-                      </p>
+                    <div className="p-6 sm:p-8 rounded-2xl h-full flex flex-col">
+                      {c.image && (
+                        <div className="relative w-16 h-16 mb-4 flex items-center justify-center">
+                          <Image
+                            src={c.image}
+                            alt={c.title}
+                            width={48}
+                            height={48}
+                            className="object-contain"
+                            loading="lazy"
+                          />
+                        </div>
+                      )}
+                      <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">{c.title}</h3>
+                      <p className="text-gray-600 text-sm sm:text-base flex-grow">{c.body}</p>
                       {c.body && (
                         <button
                           onClick={() => toggleCard(c.id)}

@@ -33,7 +33,7 @@ const Placements = () => {
   const [internships, setInternships] = useState(0)
   const placementImages = [
     'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/placements-silder-1.webp',
-    'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/about-kalinga.webp',
+    'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/mca.webp',
     'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg',
     'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/placements-ibm.webp',
     'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg'

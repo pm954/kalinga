@@ -5,16 +5,23 @@ import LogoLoop from '../gsap/LogoLoop'
 
 const AccreditationRanking = () => {
   const accreditations = [
-    { id: 1, name: 'Best Practices', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/best-prac.webp' },
-    { id: 2, name: 'Best Research', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/best-res.webp' },
-    { id: 3, name: 'Competition Success', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/comp-top.webp' },
-    { id: 4, name: 'Outlook', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/outlook.webp' },
-    { id: 5, name: 'Competition 3', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/comp-3.webp' },
-    { id: 6, name: 'UGC Grant', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/ugc-gra.webp' },
-    { id: 7, name: 'Competition', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/comp.webp' },
-    { id: 8, name: 'India Today', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/india-today.webp' },
-    { id: 9, name: 'Global', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/global.webp' },
-    { id: 10, name: 'NIRF', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/nirf.png' },
+           { id: 1, name: 'NIRF', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/nirf.webp' },
+           { id: 2, name: 'NAAC B+', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/naac.webp' },
+           { id: 2, name: 'UGC Grant', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/ugc.webp' },
+           { id: 4, name: 'Outlook', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/outlook.webp' },
+           { id: 5, name: 'Competition 3', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/competition.webp' },
+
+
+    // { id: 1, name: 'Best Practices', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/best-prac.webp' },
+    // { id: 2, name: 'Best Research', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/best-res.webp' },
+    // { id: 3, name: 'Competition Success', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/comp-top.webp' },
+    // { id: 4, name: 'Outlook', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/outlook.webp' },
+    // { id: 5, name: 'Competition 3', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/comp-3.webp' },
+    // { id: 6, name: 'UGC Grant', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/ugc-gra.webp' },
+    // { id: 7, name: 'Competition', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/comp.webp' },
+    // { id: 8, name: 'India Today', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/india-today.webp' },
+    // { id: 9, name: 'Global', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/global.webp' },
+    // { id: 10, name: 'NIRF', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/nirf.png' },
   ]
 
   // Convert to LogoLoop format
@@ -53,7 +60,7 @@ const AccreditationRanking = () => {
                     <img
                       src={item.src}
                       alt={item.alt}
-                      className="object-contain w-[30px] h-[30px]"
+                      className="object-contain w-[30px] h-[30px] rounded-[20px]"
                       loading="lazy"
                       decoding="async"
                       draggable={false}
