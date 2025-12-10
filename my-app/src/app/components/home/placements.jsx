@@ -8,12 +8,24 @@ import SectionHeading from '../general/SectionHeading'
 const logos = [
   'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/infosys.webp',
   'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/byjus.webp',
+  'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/capgemini.webp',
   'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/airtel.webp',
   'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/amul.webp',
+  'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/cipla.webp',
+  'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/wipro.webp',
+  'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/adani.webp',
+  'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/bosch.webp',
+  'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/biocon.webp',
+  'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/apollo.webp',
   'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/asahi.webp',
   'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/axis.webp',
+  'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/cognizant.webp',
+  'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/suzuki.webp',
+  'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/himalaya.webp',
   'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/decathlon.webp',
   'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/force.webp',
+  'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/goorej.webp',
+  'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/genpact.webp',
   'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/hdfc.webp',
   'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/jio.webp',
   'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/justdail.webp',
@@ -33,11 +45,9 @@ const Placements = () => {
   const [recruiters, setRecruiters] = useState(0)
   const [internships, setInternships] = useState(0)
   const placementImages = [
-    'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/placements-silder-1.webp',
-    'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/mca.webp',
-    'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg',
-    'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/placements-ibm.webp',
-    'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg'
+    'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-slider-1.png',
+    'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement.png',
+    'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-slider-2.png'
   ]
   
   // Convert logo URLs to image elements for LogoLoop
