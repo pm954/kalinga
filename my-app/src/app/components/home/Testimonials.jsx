@@ -167,7 +167,7 @@ export default function Testimonials() {
                         subtitleClassName="text-center"
                         titleClassName="text-center"
                         subtitle="Real Stories. Real Success."
-                        title="Lorem ipsum dolor sit amet, consectetur"
+                        title="Stories that define our Kalinga spirit."
                     />
                 </h5>
                 {/* Slider Track */}
