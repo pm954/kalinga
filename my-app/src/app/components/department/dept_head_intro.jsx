@@ -4,10 +4,7 @@ import SectionHeading from "../general/SectionHeading";
 const DEFAULT_IMAGE_SRC = "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/omprakash.png";
 const QUOTE_IMAGE = "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/quote.png";
 const DEFAULT_BADGES = [
-  "Compassionate & Patient-Centered",
-  "Trusted for Experience",
-  "Leader in Robotic Surgery",
-  "A Global Mentor & Educator"
+  "Faculty of Information Technology",
 ];
 const DEFAULT_BADGE_CLASSES = [
   "bg-[#FDE3A7]",
@@ -15,8 +12,8 @@ const DEFAULT_BADGE_CLASSES = [
   "bg-[#FADCBE]",
   "bg-[#FCC8A2]",
 ];
-const DEFAULT_HEADING = "Why Patients Trust Him";
-const DEFAULT_DESCRIPTION = "Beyond surgical excellence, Dr. Arumugam. S is known for his compassionate approach, honest advice, and ability to make patients feel seen, heard, and truly cared for.";
+const DEFAULT_HEADING = "Head of department";
+const DEFAULT_DESCRIPTION = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi";
 const DEFAULT_READ_MORE_LINK = "/about";
 const DEFAULT_READ_MORE_TEXT = "Read More";
 
