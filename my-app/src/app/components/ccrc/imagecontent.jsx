@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import Image from "next/image";
 import GlobalArrowButton from "@/app/components/general/global-arrow_button";

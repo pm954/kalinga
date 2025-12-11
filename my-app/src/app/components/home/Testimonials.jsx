@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import SectionHeading from '../general/SectionHeading';
 
 // Testimonials data array
-const testimonialsData = [
+const defaultTestimonialsData = [
     {
         id: 1,
         name: "David Chen",
@@ -39,7 +39,8 @@ const testimonialsData = [
     }
 ];
 
-export default function Testimonials() {
+export default function Testimonials({ testimonials = [] }) {
+    const testimonialsData = testimonials.length > 0 ? testimonials : defaultTestimonialsData;
     const [activeIndex, setActiveIndex] = useState(1); // Start at index 1
     const [isMobile, setIsMobile] = useState(false);
     const [sliderHeight, setSliderHeight] = useState(500);
