@@ -155,7 +155,7 @@ export default function Achievements() {
               <div>
                 <Link href="/about-us" passHref legacyBehavior>
                   <a className="inline-flex">
-                    <GlobalArrowButton className="w-full sm:w-[173px] h-[44px]">
+                    <GlobalArrowButton className="w-full sm:w-[160px] h-[44px] justify-between"> 
                       Learn More
                     </GlobalArrowButton>
                   </a>

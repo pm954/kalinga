@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import GlobalArrowButton from "../general/global-arrow_button";
-
+import SectionHeading from "../general/SectionHeading";
 const programsData = [
   {
     title: "B.Tech",
@@ -38,7 +38,8 @@ const programsData = [
     specialization: "(Electrical, Mechanical & Civil)",
     duration: "3 Year",
     type: "UG"
-  }
+  },
+  
 ];
 
 export default function OurPrograms() {
@@ -46,21 +47,33 @@ export default function OurPrograms() {
   const [selectedFaculty, setSelectedFaculty] = useState("Faculty of Engineering & Technology");
   const [searchQuery, setSearchQuery] = useState("");
 
+  const filteredPrograms = programsData.filter((program) => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return true;
+    return (
+      program.title.toLowerCase().includes(query) ||
+      program.specialization.toLowerCase().includes(query) ||
+      program.type.toLowerCase().includes(query) ||
+      program.duration.toLowerCase().includes(query)
+    );
+  });
+
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4 lg:px-5">
         {/* Title and Subtitle */}
-        <div className="text-center mb-12 lg:mb-16">
-          <h2 className="font-stix text-[var(--foreground)] text-4xl md:text-5xl lg:text-6xl mb-4">
-            Explore Our Programs
-          </h2>
-          <p className="text-[var(--light-text-gray)] text-sm md:text-base max-w-3xl mx-auto">
-            Lorem ipsum dolor sit amet, consectetur
-          </p>
+        <div className="text-center mb-5">
+          <SectionHeading
+            subtitle="Explore Our Programs"
+            title="Explore Our Programs"
+            subtitleClassName="text-center text-[var(--button-red)]"
+            titleClassName="text-center"
+            subtitleTextColor="text-center"
+          />
         </div>
 
         {/* Programs Container */}
-        <div className="bg-[var(--dark-blue)] rounded-2xl p-6 md:p-8 lg:p-10 relative overflow-hidden">
+        <div className="bg-[var(--dark-blue)] rounded-2xl p-5 relative overflow-hidden">
           {/* Search and Filter Section - Single White Bar */}
           <div className="bg-[var(--light-gray)] border border-white rounded-lg flex flex-col md:flex-row items-stretch mb-8 relative z-20 overflow-hidden">
             {/* Diploma Dropdown - Left Section */}
@@ -152,11 +165,16 @@ export default function OurPrograms() {
           </div>
 
           {/* Programs Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {programsData.map((program, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-5">
+            {filteredPrograms.length === 0 && (
+              <div className="col-span-full text-center text-white/80">
+                No programs match your search.
+              </div>
+            )}
+            {filteredPrograms.map((program, index) => (
               <div
                 key={index}
-                className="bg-white rounded-xl p-4 md:p-6 relative overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+                className="bg-white rounded-xl p-4 md:p-4 relative overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
               >
                 {/* Background UG Text - Top Right */}
                 <div className="absolute top-2 right-2 md:top-4 md:right-4 text-6xl md:text-8xl !font-bold text-gray-200 leading-none opacity-50 z-0 font-stix">
@@ -176,7 +194,7 @@ export default function OurPrograms() {
                   </p>
 
                   {/* Program Details Section */}
-                  <div className="mb-4 md:mb-6 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                  <div className="mb-4 md:mb-6 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                     {/* Duration */}
                     <p className="text-[var(--light-text-gray)] !text-[11px] md:!text-[12px] whitespace-nowrap">
                       Duration : {program.duration}

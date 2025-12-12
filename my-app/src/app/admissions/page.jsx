@@ -7,17 +7,266 @@ import QuickLinks from "../components/general/quick_links";
 import FAQ from "../components/general/faq";
 import AdmissionCareer from "../components/general/admission_cta";
 import OrganogramOfKalinga from "../components/about/organogram_of_kalinga";
+
 export default function Admissions() {
+  // AdmissionSteps content
+  const admissionStepsContent = {
+    steps: [
+      {
+        id: 1,
+        stepNumber: "01",
+        title: "Step 1",
+        description: "Visit Website",
+        backDescription: "Navigate to our official website and explore the admission section to understand the process and requirements.",
+      },
+      {
+        id: 2,
+        stepNumber: "02",
+        title: "Step 2",
+        description: "Register for the entrance exam",
+        backDescription: "Create your account and complete the registration form for the entrance examination. Ensure all personal details are accurate.",
+      },
+      {
+        id: 3,
+        stepNumber: "03",
+        title: "Step 3",
+        description: "Take the computer-based exam and get shortlisted",
+        backDescription: "Appear for the computer-based entrance exam on the scheduled date. Results will be announced, and shortlisted candidates will be notified.",
+      },
+      {
+        id: 4,
+        stepNumber: "04",
+        title: "Step 4",
+        description: "Offer letter",
+        backDescription: "Receive your offer letter based on your performance. Review the terms and conditions carefully before accepting.",
+      },
+      {
+        id: 5,
+        stepNumber: "05",
+        title: "Step 5",
+        description: "Admission letter",
+        backDescription: "Complete the admission formalities, submit required documents, and receive your official admission letter to begin your journey at Kalinga University.",
+      },
+    ],
+    subtitle: "Admission Procedure",
+    title: "Steps To Get Admission Into KU",
+    showHeaderButton: true,
+    ctaLabel: "Apply Now",
+    showReadMore: true,
+    showIcon: true,
+  };
+
+  // OrganogramOfKalinga content (first instance - with image)
+  const entranceExamContent = {
+    title: "Entrance exam",
+    description: [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi",
+    ],
+    buttonLabel: "Explore Now",
+    cardBackgroundColor: "bg-[var(--dark-blue)]",
+    showImage: true,
+    imageUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/student-img.png",
+    imageAlt: "Entrance exam",
+    buttonClassName: "!bg-[var(--button-red)] !text-white",
+    arrowClassName: "!bg-white",
+    arrowIconClassName: "!text-[var(--button-red)]",
+    textClassName: "!text-white",
+    useContainer: true,
+  };
+
+  // OrganogramOfKalinga content (second instance - without image)
+  const admissionOrganogramContent = {
+    title: "Admission Process Overview",
+    description: [
+      "Kalinga University follows a streamlined admission process designed to identify and welcome talented students from diverse backgrounds. Our admission team works diligently to ensure a smooth and transparent process from application to enrollment.",
+      "The process includes online registration, entrance examination, document verification, and final admission confirmation. We provide comprehensive support at every step to help students navigate their journey to becoming part of the Kalinga family.",
+    ],
+    buttonLabel: "Learn More",
+    cardBackgroundColor: "bg-[var(--dark-blue)]",
+    showImage: false,
+    imageUrl: "",
+    imageAlt: "",
+    buttonClassName: "!bg-white !text-black",
+    arrowClassName: "!bg-[var(--dark-orange-red)]",
+    arrowIconClassName: "!text-white",
+    textClassName: "!text-black",
+  };
+
+  // Facility content
+  const facilityContent = {
+    title: "Campus Facilities",
+    subtitle: "World-Class Infrastructure",
+    facilities: [
+      {
+        id: 1,
+        name: "Hostel",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/library.webp",
+      },
+      {
+        id: 2,
+        name: "Library",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/library.webp",
+      },
+      {
+        id: 3,
+        name: "GYM",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/library.webp",
+      },
+      {
+        id: 4,
+        name: "Playground",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/library.webp",
+      },
+      {
+        id: 5,
+        name: "Laboratories",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/library.webp",
+      },
+      {
+        id: 6,
+        name: "Cafeteria",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/library.webp",
+      },
+    ],
+  };
+
+  // QuickLinks content
+  const quickLinksContent = {
+    title: "Quick Links",
+    description: "Access important admission-related resources and information to help you through your admission journey.",
+    links: [
+      {
+        id: 1,
+        icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+        title: "Admission Form",
+        description: "Download and fill out the admission application form to begin your journey.",
+      },
+      {
+        id: 2,
+        icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+        title: "Eligibility Criteria",
+        description: "Check the eligibility requirements for your desired program before applying.",
+      },
+      {
+        id: 3,
+        icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+        title: "Scholarships",
+        description: "Explore various scholarship opportunities available for meritorious students.",
+      },
+      {
+        id: 4,
+        icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+        title: "Fee Structure",
+        description: "Review the detailed fee structure for different programs and payment options.",
+      },
+      {
+        id: 5,
+        icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+        title: "Important Dates",
+        description: "Stay updated with admission deadlines, exam dates, and other important events.",
+      },
+      {
+        id: 6,
+        icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+        title: "Contact Us",
+        description: "Get in touch with our admission team for any queries or assistance you may need.",
+      },
+    ],
+  };
+
+  // FAQ content
+  const faqContent = {
+    title: "Frequently Asked Questions",
+    items: [
+      {
+        id: 1,
+        question: "What is the admission process at Kalinga University?",
+        answer: "The admission process involves online registration, appearing for the entrance examination, document verification, and final admission confirmation. Detailed steps are available on our website and admission portal.",
+      },
+      {
+        id: 2,
+        question: "What are the eligibility criteria for admission?",
+        answer: "Eligibility criteria vary by program. Generally, candidates need to have completed their 10+2 or equivalent examination with minimum required marks. Specific requirements for each program are listed in our admission brochure.",
+      },
+      {
+        id: 3,
+        question: "What documents are required for admission?",
+        answer: "Required documents typically include mark sheets, certificates, identity proof, passport-size photographs, and category certificates (if applicable). A complete list is provided in the admission form.",
+      },
+      {
+        id: 4,
+        question: "How can I apply for scholarships?",
+        answer: "Scholarship applications can be submitted along with your admission application. We offer merit-based, need-based, and special category scholarships. Details and application forms are available on our website.",
+      },
+      {
+        id: 5,
+        question: "What is the fee structure and payment options?",
+        answer: "The fee structure varies by program and includes tuition fees, examination fees, and other charges. We offer flexible payment options including installments and various payment methods. Detailed fee structure is available in the admission brochure.",
+      },
+      {
+        id: 6,
+        question: "When does the admission process start?",
+        answer: "Admission processes typically begin in the months leading up to the academic session. Important dates including registration deadlines, exam dates, and admission confirmation dates are published on our website and communicated through official channels.",
+      },
+    ],
+  };
+
   return (
     <div>
       <OurPrograms />
+      <OrganogramOfKalinga
+        title={entranceExamContent.title}
+        description={entranceExamContent.description}
+        buttonLabel={entranceExamContent.buttonLabel}
+        cardBackgroundColor={entranceExamContent.cardBackgroundColor}
+        showImage={entranceExamContent.showImage}
+        imageUrl={entranceExamContent.imageUrl}
+        imageAlt={entranceExamContent.imageAlt}
+        buttonClassName={entranceExamContent.buttonClassName}
+        arrowClassName={entranceExamContent.arrowClassName}
+        arrowIconClassName={entranceExamContent.arrowIconClassName}
+        textClassName={entranceExamContent.textClassName}
+        useContainer={entranceExamContent.useContainer}
+      />
       {/* <EntranceExam /> */}
-      <AdmissionSteps />
-      <OrganogramOfKalinga cardBackgroundColor="bg-[var(--dark-blue)]" />
+      <AdmissionSteps
+        steps={admissionStepsContent.steps}
+        subtitle={admissionStepsContent.subtitle}
+        title={admissionStepsContent.title}
+        showHeaderButton={admissionStepsContent.showHeaderButton}
+        ctaLabel={admissionStepsContent.ctaLabel}
+        showReadMore={admissionStepsContent.showReadMore}
+        showIcon={admissionStepsContent.showIcon}
+      />
+      <OrganogramOfKalinga
+        title={admissionOrganogramContent.title}
+        description={admissionOrganogramContent.description}
+        buttonLabel={admissionOrganogramContent.buttonLabel}
+        cardBackgroundColor={admissionOrganogramContent.cardBackgroundColor}
+        showImage={admissionOrganogramContent.showImage}
+        imageUrl={admissionOrganogramContent.imageUrl}
+        imageAlt={admissionOrganogramContent.imageAlt}
+        buttonClassName={admissionOrganogramContent.buttonClassName}
+        arrowClassName={admissionOrganogramContent.arrowClassName}
+        arrowIconClassName={admissionOrganogramContent.arrowIconClassName}
+        textClassName={admissionOrganogramContent.textClassName}
+      />
       <ScholarshipsSlider />
-      <Facility />
-      <QuickLinks />
-      <FAQ />
+      <Facility
+        title={facilityContent.title}
+        subtitle={facilityContent.subtitle}
+        facilities={facilityContent.facilities}
+      />
+      <QuickLinks
+        title={quickLinksContent.title}
+        description={quickLinksContent.description}
+        links={quickLinksContent.links}
+        titleClassName="text-white"
+      />
+      <FAQ
+        title={faqContent.title}
+        items={faqContent.items}
+      />
       <AdmissionCareer />
     </div>
   );

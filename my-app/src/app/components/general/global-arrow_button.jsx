@@ -11,7 +11,7 @@ export default function GlobalArrowButton({
   const showArrow = variant === "default" || variant === "transparent";
   
   // Base button classes
-  const baseButtonClasses = "group  px-3 py-2  rounded-xl font-sans text-base font-semibold transition-all duration-300 cursor-pointer flex items-center";
+  const baseButtonClasses = "group  px-3 py-2  rounded-xl font-sans text-base font-semibold transition-all duration-300 cursor-pointer flex items-center w-fit";
   
   // Variant-specific button classes
   const variantButtonClasses = {

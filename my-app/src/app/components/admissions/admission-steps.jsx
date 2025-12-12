@@ -12,22 +12,27 @@ const stepData = [
   {
     title: "Step 1",
     description: "Visit Website",
+    backDescription: "hello",
   },
   {
     title: "Step 2",
     description: "Register for the entrance exam",
+    backDescription: "hello 2",
   },
   {
     title: "Step 3",
     description: "Take the computer-based exam and get shortlisted",
+    backDescription: "hello 3",
   },
   {
     title: "Step 4",
     description: "Offer letter",
+    backDescription: "hello 4",
   },
   {
     title: "Step 5",
     description: "Admission letter",
+    backDescription: "hello 5",
   },
 ];
 
@@ -36,6 +41,7 @@ const admissionSteps = stepData.map((step, index) => ({
   stepNumber: String(index + 1).padStart(2, "0"),
   title: step.title,
   description: step.description,
+  backDescription: step.backDescription ?? step.description,
   image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/step1.png",
 }));
 
@@ -73,49 +79,47 @@ export default function AdmissionSteps({
   return (
     <section className="py-16 bg-[var(--light-gray)]">
       <style dangerouslySetInnerHTML={{__html: `
-        .admission-steps-swiper .swiper-slide-active .step-card-inner {
-          background-color: #F5E6D3;
-          color: var(--foreground);
-        }
-        .admission-steps-swiper .swiper-slide:not(.swiper-slide-active) .step-card-inner {
-          background-color: var(--button-red);
+        .admission-steps-swiper .swiper-slide .step-card-inner {
           color: white;
         }
-        .admission-steps-swiper .swiper-slide-active .step-number {
-          color: #9ca3af;
+        .admission-steps-swiper .swiper-slide .step-number {
+          color: var(--lite-sand);
+          opacity: 0.2;
         }
-        .admission-steps-swiper .swiper-slide:not(.swiper-slide-active) .step-number {
-          color: white;
-        }
-        .admission-steps-swiper .swiper-slide-active .step-title {
-          color: var(--foreground);
-        }
-        .admission-steps-swiper .swiper-slide:not(.swiper-slide-active) .step-title {
-          color: white;
-        }
-        .admission-steps-swiper .swiper-slide-active .step-description {
+        .admission-steps-swiper .flip-face.back .step-number {
           color: var(--light-text-gray);
+          opacity: 0.3;
         }
-        .admission-steps-swiper .swiper-slide:not(.swiper-slide-active) .step-description {
+        .admission-steps-swiper .swiper-slide .step-title {
           color: white;
         }
-        .admission-steps-swiper .swiper-slide-active .step-button {
-          background-color: white;
+        .admission-steps-swiper .swiper-slide .step-description {
+          color: white;
         }
-        .admission-steps-swiper .swiper-slide-active .step-button:hover {
-          background-color: #f3f4f6;
+        .admission-steps-swiper .step-button-icon {
+          stroke : var(--foreground);
         }
-        .admission-steps-swiper .swiper-slide:not(.swiper-slide-active) .step-button {
-          background-color: rgba(255, 255, 255, 0.2);
+        .admission-steps-swiper .card-wrapper.hoverable {
+          perspective: 1200px;
         }
-        .admission-steps-swiper .swiper-slide:not(.swiper-slide-active) .step-button:hover {
-          background-color: rgba(255, 255, 255, 0.3);
+        .admission-steps-swiper .card-wrapper.hoverable .flip-inner {
+          transform-style: preserve-3d;
+          transition: transform 0.6s;
+          position: relative;
+          height: 100%;
         }
-        .admission-steps-swiper .swiper-slide-active .step-button-icon {
-          stroke: black;
+        .admission-steps-swiper .card-wrapper.hoverable:hover .flip-inner {
+          transform: rotateY(180deg);
         }
-        .admission-steps-swiper .swiper-slide:not(.swiper-slide-active) .step-button-icon {
-          stroke: white;
+        .admission-steps-swiper .flip-face {
+          position: absolute;
+          inset: 0;
+          backface-visibility: hidden;
+          border-radius: 0.75rem;
+          overflow: hidden;
+        }
+        .admission-steps-swiper .flip-face.back {
+          transform: rotateY(180deg);
         }
       `}} />
       <div className="container mx-auto px-4 lg:px-5">
@@ -143,26 +147,23 @@ export default function AdmissionSteps({
       <div className="relative pl-0 md:pl-[50px]">
           <Swiper
             modules={[Navigation]}
-            spaceBetween={20}
-            slidesPerView={1}
+            spaceBetween={24}
+            slidesPerView={"auto"}
+            slidesPerGroup={1}
             grabCursor={true}
             loop={false}
             breakpoints={{
               640: {
-                slidesPerView: 1.5,
-                spaceBetween: 20,
+                spaceBetween: 24,
               },
               768: {
-                slidesPerView: 2,
-                spaceBetween: 24,
+                spaceBetween: 28,
               },
               1024: {
-                slidesPerView: 2.5,
-                spaceBetween: 24,
+                spaceBetween: 32,
               },
               1280: {
-                slidesPerView: 4,
-                spaceBetween: 24,
+                spaceBetween: 36,
               },
             }}
             navigation={{
@@ -178,85 +179,103 @@ export default function AdmissionSteps({
               // Delay binding to ensure button refs are set
               setTimeout(() => bindNavigation(swiper), 0);
             }}
-            className="admission-steps-swiper !pb-12 [&_.swiper-wrapper]:!flex [&_.swiper-wrapper]:!items-stretch [&_.swiper-slide]:!h-auto"
+            className="admission-steps-swiper !pb-12 !px-3 md:!px-5 [&_.swiper-wrapper]:!flex [&_.swiper-wrapper]:!items-stretch [&_.swiper-slide]:!h-auto [&_.swiper-slide]:!w-auto"
           >
             {steps.map((step, index) => (
-              <SwiperSlide key={step.id} className="!h-auto">
+              <SwiperSlide key={step.id} className="!h-auto !w-auto">
                 <div className="relative h-full flex">
                   {/* Connecting Line - Between cards */}
                   {index < steps.length - 1 && (
-                    <div className="hidden lg:block absolute top-1/2 -right-[24px] w-[24px] h-0.5 bg-gray-400 transform -translate-y-1/2 z-20 pointer-events-none"></div>
+                    <div className="hidden lg:block absolute top-1/2 -right-[24px] w-[24px] border-t border-dashed border-gray-400 transform -translate-y-1/2 z-20 pointer-events-none"></div>
                   )}
                   
                   {/* Step Card */}
-                  <div className="bg-white rounded-xl p-1 flex-1 flex flex-col">
-                  <div
-                    className="step-card-inner h-full min-h-[185px] md:min-h-[185px] flex-1 flex flex-col min-w-full rounded-xl p-4 relative overflow-hidden"
-                  >
-                    {/* Background Number */}
-                    <div className="step-number absolute top-4 right-4 text-7xl md:text-8xl font-bold leading-none opacity-20 font-stix">
-                      {step.stepNumber}
-                    </div>
+                  <div className={`card-wrapper w-[320px] md:w-[360px] h-[180px] md:h-[180px] flex flex-col ${showReadMore ? "hoverable" : ""}`}>
+                    <div className="flip-inner h-full">
+                      {/* Front Face */}
+                      <div className="flip-face front bg-white rounded-xl p-1 h-full flex flex-col">
+                        <div className="step-card-inner h-full flex flex-col rounded-xl relative overflow-hidden bg-[var(--button-red)] text-white p-4">
+                          {/* Background Number */}
+                          <div className="step-number absolute top-4 right-4 text-7xl md:text-8xl font-bold leading-none opacity-20 font-stix">
+                            {step.stepNumber}
+                          </div>
 
-                    {/* Content */}
-                    <div className="relative z-10 flex flex-col h-full">
-                      {/* Icon and Text Row */}
-                      <div className="flex items-end gap-4 flex-1 pt-4">
-                        {/* Icon Image */}
-                        {showIcon && (
-                          <div className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center text-[var(--button-red)]">
-                            {step.icon ? (
-                              step.icon
-                            ) : (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                className="h-10 w-10"
-                                fill="currentColor"
-                              >
-                                <path d="M4 7.5A2.5 2.5 0 0 1 6.5 5h11A2.5 2.5 0 0 1 20 7.5v9A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5zM6.5 6.5a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1z" />
-                                <path d="M9 8.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5A.75.75 0 0 1 9 8.75M9 12a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5A.75.75 0 0 1 9 12" />
-                              </svg>
+                          {/* Content */}
+                          <div className="relative z-10 flex flex-col h-full">
+                            {/* Icon and Text Row */}
+                            <div className="flex items-end gap-4 flex-1 pt-4">
+                              {/* Icon Image */}
+                              {showIcon && (
+                                <div className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center text-[var(--button-red)]">
+                                  {step.icon ? (
+                                    step.icon
+                                  ) : (
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      viewBox="0 0 24 24"
+                                      className="h-10 w-10"
+                                      fill="currentColor"
+                                    >
+                                      <path d="M4 7.5A2.5 2.5 0 0 1 6.5 5h11A2.5 2.5 0 0 1 20 7.5v9A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5zM6.5 6.5a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1z" />
+                                      <path d="M9 8.75a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5A.75.75 0 0 1 9 8.75M9 12a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5A.75.75 0 0 1 9 12" />
+                                    </svg>
+                                  )}
+                                </div>
+                              )}
+
+                              {/* Title and Description */}
+                              <div className="flex-1">
+                                {/* Title */}
+                                <h4 className="step-title text-lg md:text-xl mb-1">
+                                  {step.title}
+                                </h4>
+
+                                {/* Description */}
+                                <p className="step-description text-sm md:text-base">
+                                  {step.description}
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Button - Separate div with justify-end */}
+                            {showReadMore && (
+                              <div className="flex justify-end">
+                                <button className="step-button w-8 h-8 rounded-lg flex items-center justify-center transition-colors shadow-md bg-white">
+                                  <svg
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    className="step-button-icon"
+                                    strokeWidth="2.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  >
+                                    <path d="M7 17L17 7" />
+                                    <path d="M7 7h10v10" />
+                                  </svg>
+                                </button>
+                              </div>
                             )}
                           </div>
-                        )}
-
-                        {/* Title and Description */}
-                        <div className="flex-1">
-                          {/* Title */}
-                          <h4 className="step-title text-lg md:text-xl mb-1">
-                            {step.title}
-                          </h4>
-
-                          {/* Description */}
-                          <p className="step-description text-sm md:text-base">
-                            {step.description}
-                          </p>
                         </div>
                       </div>
 
-                      {/* Button - Separate div with justify-end */}
-                      {showReadMore && (
-                        <div className="flex justify-end">
-                          <button className="step-button w-8 h-8 rounded-lg flex items-center justify-center transition-colors shadow-md">
-                            <svg
-                              width="16"
-                              height="16"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              className="step-button-icon"
-                              strokeWidth="2.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path d="M7 17L17 7" />
-                              <path d="M7 7h10v10" />
-                            </svg>
-                          </button>
+                      {/* Back Face */}
+                      <div className="flip-face back bg-white rounded-xl p-1 h-full flex flex-col">
+                        <div className="step-card-inner h-full flex flex-col rounded-xl relative overflow-hidden bg-[var(--lite-sand)] p-4">
+                          {/* Background Number */}
+                          <div className="step-number absolute top-4 right-4 text-7xl md:text-8xl font-bold leading-none font-stix text-gray-400">
+                            {step.stepNumber}
+                          </div>
+                          <div className="relative z-10 flex flex-col h-full justify-center items-center gap-3">
+                            <p className="text-sm md:text-base text-center text-[var(--text-gray-card)]">
+                              {step.backDescription ?? step.description}
+                            </p>
+                          </div>
                         </div>
-                      )}
+                      </div>
                     </div>
-                  </div>
                   </div>
                 </div>
               </SwiperSlide>

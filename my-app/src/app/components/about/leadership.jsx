@@ -121,7 +121,7 @@ export default function Leadership() {
           </Swiper>
 
           {/* Navigation Buttons */}
-          <div className="flex justify-end items-center gap-3 mt-4">
+          <div className="flex justify-end items-center gap-3">
             <button className="leadership-swiper-button-prev w-12 h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] flex items-center justify-center hover:opacity-90 transition-opacity shadow-md">
               <svg
                 width="20"

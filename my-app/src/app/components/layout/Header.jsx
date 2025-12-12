@@ -300,7 +300,7 @@ const Header = () => {
   return (
     <header className="relative z-[10040] w-full overflow-visible">
       {/* Top Bar */}
-      <div className="text-xs py-3 w-full">
+      <div className="text-xs w-full">
         <div className="container mx-auto px-4 lg:px-5">
             <div className="flex justify-between font-medium gap-4 text-[var(--dark-gray)] flex-wrap">
             <a href={getEmail('admissions').href} className="flex items-center gap-1.5 text-[var(--red)]">

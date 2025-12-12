@@ -8,34 +8,34 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import GlobalArrowButton from '../general/global-arrow_button'
 import GlobalRedPlainButton from '../general/global-red_plain_button'
-import Stack from '../gsap/Stack'
 import SectionHeading from '../general/SectionHeading'
+import { renderProgramCard } from '../general/program-cards-slider'
 const Programs = () => {
   const [activeTab, setActiveTab] = useState('Diploma')
   const [query, setQuery] = useState('')
+  const prevRef = useRef(null)
+  const nextRef = useRef(null)
 
   const programs = [
-    { id: 1, title: 'Diploma in Computer Applications', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/computer.webp', summary: 'Build fundamentals in programming, networking, and databases for entry-level IT roles.' },
-    { id: 2, title: 'Diploma in Hospitality', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/diploma.webp', summary: 'Front office, F&B and operations with hands-on hotel training.' },
-    { id: 3, title: 'Diploma in Graphic Design', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/graphic.webp', summary: 'Visual communication, branding, and digital tools to craft compelling designs.' },
-    { id: 4, title: 'Diploma in Hotel Management', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/hotel.webp', summary: 'Front office, F&B and operations with hands-on hotel training.' },
+    { id: 1, title: 'Diploma in Computer Applications', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/computer.webp', summary: 'Build fundamentals in programming, networking, and databases for entry-level IT roles.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2.' },
+    { id: 2, title: 'Diploma in Hospitality', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/diploma.webp', summary: 'Front office, F&B and operations with hands-on hotel training.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
+    { id: 3, title: 'Diploma in Graphic Design', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/graphic.webp', summary: 'Visual communication, branding, and digital tools to craft compelling designs.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
+    { id: 4, title: 'Diploma in Hotel Management', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/hotel.webp', summary: 'Front office, F&B and operations with hands-on hotel training.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
 
-    { id: 4, title: 'Law', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/law.png', summary: 'Explore constitutional, corporate, and criminal law with moot courts and internships.' },
-    { id: 5, title: 'Information Technology', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/information.png', summary: 'Software, data, and cloud fundamentals with project-based learning and labs.' },
-    { id: 6, title: 'Business Administration', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/busniess.png', summary: 'Managerial, marketing, and entrepreneurial skills through cases and projects.' },
+    { id: 5, title: 'Law', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/law.png', summary: 'Explore constitutional, corporate, and criminal law with moot courts and internships.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
+    { id: 6, title: 'Information Technology', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/information.png', summary: 'Software, data, and cloud fundamentals with project-based learning and labs.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
+    { id: 7, title: 'Business Administration', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/busniess.png', summary: 'Managerial, marketing, and entrepreneurial skills through cases and projects.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
 
-    { id: 7, title: 'MBA', type: 'PG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/MBA.webp', summary: 'Leadership, strategy, finance, and analytics with industry mentors.' },
-    { id: 8, title: 'M.Sc Biotechnology', type: 'PG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/biotechnology.webp', summary: 'Advanced genetics, molecular biology, and lab techniques for research roles.' },
-    { id: 9, title: 'MCA', type: 'PG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/mca.webp', summary: 'Advanced programming, data structures, and application architecture.' },
+    { id: 8, title: 'MBA', type: 'PG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/MBA.webp', summary: 'Leadership, strategy, finance, and analytics with industry mentors.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
+    { id: 9, title: 'M.Sc Biotechnology', type: 'PG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/biotechnology.webp', summary: 'Advanced genetics, molecular biology, and lab techniques for research roles.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
+    { id: 10, title: 'MCA', type: 'PG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/mca.webp', summary: 'Advanced programming, data structures, and application architecture.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
 
-    { id: 10, title: 'Ph.D in Management', type: 'Ph.D', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/Phd-mba.webp', summary: 'Research on leadership, strategy, and organizational behavior with faculty guidance.' },
-    { id: 11, title: 'Ph.D in Computer Science', type: 'Ph.D', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/Phd-cs.webp', summary: 'AI, data science, and systems research with publications and lab residencies.' },
-    { id: 12, title: 'Ph.D in Biotechnology', type: 'Ph.D', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/phd-biotechnology-n.webp', summary: 'Genomics, proteomics, and bioinformatics research with advanced lab work.' },
+    { id: 11, title: 'Ph.D in Management', type: 'Ph.D', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/Phd-mba.webp', summary: 'Research on leadership, strategy, and organizational behavior with faculty guidance.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
+    { id: 12, title: 'Ph.D in Computer Science', type: 'Ph.D', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/Phd-cs.webp', summary: 'AI, data science, and systems research with publications and lab residencies.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
+    { id: 13, title: 'Ph.D in Biotechnology', type: 'Ph.D', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/phd-biotechnology-n.webp', summary: 'Genomics, proteomics, and bioinformatics research with advanced lab work.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
   ]
 
   const visiblePrograms = programs.filter(p => p.type === activeTab)
-  const prevRef = useRef(null)
-  const nextRef = useRef(null)
 
 
   return (
@@ -144,153 +144,79 @@ const Programs = () => {
             }}
             className="programs-swiper"
           >
-            {visiblePrograms.map((p, idx) => {
-              const imageCard = (
-                <div className="relative w-full h-full rounded-xl overflow-hidden shadow-xl">
-                  <Image src={p.img} alt={p.title} fill className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                  <div className="absolute bottom-5 left-8 right-3 text-white">
-                    <h3 className="font-stix text-lg sm:text-xl leading-snug drop-shadow">{p.title}</h3>
-
-                  </div>
-                </div>
-              )
-
-              const overviewCard = (
-                <div className="w-full h-full rounded-xl overflow-hidden shadow-xl p-5 sm:p-6 lg:p-8 flex flex-col gap-6 sm:gap-8" style={{ backgroundColor: 'rgba(254, 192, 113, 1)' }}>
-                  <div>
-                  <h3 className="font-stix !text-[25px] leading-tight mb-3 sm:mb-4">Overview</h3>
-                  <p className="font-plus-jakarta-sans text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 !text-gray-800">
-                    {p.summary || 'Learn more about this program and its opportunities.'}
-                  </p>
-                  </div>
-                  <ul className="text-sm sm:text-base font-plus-jakarta-sans space-y-2.5 sm:space-y-3 mb-4 sm:mb-5">
-                    <li className="flex items-start gap-2">
-                      <Image
-                        src="https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/hand-graduation-icon.png"
-                        alt="Scholarships icon"
-                        width={20}
-                        height={20}
-                        className="mt-0.5"
-                      />
-                      <span className="text-gray-800"><span className="font-stix text-[20px] text-black">Scholarships :</span> Check eligibility</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Image
-                        src="https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/hand-graduation-icon.png"
-                        alt="Qualification icon"
-                        width={20}
-                        height={20}
-                        className="mt-0.5"
-                      />
-                      <span className="text-gray-800"><span className="font-stix text-[20px] text-black">Qualification :</span> Pass in Higher Secondary Examinations of (10+2)</span>
-                    </li>
-                  </ul>
-
-                  <div className="mt-auto flex items-center justify-between gap-2 sm:gap-3">
-                    <div className="flex items-center gap-2 sm:gap-3">
-                      <GlobalArrowButton className="!bg-transparent !shadow-none !text-[#1a1a1a] !px-0 !py-0 !h-auto text-sm sm:text-base" arrowClassName="!bg-transparent" arrowIconClassName="!text-[#1a1a1a]">
-                        Know More
-                      </GlobalArrowButton>
-                      <GlobalArrowButton className="!bg-white !text-black"
-                arrowClassName="!bg-[var(--button-red)]"
-                arrowIconClassName="!text-white"
-                textClassName="!text-black"
-                >Apply More</GlobalArrowButton>
-                    </div>
-                  </div>
-                </div>
-              )
-
-              // Keep image on top initially: place overview first, image last in the stack array
-              const cards = [overviewCard, imageCard]
-
-              return (
-                <SwiperSlide key={idx} className="py-2 sm:py-3">
-                  <div className="flex justify-center">
-                    <div className="h-[340px] sm:h-[380px] md:h-[400px] lg:h-[420px] w-[300px] sm:w-[340px] md:w-[360px] lg:w-[380px]">
-                      <Stack
-                        cards={cards} // image card first, overview second
-                        randomRotation
-                        sendToBackOnClick
-                        pauseOnHover
-                        autoplay={false}
-                        mobileClickOnly
-                      />
-                    </div>
-                  </div>
-                </SwiperSlide>
-              )
-            })}
+            {visiblePrograms.map((p, idx) => (
+              <SwiperSlide key={p.id || idx} className="py-2 sm:py-3">
+                {renderProgramCard(p)}
+              </SwiperSlide>
+            ))}
           </Swiper>
 
-          {/* Navigation Buttons (matching leadership style) */}
-          <div className="flex items-center gap-2 sm:gap-4 mt-4 px-2 sm:px-0">
-            <div className="flex-1 flex justify-center min-w-0">
-              <GlobalArrowButton
-                className="!bg-white !text-black shadow-none"
-                arrowClassName="!bg-[var(--button-red)]"
-                arrowIconClassName="!text-white"
-                textClassName="!text-black text-xs sm:text-base"
+          {/* Navigation Buttons - Bottom Right Corner */}
+          <div className="absolute bottom-[14px] right-0 flex gap-2 sm:gap-3 z-20">
+            <button
+              ref={prevRef}
+              className="programs-btn-prev w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] flex items-center justify-center hover:opacity-90 transition-opacity shadow-md"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-white hover:text-[var(--button-red)] transition-colors"
               >
-                Explore Programs
-              </GlobalArrowButton>
-            </div>
-
-            <div className="flex justify-end gap-2 sm:gap-3 relative z-20 flex-shrink-0">
-              <button
-                ref={prevRef}
-                className="programs-btn-prev w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] flex items-center justify-center hover:opacity-90 transition-opacity shadow-md"
+                <path
+                  d="M10 12L6 8L10 4"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            <button
+              ref={nextRef}
+              className="programs-btn-next w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] flex items-center justify-center hover:opacity-90 transition-opacity shadow-md"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-white hover:text-[var(--button-red)] transition-colors"
               >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="text-white hover:text-[var(--button-red)] transition-colors"
-                >
-                  <path
-                    d="M10 12L6 8L10 4"
-                    stroke="currentColor"
-                    strokeWidth="1"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-              <button
-                ref={nextRef}
-                className="programs-btn-next w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] flex items-center justify-center hover:opacity-90 transition-opacity shadow-md"
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="text-white hover:text-[var(--button-red)] transition-colors"
-                >
-                  <path
-                    d="M6 4L10 8L6 12"
-                    stroke="currentColor"
-                    strokeWidth="1"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
+                <path
+                  d="M6 4L10 8L6 12"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
           </div>
+
+          <style jsx global>{`
+            /* Hide default Swiper arrows, we use custom buttons */
+            .programs-swiper .swiper-button-prev,
+            .programs-swiper .swiper-button-next {
+              display: none !important;
+            }
+          `}</style>
         </div>
 
-        <style jsx global>{`
-          /* Hide default Swiper arrows, we use custom buttons */
-          .programs-swiper .swiper-button-prev,
-          .programs-swiper .swiper-button-next {
-            display: none !important;
-          }
-        `}</style>
+        {/* Explore Programs Button */}
+        <div className="relative flex items-center justify-center mt-4 px-2 sm:px-0">
+          <GlobalArrowButton
+            className="!bg-white !text-black shadow-none"
+            arrowClassName="!bg-[var(--button-red)]"
+            arrowIconClassName="!text-white"
+            textClassName="!text-black text-xs sm:text-base"
+          >
+            Explore Programs
+          </GlobalArrowButton>
+        </div>
       </div>
     </section>
   )
