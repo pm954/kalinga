@@ -1,15 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import GlobalArrowButton from "../general/global-arrow_button";
 
 export default function Page() {
   const imageSets = [
-    ["https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Class-room.jpg", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Rectangle+574056814.png", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Rectangle+574056814+(1).png"],
-    ["https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Transportation.webp", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/transport.webp", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Transport1-1024x683.png"],
-    ["https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/reliance-market-poonamallee-chennai-grocery-stores-7y0lkgvzc9.webp", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Micro%2Bmarket%2Bsquare-01-640w.webp", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/reliance-market-poonamallee-chennai-grocery-stores-5j3kv0y5q5.jpg"],
-    ["https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/elderly-man-hospital-reception-wearing-face-mask-taking-with-nurse-while-waiting-coronavirus-examination+(2).png", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/clipboard-face-mask-non-profit-with-doctor-community-center-healthcare-checkup-consulting-documents-volunteer-with-medical-professional-outreach-event-charity-medicare.jpg", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/elderly-man-hospital-reception-wearing-face-mask-taking-with-nurse-while-waiting-coronavirus-examination+(3).png"],
-    ["./student.jpg", "/img2.jpg", "/img3.jpg"],
-    ["/img4.jpg", "/img5.jpg", "/img6.jpg"],
+    ["https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Infrastructure1.webp", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Infrastructure2.webp", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Infrastructure3.webp"],
+    ["https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/transport-1.jpg", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/transport-2.jpg", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/transport-3.webp"],
+    ["https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/mini-market1.png","https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/mini-market2.webp","https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/mini-market3.webp"],
+    ["https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Health+Clinic1.webp", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Health+Clinic2.webp", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Health+Clinic3.webp"],
+    ["https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/bank-atm1.png", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/bank-atm2.jpeg", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/bank-atm3.webp"],
+    ["https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/security1.jpg","https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/security2.jpeg","https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/security3.jpeg"]
   ];
 
   const [indexes, setIndexes] = useState([0, 0, 0, 0, 0, 0]);
@@ -23,39 +24,6 @@ export default function Page() {
     return () => clearInterval(t);
   }, []);
 
-  const SandalButton = (
-    <button className="group bg-[var(--button-red)] h-[45px] px-2 rounded-xl shadow-lg text-white font-semibold transition-all flex items-center justify-between">
-      <p className="px-3">Apply Now</p>
-      <span className="bg-white rounded-lg p-1 px-2 flex items-center">
-        <svg width="25" height="25" viewBox="0 0 16 16" fill="none">
-          <path
-            d="M4 12L12 4M12 4H6M12 4V10"
-            stroke="var(--button-red)"
-            strokeWidth="1"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </span>
-    </button>
-  );
-
-  const RedButton = (
-    <button className="group bg-[var(--background)] text-[var(--button-red)] h-[45px] px-2 ml-[100px] rounded-xl shadow-lg font-semibold transition-all flex items-center justify-between">
-      <p className="px-3">Apply Now</p>
-      <span className="bg-[var(--button-red)] rounded-lg p-1 px-2 flex items-center">
-        <svg width="25" height="25" viewBox="0 0 16 16" fill="none">
-          <path
-            d="M4 12L12 4M12 4H6M12 4V10"
-            stroke="white"
-            strokeWidth="1"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </span>
-    </button>
-  );
 
   return (
     <div className="max-w-[1200px] mx-auto px-6 py-20 flex flex-col gap-32">
@@ -87,6 +55,7 @@ export default function Page() {
               <div className="relative h-[200px] md:h-[300px] rounded-2xl overflow-hidden shadow-lg w-full z-10">
                 <img
                   src={imageSets[index][indexes[index]]}
+                  alt={`${sec.title} at Kalinga University`}
                   className="w-full h-full object-cover transition-all duration-700"
                 />
               </div>
@@ -97,8 +66,8 @@ export default function Page() {
                     key={i}
                     className={`h-2 rounded-full ${
                       i === indexes[index]
-                        ? "bg-[#F2A33A] w-12"
-                        : "bg-gray-300 w-4"
+                        ? "bg-[var(--dark-orange-red-light)] w-12"
+                        : "bg-[var(--light-gray)] w-4"
                     }`}
                   ></div>
                 ))}
@@ -115,6 +84,7 @@ export default function Page() {
               <div className="relative h-[200px] md:h-[300px] rounded-2xl overflow-hidden shadow-lg w-full">
                 <img
                   src={imageSets[index][indexes[index]]}
+                  alt={`${sec.title} at Kalinga University`}
                   className="w-full h-full object-cover transition-all duration-700"
                 />
               </div>
@@ -125,8 +95,8 @@ export default function Page() {
                     key={i}
                     className={`h-2 rounded-full ${
                       i === indexes[index]
-                        ? "bg-[#F2A33A] w-12"
-                        : "bg-gray-300 w-4"
+                        ? "bg-[var(--dark-orange-red-light)] w-12"
+                        : "bg-[var(--light-gray)] w-4"
                     }`}
                   ></div>
                 ))}
@@ -138,20 +108,20 @@ export default function Page() {
           {sec.type === "sandal" ? (
             <div
               className="
-              bg-[#F9E7D1] rounded-2xl p-8 shadow-md w-full md:w-[45%] 
+              bg-[var(--card-sandal)] rounded-2xl p-8 shadow-md w-full md:w-[45%] 
               min-h-[280px] md:min-h-[280px]
               md:left-[180px] 
               mt-6 md:mt-0 relative
             "
             >
               <h1 className="text-2xl font-regular mt-[40px] mb-3">{sec.title}</h1>
-              <p className="text-sm text-black/70 leading-relaxed mb-4 w-[338px]">{sec.desc}</p>
-              {SandalButton}
+              <p className="text-sm text-[var(--foreground)]/70 leading-relaxed mb-4 w-[280px] mb:w-[338px]">{sec.desc}</p>
+              <GlobalArrowButton>Apply Now</GlobalArrowButton>
             </div>
           ) : (
             <div
               className="
-              bg-[#8D2221] text-white rounded-2xl p-8 shadow-md 
+              bg-[var(--button-red)] text-white rounded-2xl p-8 shadow-md 
               w-full md:w-[45%] min-h-[280px]
               md:absolute md:right-[180px] md:top-[80px]
               mt-6 md:mt-0
@@ -163,7 +133,14 @@ export default function Page() {
               <p className="text-sm leading-relaxed mb-4 md:pl-[100px]">
                 {sec.desc}
               </p>
-              {RedButton}
+<GlobalArrowButton 
+ className="!bg-white !text-[var(--foreground)]"
+  variant="transparent"
+  arrowClassName="bg-[var(--brown)]"
+>
+  Apply Now
+</GlobalArrowButton>
+             
             </div>
           )}
         </div>

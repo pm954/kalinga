@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useLayoutEffect, useEffect } from "react"
+import GlobalRedPlainButton from "../general/global-red_plain_button"
 
 export default function CareerApplicationForm() {
 
@@ -42,20 +43,20 @@ export default function CareerApplicationForm() {
   }, [])
 
   return (
-    <section className="w-full max-w-[1249px] mx-auto bg-[#0D3B66] py-20 px-4 sm:px-6 lg:px-8 rounded-xl">
+    <section className="w-full max-w-[1249px] mx-auto bg-[var(--dark-blue)] py-20 px-4 sm:px-6 lg:px-8 rounded-xl">
       
-      <h2 className="text-white text-center text-3xl sm:text-[40px] font-light">
+      <h2 className="text-[var(--background)] text-center text-3xl sm:text-[40px] font-light">
       Career Application Form
       </h2>
 
-      <p className="text-center text-white/70 max-w-3xl mx-auto mt-4 text-sm sm:text-base">
+      <p className="text-center text-[var(--background)]/70 max-w-3xl mx-auto mt-4 text-sm sm:text-base">
       Join a dynamic community of educators, researchers, and professionals shaping the future of learning at Kalinga University.
  Please fill in your details below to apply for a suitable position. Our HR team will review your application and contact you if your profile matches our current openings.
 
       </p>
 
       {/* TABS */}
-      <div className="relative mt-10 pb-2 border-b border-white/30">
+      <div className="relative mt-10 pb-2 border-b border-[var(--background)]/30">
         
         <div
           ref={tabsContainerRef}
@@ -67,7 +68,7 @@ export default function CareerApplicationForm() {
               ref={(el) => (tabRefs.current[tab.id] = el)}
               onClick={() => setActiveTab(tab.id)}
               className={`pb-3 text-sm sm:text-base ${
-                activeTab === tab.id ? "text-[#E5A63B] font-medium" : "text-white"
+                activeTab === tab.id ? "text-[var(--dark-orange-red-light)] font-medium" : "text-[var(--background)]"
               }`}
             >
               {tab.label}
@@ -76,7 +77,7 @@ export default function CareerApplicationForm() {
         </div>
 
         <span
-          className="absolute bottom-0 h-[3px] bg-[#E5A63B] transition-all duration-300"
+          className="absolute bottom-0 h-[3px] bg-[var(--dark-orange-red-light)] transition-all duration-300"
           style={{
             width: underlineStyle.width,
             transform: `translateX(${underlineStyle.x}px)`
@@ -91,45 +92,43 @@ export default function CareerApplicationForm() {
         <div className="grid sm:grid-cols-2 gap-10">
 
           <div>
-            <label className="text-white text-xl">Full Name</label>
-            <input className="w-full mt-2 bg-transparent border-b border-white/40 text-white py-2 focus:border-[#E5A63B]" />
+            <label className="text-[var(--background)] text-xl">Full Name</label>
+            <input className="w-full mt-2 bg-transparent border-b border-[var(--background)]/40 text-[var(--background)] py-2 focus:border-[var(--dark-orange-red-light)]" />
           </div>
 
           <div>
-            <label className="text-white text-xl">Email Address</label>
-            <input className="w-full mt-2 bg-transparent border-b border-white/40 text-white py-2 focus:border-[#E5A63B]" />
+            <label className="text-[var(--background)] text-xl">Email Address</label>
+            <input className="w-full mt-2 bg-transparent border-b border-[var(--background)]/40 text-[var(--background)] py-2 focus:border-[var(--dark-orange-red-light)]" />
           </div>
 
           <div>
-            <label className="text-white text-xl">Mobile Number</label>
-            <input className="w-full mt-2 bg-transparent border-b border-white/40 text-white py-2 focus:border-[#E5A63B]" />
+            <label className="text-[var(--background)] text-xl">Mobile Number</label>
+            <input className="w-full mt-2 bg-transparent border-b border-[var(--background)]/40 text-[var(--background)] py-2 focus:border-[var(--dark-orange-red-light)]" />
           </div>
 
           <div>
-            <label className="text-white text-xl">Date of Birth</label>
-            <input type="date" className="w-full mt-2 bg-transparent border-b border-white/40 text-white py-2 focus:border-[#E5A63B]" />
+            <label className="text-[var(--background)] text-xl">Date of Birth</label>
+            <input type="date" className="w-full mt-2 bg-transparent border-b border-[var(--background)]/40 text-[var(--background)] py-2 focus:border-[var(--dark-orange-red-light)]" />
           </div>
 
           <div>
-            <label className="text-white text-xl">Gender</label>
-            <select className="w-full mt-2 bg-transparent border-b border-white/40 text-white py-2 focus:border-[#E5A63B]">
-              <option className="text-black">Select</option>
-              <option className="text-black">Male</option>
-              <option className="text-black">Female</option>
+            <label className="text-[var(--background)] text-xl">Gender</label>
+            <select className="w-full mt-2 bg-transparent border-b border-[var(--background)]/40 text-[var(--background)] py-2 focus:border-[var(--dark-orange-red-light)]">
+              <option className="text-[var(--foreground)]">Select</option>
+              <option className="text-[var(--foreground)]">Male</option>
+              <option className="text-[var(--foreground)]">Female</option>
             </select>
           </div>
 
           <div>
-            <label className="text-white text-xl">Nationality</label>
-            <input className="w-full mt-2 bg-transparent border-b border-white/40 text-white py-2 focus:border-[#E5A63B]" />
+            <label className="text-[var(--background)] text-xl">Nationality</label>
+            <input className="w-full mt-2 bg-transparent border-b border-[var(--background)]/40 text-[var(--background)] py-2 focus:border-[var(--dark-orange-red-light)]" />
           </div>
 
         </div>
 
         <div className="flex justify-end mt-12">
-          <button className="bg-[#C7362F] text-white px-10 py-3 rounded-md text-sm hover:bg-[#a32a25]">
-            Next
-          </button>
+          <GlobalRedPlainButton>Submit</GlobalRedPlainButton>
         </div>
 
       </div>
