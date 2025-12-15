@@ -5,14 +5,14 @@ import SectionHeading from '../general/SectionHeading';
 
 // Testimonials data array
 const defaultTestimonialsData = [
-    {
-        id: 1,
-        name: "David Chen",
-        role: "Founder, TechFlow",
-        quote: "The mentorship I received was transformative. They didn't just help me refine my pitch; they helped me reshape my entire business model for scalability.",
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/students-say-2.webp",
-        theme: "orange"
-    },
+        {
+            id: 1,
+            name: "David Chen",
+            role: "Founder, TechFlow",
+            quote: "The mentorship I received was transformative. They didn't just help me refine my pitch; they helped me reshape my entire business model for scalability.",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/students-say-2.webp",
+            theme: "orange"
+        },
     {
         id: 2,
         name: "Sarah Jenkins",
@@ -39,9 +39,9 @@ const defaultTestimonialsData = [
     }
 ];
 
-export default function Testimonials({ testimonials = [] }) {
+export default function Testimonials({ testimonials = [], className = "", subtitleClassName = "", titleClassName = "" }) {
     const testimonialsData = testimonials.length > 0 ? testimonials : defaultTestimonialsData;
-    const [activeIndex, setActiveIndex] = useState(1); // Start at index 1
+    const [activeIndex, setActiveIndex] = useState(1);
     const [isMobile, setIsMobile] = useState(false);
     const [sliderHeight, setSliderHeight] = useState(500);
     const cardRefs = useRef({});
@@ -155,7 +155,7 @@ export default function Testimonials({ testimonials = [] }) {
     };
 
     return (
-        <div className=" flex flex-col items-center justify-center overflow-x-hidden selection:bg-orange-100 selection:text-orange-900 py-16">
+        <div className={`flex flex-col items-center justify-center overflow-x-hidden selection:bg-orange-100 selection:text-orange-900 py-16 ${className}`}>
             <style jsx>{`
                 ::-webkit-scrollbar { display: none; }
             `}</style>
@@ -163,14 +163,12 @@ export default function Testimonials({ testimonials = [] }) {
             {/* Main Container */}
             <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center">
                 {/* Section Heading */}
-                <h5 className="text-gray-600 text-center leading-tight text-xs sm:text-sm md:text-base">
-                    <SectionHeading 
-                        subtitleClassName="text-center"
-                        titleClassName="text-center"
+                    <SectionHeading  
+                        subtitleClassName={`text-center ${subtitleClassName} `}
+                        titleClassName={`text-center ${titleClassName}`}
                         subtitle="Real Stories. Real Success."
                         title="Stories that define our Kalinga spirit."
                     />
-                </h5>
                 {/* Slider Track */}
                 <div 
                     className="relative w-full flex items-center justify-center" 

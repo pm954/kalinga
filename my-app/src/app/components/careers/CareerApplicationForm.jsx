@@ -2,8 +2,26 @@
 
 import { useState, useRef, useLayoutEffect, useEffect } from "react"
 import GlobalRedPlainButton from "../general/global-red_plain_button"
+import GlobalArrowButton from "../general/global-arrow_button"
 
-export default function CareerApplicationForm() {
+export default function CareerApplicationForm({
+  /** Heading text for the form */
+  heading = "Career Application Form",
+  /** Description text shown under the heading */
+  description = "Join a dynamic community of educators, researchers, and professionals shaping the future of learning at Kalinga University. Please fill in your details below to apply for a suitable position. Our HR team will review your application and contact you if your profile matches our current openings.",
+  /** Background color class for the section */
+  backgroundClass = "bg-[var(--dark-blue)]",
+  /** If true, hides the tabs and underline - useful for Alumni form variant */
+  hideTabs = false,
+  /** Submit button label */
+  submitLabel = "Submit",
+  /** Use arrow-style global button instead of plain red button */
+  useArrowSubmitButton = false,
+  /** Variant to use for arrow submit button */
+  arrowSubmitVariant = "white",
+  /** Optional submit handler */
+  onSubmit,
+}) {
 
   const [activeTab, setActiveTab] = useState("personal")
   const tabRefs = useRef({})
@@ -33,58 +51,66 @@ export default function CareerApplicationForm() {
     })
   }
 
-  useLayoutEffect(() => { updateUnderline() }, [activeTab])
+  useLayoutEffect(() => {
+    if (!hideTabs) {
+      updateUnderline()
+    }
+  }, [activeTab, hideTabs])
 
   useEffect(() => {
+    if (hideTabs) return
+
     const ro = new ResizeObserver(updateUnderline)
     const c = tabsContainerRef.current
     if (c) ro.observe(c)
     return () => ro.disconnect()
-  }, [])
+  }, [hideTabs])
+
+  const submitAlignClass = hideTabs ? "justify-center" : "justify-end";
 
   return (
-    <section className="w-full max-w-[1249px] mx-auto bg-[var(--dark-blue)] py-20 px-4 sm:px-6 lg:px-8 rounded-xl">
-      
+    <section className={`w-full  ${backgroundClass} py-20   rounded-xl`}>
+      <div className="container mx-auto ">
       <h2 className="text-[var(--background)] text-center text-3xl sm:text-[40px] font-light">
-      Career Application Form
+        {heading}
       </h2>
 
       <p className="text-center text-[var(--background)]/70 max-w-3xl mx-auto mt-4 text-sm sm:text-base">
-      Join a dynamic community of educators, researchers, and professionals shaping the future of learning at Kalinga University.
- Please fill in your details below to apply for a suitable position. Our HR team will review your application and contact you if your profile matches our current openings.
-
+        {description}
       </p>
 
-      {/* TABS */}
-      <div className="relative mt-10 pb-2 border-b border-[var(--background)]/30">
-        
-        <div
-          ref={tabsContainerRef}
-          className="flex gap-10 justify-center overflow-x-auto no-scrollbar px-2"
-        >
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              ref={(el) => (tabRefs.current[tab.id] = el)}
-              onClick={() => setActiveTab(tab.id)}
-              className={`pb-3 text-sm sm:text-base ${
-                activeTab === tab.id ? "text-[var(--dark-orange-red-light)] font-medium" : "text-[var(--background)]"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+      {/* TABS - hidden for Alumni variant */}
+      {!hideTabs && (
+        <div className="relative mt-10 pb-2 border-b border-[var(--background)]/30">
+          
+          <div
+            ref={tabsContainerRef}
+            className="flex gap-10 justify-center overflow-x-auto no-scrollbar px-2"
+          >
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                ref={(el) => (tabRefs.current[tab.id] = el)}
+                onClick={() => setActiveTab(tab.id)}
+                className={`pb-3 text-sm sm:text-base ${
+                  activeTab === tab.id ? "text-[var(--dark-orange-red-light)] font-medium" : "text-[var(--background)]"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          <span
+            className="absolute bottom-0 h-[3px] bg-[var(--dark-orange-red-light)] transition-all duration-300"
+            style={{
+              width: underlineStyle.width,
+              transform: `translateX(${underlineStyle.x}px)`
+            }}
+          />
+
         </div>
-
-        <span
-          className="absolute bottom-0 h-[3px] bg-[var(--dark-orange-red-light)] transition-all duration-300"
-          style={{
-            width: underlineStyle.width,
-            transform: `translateX(${underlineStyle.x}px)`
-          }}
-        />
-
-      </div>
+      )}
 
       {/* FORM */}
       <div className="mt-10 p-10 rounded-xl">
@@ -127,12 +153,23 @@ export default function CareerApplicationForm() {
 
         </div>
 
-        <div className="flex justify-end mt-12">
-          <GlobalRedPlainButton>Submit</GlobalRedPlainButton>
+        <div className={`flex ${submitAlignClass} mt-12`}>
+          {useArrowSubmitButton ? (
+            <GlobalArrowButton
+              variant={arrowSubmitVariant}
+              onClick={onSubmit}
+            >
+              {submitLabel}
+            </GlobalArrowButton>
+          ) : (
+            <GlobalRedPlainButton onClick={onSubmit}>
+              {submitLabel}
+            </GlobalRedPlainButton>
+          )}
         </div>
 
       </div>
-
+      </div>
     </section>
   );
 }

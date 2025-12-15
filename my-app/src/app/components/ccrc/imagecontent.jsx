@@ -26,6 +26,7 @@ export default function ImageContent({
   readmore = true,
   subtitleclassName = "",
   additionalContent = additionalContent2,
+  titleClassName = "",
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
 

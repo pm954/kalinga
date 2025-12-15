@@ -53,9 +53,9 @@ const OrganogramOfKalinga = ({
     <section className="py-16 bg-white">
       <div className={`${useContainer ? 'container mx-auto' : ''} px-4 sm:px-5`}>
         <div
-          className={`${cardBackgroundColor} rounded-[10px] text-white relative ${showImage ? 'overflow-visible' : 'overflow-hidden'}`}
+          className={`${cardBackgroundColor} container mx-auto  rounded-[10px] text-white relative ${showImage ? 'overflow-visible' : 'overflow-hidden'}`}
         >
-          <div className={`flex flex-col ${showImage ? 'lg:flex-row' : ''} items-center gap-6 lg:gap-8`}>
+          <div className={`flex flex-col  ${showImage ? 'lg:flex-row' : ''} items-center gap-6 lg:gap-8`}>
             {/* Left Content */}
             <div className={`flex-1 p-5 md:p-8 ${showImage ? 'lg:w-1/2' : 'w-full'}`}>
               {/* Title */}

@@ -36,6 +36,8 @@ export default function CenterOfExcellence({
   centres = centresOfExcellence,
   title = "Centres of Excellence",
   description = "At Kalinga, we'll not just build your future with only classroom-based studies, but there's something more to it that will make your learning experience fun and exciting. Presenting to you our Centres of Excellence that will introduce you to the future of technologies.",
+  nameOnly = false, // variant: show only name centered, no image or title
+  showDescription = true,
 }) {
   return (
     <section className="py-16 bg-white relative">
@@ -45,9 +47,11 @@ export default function CenterOfExcellence({
           <h2 className="font-stix text-[var(--foreground)] text-3xl md:text-4xl lg:text-5xl mb-4">
             {title}
           </h2>
-          <p className="text-[var(--light-text-gray)] max-w-4xl mx-auto"> 
-            {description}
-          </p>
+          {showDescription && (
+            <p className="text-[var(--light-text-gray)] max-w-4xl mx-auto"> 
+              {description}
+            </p>
+          )}
         </div>
       </div>
 
@@ -138,12 +142,20 @@ export default function CenterOfExcellence({
                 <div className="h-full w-full">
                   <div className="bg-white rounded-xl p-1 h-full relative">
                     <div className="centres-card-wrapper h-full flex flex-col">
-                      <LeadershipCard
-                        name={centre.name}
-                        title={centre.title}
-                        image={centre.image}
-                        usePTagForName={true}
-                      />
+                      {nameOnly ? (
+                        <div className="flex-1 flex items-center justify-center text-center px-6 py-8">
+                          <h3 className="font-jakarta text-lg md:text-xl font-medium text-[var(--foreground)]">
+                            {centre.name}
+                          </h3>
+                        </div>
+                      ) : (
+                        <LeadershipCard
+                          name={centre.name}
+                          title={centre.title}
+                          image={centre.image}
+                          usePTagForName={true}
+                        />
+                      )}
                     </div>
                     {/* Button - Positioned at bottom right */}
                     <div className="absolute bottom-6 right-6 hidden">
