@@ -39,7 +39,7 @@ const defaultTestimonialsData = [
     }
 ];
 
-export default function Testimonials({ testimonials = [], className = "", subtitleClassName = "", titleClassName = "" }) {
+export default function Testimonials({ testimonials = [], className = "" }) {
     const testimonialsData = testimonials.length > 0 ? testimonials : defaultTestimonialsData;
     const [activeIndex, setActiveIndex] = useState(1);
     const [isMobile, setIsMobile] = useState(false);
@@ -163,12 +163,14 @@ export default function Testimonials({ testimonials = [], className = "", subtit
             {/* Main Container */}
             <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center">
                 {/* Section Heading */}
-                    <SectionHeading  
-                        subtitleClassName={`text-center ${subtitleClassName} `}
-                        titleClassName={`text-center ${titleClassName}`}
+                <h5 className="text-gray-600 text-center leading-tight text-xs sm:text-sm md:text-base">
+                    <SectionHeading 
+                        subtitleClassName="text-center"
+                        titleClassName="text-center"
                         subtitle="Real Stories. Real Success."
                         title="Stories that define our Kalinga spirit."
                     />
+                </h5>
                 {/* Slider Track */}
                 <div 
                     className="relative w-full flex items-center justify-center" 

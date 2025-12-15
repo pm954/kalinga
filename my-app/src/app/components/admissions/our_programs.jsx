@@ -246,7 +246,7 @@ export default function OurPrograms() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
+                  <div className="flex flex-row gap-2 md:gap-3">
                     {/* Check Eligibility Button - Dark Red with white arrow in white square */}
                     <GlobalArrowButton
                       className="!bg-[var(--dark-orange-red)] !text-[var(--background)] whitespace-nowrap text-xs md:text-sm lg:text-base !h-[38px] md:!h-[40px] !rounded-lg !px-1"

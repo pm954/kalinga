@@ -8,7 +8,7 @@ export default function SectionHeading({
   return (
     <>
       {subtitle && (
-        <h5 className={`${subtitleTextColor} text-base sm:text-lg md:text-xl font-plus-jakarta-sans font-medium  ${subtitleClassName}`}>
+        <h5 className={`${subtitleTextColor} text-base sm:text-lg md:text-xl font-plus-jakarta-sans font-medium mb-4  ${subtitleClassName}`}>
           {subtitle}
         </h5>
       )}

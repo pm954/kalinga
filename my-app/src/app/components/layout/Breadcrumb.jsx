@@ -35,6 +35,10 @@ const routeHeroImages = [
     match: /^\/central-instrumentation-facility/,
     image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/about-banner.webp",
   },
+  {
+    match: /^\/iqac/,
+    image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/about-banner.webp",
+  },
 
 ];
 const imageposition = "object-center";

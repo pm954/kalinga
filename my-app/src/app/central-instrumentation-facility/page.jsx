@@ -6,6 +6,10 @@ import OurEquipmentSlider from '../components/cif/our_equipment_slider'
 import CifYoutubeCallSection from '../components/cif/youtube_call_section'
 import QuickLinks from '../components/general/quick_links'
 import ContactSection from '../components/cif/contact_section'
+import Testimonials from '../components/home/Testimonials'
+import Gallery from '../components/general/gallery'
+import AdmissionCareer from '../components/general/admission_cta'
+import CareerApplicationForm from "../components/careers/CareerApplicationForm";
 const CentralInstrumentationFacilityPage = () => {
   
   const quickLinks = [
@@ -60,6 +64,42 @@ const CentralInstrumentationFacilityPage = () => {
       text: "To create networking opportunities with research organisations for collaborative growth.",
     },
   ];
+
+  const cifTestimonials = [
+    {
+      id: 1,
+      name: "Dr. Priya Sharma",
+      role: "Research Scholar, Department of Chemistry",
+      quote: "The Central Instrumentation Facility has been instrumental in my research work. The XRD analysis I conducted here provided crucial data for my PhD thesis. The technical staff is highly knowledgeable and always ready to help.",
+      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/students-say-2.webp",
+      theme: "orange"
+    },
+    {
+      id: 2,
+      name: "Prof. Rajesh Kumar",
+      role: "Faculty Member, Department of Physics",
+      quote: "As a faculty member, I've seen how CIF has transformed research capabilities at Kalinga University. The advanced instruments and expert guidance have enabled our students to produce high-quality research publications.",
+      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/diploma.webp",
+      theme: "red"
+    },
+    {
+      id: 3,
+      name: "Anjali Patel",
+      role: "PG Student, Biotechnology",
+      quote: "The hands-on training programs at CIF gave me practical experience with sophisticated instruments. This exposure has been invaluable for my career in research. The facility is well-maintained and the support staff is excellent.",
+      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/student-say-3.webp",
+      theme: "amber"
+    },
+    {
+      id: 4,
+      name: "Dr. Amit Verma",
+      role: "External Researcher, Industry Collaboration",
+      quote: "We collaborated with Kalinga University's CIF for material characterization. The facility's state-of-the-art equipment and professional approach helped us complete our project efficiently. Highly recommended for industry-academia partnerships.",
+      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/student-say-1.webp",
+      theme: "amber"
+    }
+  ];
+
   return (
     <>
     <MainIntro 
@@ -96,7 +136,24 @@ const CentralInstrumentationFacilityPage = () => {
     links={quickLinks}
     titleClassName="text-white"
     />
-
+    <ContactSection />
+    <CareerApplicationForm
+          heading="Alumni Association Registration Form"
+          description="Share your details to stay connected with Kalinga University, receive updates, and participate in alumni activities and events."
+          backgroundClass="bg-[var(--button-red)]"
+          hideTabs={true}
+          submitLabel="Submit Alumni Details"
+          useArrowSubmitButton={true}
+          arrowSubmitVariant="white"
+        />
+    <Testimonials 
+      testimonials={cifTestimonials} 
+      className="bg-[var(--light-gray)]"
+      subtitle="Research Excellence. Real Impact."
+      title="What researchers say about our Central Instrumentation Facility."
+    />
+    <Gallery/>
+    <AdmissionCareer/>
     </>
   )
 }

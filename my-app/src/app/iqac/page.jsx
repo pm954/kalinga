@@ -1,0 +1,66 @@
+import React from 'react'
+import MainIntro from '../components/about/main_intro'
+import PublicationGrid from '../components/research/publication-grid'
+import DeptHeadIntro from '../components/department/dept_head_intro'
+import ISOCertificateSection from '../components/iqac/iso_certificate_section'
+import ContactSection from '../components/cif/contact_section'
+import AdmissionCareer from '../components/general/admission_cta'
+const IQACPage = () => {
+
+  const MentorIntroProps = [
+    {
+      id: 1,
+      title: "IQAC",
+      subtitle: "Internal Quality Assurance Cell",
+      department: "Ensuring continuous quality enhancement across the university.",
+      quote:
+        "The Internal Quality Assurance Cell (IQAC) at Kalinga University is committed to fostering a culture of excellence in teaching, learning, and research. Through systematic planning, monitoring, and feedback, IQAC ensures that quality benchmarks are met and continuously improved in every academic and administrative process.",
+      message:
+        "The Internal Quality Assurance Cell (IQAC) functions as a nodal agency for coordinating and implementing quality-related initiatives within Kalinga University. It facilitates the adoption of best practices, prepares and maintains institutional documentation for accreditation and ranking, and promotes a learner-centric environment.\n\nIQAC regularly organises workshops, orientation programs, and review meetings to ensure that departments align with institutional goals of excellence. It also collects feedback from stakeholders—students, faculty, alumni, and industry partners—to drive evidence-based improvements in curricula, evaluation methods, research activities, and support services.",
+    },
+  ];
+
+  const publicationStats = [
+    {
+        id: 1,
+        title: "Publications",
+        value: 100,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      id: 2,
+      title: "Journals",
+      value: 50,
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {   
+      id: 3,
+      title: "Books",
+      value: 30,
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      id: 4,
+      title: "Patents",
+      value: 10,
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+  ]
+  return (
+    <>
+    <MainIntro 
+    title="IQAC"
+    description="IQAC is a self-regulatory body for academic standards and quality assurance in higher education. It is responsible for ensuring that the academic standards and quality of the institution are maintained and improved."
+    imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/about/about-banner.webp"
+    imageAlt="IQAC"
+    />
+    <PublicationGrid stats={publicationStats} />
+    <DeptHeadIntro items={MentorIntroProps} />
+    <ISOCertificateSection />
+    <ContactSection />
+    <AdmissionCareer />
+    </>
+  )
+}
+
+export default IQACPage

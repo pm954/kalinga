@@ -179,7 +179,7 @@ export default function AdmissionSteps({
               // Delay binding to ensure button refs are set
               setTimeout(() => bindNavigation(swiper), 0);
             }}
-            className="admission-steps-swiper !pb-12 !px-3 md:!px-5 [&_.swiper-wrapper]:!flex [&_.swiper-wrapper]:!items-stretch [&_.swiper-slide]:!h-auto [&_.swiper-slide]:!w-auto"
+            className="admission-steps-swiper !pb-8 !px-3 md:!px-5 [&_.swiper-wrapper]:!flex [&_.swiper-wrapper]:!items-stretch [&_.swiper-slide]:!h-auto [&_.swiper-slide]:!w-auto"
           >
             {steps.map((step, index) => (
               <SwiperSlide key={step.id} className="!h-auto !w-auto">
