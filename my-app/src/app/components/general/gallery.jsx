@@ -66,7 +66,7 @@ const Gallery = ({
 
   return (
     <section className={`${backgroundColor} py-16`}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="px-4 sm:px-6 lg:px-8">
         {/* Title */}
         <h2 className="font-stix text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 sm:mb-8 md:mb-10 text-[var(--foreground)] text-center">
           {title}

@@ -23,6 +23,7 @@ const Header = () => {
   const pathname = usePathname();
   const router = useRouter();
   const isHomePage = pathname === '/';
+  const isCorporateTrainingPage = pathname === '/corporate-training-and-consultancy-division';
 
   const courses = useMemo(
     () => [
@@ -379,14 +380,14 @@ const Header = () => {
       </div>
 
       {/* Main Header */}
-      <div className={`transition-all z-[10050] w-full  overflow-visible ${isScrolled ? 'fixed top-0 left-0 right-0 bg-white duration-500 shadow-md' : ' duration-500'}`}>
+      <div className={`transition-all z-[10050] w-full  overflow-visible ${isScrolled ? 'fixed top-0 left-0 right-0 bg-white duration-500 shadow-md' : (isHomePage || isCorporateTrainingPage) ? 'bg-transparent' : 'bg-white duration-500'}`}>
           <div className="flex items-center justify-between   container mx-auto px-4 lg:px-8 py-4 w-full max-w-full !z-[10050] overflow-visible">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 relative">
               <div className="w-42 h-12">
                 <Image
                   src={
-                    isHomePage
+                    isHomePage || isCorporateTrainingPage
                       ? (isScrolled ? getLogoSrc('secondary') : getLogoSrc('primary'))
                       : getLogoSrc('secondary')
                   }
@@ -411,6 +412,8 @@ const Header = () => {
                       href={item.href}
                       className={`px-2 !text-[15px] ${
                         isHomePage 
+                          ? (isScrolled ? 'text-[var(--dark-gray)]' : 'text-white')
+                          : isCorporateTrainingPage
                           ? (isScrolled ? 'text-[var(--dark-gray)]' : 'text-white')
                           : 'text-black'
                       }`}

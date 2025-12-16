@@ -7,7 +7,58 @@ import ImageListItem from '../components/ccrc/imagelistitem';
 import StudentCell from '../components/international-students/student_cell';
 import AdmissionSteps from '../components/admissions/admission-steps';
 import AppreciationLetterLayout from '../components/international-students/appreciation_letter_layout';
+import OrganogramOfKalinga from '../components/about/organogram_of_kalinga';
+import MediaCardSlider from '../components/general/media-card-slider';
+import UpcomingConference from '../components/research/upcoming_conference';
+import Gallery from '../components/campuslife/campusgallery';
+import AdmissionCareer from '../components/general/admission_cta';
 export default function InternationalStudents() {
+  const newsConferences = [
+    {
+      id: 1,
+      title: "Annual Research Symposium 2025",
+      date: "November 10 · 2025",
+      category: "Research & Innovation",
+      description: "Join us for our annual research symposium featuring cutting-edge research presentations, keynote speakers, and networking opportunities for researchers and academics.",
+      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
+    },
+    {
+      id: 2,
+      title: "International Education Summit",
+      date: "December 05 · 2025",
+      category: "Education",
+      description: "A global gathering of educators, policymakers, and thought leaders to discuss the future of higher education and innovative teaching methodologies.",
+      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
+    },
+    {
+      id: 3,
+      title: "Technology & Innovation Conference",
+      date: "January 20 · 2026",
+      category: "Technology",
+      description: "Explore the latest trends in technology, artificial intelligence, and digital transformation in education and industry applications.",
+      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
+    },
+  ]
+  const videoItems = [
+    {
+      id: 1,
+      name: "Name",
+      description: "Lorem ipsum",
+      thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
+    },
+    {
+      id: 2,
+      name: "Name",
+      description: "Lorem ipsum",
+      thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
+    },
+    {
+      id: 3,
+      name: "Name",
+      description: "Lorem ipsum",
+      thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
+    },  
+  ]
   const boxItems = [
     {
       id: 1,
@@ -255,6 +306,43 @@ export default function InternationalStudents() {
         reverseLayout={true}
         applyTransform3dSlant={false}
       />
+      <OrganogramOfKalinga
+        title="Download Brochure 2025-26"
+        description="Kalinga University follows a well-defined governance structure that ensures smooth administration, transparency, and institutional excellence."
+        buttonLabel="Download PDF"
+        href="/about-us"
+      />
+      <MainIntro 
+        title="International Students At KU"
+        description="Kalinga University, established in 2013, stands out as one of the leading private universities strategically located in the Smart City of New Raipur, Chhattisgarh. The University has consistently ranked among the top 101–150 universities in India under the NIRF Rankings 2025 for the fourth consecutive year and has also received a NAAC B+ accreditation, continuously shining on the horizons of high-quality education with equal opportunities to its international students."
+        imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/international-students-group.webp"
+        imageAlt="International Students"
+        reverseLayout={false}
+        applyTransform3dSlant={true}
+      />
+      <MediaCardSlider
+        categoryTitle="Video Interviews"
+        title="Lorem ipsum dolor sit amet, consectetur"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed"
+        videoItems={videoItems}
+        cardBgClass="bg-white"
+        nameTextClass="text-[var(--button-red)]"
+        descriptionTextClass="text-gray-600"
+        swiperClassName="ccrc-video-slider"
+      />
+      <UpcomingConference 
+        conferences={newsConferences}
+        title="Upcoming Conferences & Events"
+        backgroundColor="bg-[var(--light-gray)]"
+        backgroundColorcard="bg-white"
+        showCategory={false}
+        showDate={false}
+        imageWidth={300}
+        imageHeight={300}
+        imageContainerClass="w-full md:w-1/3 flex justify-center"
+      />
+      <Gallery title="International Students Glimpse" /> 
+      <AdmissionCareer />
     </>
   )
 }

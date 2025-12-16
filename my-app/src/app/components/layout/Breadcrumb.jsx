@@ -62,6 +62,9 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
 
   // Don't show breadcrumb on homepage
   if (pathname === '/') return null;
+  
+  // Don't show breadcrumb on corporate-training-and-consultancy-division page
+  if (pathname === '/corporate-training-and-consultancy-division') return null;
 
   // Track previous pathname to detect route changes
   const prevPathnameRef = useRef(pathname);
