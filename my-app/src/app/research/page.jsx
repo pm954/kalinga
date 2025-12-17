@@ -19,96 +19,72 @@ export default function Research() {
   const newsConferences = [
     {
       id: 1,
-      title: "Annual Research Symposium 2025",
-      date: "November 10 · 2025",
-      category: "Research & Innovation",
-      description: "Join us for our annual research symposium featuring cutting-edge research presentations, keynote speakers, and networking opportunities for researchers and academics.",
-    },
-    {
-      id: 2,
-      title: "International Education Summit",
-      date: "December 05 · 2025",
-      category: "Education",
-      description: "A global gathering of educators, policymakers, and thought leaders to discuss the future of higher education and innovative teaching methodologies.",
-    },
+      title: "Scopus Workshop: Research Impact",
+      date: "Nov 28, 2025 · 10:00 A.M.",
+      category: "Academic Event",
+      description: "Hybrid workshop on Scopus analytics and publishing insights with experts.",
+      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Pic1+(1).jpeg"
+    }
   ];
   const centres = [
     {
       id: 1,
       name: "Rajasthan Global Security Pvt. Ltd.",
-      title: "Rapid prototyping & mentoring",
-      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/godawari.png",
+     
+      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/research/Rajasthan+Global+Security+Pvt.+Ltd..png",
     },
     {
       id: 2,
       name: "WANFENG Aluminium Wheel (INDIA) Pvt. Ltd.",
-      title: "Rapid prototyping & mentoring",
-      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/godawari.png",
+      
+      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/research/WANFENG+Aluminium+Wheel+(INDIA)+Pvt.+Ltd+(2).png",
     },
     {
       id: 3,
-      name: "WANFENG Aluminium Wheel (INDIA) Pvt. Ltd.",
-      title: "Rapid prototyping & mentoring",
-      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/godawari.png",
+      name: "Real Care Foundation",
+      
+      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/research/Real+Care+Foundation.png",
     },
+    
   ];
   const awards = [
     {
       id: 1,
-      year: "2024",
+      year: "2024-25 ",
      
       active: true,
     },  {
       id: 1,
-      year: "2024",
+      year: "2023-24",
      
       active: true,
     },  {
       id: 1,
-      year: "2024",
+      year: "22022-23",
      
       active: true,
     },  {
       id: 1,
-      year: "2024",
+      year: "2021-22",
      
       active: true,
     },  {
       id: 1,
-      year: "2024",
+      year: "2020-21",
      
       active: true,
     },  {
       id: 1,
-      year: "2024",
+      year: "2019-20",
      
       active: true,
     },  {
       id: 1,
-      year: "2024",
+      year: "2018-19",
      
       active: true,
-    },  {
-      id: 1,
-      year: "2024",
+    },  
      
-      active: true,
-    },  {
-      id: 1,
-      year: "2024",
-     
-      active: true,
-    },  {
-      id: 1,
-      year: "2024",
-     
-      active: true,
-    },  {
-      id: 1,
-      year: "2024",
-     
-      active: true,
-    },
   ];
   const breadcrumbData = {
     heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/research/reserarch-banner.webp",
@@ -121,9 +97,14 @@ export default function Research() {
   return (
     <div>
       <AutoBreadcrumb data={breadcrumbData} />
-      <MainIntro title="Research at Kalinga University" 
-      description="Kalinga University fosters a strong research culture that extends beyond classrooms through collaboration with leading universities and R&D institutions. Its research-driven curriculum, IPR and incubation cells support innovation, patents, commercialization, and industry linkage. With advanced CIF laboratories, research tools, plagiarism checks, and a robust research policy, the university empowers students to independently explore, innovate, and solve real-world challenges."
-       imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/research/research-main-content.webp" imageAlt="Kalinga University Research" />
+      <MainIntro
+        title="Research at Kalinga University"
+        description="Kalinga University fosters a strong research culture that extends beyond classrooms through collaboration with leading universities and R&D institutions. Its research-driven curriculum, IPR and incubation cells support innovation, patents, commercialization, and industry linkage. With advanced CIF laboratories, research tools, plagiarism checks, and a robust research policy, the university empowers students to independently explore, innovate, and solve real-world challenges."
+        imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/research/research-main-content.webp"
+        imageAlt="Kalinga University Research"
+        showButton ={false}
+        showKnowMore ={false}
+      />
 
       <PublicationGrid  />
       <OrganogramOfKalinga 
@@ -136,57 +117,79 @@ export default function Research() {
       <UGCLogo />
       <QuickLinks titleClassName="text-white" />
       
-      <MentorIntro   imageSrc = "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/omprakash.png"
-  title = "Mr. Amul"
-  subtitle = "Head of Research"
-  department = "Faculty of Information Technology"
-  quote = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-  message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      <MentorIntro   imageSrc = "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/oprakash.png"
+  title = "Dr. Harsha Patil"
+  subtitle = "HoD – Research"
+  department = "Research Department"
+  quote = "Research is the foundation of academic excellence, where curiosity transforms into innovation and knowledge advances society."
+  message = "At Kalinga University, research stands at the core of academic excellence. We are committed to nurturing a strong research ecosystem that encourages curiosity, innovation, and problem-solving among our students and faculty. Through advanced research laboratories, high-tech instruments, robust policy frameworks, IPR support, and collaborations with national and international organizations, we empower our scholars to contribute meaningfully to society. With hands-on training, workshops, and continuous mentorship, our faculty actively guide students in publishing research, filing patents, and presenting their work on diverse platforms, shaping them into confident leaders in their respective fields."
   />  
 
       <FAQ 
         title="Research Committee Members" 
         subtitleClassName="!hidden" 
         variant="table-display"
-        tableColumns={[
-          { key: "slNo", label: "Sl. No", width: "w-20" },
-          { key: "name", label: "Name of member", width: "w-48" },
-          { key: "designation", label: "Designation", width: "flex-1" },
-          { key: "category", label: "Category", width: "w-40" }
-        ]}
+        items={[]}
         tableSections={[
           {
             id: 1,
             title: "2023-2024",
             data: [
-              { slNo: 1, name: "Dr. John Smith", designation: "Professor/Computer Science", category: "Chairperson" },
-              { slNo: 2, name: "Dr. Jane Doe", designation: "Professor/Mechanical Engineering", category: "Member" },
-              { slNo: 3, name: "Dr. Robert Johnson", designation: "Associate Professor/ECE", category: "Member" },
-              { slNo: 4, name: "Dr. Sarah Williams", designation: "Assistant Professor/Research", category: "Member" },
-              { slNo: 5, name: "Dr. Michael Brown", designation: "Professor/Pharmacy", category: "Member" },
-              { slNo: 6, name: "Dr. Emily Davis", designation: "Associate Professor/Biotechnology", category: "Member" },
-              { slNo: 7, name: "Dr. David Wilson", designation: "External Expert", category: "Asso. Committed" },
-              { slNo: 8, name: "Dr. Lisa Anderson", designation: "Professor/Mathematics", category: "Member" },
-              { slNo: 9, name: "Dr. James Taylor", designation: "Associate Professor/Physics", category: "Member" }
+              { name: "Dr. Priya Sharma", designation: "Faculty of Science", category: "Author" },
+              { name: "Dr. Rajesh Kumar", designation: "Faculty of Technology", category: "Co-Author" },
+              { name: "Prof. Meera Patel", designation: "Faculty of CS & IT", category: "Author" },
+              { name: "Dr. Anil Verma", designation: "Faculty of Pharmacy", category: "Researcher" },
+              { name: "Dr. Sushma Desai", designation: "Faculty of Law", category: "Author" },
+              { name: "Dr. Vikram Singh", designation: "Faculty of Commerce & Management", category: "Co-Author" },
+              { name: "Prof. Kavita Rao", designation: "Faculty of Arts & Humanities", category: "Author" },
+              { name: "Dr. Manoj Tiwari", designation: "Faculty of Engineering", category: "Researcher" },
+              { name: "Dr. Neha Agarwal", designation: "Faculty of Education", category: "Author" },
+              { name: "Dr. Pradeep Nair", designation: "Faculty of Science", category: "Co-Author" },
+              { name: "Prof. Ritu Agarwal", designation: "Faculty of Technology", category: "Author" },
+              { name: "Dr. Sandeep Reddy", designation: "IEEE", category: "Researcher" }
+            ]
+          },
+          {
+            id: 2,
+            title: "2022-2023",
+            data: [
+              { name: "Dr. Vijay Bhushan", designation: "Faculty of Arts & Humanities", category: "Author" },
+              { name: "Dr. Sinha Singh", designation: "Faculty of Commerce & Management", category: "Author" },
+              { name: "Dr. Smith Kalyan Pandey", designation: "Faculty of Commerce & Management", category: "Co-Author" },
+              { name: "Dr. Jasmine Joshi", designation: "Faculty of Commerce & Management", category: "Researcher" },
+              { name: "Dr. Nusratin Khatun", designation: "Faculty of Technology", category: "Author" },
+              { name: "Prof. Ritu Mishra", designation: "Faculty of Technology", category: "Co-Author" },
+              { name: "Dr. Komal Gupta", designation: "Faculty of Commerce & Management", category: "Author" },
+              { name: "Dr. Ruchi Gupta", designation: "Faculty of Commerce & Management", category: "Researcher" },
+              { name: "Dr. C. Divya", designation: "Faculty of Commerce & Management", category: "Author" },
+              { name: "Prof. Shiv Kumar", designation: "Faculty of Technology", category: "Co-Author" },
+              { name: "Dr. Sunayana Shukla", designation: "Faculty of Commerce & Management", category: "Author" },
+              { name: "Dr. Arvind Mehta", designation: "Faculty of Science", category: "Researcher" },
+              { name: "Dr. Preeti Khanna", designation: "Faculty of Pharmacy", category: "Author" }
+            ]
+          },
+          {
+            id: 3,
+            title: "2021-2022",
+            data: [
+              { name: "Dr. Amit Kumar", designation: "Faculty of Technology", category: "Author" },
+              { name: "Prof. Divya Sharma", designation: "Faculty of CS & IT", category: "Co-Author" },
+              { name: "Dr. Rohit Verma", designation: "Faculty of Engineering", category: "Researcher" },
+              { name: "Dr. Anjali Kapoor", designation: "Faculty of Arts & Humanities", category: "Author" },
+              { name: "Dr. Sanjay Patel", designation: "Faculty of Commerce & Management", category: "Co-Author" },
+              { name: "Prof. Geeta Singh", designation: "Faculty of Science", category: "Author" },
+              { name: "Dr. Mukesh Yadav", designation: "Faculty of Pharmacy", category: "Researcher" },
+              { name: "Dr. Priyanka Nair", designation: "Faculty of Law", category: "Author" },
+              { name: "Dr. Rajiv Joshi", designation: "Faculty of Education", category: "Co-Author" },
+              { name: "Dr. Sneha Reddy", designation: "Faculty of Technology", category: "Author" },
+              { name: "Prof. Vishal Mehta", designation: "Faculty of CS & IT", category: "Researcher" },
+              { name: "Dr. Kavita Desai", designation: "Faculty of Arts & Humanities", category: "Author" }
             ]
           }
         ]}
         overflowX={false}
       />
-      <FAQ 
-        variant="button"
-        buttons={[
-          {
-            id: 1,
-            title: "Placements 2024-2025",
-            description: "Lorem ipsum...",
-            buttons: [
-              { label: "Annual Reports", onClick: () => {} },
-              { label: "Placement Details", onClick: () => {} }
-            ]
-          }
-        ]}
-      />
+      
       <ResearchSixGridButtons />
 
       <UpcomingConferences 
