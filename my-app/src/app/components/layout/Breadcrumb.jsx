@@ -51,7 +51,10 @@ const routeHeroImages = [
     match: /^\/international-students/,
     image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/international-students-banner.webp",
   },
-
+  {
+    match: /^\/leadership/,
+    image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/kalinga-front-banner02.webp",
+  },
 ];
 const imageposition = "object-center";
 

@@ -6,6 +6,11 @@ import OurEquipmentSlider from '../components/cif/our_equipment_slider'
 import CifYoutubeCallSection from '../components/cif/youtube_call_section'
 import QuickLinks from '../components/general/quick_links'
 import ContactSection from '../components/cif/contact_section'
+import CareerApplicationForm from '../components/careers/CareerApplicationForm'
+import Gallery from '../components/general/gallery'
+import AdmissionCareer from '../components/general/admission_cta'
+import Testimonials from '../components/home/Testimonials'
+
 const CentralInstrumentationFacilityPage = () => {
   
   const quickLinks = [
@@ -133,7 +138,27 @@ const CentralInstrumentationFacilityPage = () => {
     links={quickLinks}
     titleClassName="text-white"
     />
-
+    <ContactSection />
+    <CareerApplicationForm
+          heading="CTCD Application Form"
+          description="Share your details to stay connected with Kalinga University, receive updates, and participate in alumni activities and events."
+          backgroundClass="bg-[var(--button-red)]"
+          hideTabs={true}
+          submitLabel="Submit Alumni Details"
+          useArrowSubmitButton={true}
+          arrowSubmitVariant="white"
+        />
+    <Testimonials
+        testimonials={cifTestimonials}
+        className="bg-[var(--light-gray)] mt-16"
+        subtitle="CIF Testimonials"
+        title="Proudly Presenting the Remarkable Achievements of Kalinga University Alumni"
+        titleClassName="!text-[var(--foreground)]"
+        subtitleClassName="!text-[var(--button-red)]"
+        subtitleTextColor="!text-[var(--button-red)]"
+      />
+    <Gallery />
+    <AdmissionCareer />
     </>
   )
 }
