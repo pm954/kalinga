@@ -319,9 +319,9 @@ export default function InternationalStudents() {
          boxItems={boxItems} 
          title="Why Study At India" 
          subtitle="" 
-         description="The number of international students choosing India for higher education is increasing due to its high-quality and affordable education system. India is one of the fastest-developing countries in the world, providing young aspirants with the opportunity to research, innovate, and contribute to global progress. The country’s education system is becoming globally competitive with the implementation of the New Education Policy 2020. The rise in international students choosing Indian institutes shows their desire to study and grow in a leading economy. "
+         description=""
          className="bg-white"
-         textClassName="text-white"
+         textClassName=""
          headingClassName="" 
          cardBackgroundColor="bg-[var(--button-red)]"
          cardTitleClassName="text-white"
