@@ -21,8 +21,8 @@ function Sportsandwellnesscentre() {
     return (
         <>
             <AutoBreadcrumb data={breadcrumbData} />
-            <SportsWellnessOverview />
             <SportsandwellnessMainIntro />
+            <SportsWellnessOverview />
             <SportsFacilitiesTabs />
             <Sportsandwellnessevents />
             <AdmissionCareer />
