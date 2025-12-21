@@ -10,6 +10,7 @@ import MobileMenu from './MobileMenu';
 import FlatIcon from '../general/flat-icon';
 import GlobalArrowButton from '../general/global-arrow_button';
 import { contactInfo, getPhone, getEmail, getLogoSrc, getLogoAlt } from '../../config/contact-info';
+import { fetchAllDepartments } from '@/app/lib/api';
 
 
 const Header = () => {
@@ -19,11 +20,26 @@ const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredCourses, setFilteredCourses] = useState([]);
+  const [departments, setDepartments] = useState([]);
   const searchRef = useRef(null);
   const pathname = usePathname();
   const router = useRouter();
   const isHomePage = pathname === '/';
   const isCorporateTrainingPage = pathname === '/corporate-training-and-consultancy-division';
+
+  // Fetch departments for academics menu
+  useEffect(() => {
+    const loadDepartments = async () => {
+      try {
+        const departmentsData = await fetchAllDepartments();
+        setDepartments(Array.isArray(departmentsData) ? departmentsData : []);
+      } catch (err) {
+        console.error('Failed to load departments for menu:', err);
+        setDepartments([]);
+      }
+    };
+    loadDepartments();
+  }, []);
 
   const courses = useMemo(
     () => [
@@ -84,7 +100,7 @@ const Header = () => {
     setIsSearchOpen(false);
   };
 
-  const navItems = [
+  const navItems = useMemo(() => [
     {
       id: 'about',
       label: 'About Us',
@@ -119,22 +135,31 @@ const Header = () => {
       megaMenu: {
         sections: [
           {
+            title: 'Overview',
+            links: [
+              { label: 'Academics', href: '/academics' },
+              { label: 'Academics API', href: '/academics-api' },
+            ]
+          },
+          {
             title: 'Programs',
             links: [
-              { label: 'Undergraduate', href: '/academics/undergraduate' },
-              { label: 'Postgraduate', href: '/academics/postgraduate' },
-              { label: 'Doctoral', href: '/academics/doctoral' },
-              { label: 'Distance Learning', href: '/academics/distance' },
+              { label: 'Undergraduate (UG)', href: '/admissions?studyLevel=UG' },
+              { label: 'Postgraduate (PG)', href: '/admissions?studyLevel=PG' },
+              { label: 'Doctoral (PhD)', href: '/admissions?studyLevel=PhD' },
+              { label: 'Diploma', href: '/admissions?studyLevel=Diploma' },
             ]
           },
           {
             title: 'Departments',
-            links: [
-              { label: 'Engineering', href: '/academics/engineering' },
-              { label: 'Management', href: '/academics/management' },
-              { label: 'Science', href: '/academics/science' },
-              { label: 'Arts', href: '/academics/arts' },
-            ]
+            links: departments.length > 0 
+              ? departments.slice(0, 10).map(dept => ({
+                  label: dept.name || 'Department',
+                  href: `/admissions?department=${encodeURIComponent(dept.slug || dept.id)}`
+                }))
+              : [
+                  { label: 'Loading...', href: '/academics' }
+                ]
           }
         ]
       }
@@ -264,7 +289,7 @@ const Header = () => {
         ]
       }
     },
-  ];
+  ], [departments]);
   const topBarItems = [
 
     {
@@ -384,7 +409,7 @@ const Header = () => {
           <div className="flex items-center justify-between   container mx-auto px-2 py-4 w-full max-w-full !z-[10050] overflow-visible">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 relative">
-              <div className="w-42 h-12">
+              <div className="w-42 h-12 relative">
                 <Image
                   src={
                     isHomePage || isCorporateTrainingPage
@@ -393,7 +418,7 @@ const Header = () => {
                   }
                   alt={getLogoAlt('primary')}
                   fill
-                  className="object-contain relative transition-all duration-300"
+                  className="object-contain transition-all duration-300"
                 />
               </div>
             </Link>
