@@ -185,8 +185,11 @@ const FAQ = ({
     })
   }
 
-  // Get items to render based on variant
-  const itemsToRender = variant === "editable" ? faqItems : items
+  // Get items to render based on variant and ensure they have IDs
+  const itemsToRender = (variant === "editable" ? faqItems : items).map((item, index) => ({
+    ...item,
+    id: item.id !== undefined ? item.id : index + 1
+  }))
 
   // Wrapper component that conditionally renders with or without section
   const Wrapper = ({ children, className = "" }) => {
@@ -213,10 +216,15 @@ const FAQ = ({
             ] : undefined
           }))
     
-    // Regular FAQ items (non-table)
-    const regularItems = items.filter(item => 
-      !(item.answer && typeof item.answer === 'object' && item.answer.type === 'table')
-    )
+    // Regular FAQ items (non-table) - ensure they have IDs
+    const regularItems = items
+      .filter(item => 
+        !(item.answer && typeof item.answer === 'object' && item.answer.type === 'table')
+      )
+      .map((item, index) => ({
+        ...item,
+        id: item.id !== undefined ? item.id : index + 1
+      }))
     
     return (
       <Wrapper className={`${backgroundColor} py-16`}>
@@ -371,7 +379,7 @@ const FAQ = ({
             const isCollapsed = collapsedSections.has(sectionId)
             
             return (
-              <div key={item.id || index} className="container mx-auto mb-6 rounded-lg overflow-hidden shadow-md mt-5">
+              <div key={item.id || index} className="mb-6 rounded-lg overflow-hidden shadow-md mt-5">
                 {/* Header - Entire header is clickable */}
                 <button
                   onClick={() => toggleSection(sectionId)}

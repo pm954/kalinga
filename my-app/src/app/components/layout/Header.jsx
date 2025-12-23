@@ -405,14 +405,16 @@ const Header = () => {
       </div>
 
       {/* Main Header */}
-      <div className={`transition-all z-[10050] w-full  overflow-visible ${isScrolled ? 'fixed top-0 left-0 right-0 bg-white duration-500 shadow-md' : (isHomePage || isCorporateTrainingPage) ? 'bg-transparent' : 'bg-white duration-500'}`}>
+      <div className={`transition-all z-[10050] w-full  overflow-visible ${isScrolled ? 'fixed top-0 left-0 right-0 bg-white duration-500 shadow-md' : isHomePage ? 'bg-transparent' : isCorporateTrainingPage ? 'bg-white duration-500' : 'bg-white duration-500'}`}>
           <div className="flex items-center justify-between   container mx-auto px-2 py-4 w-full max-w-full !z-[10050] overflow-visible">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 relative">
               <div className="w-42 h-12 relative">
                 <Image
                   src={
-                    isHomePage || isCorporateTrainingPage
+                    isCorporateTrainingPage
+                      ? getLogoSrc('secondary')
+                      : isHomePage
                       ? (isScrolled ? getLogoSrc('secondary') : getLogoSrc('primary'))
                       : getLogoSrc('secondary')
                   }
@@ -439,7 +441,7 @@ const Header = () => {
                         isHomePage 
                           ? (isScrolled ? 'text-[var(--dark-gray)]' : 'text-white')
                           : isCorporateTrainingPage
-                          ? (isScrolled ? 'text-[var(--dark-gray)]' : 'text-white')
+                          ? 'text-black'
                           : 'text-black'
                       }`}
                     >

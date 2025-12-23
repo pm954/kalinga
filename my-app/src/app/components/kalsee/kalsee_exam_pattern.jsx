@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import SectionHeading from "../general/SectionHeading";
 
 const dataMap = {
   btech: {
@@ -66,15 +67,16 @@ export default function KalseeExamPattern() {
   const total = activeData.rows.reduce((sum, r) => sum + (Number(r.questions) || 0), 0);
 
   return (
-    <section className="w-full py-12">
-      <div className="mx-auto w-full max-w-6xl px-4">
-        <h2 className="text-center font-stix text-[44px] leading-[54px] text-[var(--foreground)]">
-          Pattern Of KALSEE Exam
-        </h2>
+    <section className="w-full py-8 sm:py-12 md:py-16">
+      <div className="mx-auto w-full container px-4 sm:px-6">
+        <SectionHeading
+          title="Pattern Of KALSEE Exam"
+          titleClassName="text-center  leading-tight sm:leading-normal md:leading-[54px]"
+        />
 
-        <div className="mt-10 grid gap-8 md:grid-cols-[420px_1fr]">
+        <div className="mt-6 sm:mt-8 md:mt-10 flex flex-col md:grid md:grid-cols-[420px_1fr] gap-6 md:gap-8">
           {/* LEFT: selections */}
-          <div className="space-y-5">
+          <div className="flex md:flex-col gap-3 md:gap-5 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
             {items.map((it) => {
               const isActive = it.key === active;
 
@@ -84,8 +86,8 @@ export default function KalseeExamPattern() {
                   type="button"
                   onClick={() => setActive(it.key)}
                   className={[
-                    "w-full rounded-[10px] px-6 py-6 text-left font-semibold transition cursor-pointer",
-                    "border border-black/10",
+                    "flex-shrink-0 md:w-full rounded-[10px] px-4 sm:px-6 py-4 sm:py-6 text-left font-semibold transition cursor-pointer text-sm sm:text-base",
+                    "border border-black/10 whitespace-nowrap md:whitespace-normal",
                     isActive
                       ? "bg-[var(--button-red)] text-white"
                       : "bg-[var(--card-sandal)] text-[var(--foreground)]",
@@ -98,37 +100,37 @@ export default function KalseeExamPattern() {
           </div>
 
           {/* RIGHT: panel */}
-          <div className="rounded-[18px] bg-[var(--dark-blue)] p-6 md:p-7">
-            <p className="text-[14px] font-semibold text-white/90">
+          <div className="rounded-[18px] bg-[var(--dark-blue)] p-4 sm:p-6 md:p-7">
+            <p className="text-xs sm:text-sm md:text-[14px] font-semibold text-white/90">
               {activeData.note}
             </p>
 
-            <div className="mt-4 overflow-hidden rounded-[10px] bg-white">
-              <table className="w-full border-collapse text-left text-[14px]">
+            <div className="mt-4 overflow-x-auto rounded-[10px] bg-white">
+              <table className="w-full min-w-[400px] border-collapse text-left text-xs sm:text-sm md:text-[14px]">
                 <thead>
                   <tr className="bg-[var(--button-red)] text-white">
-                    <th className="px-5 py-4 font-semibold">Sl. No</th>
-                    <th className="px-5 py-4 font-semibold">Section</th>
-                    <th className="px-5 py-4 font-semibold">Subject</th>
-                    <th className="px-5 py-4 text-right font-semibold">Questions</th>
+                    <th className="px-3 sm:px-4 md:px-5 py-3 sm:py-4 font-semibold">Sl. No</th>
+                    <th className="px-3 sm:px-4 md:px-5 py-3 sm:py-4 font-semibold">Section</th>
+                    <th className="px-3 sm:px-4 md:px-5 py-3 sm:py-4 font-semibold">Subject</th>
+                    <th className="px-3 sm:px-4 md:px-5 py-3 sm:py-4 text-right font-semibold">Questions</th>
                   </tr>
                 </thead>
 
                 <tbody className="text-[var(--foreground)]">
                   {activeData.rows.map((r, idx) => (
                     <tr key={idx} className="border-t border-black/10">
-                      <td className="px-5 py-4">{r.sl}</td>
-                      <td className="px-5 py-4">{r.section}</td>
-                      <td className="px-5 py-4">{r.subject}</td>
-                      <td className="px-5 py-4 text-right">{r.questions}</td>
+                      <td className="px-3 sm:px-4 md:px-5 py-3 sm:py-4">{r.sl}</td>
+                      <td className="px-3 sm:px-4 md:px-5 py-3 sm:py-4">{r.section}</td>
+                      <td className="px-3 sm:px-4 md:px-5 py-3 sm:py-4">{r.subject}</td>
+                      <td className="px-3 sm:px-4 md:px-5 py-3 sm:py-4 text-right">{r.questions}</td>
                     </tr>
                   ))}
 
                   <tr className="border-t border-black/10 bg-[#fffaf2]">
-                    <td className="px-5 py-4 font-semibold text-center" colSpan={3}>
+                    <td className="px-3 sm:px-4 md:px-5 py-3 sm:py-4 font-semibold text-center" colSpan={3}>
                       Total
                     </td>
-                    <td className="px-5 py-4 text-right font-semibold">
+                    <td className="px-3 sm:px-4 md:px-5 py-3 sm:py-4 text-right font-semibold">
                       {total}
                     </td>
                   </tr>
