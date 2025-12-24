@@ -501,40 +501,65 @@ const TrainingAndPlacementCell = () => {
         imageItems={[
           {
             id: 1,
-            name: "Student Name 1",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
-            description: "Company Name | Package: ₹XX LPA",
+            name: "Anisha Hussain",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/training-and-placement-cell/Our-Outstanding-Achievers(1).png",
+            description: "MBA ",
           },
           {
             id: 2,
-            name: "Student Name 2",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
-            description: "Company Name | Package: ₹XX LPA",
+            name: "Yash Agarwal",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/training-and-placement-cell/Our-Outstanding-Achievers(2).png",
+            description: "B.Pharma",
           },
           {
             id: 3,
-            name: "Student Name 3",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
-            description: "Company Name | Package: ₹XX LPA",
+            name: "Karishma meher",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/training-and-placement-cell/Our-Outstanding-Achievers(3).png",
+            description: "B.com",
           },
           {
             id: 4,
-            name: "Student Name 4",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
-            description: "Company Name | Package: ₹XX LPA",
+            name: "David Kisku",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/training-and-placement-cell/Our-Outstanding-Achievers(4).png",
+            description: "B.pharmacy",
           },
           {
             id: 5,
-            name: "Student Name 5",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
-            description: "Company Name | Package: ₹XX LPA",
+            name: "Aryan Prakash Gupta",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/training-and-placement-cell/Our-Outstanding-Achievers(5).png",
+            description: "MBA",
           },
           {
             id: 6,
-            name: "Student Name 6",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
-            description: "Company Name | Package: ₹XX LPA",
+            name: "Ashley Christeena Thomas",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/training-and-placement-cell/Our-Outstanding-Achievers(6).png",
+            description: "B.pharmacy",
           },
+           {
+            id: 7,
+            name: "Gautam Mandal",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/training-and-placement-cell/Our-Outstanding-Achievers(7).png",
+            description: "B.Tech CS",
+          },
+           {
+            id: 8,
+            name: "Mehek Sharma",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/training-and-placement-cell/Our-Outstanding-Achievers(8).png",
+            description: "B.com",
+          },
+           {
+            id: 9,
+            name: "Adarsh choudhary",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/training-and-placement-cell/Our-Outstanding-Achievers(9).png",
+            description: "B.com(Banking and Finance)",
+          },
+           {
+            id: 10,
+            name: "Rupali Sahu",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/training-and-placement-cell/Our-Outstanding-Achievers(10).png",
+            description: "MBA",
+          },
+           
         ]}
         cardBgClass="bg-white"
         nameTextClass="text-[var(--button-red)]"
