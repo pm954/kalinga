@@ -10,17 +10,254 @@ import Partner from '@/app/components/ccrc/partner'
 import MediaCardSlider from '@/app/components/general/media-card-slider'
 import Testimonials from '@/app/components/home/Testimonials'
 import Gallery from '@/app/components/campuslife/campusgallery'
+import CustomGallery from '@/app/components/general/gallery'
 const TrainingAndPlacementCell = () => {
   const blueItems = [
     {
-      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/mou/subros.png",
-      imageAlt: "Subros",
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-1.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-2.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-3.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-4.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-5.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-6.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-7.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-8.webp",
+      imageAlt: "",
+    },  
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-9.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-10.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-11.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-12.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-13.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-14.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-15.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-16.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-17.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-18.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-19.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-20.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-21.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-22.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-23.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-24.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-25.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-26.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-27.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-28.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-29.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-30.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-31.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-32.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-33.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-34.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-35.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-36.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-37.webp",
+      imageAlt: "",
+    },
+    // {
+    //   imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-38.webp",
+    //   imageAlt: "",
+    // },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-39.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-40.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-41.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-42.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-43.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-44.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-45.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-46.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-47.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-48.webp",
+      imageAlt: "",
+    },
+    { 
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-49.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-50.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-51.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-52.webp",
+      imageAlt: "",
+    },
+    {
+      imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-53.webp",
+      imageAlt: "",
     },
   ]
     const items = [
         {
             id: 1,
-            text: "With our personalised training programs, expert-led sessions, and interview preparation, you will be well-prepared to clear any job interview according to your skill set. Our expert mentors go beyond and guide you with skills that companies are looking for in the current job market, and even update the training modules accordingly. Apart from this, we also keep the database of job openings in various companies up-to-date, so that our students don't miss out on any opportunities. With our strong industry connections, we conduct campus drives each year, ensuring that our graduates are placed in leading companies with competitive salary packages."
+            text: "To provide career counselling services for skill development and better job opportunities"
+        },
+        {
+            id: 2,
+            text: "To organise pre-placement training, which includes soft skills, group discussions, resume writing, and mock interviews"
+        },
+        {
+            id: 3,
+            text: "To organise guest lectures, seminars, workshops, industrial visits, and certification programs"
+        },
+        {
+            id: 4,
+            text: "To invite companies for campus placements drives"
+        },
+        {
+            id: 5,
+            text: "To facilitate internships and job opportunities through campus placement drives"
+        },
+        {
+            id: 6,
+            text: "To promote entrepreneurial skills among students"
+        },
+        {
+            id: 7,
+            text: "To maintain an updated record of students' skills to match them with current industry requirements for better placement opportunities"
+        },
+        {
+            id: 8,
+            text: "To regularly monitor placement activities and generate feedback to improve students' performance in interviews"
         },
     ]
     const skillsContent = {
@@ -54,6 +291,33 @@ const TrainingAndPlacementCell = () => {
             },
         ]
     }
+    const galleryImages = [
+        {
+            id: 1,
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-glimple-1.webp",
+            alt: "Training and Placement Gallery 1"
+        },
+        {
+            id: 2,
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-glimple-2.webp",
+            alt: "Training and Placement Gallery 2"
+        },
+        {
+            id: 3,
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-glimple-3.webp",
+            alt: "Training and Placement Gallery 3"
+        },
+        {
+            id: 4,
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-glimple-4.webp",
+            alt: "Training and Placement Gallery 4"
+        },
+        {
+            id: 5,
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-glimple-5.webp",
+            alt: "Training and Placement Gallery 5"
+        },
+    ]
     return (
     <>
     <MainIntro
@@ -62,16 +326,16 @@ const TrainingAndPlacementCell = () => {
       "The Career and Corporate Centre of Kalinga University is a hub for career guidance and training, and corporate partnerships. With modern infrastructure and resources, the centre meets industry standards and has even received appreciation from top organisations. The Kalinga University campus placements support cell introduces you to the professional world. We don't just prepare you for the corporate world, but give you a 360-degree training so that you can turn out to be a confident individual who is ready to tackle any challenge in life.",
       "With our personalised training programs, expert-led sessions, and interview preparation, you will be well-prepared to clear any job interview according to your skill set. Our expert mentors go beyond and guide you with skills that companies are looking for in the current job market, and even update the training modules accordingly. Apart from this, we also keep the database of job openings in various companies up-to-date, so that our students don't miss out on any opportunities. With our strong industry connections, we conduct campus drives each year, ensuring that our graduates are placed in leading companies with competitive salary packages."
     ]}
-    imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/training-and-placement-cell/training-and-placement-cell-banner.webp"
-    imageAlt="Training And Placement Cell"
+    imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/placemnt-intro.webp"
+    imageAlt="Objectives"
     initialVisibleParagraphs={1}
     showKnowMore={true}
     />
-    <ImageListItem items={items} imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/training-and-placement-cell/training-and-placement-cell-banner.webp" title="Training And Placement Cell" />
+    <ImageListItem items={items} imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/placement-intro-2.webp" title="Training And Placement Cell" />
     <ImageContent
-    title="Training And Placement Cell"
+    title="Our Career And Corporate Resource Centre"
     description="The Career and Corporate Resource Centre (CCRC) of Kalinga University bridges academic learning and industrial knowledge through collaborations and customised solutions. Our services include: Corporate Trainings & Psychometric Analysis, Consultancy Services: 360 Degree PMS & HRIS, Corporate Social Responsibility, Training and Placements, and Incubation support."
-    imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/training-and-placement-cell/training-and-placement-cell-banner.webp"
+    imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ccrclogo.webp"
     imageAlt="Training And Placement Cell"
     buttonLink="/career-and-corporate-resource-centre"
     buttonText="Explore More"
@@ -222,13 +486,14 @@ const TrainingAndPlacementCell = () => {
       description={skillsContent.description}
       careers={skillsContent.careers}
     />
+
     <Partner 
-        blueTitle="Best Campus Placement University in Chhattisgarh" 
-        redTitle="MoU Partners" 
+        blueTitle="Our Prominent Recruiters" 
+        redTitle="" 
         blueItems={blueItems} 
         ccrcLogo="https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ccrclogo.webp"
         singleColumn={true}
-        description="Maintaining the track record of providing students with the best job opportunities and rewarding salary packages at top companies."
+        description=""
       />
       <MediaCardSlider
         categoryTitle="Top Performers"
@@ -276,7 +541,10 @@ const TrainingAndPlacementCell = () => {
         descriptionTextClass="text-gray-600"
         swiperClassName="top-performers-slider"
       />
-      <Gallery />
+    <CustomGallery 
+      images={galleryImages}
+      title="Glimpses of Our Training and Placement Activities"
+    />
     </>
   )
 }
