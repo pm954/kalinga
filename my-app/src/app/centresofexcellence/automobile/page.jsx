@@ -2,13 +2,13 @@
 
 import { useLayoutEffect } from "react";
 import ImageContent from "@/app/components/ccrc/imagecontent";
-import WhatYouLearnSlider from "@/app/components/centresofexcellence/what-you-learn-slider";
+import CareerPath from "@/app/components/course/career_path";
 import StudentActivities from "@/app/components/department/student_activities";
 import AdmissionCareer from "@/app/components/general/admission_cta";
 
 const breadcrumbData = {
   heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
+    "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
   pageTitle: "Automobile Training Centre",
   customBreadcrumbs: [
     { label: "Home", href: "/" },
@@ -20,54 +20,56 @@ const breadcrumbData = {
   ],
 };
 
-const aboutText =
-  "JustAuto Solutions Pvt. Ltd. is an ISO-certified company that specialises in automotive training and the supply of tools and equipment. Kalinga University has partnered with JustAuto Solutions to provide industry-focused training in the repair and maintenance of 2 & 3-wheelers. Through hands-on practice, expert-led sessions, and certification-based learning, students gain practical technical exposure and become employable in the fast-growing automobile industry.";
+const aboutText = [
+  "JustAuto Solutions Pvt. Ltd. is an ISO-certified company that specialises in automotive training and the supply of tools and equipment. Kalinga University has partnered with JustAuto Solutions to provide industry-focused training in the repair and maintenance of 2 & 3-wheelers.",
+  "Through hands-on practice, expert-led sessions, and certification-based learning, students gain practical technical exposure and become employable in the fast-growing automobile industry.",
+];
 
-const whatYouLearnItems = [
+const learnCards = [
   {
     id: 1,
-    title: "Fundamentals of 2 & 3-Wheeler Systems",
-    description: "",
+    title: "",
+    description: "Fundamentals of 2 & 3-Wheeler systems",
     icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/merit.svg",
   },
   {
     id: 2,
-    title: "Diagnostic Skills Using Modern Tools",
-    description: "",
+    title: "",
+    description: "Diagnostic skills using modern tools",
     icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/social.svg",
   },
   {
     id: 3,
-    title: "Engine Service & Maintenance",
-    description: "",
+    title: "",
+    description: "Engine service & maintenance",
     icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/book-logo.png",
   },
   {
     id: 4,
-    title: "Repair Procedures for 2 & 3 Wheelers",
-    description: "",
+    title: "",
+    description: "Repair procedures for 2 & 3 wheelers",
     icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/merit.svg",
   },
   {
     id: 5,
-    title: "Preventive & Predictive Maintenance Techniques",
-    description: "",
+    title: "",
+    description: "Preventive & predictive maintenance techniques",
     icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/social.svg",
   },
   {
     id: 6,
-    title: "Exposure to Emerging Technologies in Mobility",
-    description: "",
+    title: "",
+    description: "Exposure to emerging technologies in mobility",
     icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/book-logo.png",
   },
 ];
 
-const activities = [
+const glimpses = [
   {
     id: 1,
     imageSrc:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
-    imageAlt: "Automobile Training Centre",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+    imageAlt: "Automobile Training Glimpse",
     title: "Workshop Session / Training Glimpse",
     buttonText: "Read More",
     date: "August 25 - 2025",
@@ -75,8 +77,8 @@ const activities = [
   {
     id: 2,
     imageSrc:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
-    imageAlt: "Automobile Training Centre",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+    imageAlt: "Automobile Training Glimpse",
     title: "Industry Expert Talk",
     buttonText: "Read More",
     date: "September 10 - 2025",
@@ -84,8 +86,8 @@ const activities = [
   {
     id: 3,
     imageSrc:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
-    imageAlt: "Automobile Training Centre",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+    imageAlt: "Automobile Training Glimpse",
     title: "Hands-on Diagnostic Practice",
     buttonText: "Read More",
     date: "October 05 - 2025",
@@ -102,7 +104,6 @@ export default function AutomobileTrainingCentrePage() {
 
   return (
     <main className="bg-white">
-      {/* Page Title */}
       <section className="pt-10 pb-6">
         <div className="container mx-auto px-4">
           <h1 className="text-2xl md:text-4xl font-semibold text-[var(--title-color)]">
@@ -114,29 +115,18 @@ export default function AutomobileTrainingCentrePage() {
         </div>
       </section>
 
-      {/* 1) ImageContent block */}
       <ImageContent
         title="Automobile Training Centre"
         subtitle="In collaboration with JustAuto Solutions"
         description={aboutText}
-        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg"
+        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png"
         imageAlt="Automobile Training Centre"
         readmore={false}
       />
 
-      {/* 2) What You’ll Learn Here (cards slider) */}
-      <WhatYouLearnSlider
-        title="What You’ll Learn Here"
-        subtitle=""
-        items={whatYouLearnItems}
-      />
+      <CareerPath careers={learnCards} title="What You’ll Learn Here" description="" />
 
-      {/* 3) Events and Activities */}
-      <StudentActivities
-        activities={activities}
-        title="Events and Activities"
-        subtitle="Glimpses"
-      />
+      <StudentActivities title="Glimpses" subtitle="" activities={glimpses} />
 
       <AdmissionCareer />
     </main>

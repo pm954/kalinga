@@ -2,15 +2,9 @@
 
 import { useLayoutEffect } from "react";
 import ImageContent from "@/app/components/ccrc/imagecontent";
+import CareerPath from "@/app/components/course/career_path";
 import StudentActivities from "@/app/components/department/student_activities";
 import AdmissionCareer from "@/app/components/general/admission_cta";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import ScholarshipCard from "@/app/components/general/scholarship-card";
-import Image from "next/image";
 
 const breadcrumbData = {
   heroImage:
@@ -26,155 +20,79 @@ const breadcrumbData = {
   ],
 };
 
-const aboutCentreDescription =
-  "BDS Education stands at the forefront of tech education by providing training to students in futuristic skills such as AI, coding, robotics, and drones. Their Teach It Yourself (TIY) model and Knowledge-Through-Projects approach empower educators and inspire students to become innovators and real-world problem solvers.\n\nWith a mission to support NEP 2020, Kalinga University has partnered with BDS Education to offer training to students in skills that are in high demand. With this CoE, our students acquire the latest technical knowledge through their industry-relevant curriculum and practical training programs.";
+const aboutCentreDescription = [
+  "BDS Education stands at the forefront of tech education by providing training to students in futuristic skills such as AI, coding, robotics, and drones. Their Teach It Yourself (TIY) model and Knowledge-Through-Projects approach empower educators and inspire students to become innovators and real-world problem solvers.",
+  "With a mission to support NEP 2020, Kalinga University has partnered with BDS Education to offer training to students in skills that are in high demand. With this CoE, our students acquire the latest technical knowledge through their industry-relevant curriculum and practical training programs.",
+];
 
 const learnCards = [
   {
     id: 1,
-    title: "Programming Languages used in robotics & automation tasks",
-    description: "",
+    title: "",
+    description: "Programming languages used in robotics & automation tasks",
     icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/merit.svg",
   },
   {
     id: 2,
-    title: "Robotics Mechanisms & Controls",
-    description: "",
+    title: "",
+    description: "Robotics mechanisms & control systems",
     icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/social.svg",
   },
   {
     id: 3,
-    title: "Drone Mechanisms & Safe Flying Practices",
-    description: "",
+    title: "",
+    description: "Drone mechanisms & safe flying practices",
     icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/book-logo.png",
   },
   {
     id: 4,
-    title: "AI Principles Used in Smart Gadgets",
-    description: "",
+    title: "",
+    description: "Artificial Intelligence principles used in smart gadgets",
     icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/merit.svg",
   },
   {
     id: 5,
-    title: "Project-Based Learning & Experimentation",
-    description: "",
+    title: "",
+    description: "Project-based learning & experimentation",
     icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/social.svg",
   },
   {
     id: 6,
-    title: "Develop Your Own Tech-Based Ideas",
-    description: "",
+    title: "",
+    description: "Develop and prototype your own tech-based ideas",
     icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/book-logo.png",
   },
 ];
 
-const activities = [
+const glimpses = [
   {
     id: 1,
     imageSrc:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
-    imageAlt: "Glimpses",
-    title: "Glimpses",
+    imageAlt: "Robotics & Drones Glimpse",
+    title: "Training Session Glimpse",
     buttonText: "Read More",
-    date: "",
+    date: "August 25 - 2025",
+  },
+  {
+    id: 2,
+    imageSrc:
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+    imageAlt: "Robotics & Drones Glimpse",
+    title: "Project Demonstration",
+    buttonText: "Read More",
+    date: "September 10 - 2025",
+  },
+  {
+    id: 3,
+    imageSrc:
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+    imageAlt: "Robotics & Drones Glimpse",
+    title: "Drone Practice Glimpse",
+    buttonText: "Read More",
+    date: "October 05 - 2025",
   },
 ];
-
-function WhatYoullLearnSlider({ title = "What You’ll Learn", cards = [] }) {
-  return (
-    <section className="py-16 bg-white relative">
-      <div className="container mx-auto px-2">
-        <div className="mb-8 md:mb-12">
-          <h2 className="font-stix text-[var(--foreground)] text-3xl md:text-4xl lg:text-5xl mb-4 text-center">
-            {title}
-          </h2>
-        </div>
-
-        <div className="relative pt-8 rounded-xl">
-          <Swiper
-            modules={[Navigation]}
-            spaceBetween={24}
-            slidesPerView={1}
-            breakpoints={{
-              640: { slidesPerView: 1.5, spaceBetween: 20 },
-              768: { slidesPerView: 2, spaceBetween: 24 },
-              1024: { slidesPerView: 3, spaceBetween: 24 },
-              1280: { slidesPerView: 3, spaceBetween: 24 },
-            }}
-            navigation={{
-              nextEl: ".learn-swiper-button-next",
-              prevEl: ".learn-swiper-button-prev",
-            }}
-            className="learn-swiper !p-6 [&_.swiper-wrapper]:!flex [&_.swiper-wrapper]:items-stretch [&_.swiper-slide]:!h-auto [&_.swiper-slide]:!flex [&_.swiper-wrapper]:overflow-visible [&_.swiper-slide]:overflow-visible"
-            loop={false}
-            autoHeight={false}
-          >
-            {cards.map((item) => (
-              <SwiperSlide key={item.id}>
-                <div className="h-full w-full overflow-visible">
-                  <div className="bg-white rounded-xl p-1 h-full relative min-h-[220px] max-w-[380px] mx-auto overflow-visible">
-                    <ScholarshipCard
-                      title={item.title}
-                      description=""
-                      icon={
-                        <Image
-                          src={item.icon}
-                          alt={item.title}
-                          width={180}
-                          height={180}
-                          className="object-contain"
-                        />
-                      }
-                    />
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-
-          <div className="flex justify-end items-center gap-3 pr-6">
-            <button className="learn-swiper-button-prev w-12 h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] flex items-center justify-center shadow-md">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-white"
-              >
-                <path
-                  d="M10 12L6 8L10 4"
-                  stroke="currentColor"
-                  strokeWidth="1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-            <button className="learn-swiper-button-next w-12 h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] flex items-center justify-center shadow-md">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-white"
-              >
-                <path
-                  d="M6 4L10 8L6 12"
-                  stroke="currentColor"
-                  strokeWidth="1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 export default function RoboticsCodingDronesTrainingCentrePage() {
   useLayoutEffect(() => {
@@ -185,7 +103,7 @@ export default function RoboticsCodingDronesTrainingCentrePage() {
   }, []);
 
   return (
-    <>
+    <main className="bg-white">
       <section className="pt-10 pb-6">
         <div className="container mx-auto px-4">
           <h1 className="text-2xl md:text-4xl font-semibold text-[var(--title-color)]">
@@ -206,15 +124,11 @@ export default function RoboticsCodingDronesTrainingCentrePage() {
         readmore={false}
       />
 
-      <WhatYoullLearnSlider title="What You’ll Learn" cards={learnCards} />
+      <CareerPath careers={learnCards} title="What You’ll Learn" description="" />
 
-      <StudentActivities
-        activities={activities}
-        title="Events and Activities"
-        subtitle="Glimpses"
-      />
+      <StudentActivities title="Glimpses" subtitle="" activities={glimpses} />
 
       <AdmissionCareer />
-    </>
+    </main>
   );
 }
