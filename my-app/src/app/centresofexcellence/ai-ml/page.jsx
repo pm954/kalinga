@@ -100,7 +100,7 @@ export default function AIMLCentrePage() {
   }, []);
 
   return (
-    <main className="bg-white">
+    <>
       <section className="pt-10 pb-6">
         <div className="container mx-auto px-4">
           <h1 className="text-2xl md:text-4xl font-semibold text-[var(--title-color)]">
@@ -126,6 +126,6 @@ export default function AIMLCentrePage() {
       <StudentActivities title="Glimpses" subtitle="" activities={glimpses} />
 
       <AdmissionCareer />
-    </main>
+    </>
   );
 }
