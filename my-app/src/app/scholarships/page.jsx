@@ -45,7 +45,7 @@ export default function ScholarshipsPage() {
 
   const breadcrumbData = {
     heroImage:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/scholarships/scholarship-banner.webp",
     pageTitle: "Scolarships",
     customBreadcrumbs: [
       { label: "Home", href: "/" },
@@ -342,7 +342,7 @@ export default function ScholarshipsPage() {
         title="Rewarding the Hard Work and Academic Excellence of Meritorious Students"
         subtitle="KU Scholarships 2025-26"
         description="We reward the hard work of every student, and Kalinga University’s scholarships encourage them to dream bigger and confidently step forward towards their career goals."
-        imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png"
+        imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/scholarships/scholarship-about.webp"
       />
 
       {/* ✅ WhyStudy wrapped only to reduce height safely, WITHOUT changing component */}

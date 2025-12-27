@@ -2,6 +2,16 @@ import ResearchIntro from "@/app/components/research-resources/research_intro";
 import ImageListItem from "@/app/components/ccrc/imagelistitem";
 import ResearchResourceFaqClient from "../components/research-resources/research_resource_faq";
 
+const breadcrumbData = {
+    heroImage:
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/research-resources/research-banner.webp",
+    pageTitle: "Research-Resources",
+    customBreadcrumbs: [
+      { label: "Home", href: "/" },
+      { label: "Research-Resources", href: "/research-resources" },
+    ],
+  };
+
 const formatItemText = (text) => {
     const [boldPart, ...rest] = text.split(" - ");
     return (
@@ -96,12 +106,12 @@ export default function ResearchResources() {
                 buttonLabel="Read more"
                 showButton={true}
                 showKnowMore={false}
-                imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png"
+                imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/research-resources/research-main.webp"
                 imageAlt="Kalinga University campus"
             />
             <ImageListItem
                 items={Items}
-                imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png"
+                imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/research-resources/research-toolkit.webp"
                 title="Your Research Toolkit"
                 headingClassName="!text-white !text-[52px] !leading-[60px] !text-center lg:!text-left"
                 textClassName="!text-white/90 !text-[16px] !leading-[26px]"

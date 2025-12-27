@@ -6,7 +6,7 @@ import AdmissionCareer from '../components/general/admission_cta';
 function KuFees() {
     const breadcrumbData = {
         heroImage:
-            "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+            "https://kalinga-university.s3.ap-south-1.amazonaws.com/kufees/kufees-banner.webp",
         pageTitle: "KU Fees",
         customBreadcrumbs: [
             { label: "Home", href: "/" },
