@@ -22,6 +22,9 @@ import SectionHeading from "@/app/components/general/SectionHeading";
 import CareerApplicationForm from "../components/careers/CareerApplicationForm";
 import ContactSection from "../components/cif/contact_section";
 
+// Disable static generation to prevent SSR issues with DOMMatrix
+export const dynamic = 'force-dynamic';
+
 // Breadcrumb configuration
 const breadcrumbData = {
   heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/alumini/alumini.webp",
