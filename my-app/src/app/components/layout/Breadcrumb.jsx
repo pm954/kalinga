@@ -8,6 +8,26 @@ import { useEffect, useRef } from 'react';
 
 const imageposition = "object-top";
 
+// Function to convert text to proper title case
+const toTitleCase = (str) => {
+  if (!str) return '';
+  // Words that should be lowercase unless they're the first word
+  const lowercaseWords = ['of', 'and', 'the', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'with', 'by'];
+  
+  return str
+    .toLowerCase()
+    .split(' ')
+    .map((word, index) => {
+      // Always capitalize first word, or if word is not in lowercase list
+      if (index === 0 || !lowercaseWords.includes(word)) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      }
+      // Keep lowercase for words in the list (except first word)
+      return word;
+    })
+    .join(' ');
+};
+
 const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   const pathname = usePathname();
   const breadcrumbContext = useBreadcrumb();
@@ -97,7 +117,7 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   const resolvedHeroImage = finalHeroImage || null;
   
   // Use pageTitle if provided, otherwise use last breadcrumb label
-  const currentPageTitle = finalPageTitle || breadcrumbs[breadcrumbs.length - 1]?.label || '';
+  const currentPageTitle = toTitleCase(finalPageTitle || breadcrumbs[breadcrumbs.length - 1]?.label || '');
 
   return (
     <div className="relative px-2  ">
@@ -144,7 +164,7 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
         <div className="container mx-auto">
         <div className="absolute z-[10] flex md:flex-row flex-col md:items-end items-start gap-2  md:gap-6 left-1/2 -translate-x-1/2 md:left-auto md:right-auto md:translate-x-0 md:bottom-[25px]  -bottom-[35px] translate-y-1/2 mb-12 md:mb-16 ">
           <div className="p-5 bg-[var(--dark-blue)]/80 backdrop-blur-md rounded-2xl md:min-h-[150px] min-h-[100px] flex justify-center items-center min-w-[330px] md:max-w-4/5 max-w-full wraptext-center">
-            <h1 className="font-stix capitalize text-center text-white text-2xl md:text-4xl lg:text-5xl font-normal ">
+            <h1 className="font-stix text-center text-white text-2xl md:text-4xl lg:text-5xl font-normal ">
               {currentPageTitle}
             </h1> 
           </div>

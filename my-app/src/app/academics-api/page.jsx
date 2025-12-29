@@ -10,6 +10,27 @@ import Stack from '@/app/components/gsap/Stack'
 import { fetchAllDepartments, fetchDepartmentCompleteDetail, parseHtmlToText, fetchDepartmentCourseCounts } from '@/app/lib/api'
 import { useBreadcrumbData } from '@/app/components/layout/BreadcrumbContext'
 import GlobalArrowButton from '@/app/components/general/global-arrow_button'
+
+// Function to convert text to proper title case
+const toTitleCase = (str) => {
+  if (!str) return '';
+  // Words that should be lowercase unless they're the first word
+  const lowercaseWords = ['of', 'and', 'the', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'with', 'by'];
+  
+  return str
+    .toLowerCase()
+    .split(' ')
+    .map((word, index) => {
+      // Always capitalize first word, or if word is not in lowercase list
+      if (index === 0 || !lowercaseWords.includes(word)) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      }
+      // Keep lowercase for words in the list (except first word)
+      return word;
+    })
+    .join(' ');
+};
+
 // Breadcrumb configuration
 const breadcrumbData = {
   heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/academics/academics-banner.webp",
@@ -342,7 +363,7 @@ function DepartmentCard({ program }) {
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
       <div className="absolute bottom-5 left-8 right-3 text-white">
-        <h3 className="font-stix text-lg sm:text-xl leading-snug drop-shadow">{program.title}</h3>
+        <h3 className="font-stix text-lg sm:text-xl leading-snug drop-shadow">{toTitleCase(program.title)}</h3>
       </div>
     </div>
   );
