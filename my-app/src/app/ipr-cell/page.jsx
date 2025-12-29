@@ -87,7 +87,6 @@ export default function IPRCellPage() {
   }));
 
   return (
-    // ✅ Enforce same font family across the whole page
     <main className="bg-white font-jakarta">
       <ImageContent
         title="Intellectual Property Rights (IPR) Cell"
@@ -98,7 +97,10 @@ export default function IPRCellPage() {
         readmore={false}
       />
 
-      <MentorIntro items={MentorIntroProps} />
+      {/* ✅ Reduce the big gap below ImageContent */}
+      <div className="-mt-16 md:-mt-20">
+        <MentorIntro items={MentorIntroProps} />
+      </div>
 
       <section className="py-12">
         <div className="container mx-auto px-4">
