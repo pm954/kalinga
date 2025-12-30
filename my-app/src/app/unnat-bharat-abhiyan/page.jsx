@@ -6,7 +6,9 @@ import ImageContent from "@/app/components/ccrc/imagecontent";
 import MainIntro from "../components/about/main_intro";
 import VisionMission from "../components/about/vision-mission";
 import ImageListItem from "../components/ccrc/imagelistitem";
-import DeptHeadIntro from "@/app/components/department/dept_head_intro";
+
+import DataTable from "@/app/components/general/data-table";
+import ContactSection from '../components/cif/contact_section';
 
 /* ---------------- Breadcrumb ---------------- */
 const breadcrumbData = {
@@ -45,19 +47,21 @@ const objectives = [
   { text: "To foster dialogue on science, society, and the environment." },
 ];
 
-/* ---------------- Mentor ---------------- */
-const MentorIntroProps = [
+
+/* ---------------- UBA Contact ---------------- */
+const ubaContact = [
   {
-    imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/unnat-bharat-abhiyan/chart+(1).png",
+    imageSrc:
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/unnat-bharat-abhiyan/chart+(1).png",
     title: "Dr. Sandeep Gandhi",
-    subtitle: "UBA PI Coordinator",
+    subtitle: "UBA Principal Investigator (Coordinator)",
     department: "Registrar, Kalinga University",
-    quote: `Registrar
-Email: registrar@kalingauniversity.ac.in
-Phone: +91-9303097043`,
-    message: [],
+    email: "registrar@kalingauniversity.ac.in",
+    phone: "+91-9303097043",
+    
   },
 ];
+
 
 /* ---------------- UBA Team ---------------- */
 const ubaTeamTable = [
@@ -72,36 +76,51 @@ const ubaTeamTable = [
   { slNo: 9, name: "Mr. Hemant Kumar Sahu", designation: "IQAC Office Assistant", role: "Member" },
 ];
 
-const ubaTeamTableSection = [
-  {
-    id: 1,
-    title: "UBA Committee",
-    columns: [
-      { key: "slNo", label: "S. No.", width: "w-24" },
-      { key: "name", label: "Name", width: "w-72" },
-      { key: "designation", label: "Designation", width: "w-80" },
-      { key: "role", label: "Role in UBA", width: "w-40" },
-    ],
-    data: ubaTeamTable,
-  },
-];
+
 // CTCD common styles (reuse for UBA tabs)
-const CARD_CLASSNAME = "rounded-[16px] bg-[var(--card-sandal)] p-[22px] md:p-[26px]";
-const CARD_TITLE_CLASSNAME = "font-plus-jakarta-sans text-[24px] leading-[30px] font-medium text-[var(--button-red)]";
+
 const CARD_TEXT_CLASSNAME = "mt-[10px] text-[var(--foreground)]";
-const SECTION_TITLE_CLASSNAME = "font-stix text-2xl md:text-[40px] text-[var(--foreground)]";
+const SECTION_TITLE_CLASSNAME = "font-stix text-1xl md:text-[30px] text-[var(--foreground)]";
 
 /* ---------------- Page ---------------- */
 export default function UnnatBharatAbhiyanPage() {
+ 
+
   return (
     
     <div className="bg-white">
+ <style jsx>{`
+        .uba-tabs button {
+          background: white;
+          color: var(--foreground);
+          border-radius: 14px;
+          height: 54px;
+          font-family: "Plus Jakarta Sans";
+          font-size: 16px;
+          font-weight: 500;
+          padding: 0 24px;
+          transition: all 0.25s ease;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+
+        .uba-tabs button:hover {
+          background: #972B28;
+          color: white;
+        }
+
+        .uba-tabs [data-active="true"] {
+          background: #972B28 !important;
+          color: white !important;
+        }
+      `}</style>
 
       <ImageContent
         title="Unnat Bharat Abhiyan"
         description="Unnat Bharat Abhiyan (UBA) was launched by the Ministry of Education in 2014, which aims to address pressing challenges of rural India and connect them with higher education institutions for their holistic growth and development. Inspired by Gandhiji’s vision in Hind Swaraj, UBA supports the growth of self-sustained villages using eco-friendly and community-based technologies. The conceptualisation of Unnat Bharat Abhiyan started with the initiative of a group of dedicated faculty members of the Indian Institute of Technology (IIT) Delhi, working for a long time in the area of rural development and appropriate technology. India’s 70% of the population lives in rural areas, and this initiative will meet their needs of life, like food, energy, sanitation, education, health, and livelihood, reducing their migration towards their cities and improving growth and job opportunities in their areas."
         imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/unnat-bharat-abhiyan/news-6047.webp"
         readmore={false}
+        subtitle={false}
       />
 
       <MainIntro
@@ -121,16 +140,95 @@ export default function UnnatBharatAbhiyanPage() {
         description={false}
       />
 
-      <DeptHeadIntro items={MentorIntroProps} />
+<div className="container mx-auto px-4 mt-16">
+  <div className="grid grid-cols-1  lg:grid-cols-12 items-center gap-8">
 
-      <FAQ
-        title="Our UBA Team Members"
-        showHeading={false}
-        variant="table-display"
-        items={[]}
-        tableSections={ubaTeamTableSection}
-        overflowX={false}
-      />
+    {/* IMAGE */}
+  <div className="lg:col-span-4 flex justify-center mb-2 lg:mb-25 lg:justify-start relative z-20 lg:translate-x-6">
+
+
+      <div className="bg-[var(--lite-sand)] rounded-2xl  p-2 w-[280px] sm:w-[320px] md:w-full max-w-[380px]">
+        <img
+          src="https://kalinga-university.s3.ap-south-1.amazonaws.com/unnat-bharat-abhiyan/chart+(1).png"
+          alt="Dr. Sandeep Gandhi"
+          className="w-full h-[300px] md:h-[380px]   object-cover rounded-2xl"
+        />
+      </div>
+    </div>
+
+    {/* BLUE CARD */}
+   <div className="lg:col-span-8 relative mt-0 lg:mt-40 lg:left-[-40px] z-10">
+
+      <div className="bg-[var(--dark-blue)] rounded-xl p-6 sm:p-10 md:p-14 lg:pl-16">
+
+        {/* NAME */}
+        <h3 className="text-white text-xl sm:text-2xl md:text-3xl font-stix mb-2">
+          Dr. Sandeep Gandhi
+        </h3>
+
+        {/* DESIGNATION */}
+        <p className="text-white/80 text-sm sm:text-base mb-6 leading-relaxed">
+          UBA Principal Investigator (Coordinator)<br />
+          Registrar, Kalinga University
+        </p>
+
+        {/* CONTACT */}
+        <div className="space-y-5 text-white/80">
+
+          {/* EMAIL */}
+          <div className="flex items-center gap-3 break-all">
+            <svg className="w-5 h-5 text-[var(--dark-orange-red)] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+            </svg>
+            <a href="mailto:registrar@kalingauniversity.ac.in" className="underline">
+              registrar@kalingauniversity.ac.in
+            </a>
+          </div>
+
+          {/* PHONE */}
+          <div className="flex items-center gap-3">
+            <svg className="w-5 h-5 text-[var(--dark-orange-red)] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            <span>+91-9303097043</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<div className="container mx-auto mt-16">
+  {/* Title */}
+  <h2 className="font-stix text-2xl md:text-[36px] text-center text-[var(--foreground)] mb-6">
+    UBA Committee
+  </h2>
+
+  {/* Table Wrapper */}
+  <div className="overflow-x-auto">
+    <DataTable
+      columns={[
+        { key: "slNo", label: "S. No.", width: "w-24" },
+        { key: "name", label: "Name", width: "w-72" },
+        { key: "designation", label: "Designation", width: "w-80" },
+        { key: "role", label: "Role in UBA", width: "w-40" },
+      ]}
+      data={ubaTeamTable}
+      overflowX={true}
+      className="shadow-none"
+    />
+  </div>
+</div>
+
+
+
 
       {/* ================== UBA ACTIVITIES TABS ================== */}
 
@@ -138,50 +236,21 @@ export default function UnnatBharatAbhiyanPage() {
       <div className="mt-20 mx-2 rounded-xl bg-[var(--dark-blue)] py-16">
         <div className="container mx-auto">
           <Tabs defaultValue="infra">
- <TabsList className="!flex !gap-4 md:!gap-5 !bg-transparent !rounded-none !p-0 !overflow-x-auto !px-2 md:!px-0">
+ <TabsList className="uba-tabs flex gap-4 md:gap-5 bg-transparent p-0 overflow-x-auto px-2 md:px-0">
 
-  <TabsTrigger
-    value="infra"
-    className="!h-[54px] min-w-[240px] !rounded-[14px] !bg-white 
-    font-plus-jakarta-sans text-[16px] font-medium 
-    !text-[var(--foreground)] 
-    hover:!bg-[#972B28] hover:!text-white 
-    data-[state=active]:!bg-[var(--button-red)] 
-    data-[state=active]:!text-white 
-    shadow-sm transition-all whitespace-nowrap"
-  >
-    Infrastructure Development
-  </TabsTrigger>
+              <TabsTrigger value="infra" className="min-w-[240px] shadow-sm">
+                Infrastructure Development
+              </TabsTrigger>
 
-  <TabsTrigger
-    value="survey"
-    className="!h-[54px] min-w-[200px] !rounded-[14px] !bg-white 
-    font-plus-jakarta-sans text-[16px] font-medium 
-    !text-[var(--foreground)] 
-    hover:!bg-[#972B28] hover:!text-white 
-    data-[state=active]:!bg-[var(--button-red)] 
-    data-[state=active]:!text-white 
-    shadow-sm transition-all whitespace-nowrap"
-  >
-    Village Survey
-  </TabsTrigger>
+              <TabsTrigger value="survey" className="min-w-[200px] shadow-sm">
+                Village Survey
+              </TabsTrigger>
 
-  <TabsTrigger
-    value="garbage"
-    className="!h-[54px] min-w-[280px] !rounded-[14px] !bg-white 
-    font-plus-jakarta-sans text-[16px] font-medium 
-    !text-[var(--foreground)] 
-    hover:!bg-[#972B28] hover:!text-white 
-    data-[state=active]:!bg-[var(--button-red)] 
-    data-[state=active]:!text-white 
-    shadow-sm transition-all whitespace-nowrap"
-  >
-    Smart Garbage Monitoring
-  </TabsTrigger>
+              <TabsTrigger value="garbage" className="min-w-[280px] shadow-sm">
+                Smart Garbage Monitoring
+              </TabsTrigger>
 
-</TabsList>
-
-
+            </TabsList>
 
 
             <div className="mt-6 rounded-xl bg-white p-8">
@@ -191,10 +260,10 @@ export default function UnnatBharatAbhiyanPage() {
               {/* ================= INFRASTRUCTURE DEVELOPMENT ================= */}
 <div className="space-y-6">
 
- <h3 className={SECTION_TITLE_CLASSNAME}>
+ <h2 className={SECTION_TITLE_CLASSNAME}>
 
     Infrastructure (Basic Amenities) Development of Government Schools
-  </h3>
+  </h2>
 <p className={CARD_TEXT_CLASSNAME}>
 
 
@@ -457,4 +526,4 @@ export default function UnnatBharatAbhiyanPage() {
       </div>
     </div>
   );
-}
+}     
