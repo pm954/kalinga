@@ -243,6 +243,17 @@ export default function LaboratoriesPage() {
       />
 
       <AdmissionCareer />
+      <style jsx global>{`
+  .absolute.inset-0 > img {
+    object-position: center 30% !important;
+  }
+
+  @media (max-width: 768px) {
+    .absolute.inset-0 > img {
+      object-position: center 5% !important;
+    }
+  }
+`}</style>
     </main>
   );
 }

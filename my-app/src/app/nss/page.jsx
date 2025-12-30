@@ -10,7 +10,8 @@ import WeStandOut from "@/app/components/department/we_stand_out";
 import AdmissionCareer from "@/app/components/general/admission_cta";
 
 const breadcrumbData = {
-  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/nss/nss-banner.webp",
+  heroImage:
+    "https://kalinga-university.s3.ap-south-1.amazonaws.com/nss/nss-benefits-new.webp",
   pageTitle: "National Service Scheme",
   customBreadcrumbs: [
     { label: "Home", href: "/" },
@@ -39,7 +40,8 @@ const visionMissionData = [
   {
     visionTitle: "Vision",
     missionTitle: "Mission",
-    visionText: "To inspire students to become disciplined and socially responsible citizens.",
+    visionText:
+      "To inspire students to become disciplined and socially responsible citizens.",
     missionText:
       "To encourage equality, diversity, and active participation in community-based programs.",
     showImage: true,
@@ -108,7 +110,7 @@ export default function NSSPage() {
       <MainIntro
         title="About NSS At KU"
         description={[aboutP1, aboutP2]}
-        imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/nss/nss-main-intro.webp"
+        imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/ncc/Ncc-img-2.webp"
         imageAlt="NSS at Kalinga University"
         showKnowMore={true}
         knowMoreLabel="Read More"
@@ -118,7 +120,7 @@ export default function NSSPage() {
       <ImageListItem
         title="Objectives"
         items={objectiveItems}
-        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/nss/nss-objectives.webp"
+        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/ncc/Ncc-img-1.webp"
       />
 
       <VisionMission data={visionMissionData} />
@@ -126,25 +128,43 @@ export default function NSSPage() {
       <div className="nss-benefits-equal-height">
         <ImageListItem
           title="Benefits Of Joining Our NSS Team"
-          imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/nss/nss-benefits-new.webp"
+          imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/ncc/Ncc-1.webp"
           boxItems={benefitsBoxItems}
         />
       </div>
 
-
       <WeStandOut title="Learning Outcomes" cards={learningOutcomeCards} />
 
       <AdmissionCareer />
-      <style jsx global>{`
-  .nss-benefits-equal-height .grid {
-    align-items: stretch !important;
-  }
 
-  .nss-benefits-equal-height img {
-    height: 100% !important;
-    object-fit: cover !important;
-  }
-`}</style>
+      {/* ✅ FIXED + WORKING GLOBAL CSS */}
+      <style jsx global>{`
+        /* ---------- NSS benefits equal height ---------- */
+        .nss-benefits-equal-height .grid {
+          align-items: stretch !important;
+        }
+
+        /* IMPORTANT: limit to the left image inside ImageListItem only */
+        .nss-benefits-equal-height img {
+          height: 100% !important;
+          object-fit: cover !important;
+        }
+
+        /* ---------- Breadcrumb / Hero banner alignment ---------- */
+        /*
+          Your breadcrumb hero uses a wrapper like: .absolute.inset-0 > img
+          Make sure the dot is present and the block is properly closed.
+        */
+        .absolute.inset-0 > img {
+          object-position: center 10% !important;
+        }
+
+        @media (max-width: 500px) {
+          .absolute.inset-0 > img {
+            object-position: center 10% !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

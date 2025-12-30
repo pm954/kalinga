@@ -35,7 +35,7 @@ const MentorIntroProps = [
     imageAlt: "Dean - IPR Cell",
 
     quote:
-      "KU believes that your powerful ideas need to be recognised and protected. Our IPR Cell works towards safeguarding the creations of students, researchers, and faculty members.",
+      "KU believes that your powerful ideas need to be recognised and protected.",
 
     message: [
       "We understand that creativity and innovation are part of academic excellence and national progress. Kalinga University believes that your powerful ideas need to be recognised and protected.",
@@ -110,7 +110,7 @@ export default function IPRCellPage() {
 
       <section className="pb-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-semibold text-[var(--title-color)]">
+          <h2 className="!font-stix text-4xl">
             Our IPR Committee
           </h2>
 
@@ -127,8 +127,7 @@ export default function IPRCellPage() {
             rel="noopener noreferrer"
           >
             <GlobalArrowButton
-              variant="outline"
-              className="border-[var(--button-red)] text-[var(--button-red)] hover:bg-[var(--button-red)] hover:text-white"
+              variant="default"
             >
               KU Ref. Citation
             </GlobalArrowButton>

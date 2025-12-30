@@ -57,7 +57,7 @@ const learnCards = [
     id: 6,
     title: "",
     description: "Designing intelligent systems & software",
-    imageUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/aiml/ai-1.svg",
+    imageUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/aiml/ai-6.svg",
   },
 ];
 
@@ -101,6 +101,7 @@ export default function AIMLCentrePage() {
 
   return (
     <>
+
       <ImageContent
         title="AI & ML Courses Training Centre"
         subtitle="In collaboration with the IBM Innovation Centre for Education"

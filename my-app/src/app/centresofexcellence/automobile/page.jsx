@@ -66,7 +66,7 @@ const learnCards = [
     title: "",
     description: "Exposure to emerging technologies in mobility",
     imageUrl:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/automobile/auto-6.svg",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/automobile/automobile-icon-new.svg",
   },
 ];
 

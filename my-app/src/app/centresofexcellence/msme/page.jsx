@@ -26,7 +26,7 @@ const learnCards = [
     title: "",
     description: "Understanding of MSME Business Models & Industrial Practices",
     imageUrl:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/msme/msme-1.svg",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/msme/msme-icon-new.svg",
   },
   {
     id: 2,
@@ -113,8 +113,7 @@ export default function MSMETrainingCentrePage() {
           "We have partnered with India’s first and only “Gold” Category accredited MSME association that provides a wide range of business solutions to MSMEs across India. Their Tried, Tested, Credible, Affordable, and Ready-made solutions help companies save their time, energy, and cost.",
           "Kalinga University has partnered with IamSMEofIndia to train students in developing effective business strategies through their workshops and seminars, in which they provide them with the latest industrial knowledge and develop an entrepreneurial spirit among them. Their industry experts prepare students to make informed business decisions and to understand how companies can overcome their hurdles in the competitive business world.",
         ]}
-        certificateLink="https://drive.google.com/file/d/1Lz-kMpsQjxyPBScXs5mpQ3-RYEpF4g89/view?usp=drive_link"
-        certificateLinkText="Ministry of Corporate Affairs Certificate"
+        readmore={false}
       />
 
       <CareerPath careers={learnCards} title="What You’ll Learn" description="" />
@@ -122,6 +121,17 @@ export default function MSMETrainingCentrePage() {
       <Gallery images={galleryImages} title="Glimpses of MSME Centre Activities" />
 
       <AdmissionCareer />
+      <style jsx global>{`
+  .absolute.inset-0 > img {
+    object-position: center 20% !important;
+  }
+
+  @media (max-width: 768px) {
+    .absolute.inset-0 > img {
+      object-position: center 5% !important;
+    }
+  }
+`}</style>
     </main>
   );
 }

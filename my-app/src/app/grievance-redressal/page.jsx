@@ -72,85 +72,96 @@ function GrievanceFormCard() {
   return (
     <section className="py-14">
       <div className="container mx-auto px-4">
-
         <div className="bg-[var(--button-red)] rounded-2xl px-6 sm:px-12 py-14">
-          <h2 className="text-white text-center text-3xl sm:text-[40px] font-light">
+          <h2 className="text-white text-center text-3xl sm:text-[40px] font-light font-stix">
             Kalinga University Grievance Cell
           </h2>
 
-
           <div className="mt-12 max-w-4xl mx-auto grid sm:grid-cols-2 gap-x-14 gap-y-10">
             <div>
-              <label className="text-white text-sm sm:text-base">Student Name</label>
+              <label className="text-white text-sm sm:text-base font-plus-jakarta-sans">
+                Student Name
+              </label>
               <input
                 value={form.studentName}
                 onChange={onChange("studentName")}
                 placeholder="Student Name"
-                className="w-full mt-2 bg-transparent border-b border-white/60 text-white py-3 outline-none placeholder:text-white/60 focus:border-white"
+                className="w-full mt-2 bg-transparent border-b border-white/60 text-white py-3 outline-none placeholder:text-white/60 focus:border-white font-plus-jakarta-sans"
               />
             </div>
 
             <div>
-              <label className="text-white text-sm sm:text-base">Course Name</label>
+              <label className="text-white text-sm sm:text-base font-plus-jakarta-sans">
+                Course Name
+              </label>
               <input
                 value={form.courseName}
                 onChange={onChange("courseName")}
                 placeholder="Course Name"
-                className="w-full mt-2 bg-transparent border-b border-white/60 text-white py-3 outline-none placeholder:text-white/60 focus:border-white"
+                className="w-full mt-2 bg-transparent border-b border-white/60 text-white py-3 outline-none placeholder:text-white/60 focus:border-white font-plus-jakarta-sans"
               />
             </div>
 
             <div>
-              <label className="text-white text-sm sm:text-base">Semester / Year</label>
+              <label className="text-white text-sm sm:text-base font-plus-jakarta-sans">
+                Semester / Year
+              </label>
               <input
                 value={form.semesterYear}
                 onChange={onChange("semesterYear")}
                 placeholder="Semester / Year"
-                className="w-full mt-2 bg-transparent border-b border-white/60 text-white py-3 outline-none placeholder:text-white/60 focus:border-white"
+                className="w-full mt-2 bg-transparent border-b border-white/60 text-white py-3 outline-none placeholder:text-white/60 focus:border-white font-plus-jakarta-sans"
               />
             </div>
 
             <div>
-              <label className="text-white text-sm sm:text-base">Enrollment No</label>
+              <label className="text-white text-sm sm:text-base font-plus-jakarta-sans">
+                Enrollment No
+              </label>
               <input
                 value={form.enrollmentNo}
                 onChange={onChange("enrollmentNo")}
                 placeholder="Enrollment No"
-                className="w-full mt-2 bg-transparent border-b border-white/60 text-white py-3 outline-none placeholder:text-white/60 focus:border-white"
+                className="w-full mt-2 bg-transparent border-b border-white/60 text-white py-3 outline-none placeholder:text-white/60 focus:border-white font-plus-jakarta-sans"
               />
             </div>
 
             <div>
-              <label className="text-white text-sm sm:text-base">Please Enter Mobile No</label>
+              <label className="text-white text-sm sm:text-base font-plus-jakarta-sans">
+                Please Enter Mobile No
+              </label>
               <input
                 value={form.mobile}
                 onChange={onChange("mobile")}
                 placeholder="Please Enter Mobile No"
-                className="w-full mt-2 bg-transparent border-b border-white/60 text-white py-3 outline-none placeholder:text-white/60 focus:border-white"
+                className="w-full mt-2 bg-transparent border-b border-white/60 text-white py-3 outline-none placeholder:text-white/60 focus:border-white font-plus-jakarta-sans"
               />
             </div>
 
             <div>
-              <label className="text-white text-sm sm:text-base">Email</label>
+              <label className="text-white text-sm sm:text-base font-plus-jakarta-sans">
+                Email
+              </label>
               <input
                 value={form.email}
                 onChange={onChange("email")}
                 placeholder="Email"
-                className="w-full mt-2 bg-transparent border-b border-white/60 text-white py-3 outline-none placeholder:text-white/60 focus:border-white"
+                className="w-full mt-2 bg-transparent border-b border-white/60 text-white py-3 outline-none placeholder:text-white/60 focus:border-white font-plus-jakarta-sans"
               />
             </div>
 
             <div className="sm:col-span-2">
-              <label className="text-white text-sm sm:text-base">Grievance</label>
+              <label className="text-white text-sm sm:text-base font-plus-jakarta-sans">
+                Grievance
+              </label>
               <input
                 value={form.grievance}
                 onChange={onChange("grievance")}
                 placeholder="Grievance"
-                className="w-full mt-2 bg-transparent border-b border-white/60 text-white py-3 outline-none placeholder:text-white/60 focus:border-white"
+                className="w-full mt-2 bg-transparent border-b border-white/60 text-white py-3 outline-none placeholder:text-white/60 focus:border-white font-plus-jakarta-sans"
               />
             </div>
           </div>
-
 
           <div className="flex justify-center mt-12">
             <GlobalArrowButton variant="white" onClick={onSubmit}>
@@ -184,7 +195,7 @@ export default function GrievanceRedressalPage() {
   }));
 
   return (
-    <main className="bg-white">
+    <main className="bg-white font-plus-jakarta-sans">
       <MainIntro
         title="Grievance Redressal Cell"
         description={[aboutP1, aboutP2]}
@@ -203,17 +214,46 @@ export default function GrievanceRedressalPage() {
 
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-semibold text-[var(--title-color)]">
+          <h2 className="text-2xl md:text-4xl text-[var(--title-color)] font-stix">
             Grievance Redressal Committee
           </h2>
 
-          <div className="mt-6">
+          <div className="mt-10">
             <DataTable columns={columns} data={data} overflowX={true} />
           </div>
         </div>
       </section>
+
       <GrievanceFormCard />
       <AdmissionCareer />
+
+      {/* Existing breadcrumb image position override + font harmoniser */}
+      <style jsx global>{`
+        .absolute.inset-0 > img {
+          object-position: center 35% !important;
+        }
+
+        @media (max-width: 768px) {
+          .absolute.inset-0 > img {
+            object-position: center 5% !important;
+          }
+        }
+
+        main.font-plus-jakarta-sans p,
+        main.font-plus-jakarta-sans li,
+        main.font-plus-jakarta-sans label,
+        main.font-plus-jakarta-sans input,
+        main.font-plus-jakarta-sans textarea,
+        main.font-plus-jakarta-sans table {
+          font-family: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui !important;
+        }
+
+        main.font-plus-jakarta-sans h1,
+        main.font-plus-jakarta-sans h2,
+        main.font-plus-jakarta-sans h3 {
+          font-family: var(--font-stix), ui-serif, Georgia, serif;
+        }
+      `}</style>
     </main>
   );
 }
