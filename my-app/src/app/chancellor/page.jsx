@@ -30,13 +30,11 @@ export default function Leadership() {
         messageHeading="Chancellor's Message"
         quote="Education is not merely about degrees, but about shaping character, leadership, and purpose for a better tomorrow."
         message={[
-          "It gives me immense pleasure to welcome you to Kalinga University, where education goes beyond classrooms and inspires lifelong learning.",
-          "In today’s globalized environment, competition has increased across all fields, including education. To address this, we have built a robust curriculum that transforms students into industry-ready professionals.",
-          "Kalinga University proudly ranks among the top 101–150 universities in India under the NIRF Rankings and holds NAAC B+ accreditation.",
-          "Our multicultural campus includes students from over 24 countries, interdisciplinary programs, advanced research laboratories, and experienced faculty members.",
-          "We emphasize co-curricular activities, ethics, and community engagement to nurture responsible global citizens.",
-          "At Kalinga University, students do not just earn degrees; they graduate with confidence, clarity, and the ability to make meaningful contributions to society.",
-          "I warmly welcome you to Kalinga University and wish you every success in your academic and professional journey.",
+          "I feel honoured and privileged to lead Kalinga University at a time when higher education is being modified and redefined at a global level. The National Education Policy 2020 has set new standards with a bold vision, and we are committed to following its core values. Our mission is to combine knowledge with a purpose, helping students develop curiosity and interests in their field of study.",
+          "At Kalinga, we surpass conventional learning by using modern teaching practices and creating an environment where students are turned into holistic beings and can put their learning into action. With an aim to pursue excellence in every parameter, KU also offers an environment where non-academic pursuits of students are also achieved alongside the academic curriculum.",
+          "Striking a balance between the two, we offer 130+ programs along with world-class infrastructure that incorporates research facilities, advanced laboratories with high-tech instruments, an expansive library with all the latest resources, an auditorium, A-1 level sports facilities, a fully-equipped gym, recreation centres, separate boys and girls hostel facilities, and other dedicated spaces for extracurriculars.",
+          "We constantly strive to introduce changes into our education systems so that students are well-prepared for the rapidly changing world and develop a global perspective. With national and international tie-ups, we conduct conferences and seminars so that our students meet with industry leaders or popular personalities and learn to lead in the competitive world.",
+          "I would like to conclude by saying Rabindranath Tagore's timeless words, \"The highest education is that which does not merely give us information but makes our life in harmony with all existence.\" Wishing you all great success!",
         ]}
       />
     </>

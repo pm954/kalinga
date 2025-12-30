@@ -56,16 +56,17 @@ export default function ImageListItem({
         `}
       </style>
       <div className="container mx-auto ">
-        <div className="grid md:grid-cols-12 grid-cols-6 items-center md:gap-12 gap-6 justify-between">
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            width={imageWidth}
-            height={imageHeight}
-            className="col-span-6 rounded-xl"
-          />
+        <div className="grid md:grid-cols-12 grid-cols-6 items-stretch md:gap-12 gap-6 justify-between">
+          <div className="col-span-6 relative min-h-[500px] rounded-xl overflow-hidden">
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              fill
+              className="object-cover rounded-xl"
+            />
+          </div>
 
-          <div className="col-span-6 md:gap-5 gap-2   items-center items-start min-h-[500px] flex flex-col">
+          <div className="col-span-6 md:gap-5 gap-2 items-center items-start min-h-[500px] flex flex-col">
             {/* Heading not scrollable */}
             <SectionHeading
               title={title}
