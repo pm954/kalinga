@@ -14,7 +14,7 @@ import Gallery from "@/app/components/general/gallery";
 /* ---------------- Breadcrumb ---------------- */
 const breadcrumbData = {
   heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/kif/kif-banner.webp",
+    "https://kalinga-university.s3.ap-south-1.amazonaws.com/contact-us/contact-us-banner.webp",
   pageTitle: "Institution Innovation Council",
   customBreadcrumbs: [
     { label: "Home", href: "/" },
@@ -36,32 +36,24 @@ const objectives = [
   { text: "Organise Hackathons, Ideathons, idea competitions, innovative project expo, mini-challenges, etc." },
 ];
 
-/* ---------------- About IIC ---------------- */
-const aboutText = `
-The Institution’s Innovation Council (IIC) is an initiative of the Ministry of Education (MoE), Government of India, launched through the MoE’s Innovation Cell (MIC) in collaboration with AICTE to promote a strong culture of innovation and a startup ecosystem in Higher Educational Institutions (HEIs).
 
-At Kalinga University, the Institution’s Innovation Council (IIC) was established in 2018–19 with the mission of fostering an innovative mindset among students, researchers, and faculty members across disciplines. The council encourages, nurtures, and inspires individuals by supporting their ideas and transforming them into practical, real-world solutions.
-
-IIC engages a large number of students and faculty members in entrepreneurship and innovation-related activities including Intellectual Property Rights (IPR), Ideation, Proof of Concept Development, Design Thinking, and project handling at the pre-incubation level. The IIC model enables institutions to overcome challenges such as limited participation, weak coordination, and underutilization of creative potential.
-`;
 
 /* ---------------- Innovation Ecosystem ---------------- */
 const innovationParagraph = `
 The Institution’s Innovation Council at Kalinga University regularly organises innovation-driven activities, programs, and initiatives to develop problem-solving and entrepreneurial skills. These activities help students convert ideas into impactful solutions and promote research-based startups, social innovation, and technology-driven entrepreneurship. Through workshops, hackathons, mentorship, and incubation support, IIC creates a strong innovation ecosystem across the university.
 `;
 
-/* ---------------- IIC Committee Table ---------------- */
 const iicCommitteeTable = [
   { memberType: "Director IQAC", role: "IIC President & ARIIA Coordinator" },
   { memberType: "Director KIF", role: "Vice President" },
-  { memberType: "Asst. Professor", role: "Convenor" },
-  { memberType: "Asst. Professor", role: "Start-Up Activity Coordinator" },
-  { memberType: "Director Admission", role: "Social Media Convenor" },
-  { memberType: "Asst. Professor", role: "Innovation Activity Coordinator" },
+  { memberType: "Assistant Professor", role: "Convener" },
+  { memberType: "Assistant Professor", role: "Start-Up Activity Coordinator" },
+  { memberType: "Director Admission", role: "Social Media Convener" },
+  { memberType: "Assistant Professor", role: "Innovation Activity Coordinator" },
   { memberType: "TPO", role: "Internship Activity Coordinator" },
   { memberType: "Research Associate", role: "IPR Activity Coordinator" },
-  { memberType: "Asst. Registrar", role: "NIRF Coordinator" },
-  { memberType: "Student", role: "Social Media Convenor" },
+  { memberType: "Assistant Registrar", role: "NIRF Coordinator" },
+  { memberType: "Student", role: "Social Media Convener" },
   { memberType: "Student", role: "Innovation Activity Coordinator" },
   { memberType: "Student", role: "Innovation Coordinator, Member" },
   { memberType: "Student", role: "Innovation Coordinator, Member" },
@@ -72,7 +64,9 @@ const iicCommitteeTable = [
   { memberType: "External Member", role: "Member" },
   { memberType: "Student", role: "Internship Activity Coordinator" },
   { memberType: "Student", role: "Member" },
+  { memberType: "Student", role: "Member" },
 ];
+
 
 const iicCommitteeSection = [
   {
@@ -203,15 +197,19 @@ export default function InstitutionInnovationCouncil() {
   return (
     <div className="bg-white">
 
-      {/* About IIC */}
-      <ImageContent
-        title="Institution Innovation Council"
-        subtitle="About IIC"
-        description={aboutText}
-        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/research/research-main-content.webp"
-        imageAlt="Institution Innovation Council"
-      />
 
+  <ImageContent 
+      imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/research/research-main-content.webp"
+      description="The Institution’s Innovation Council (IIC) is an initiative of the Ministry of Education (MoE), Government of India, launched through the MoE’s Innovation Cell (MIC) in collaboration with AICTE to promote a strong culture of innovation and a startup ecosystem in Higher Educational Institutions (HEIs).
+
+At Kalinga University, the Institution’s Innovation Council (IIC) was established in 2018–19 with the mission of fostering an innovative mindset among students, researchers, and faculty members across disciplines."
+      additionalContent={[
+        "The council encourages, nurtures, and inspires individuals by supporting their ideas and transforming them into practical, real-world solutions.IIC engages a large number of students and faculty members in entrepreneurship and innovation-related activities including Intellectual Property Rights (IPR), Ideation, Proof of Concept Development, Design Thinking, and project handling at the pre-incubation level. The IIC model enables institutions to overcome challenges such as limited participation, weak coordination, and underutilization of creative potential."
+      ]}
+      subtitle={false}
+      title="Institution Innovation Council"
+
+    />
       {/* Innovation Section */}
       <section className="py-16 bg-[var(--light-gray)]">
         <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
@@ -244,26 +242,34 @@ export default function InstitutionInnovationCouncil() {
         description={false}
       />
 
-      {/* IIC Committee (Last Section) */}
-      <FAQ
-        title="IIC Committee"
-        showHeading={false}
-        variant="table-display"
-        items={[]}
-        tableSections={iicCommitteeSection}
-        overflowX={false}
-      />
+   <div className="container mx-auto mt-16 bg-[var(--lite-sand)] p-6 rounded-xl">
+  <h2 className="font-stix text-2xl md:text-[36px] text-center text-[var(--foreground)] mb-6">
+    IIC Committee
+  </h2>
+
+  <div className="overflow-x-auto">
+    <DataTable
+      columns={[
+        { key: "memberType", label: "Member Type", width: "w-[35%]" },
+        { key: "role", label: "Key Role / Position Assigned in IIC", width: "w-[65%]" },
+      ]}
+      data={iicCommitteeTable}
+      overflowX={true}
+      className="shadow-none"
+    />
+  </div>
+</div>
+
 {/* ---------------- Kalinga Incubation Foundation ---------------- */}
 <ImageContent
-  title="Kalinga Incubation Foundation"
-  subtitle="About KIF"
-  description="Kalinga Incubation Foundation (KIF) is the incubation and startup support arm of Kalinga University, created to nurture student and faculty-led innovations. KIF supports bold ideas and helps transform them into scalable and sustainable startups."
+  title=" About Kalinga Incubation Foundation"
+  subtitle={false}
+  description="KIF was established in ----, where students' bold and unique ideas are supported so that their entrepreneurial ambitions can be turned into ACTION. Our motive is to promote the spirit of research, innovation, and entrepreneurship among students and faculty members of our university."
   imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/IIC/chart+(4).png"
   imageAlt="Kalinga Incubation Foundation"
   hasImage={true}
   additionalContent={[
-    "KIF provides incubation support through expert mentoring, infrastructure, startup funding guidance, pitch training, workshops, industrial visits, and research-driven innovation.",
-    "It acts as a bridge between innovation and entrepreneurship by converting raw ideas into viable business ventures and socially impactful solutions."
+  "  Our dedicated incubation managers and support members will transform your raw ideas into real-world ventures. With expert guidance, research-related infrastructure, pitch trainings, workshops, guest lectures, industrial visits, and presentation trainings, Kalinga will guide you at every stage of your startup journey. "
   ]}
 />
    
@@ -480,7 +486,7 @@ function SportsFacilitiesTabs() {
                 type="button"
                 onClick={() => setActiveTab(t.id)}
                 className={[
-                  "whitespace-nowrap rounded-lg border px-4 py-2 text-sm font-medium transition-colors",
+                  "whitespace-nowrap rounded-lg border px-4 py-2 text-base font-medium transition-colors",
                   isActive
                     ? "bg-[var(--button-red)] text-white border-white/10"
                     : "bg-white text-[var(--foreground)] border-white/30 hover:bg-white/95",
@@ -573,7 +579,7 @@ function EventsTable({ title, data }) {
 
   return (
     <div>
-      <h2 className="text-center mb-[20px]">{title}</h2>
+      <h2 className="text-center mb-[30px]">{title}</h2>
 
       <div className="max-h-[450px] overflow-y-auto">
         <DataTable
@@ -606,7 +612,12 @@ const events2024 = [
   { date: "12-02-2023", name: "National Pollution Control Day" },
   { date: "28-02-2023", name: "National Science Day" },
   { date: "03-03-2023 to 04-03-2023", name: "Smart City Hackathon – 2023" },
-  { date: "16-03-2023", name: "Expert Talk on Process of Innovative Development, Technology Readiness Level (TRL), Commercialization of Technologies and Tech Transfer" },
+{
+  date: "16-03-2023",
+  name:"Expert Talk on Process of Innovative Development,\u200B Technology Readiness Level (TRL),\u200B Commercialization of Technologies and Tech Transfer"
+
+},
+
   { date: "20-03-2023", name: "Science Model and Poster Exhibition" },
   { date: "13-04-2023", name: "Attitude and Behaviour for Being a Successful Entrepreneur" },
   { date: "17-04-2023", name: "Global Peace and Sustainable Development Summit, 2023" },
