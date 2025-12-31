@@ -16,12 +16,12 @@ export default function PublicationGrid({
     {
       title: "Startups",
       value: "6 +",
-      description: "Our institution actively supports patent filing and innovation, resulting in numerous granted and filed patents that translate research into real-world solutions.",
+      description: "Through a strong incubation ecosystem, the university has nurtured multiple startups that promote entrepreneurship, innovation, and industry impact.",
     },
     {
       title: "Patents",
       value: "532 +",
-      description: "Through a strong incubation ecosystem, the university has nurtured multiple startups that promote entrepreneurship, innovation, and industry impact.",
+      description: "Our institution actively supports patent filing and innovation, resulting in numerous granted and filed patents that translate research into real-world solutions.",
     },
     {
       title: "H-Index",

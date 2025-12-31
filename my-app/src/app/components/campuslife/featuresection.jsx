@@ -56,7 +56,7 @@ export default function Page() {
                 <img
                   src={imageSets[index][indexes[index]]}
                   alt={`${sec.title} at Kalinga University`}
-                  className="w-full h-full object-cover transition-all duration-700 object-top"
+                  className="w-full h-full object-cover transition-all duration-700 object-center"
                 />
               </div>
 

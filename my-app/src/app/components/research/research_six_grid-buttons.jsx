@@ -5,6 +5,7 @@ import GlobalArrowButton from "../general/global-arrow_button";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
+import DataTable from "../general/data-table";
 
 const defaultButtons = [
   // Left Column
@@ -16,7 +17,9 @@ const defaultButtons = [
   {
     id: 2,
     text: "Ethics Committee Constitution",
-    href: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/RESEARCH+Ethics.pdf",
+    href: "",
+    isTable: true,
+    tableType: "ethics",
   },
   {
     id: 3,
@@ -31,7 +34,7 @@ const defaultButtons = [
   {
     id: 5,
     text: "Constitution of the Ethics Board for Maintaining Research Integrity",
-    href: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Constitution+of+Research+Advisory+Committee.pdf",
+    href: "https://kalinga-university.s3.ap-south-1.amazonaws.com/research/5.+CONSTITUTION+OF+ETHICS+BOARD+FOR+MAINTAINING+RESEARCH+INTEGRITY.pdf"
   },
   {
     id: 6,
@@ -42,7 +45,9 @@ const defaultButtons = [
   {
     id: 7,
     text: "Research Advisory Committee",
-    href: "https://kalinga-university.s3.ap-south-1.amazonaws.com/research/Constitution+of+Research+Advisory+Committee.pdf",
+    href: "",
+    isTable: true,
+    tableType: "researchAdvisory",
   },
   {
     id: 8,
@@ -57,7 +62,7 @@ const defaultButtons = [
   {
     id: 10,
     text: "Research Integrity & Ethics Policy",
-    href: "https://kalinga-university.s3.ap-south-1.amazonaws.com/research/Constitution+of+Research+Advisory+Committee.pdf",
+    href: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/RESEARCH+Ethics.pdf",
   },
   {
     id: 11,
@@ -71,8 +76,83 @@ const defaultButtons = [
   },
 ];
 
+// Research Advisory Committee Table Data
+const researchAdvisoryCommitteeData = [
+  { slNo: 1, name: "Dr. Sushma Dubey", designation: "Associate Professor", department: "Biotechnology" },
+  { slNo: 2, name: "Dr. Suchitra Ku Panigrahy", designation: "Assistant Professor", department: "Biotechnology" },
+  { slNo: 3, name: "Dr. Deepa Biswas", designation: "Associate Professor", department: "Botany" },
+  { slNo: 4, name: "Dr. Shilpi Shrivastava", designation: "Professor", department: "Chemistry" },
+  { slNo: 5, name: "Dr. Preeti Pandey", designation: "Assistant Professor", department: "Chemistry" },
+  { slNo: 6, name: "Dr. Eshwara Raghvendra Rao", designation: "Professor", department: "Civil Engineering" },
+  { slNo: 7, name: "Dr. Shinki Katyayani Pandey", designation: "Assistant Professor", department: "Commerce And Management" },
+  { slNo: 8, name: "Dr. Deepti Patnaik", designation: "Assistant Professor", department: "Commerce And Management" },
+  { slNo: 9, name: "Dr. Anupa Sinha", designation: "Assistant Professor", department: "Computer Science And Engineering" },
+  { slNo: 10, name: "Dr. R. Udaya Kumar", designation: "Professor", department: "Computer Science And Engineering" },
+  { slNo: 11, name: "Dr. Chandra Saha Roy", designation: "Assistant Professor", department: "Economics" },
+  { slNo: 12, name: "Dr. Harsha Patil", designation: "Associate Professor", department: "Education" },
+  { slNo: 13, name: "Dr. Shraddha Verma", designation: "Associate Professor", department: "Education" },
+  { slNo: 14, name: "Dr. Manoj Kumar Nigam", designation: "Professor", department: "Electrical Engineering" },
+  { slNo: 15, name: "Dr. Vijayalaxmi Biradar", designation: "Professor", department: "Electronics And Communication" },
+  { slNo: 16, name: "Dr. Shilpi Bhattacharya", designation: "Professor", department: "English" },
+  { slNo: 17, name: "Dr. A. Vijayanand", designation: "Assistant Professor", department: "English" },
+  { slNo: 18, name: "Dr. A. Rajshekhar", designation: "Professor", department: "Geography" },
+  { slNo: 19, name: "Dr. Ajay Kumar Shukla", designation: "Professor", department: "Hindi" },
+  { slNo: 20, name: "Dr. Shraddha Hirkane", designation: "Assistant Professor", department: "Hindi" },
+  { slNo: 21, name: "Dr. Dolamani Sahu", designation: "Associate Professor", department: "History" },
+  { slNo: 22, name: "Dr. Sanjana Singh", designation: "Professor", department: "History" },
+  { slNo: 23, name: "Dr. Yogesh Vaishnaw", designation: "Assistant Professor", department: "Journalism And Mass Communication" },
+  { slNo: 24, name: "Dr. Azim Khan", designation: "Professor", department: "Law" },
+  { slNo: 25, name: "Dr. Narendra Kumar Singh", designation: "Associate Professor", department: "Law" },
+  { slNo: 26, name: "Dr. R. Jayakumar", designation: "Professor", department: "Life Sciences" },
+  { slNo: 27, name: "Dr. Byju John", designation: "Professor", department: "Management" },
+  { slNo: 28, name: "Dr. G. V. V. Jagannadha Rao", designation: "Assistant Professor", department: "Mathematics" },
+  { slNo: 29, name: "Dr. Tejaswini Pradhan", designation: "Assistant Professor", department: "Mathematics" },
+  { slNo: 30, name: "Dr. Vinay Chandra Jha", designation: "Professor", department: "Mechanical Engineering" },
+  { slNo: 31, name: "Dr. Rahul Mishra", designation: "Assistant Professor", department: "Mechanical Engineering" },
+  { slNo: 32, name: "Dr. Kalidoss", designation: "Associate Professor", department: "Physical Education" },
+  { slNo: 33, name: "Dr. Sanjeev Kumar Yadav", designation: "Assistant Professor", department: "Physical Education" },
+  { slNo: 34, name: "Dr. Aloke Verma", designation: "Assistant Professor", department: "Physics" },
+  { slNo: 35, name: "Dr. Anita Verma", designation: "Assistant Professor", department: "Physics" },
+  { slNo: 36, name: "Dr. Anita Samal", designation: "Professor", department: "Political Science" },
+  { slNo: 37, name: "Dr. Sandhya Tiwari", designation: "Professor", department: "Political Science" },
+  { slNo: 38, name: "Dr. Manoj Mathew P", designation: "Assistant Professor", department: "Social Work/Sociology" },
+  { slNo: 39, name: "Dr. Esha Chatterjee", designation: "Assistant Professor", department: "Social Work/Sociology" },
+  { slNo: 40, name: "Dr. Manoj Singh", designation: "Assistant Professor", department: "Zoology" },
+  { slNo: 41, name: "Dr. Ajay Kumar Harit", designation: "Associate Professor", department: "Zoology" },
+];
+
+const researchAdvisoryCommitteeColumns = [
+  { key: "slNo", label: "S.No.", width: "w-20" },
+  { key: "name", label: "Name of the Member", width: "flex-1" },
+  { key: "designation", label: "Designation", width: "w-48" },
+  { key: "department", label: "Department", width: "flex-1" },
+];
+
+// Ethics Committee Constitution Table Data
+const ethicsCommitteeData = [
+  { slNo: 1, position: "Vice-Chancellor and Chairperson of the Committee" },
+  { slNo: 2, position: "Director of Research and Member Secretary of the Committee" },
+  { slNo: 3, position: "Director IQAC" },
+  { slNo: 4, position: "Registrar" },
+  { slNo: 5, position: "Dean, Faculty of Arts & Humanities" },
+  { slNo: 6, position: "Dean, Faculty of Education" },
+  { slNo: 7, position: "Dean, Faculty of Law" },
+  { slNo: 8, position: "Dean, Faculty of IT" },
+  { slNo: 9, position: "Dean, Faculty of Science" },
+  { slNo: 10, position: "Dean, Faculty of Engineering" },
+  { slNo: 11, position: "Dean, Faculty of Pharmacy" },
+  { slNo: 12, position: "Coordinator, Research Faculty" },
+];
+
+const ethicsCommitteeColumns = [
+  { key: "slNo", label: "S.No.", width: "w-20" },
+  { key: "position", label: "Position", width: "flex-1" },
+];
+
 export default function ResearchSixGridButtons({ buttons = defaultButtons }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isTableModalOpen, setIsTableModalOpen] = useState(false);
+  const [selectedTableType, setSelectedTableType] = useState(null);
   const [selectedPdf, setSelectedPdf] = useState(null);
   const [selectedTitle, setSelectedTitle] = useState("");
   const [numPages, setNumPages] = useState(null);
@@ -91,6 +171,16 @@ export default function ResearchSixGridButtons({ buttons = defaultButtons }) {
   };
 
   const handleButtonClick = (e, button) => {
+    // Check if this button should show a table modal
+    if (button.isTable) {
+      e.preventDefault();
+      setSelectedTitle(button.text);
+      setSelectedTableType(button.tableType);
+      setIsTableModalOpen(true);
+      return;
+    }
+    
+    // Check if this is a PDF link
     if (isPdfLink(button.href)) {
       e.preventDefault();
       setSelectedPdf(button.href);
@@ -120,6 +210,12 @@ export default function ResearchSixGridButtons({ buttons = defaultButtons }) {
     setError(null);
   };
 
+  const handleCloseTableModal = () => {
+    setIsTableModalOpen(false);
+    setSelectedTitle("");
+    setSelectedTableType(null);
+  };
+
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
     setLoading(false);
@@ -146,9 +242,10 @@ export default function ResearchSixGridButtons({ buttons = defaultButtons }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {buttons.map((button) => {
               const isPdf = isPdfLink(button.href);
+              const isTable = button.isTable;
               return (
                 <div key={button.id} className="block">
-                  {isPdf ? (
+                  {isPdf || isTable ? (
                     <GlobalArrowButton
                       onClick={(e) => handleButtonClick(e, button)}
                       className="!w-full h-[60px] justify-between"
@@ -159,19 +256,19 @@ export default function ResearchSixGridButtons({ buttons = defaultButtons }) {
                     </GlobalArrowButton>
                   ) : (
                     <a
-                href={button.href}
-                className="block"
+                      href={button.href}
+                      className="block"
                       target={button.href.startsWith("http") ? "_blank" : undefined}
                       rel={button.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              >
-                <GlobalArrowButton
-                  className="!w-full h-[60px] justify-between"
-                  arrowClassName="p-[3px] !px-2 mr-2 !py-1"
-                  arrowSize={29}
-                >
-                  {button.text}
-                </GlobalArrowButton>
-              </a>
+                    >
+                      <GlobalArrowButton
+                        className="!w-full h-[60px] justify-between"
+                        arrowClassName="p-[3px] !px-2 mr-2 !py-1"
+                        arrowSize={29}
+                      >
+                        {button.text}
+                      </GlobalArrowButton>
+                    </a>
                   )}
                 </div>
               );
@@ -304,6 +401,55 @@ export default function ResearchSixGridButtons({ buttons = defaultButtons }) {
                   )}
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Table Modal */}
+      {isTableModalOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
+          onClick={handleCloseTableModal}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="bg-white rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden relative shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 md:p-6 border-b border-gray-200">
+              <h3 className="font-stix text-xl md:text-2xl text-[var(--foreground)] pr-4">
+                {selectedTitle}
+              </h3>
+              <button
+                onClick={handleCloseTableModal}
+                className="rounded-full border border-black/10 px-3 py-1 text-sm hover:bg-black/5 transition-colors"
+                aria-label="Close modal"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Table Content */}
+            <div className="w-full max-h-[calc(90vh-100px)] overflow-y-auto p-4 md:p-6">
+              {selectedTableType === "researchAdvisory" && (
+                <DataTable
+                  columns={researchAdvisoryCommitteeColumns}
+                  data={researchAdvisoryCommitteeData}
+                  overflowX={true}
+                  className="mt-4"
+                />
+              )}
+              {selectedTableType === "ethics" && (
+                <DataTable
+                  columns={ethicsCommitteeColumns}
+                  data={ethicsCommitteeData}
+                  overflowX={true}
+                  className="mt-4"
+                />
+              )}
             </div>
           </div>
         </div>

@@ -68,7 +68,7 @@ export default function Careers() {
   const careerFAQs = [
     {
       id: 1,
-      question: "How can I applyfor ajob at Kalinga University?",
+      question: "How can I apply for ajob at Kalinga University?",
       answer: "You can apply directly through our official careers page by filling out the Career Application Form and uploading your updated resume. Shortlisted candidates will be contacted by our HR team for further rounds of the selection process."
     },
     {
