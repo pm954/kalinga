@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import SectionHeading from '@/app/components/general/SectionHeading';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -18,6 +18,18 @@ const EventDetailContent = ({
   },
   galleryImages = []
 }) => {
+  // State to track the currently selected image
+  const [selectedImage, setSelectedImage] = useState(mainImage);
+
+  // Update selected image when mainImage or galleryImages change
+  useEffect(() => {
+    setSelectedImage(mainImage);
+  }, [mainImage]);
+
+  // Handle image click
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+  };
   return (
     <section className="py-12 md:py-16 bg-white">
       <div className="container mx-auto px-4">
@@ -60,12 +72,13 @@ const EventDetailContent = ({
         )}
 
         {/* Main Large Image */}
-        {mainImage.src && (
+        {selectedImage && selectedImage.src && (
           <div className="mb-5">
             <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] rounded-xl overflow-hidden">
               <Image
-                src={mainImage.src}
-                alt={mainImage.alt}
+                key={selectedImage.src}
+                src={selectedImage.src}
+                alt={selectedImage.alt || 'Event Gallery'}
                 fill
                 className="object-cover"
                 priority
@@ -79,8 +92,8 @@ const EventDetailContent = ({
           galleryImages.length > 4 ? (
             <div className="relative">
               <Swiper
-                modules={[Navigation, Autoplay]}
-                navigation={true}
+                modules={[Autoplay]}
+                navigation={false}
                 autoplay={{
                   delay: 3000,
                   disableOnInteraction: false,
@@ -100,35 +113,67 @@ const EventDetailContent = ({
                 }}
                 className="gallery-swiper"
               >
-                {galleryImages.map((image) => (
-                  <SwiperSlide key={image.id}>
-                    <div className="relative w-full aspect-square rounded-lg overflow-hidden">
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </SwiperSlide>
-                ))}
+                {galleryImages.map((image) => {
+                  const isSelected = selectedImage.src === image.src;
+                  return (
+                    <SwiperSlide key={image.id}>
+                      <div 
+                        className={`relative w-full aspect-square rounded-lg overflow-hidden cursor-pointer transition-all duration-200 ${
+                          isSelected ? 'ring-4 ring-[var(--button-red)] ring-offset-2' : 'hover:opacity-80'
+                        }`}
+                        onClick={() => handleImageClick(image)}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            handleImageClick(image);
+                          }
+                        }}
+                        aria-label={`Select image: ${image.alt || 'Gallery image'}`}
+                      >
+                        <Image
+                          src={image.src}
+                          alt={image.alt}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    </SwiperSlide>
+                  );
+                })}
               </Swiper>
             </div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-              {galleryImages.map((image) => (
-                <div
-                  key={image.id}
-                  className="relative w-full aspect-square rounded-lg overflow-hidden"
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ))}
+              {galleryImages.map((image) => {
+                const isSelected = selectedImage.src === image.src;
+                return (
+                  <div
+                    key={image.id}
+                    className={`relative w-full aspect-square rounded-lg overflow-hidden cursor-pointer transition-all duration-200 ${
+                      isSelected ? 'ring-4 ring-[var(--button-red)] ring-offset-2' : 'hover:opacity-80'
+                    }`}
+                    onClick={() => handleImageClick(image)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleImageClick(image);
+                      }
+                    }}
+                    aria-label={`Select image: ${image.alt || 'Gallery image'}`}
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                );
+              })}
             </div>
           )
         )}

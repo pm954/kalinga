@@ -12,7 +12,7 @@ import AdmissionCareer from "@/app/components/general/admission_cta";
 import MediaCardSlider from "@/app/components/general/media-card-slider";
 
 const breadcrumbData = {
-  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ccrc-banner-updated.jpg",
+  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/kif/kif-banner.webp",
   pageTitle: "CCRC",
   customBreadcrumbs: [
     { label: 'Home', href: '/' },

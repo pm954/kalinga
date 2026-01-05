@@ -55,7 +55,66 @@ const toTitleCase = (str, applyLowercaseRestrictions = false) => {
 const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   const pathname = usePathname();
   const breadcrumbContext = useBreadcrumb();
-  const { breadcrumbData: contextData, isLoading: contextLoading } = breadcrumbContext || {};
+  const { breadcrumbData: contextData, isLoading: contextLoading, setBreadcrumbData, setIsLoading } = breadcrumbContext || {};
+  const prevPathnameRef = useRef(pathname);
+
+  // Clear old data and window.__breadcrumbData immediately when pathname changes
+  useEffect(() => {
+    if (prevPathnameRef.current !== pathname) {
+      // Clear previous page's data immediately
+      if (setBreadcrumbData) {
+        setBreadcrumbData(null);
+      }
+      if (setIsLoading) {
+        setIsLoading(true);
+      }
+      // Clear any stale window.__breadcrumbData from previous page
+      if (typeof window !== 'undefined' && window.__breadcrumbData) {
+        delete window.__breadcrumbData;
+      }
+      prevPathnameRef.current = pathname;
+    }
+  }, [pathname, setBreadcrumbData, setIsLoading]);
+
+  // Check for new breadcrumb data from window.__breadcrumbData (legacy support)
+  // Only check after pathname has been updated
+  useEffect(() => {
+    if (!breadcrumbContext?.setBreadcrumbData) return;
+
+    // Check immediately for new data
+    if (typeof window !== 'undefined' && window.__breadcrumbData) {
+      const data = window.__breadcrumbData;
+      // Verify the data is for current pathname by checking if it's fresh
+      breadcrumbContext.setBreadcrumbData(data);
+      delete window.__breadcrumbData;
+      if (setIsLoading) {
+        setIsLoading(false);
+      }
+      return;
+    }
+
+    // Also check after a microtask to catch data set in useEffect
+    const timeoutId = setTimeout(() => {
+      if (typeof window !== 'undefined' && window.__breadcrumbData) {
+        const data = window.__breadcrumbData;
+        breadcrumbContext.setBreadcrumbData(data);
+        delete window.__breadcrumbData;
+        if (setIsLoading) {
+          setIsLoading(false);
+        }
+      } else if (!contextData && !heroImage && !pageTitle) {
+        // If no data arrives and no props provided, stop loading after a reasonable timeout
+        const fallbackTimeout = setTimeout(() => {
+          if (setIsLoading) {
+            setIsLoading(false);
+          }
+        }, 500);
+        return () => clearTimeout(fallbackTimeout);
+      }
+    }, 50); // Small delay to let pages set their data
+
+    return () => clearTimeout(timeoutId);
+  }, [pathname, breadcrumbContext, contextData, heroImage, pageTitle, setIsLoading]);
 
   // Don't show breadcrumb on homepage
   if (pathname === '/') return null;
@@ -69,32 +128,11 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   // Don't show breadcrumb on kalmat page
   if (pathname === '/kalmat') return null;
 
-  // Check for new breadcrumb data from window.__breadcrumbData (legacy support)
-  useEffect(() => {
-    if (!breadcrumbContext?.setBreadcrumbData) return;
-
-    // Check immediately first (in case data was set synchronously)
-    if (typeof window !== 'undefined' && window.__breadcrumbData) {
-      breadcrumbContext.setBreadcrumbData(window.__breadcrumbData);
-      delete window.__breadcrumbData;
-      return;
-    }
-
-    // Also check after a microtask to catch data set in useEffect
-    const timeoutId = setTimeout(() => {
-      if (typeof window !== 'undefined' && window.__breadcrumbData) {
-        breadcrumbContext.setBreadcrumbData(window.__breadcrumbData);
-        delete window.__breadcrumbData;
-      }
-    }, 0);
-
-    return () => clearTimeout(timeoutId);
-  }, [pathname, breadcrumbContext]);
-
-  // Use context data if available, otherwise use props
-  const finalHeroImage = contextData?.heroImage ?? heroImage;
-  const finalPageTitle = contextData?.pageTitle ?? pageTitle;
-  const finalCustomBreadcrumbs = contextData?.customBreadcrumbs ?? customBreadcrumbs;
+  // Prioritize props over context data for immediate rendering
+  // This ensures props (passed directly) take precedence and reduce flickering
+  const finalHeroImage = heroImage ?? contextData?.heroImage;
+  const finalPageTitle = pageTitle ?? contextData?.pageTitle;
+  const finalCustomBreadcrumbs = customBreadcrumbs ?? contextData?.customBreadcrumbs;
   const finalImagePosition = contextData?.imageposition ?? imageposition;
 
   // Generate breadcrumbs from path or use custom ones
@@ -125,9 +163,11 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   const resolvedHeroImage = finalHeroImage || null;
   
   // Check if breadcrumb data is loading
-  // Show loader if context is loading OR if we're on a dynamic route and contextData is null
+  // Show loader only if we have no data at all (no props, no context) and context says it's loading
   const isDynamicRoute = pathname.includes('/courses/') || pathname.includes('/departments/');
-  const isLoading = contextLoading || (isDynamicRoute && contextData === null && !finalPageTitle);
+  const hasAnyData = finalHeroImage || finalPageTitle || (finalCustomBreadcrumbs && finalCustomBreadcrumbs.length > 0);
+  // Only show loading if we truly have no data and context indicates loading
+  const isLoading = contextLoading && !hasAnyData;
   
   // Apply lowercase restrictions only for department or course pages
   const applyLowercaseRestrictions = isDynamicRoute;
@@ -135,8 +175,9 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   // Use pageTitle if provided, otherwise use last breadcrumb label
   const currentPageTitle = toTitleCase(finalPageTitle || breadcrumbs[breadcrumbs.length - 1]?.label || '', applyLowercaseRestrictions);
 
+  // Use pathname as key to force re-render when route changes
   return (
-    <div className="relative px-2  ">
+    <div key={pathname} className="relative px-2  ">
       {/* Hero Image Section */}
       <div className="relative h-[400px] rounded-4xl md:h-[400px] lg:h-[400px] w-full overflow-visible bg-gradient-to-br from-[var(--dark-blue)] to-[var(--foreground)] z-0 pb-20 md:pb-24 lg:pb-28">
         {isLoading ? (
@@ -154,11 +195,13 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
           <>
             <div className="absolute inset-0 overflow-hidden rounded-4xl">
               <Image
+                key={`${pathname}-${resolvedHeroImage}`}
                 src={resolvedHeroImage}
                 alt={currentPageTitle}
                 fill
                 className={`object-cover ${finalImagePosition}`} 
                 priority
+                unoptimized
               />
               {/* Gradient Overlay for image */}
               <div className="absolute inset-0"></div>

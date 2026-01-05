@@ -13,32 +13,32 @@ const defaultVideoInterviews = [
     {
         id: 1,
         title: "Lorem Ipsum Dolor Sit Amet, Consectetur",
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/image+15.png",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Anant+Jha.jpg",
     },
     {
         id: 2,
         title: "Lorem Ipsum Dolor Sit Amet, Consectetur",
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/image+15.png",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/about-kalinga.webp",
     },
     {
         id: 3,
         title: "Lorem Ipsum Dolor Sit Amet, Consectetur",
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/image+15.png",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ccrc-banner-updated.jpg",
     },
     {
         id: 4,
         title: "Lorem Ipsum Dolor Sit Amet, Consectetur",
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/image+15.png",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Anant+Jha.jpg",
     },
     {
         id: 5,
         title: "Lorem Ipsum Dolor Sit Amet, Consectetur",
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/image+15.png",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Anant+Jha.jpg",
     },
     {
         id: 6,
         title: "Lorem Ipsum Dolor Sit Amet, Consectetur",
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/image+15.png",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Anant+Jha.jpg",
     },
 ];
 
@@ -72,21 +72,26 @@ function VideoCardSlider({
       <div className="relative w-full flex-1 flex-shrink-0 p-3 pb-0 box-border">
         <div className="relative w-full h-full">
           <Image
-            src={image || "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/image+15.png"}
+            src={image || "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Anant+Jha.jpg"}
             alt={title}
             fill
-            className="rounded-[20px]"
+            className="rounded-[20px] !object-cover"
           />
           {/* Play Button Overlay */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="">
-              <Image
-                src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/play-icon.png"
-                alt="Play"
-                width={playButtonSize}
-                height={playButtonSize}
-                className="object-contain w-[50px] h-[50px] md:w-auto md:h-auto"
-              />
+            <div className="relative">
+              {/* Play icon overlay on thumbnail */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <svg
+                  width={playButtonSize * 0.5}
+                  height={playButtonSize * 0.5}
+                  viewBox="0 0 24 24"
+                  fill="white"
+                  className="drop-shadow-lg"
+                >
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
             </div>
           </div>
         </div>
@@ -274,6 +279,18 @@ export default function SustainableSlider({
                 .three-card-button-next.swiper-button-disabled {
                     opacity: 0.35;
                     cursor: not-allowed;
+                }
+                .sustainable-swiper .swiper-slide-next img{
+                    height: 280px !important;
+                    object-position: center !important;
+                }
+                .sustainable-swiper .swiper-slide-prev img{
+                    height: 280px !important;
+                    object-position: center !important;
+                }
+                .sustainable-swiper .swiper-slide-active img{
+                    height: 130px !important;
+                    object-position: center !important;
                 }
             `}</style>
         </div>
