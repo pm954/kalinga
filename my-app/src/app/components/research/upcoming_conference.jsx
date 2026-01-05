@@ -131,90 +131,92 @@ export default function UpcomingConference({
       <div className="container mx-auto">
         <h2 className="text-center mb-10">{finalTitle}</h2>
 
-        <Swiper
-          modules={[Pagination]}
-          spaceBetween={24}
-          slidesPerView={1}
-          grabCursor={true}
-          pagination={{
-            clickable: true,
-            el: ".conference-pagination",
-          }}
-          onSwiper={(swiper) => {
-            if (swiper.params.pagination.el) {
-              swiper.pagination.init();
-              swiper.pagination.render();
-              swiper.pagination.update();
-            }
-          }}
-        >
-          {conferences.map((conf) => (
-            <SwiperSlide key={conf.id}>
-              <div className={`${backgroundColorcard} rounded-2xl shadow-sm  flex flex-col md:flex-row gap-4 md:gap-8 justify-center items-center`}>
-                <div
-                  className={`${imageContainerClass} rounded-xl overflow-hidden relative`}
-                  style={{
-                    height: `${imageHeight}px`,
-                    width: `${imageWidth}%`,
-                  }}
-                >
-                  <Image
-                    src={conf.image}
-                    alt={conf.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 40vw"
-                    unoptimized
-                  />
-                </div>
+        {displayConferences && displayConferences.length > 0 ? (
+          <>
+            <Swiper
+              modules={[Pagination]}
+              spaceBetween={24}
+              slidesPerView={1}
+              grabCursor={true}
+              pagination={{
+                clickable: true,
+                el: ".conference-pagination",
+              }}
+              onSwiper={(swiper) => {
+                if (swiper.params.pagination.el) {
+                  swiper.pagination.init();
+                  swiper.pagination.render();
+                  swiper.pagination.update();
+                }
+              }}
+            >
+              {displayConferences.map((conf) => (
+                <SwiperSlide key={conf.id}>
+                  <div className={`${backgroundColorcard} rounded-2xl shadow-sm  flex flex-col md:flex-row gap-4 md:gap-8 justify-center items-center`}>
+                    <div
+                      className={`${imageContainerClass} rounded-xl overflow-hidden relative`}
+                      style={{
+                        height: `${imageHeight}px`,
+                        width: `${imageWidth}%`,
+                      }}
+                    >
+                      <Image
+                        src={conf.image}
+                        alt={conf.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 40vw"
+                        unoptimized
+                      />
+                    </div>
 
-                <div className="w-full md:w-3/5 flex flex-col gap-6 md:px-0 px-5 h-full justify-around pb-5">
-                  {/* Badges positioned at top right */}
-                  {(showDate || showCategory) && (
-                    <div className="flex md:justify-end justify-start gap-5 items-center mr-4 flex-wrap">
-                      {showDate && conf.date && (
-                        <p className="inline-flex font-light font-plus-jakarta-sans  items-center px-2 md:px-3 py-1 rounded-lg bg-[var(--dark-green)] text-white text-xs whitespace-nowrap">
-                          {conf.date}
-                        </p>
+                    <div className="w-full md:w-3/5 flex flex-col gap-6 md:px-0 px-5 h-full justify-around pb-5">
+                      {/* Badges positioned at top right */}
+                      {(showDate || showCategory) && (
+                        <div className="flex md:justify-end justify-start gap-5 items-center mr-4 flex-wrap">
+                          {showDate && conf.date && (
+                            <p className="inline-flex font-light font-plus-jakarta-sans  items-center px-2 md:px-3 py-1 rounded-lg bg-[var(--dark-green)] text-white text-xs whitespace-nowrap">
+                              {conf.date}
+                            </p>
+                          )}
+                          {showCategory && conf.category && (
+                            <p className="inline-flex font-light font-plus-jakarta-sans items-center px-2 md:px-3 py-1 rounded-lg bg-[var(--dark-blue)] text-white text-xs whitespace-nowrap">
+                              {conf.category}
+                            </p>
+                          )}
+                        </div>
                       )}
-                      {showCategory && conf.category && (
-                        <p className="inline-flex font-light font-plus-jakarta-sans items-center px-2 md:px-3 py-1 rounded-lg bg-[var(--dark-blue)] text-white text-xs whitespace-nowrap">
-                          {conf.category}
+
+                      <div className="px-3">
+                        <h3 className="text-2xl md:text-4xl  mb-3">
+                          {conf.title}
+                        </h3>
+                        <p className="text-[var(--light-text-gray)] text-sm">
+                          {conf.description}
                         </p>
+                      </div>
+
+                      {(conf.href || href) ? (
+                        <Link href={conf.href || href}>
+                          <GlobalArrowButton className="w-fit mt-1 text-sm">
+                            {conf.registerButtonText || "Register Now"}
+                          </GlobalArrowButton>
+                        </Link>
+                      ) : (
+                        <GlobalArrowButton className="w-fit mt-1 text-sm">
+                          {conf.registerButtonText || "Register Now"}
+                        </GlobalArrowButton>
                       )}
                     </div>
-                  )}
-
-                  <div className="px-3">
-                    <h3 className="text-2xl md:text-4xl  mb-3">
-                      {conf.title}
-                    </h3>
-                    <p className="text-[var(--light-text-gray)] text-sm">
-                      {conf.description}
-                    </p>
                   </div>
-
-                  {(conf.href || href) ? (
-                    <Link href={conf.href || href}>
-                      <GlobalArrowButton className="w-fit mt-1 text-sm">
-                        {conf.registerButtonText || "Register Now"}
-                      </GlobalArrowButton>
-                    </Link>
-                  ) : (
-                    <GlobalArrowButton className="w-fit mt-1 text-sm">
-                      {conf.registerButtonText || "Register Now"}
-                    </GlobalArrowButton>
-                  )}
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div className="conference-pagination flex justify-center gap-3 mt-8" />
+          </>
         ) : (
-        <div className="text-center text-gray-500 py-10">No upcoming events found.</div>
+          <div className="text-center text-gray-500 py-10">No upcoming events found.</div>
         )}
-
-        <div className="conference-pagination flex justify-center gap-3 mt-8" />
       </div>
     </section>
   );
