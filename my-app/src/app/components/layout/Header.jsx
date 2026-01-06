@@ -112,6 +112,7 @@ const Header = () => {
             links: [
               { label: 'Who We Are', href: '/about-us' },
               { label: 'Why Kalinga', href: '/about-us#vision-mission' },
+              { label: 'About Raipur', href: '/about-raipur' },
               { label: 'Administration & Leadership', href: '/leadership' },
               { label: 'Awards and accolades', href: '/about-us' },
               { label: 'Organogram', href: '/organogram' },
@@ -119,12 +120,25 @@ const Header = () => {
             ]
           },
           {
-            title: 'Kalinga Infrastructure',
+            title: 'Statutory Compliance',
             links: [
-              { label: 'Campus Facilities', href: '/campus-facilities' },
-              { label: 'Academic Facilities', href: '/academic-facilities' },
-              { label: 'Library', href: '/library' },
-              { label: 'Laboratories', href: '/laboratories' },
+              { label: 'Online Submission For Grievance Redressal', href: '#' },
+              { label: 'Grievance Redressal Committees', href: '#' },
+              { label: 'SC & ST Grievance Cell', href: '#' },
+            ]
+          },
+          {
+            title: 'Councils & Committees',
+            links: [
+              { label: 'Governing Council', href: '#' },
+              { label: 'Executive Council', href: '#' },
+              { label: 'Academic Council', href: '#' },
+              { label: 'Finance Committee', href: '#' },
+              { label: 'Library Committee', href: '#' },
+              { label: 'Anti Ragging', href: '/anti-ragging-cell' },
+              { label: 'ICC', href: '/institution-innovation-council' },
+              { label: 'IQAC', href: '/iqac' },
+              { label: 'Planning Board', href: '#' },
             ]
           }
         ]
@@ -140,6 +154,7 @@ const Header = () => {
             title: 'Overview',
             links: [
               { label: 'Academics', href: '/academics' },
+              { label: 'Academic Calendar', href: '/academic-calendar' },
             ]
           },
           {
@@ -165,22 +180,22 @@ const Header = () => {
         ]
       }
     },
-    {
-      id: 'departments',
-      label: 'Departments',
-      href: '/departments',
-      megaMenu: {
-        sections: [
-          {
-            title: 'Departments',
-            links: [
-              { label: 'Courses', href: '/departments/bachelor-of-animation-and-visual-effects' },
-              { label: 'Faculty of Information Technology', href: '/departments/faculty-of-information-technology' },
-            ]
-          }
-        ]
-      }
-    },
+    // {
+    //   id: 'departments',
+    //   label: 'Departments',
+    //   href: '/departments',
+    //   megaMenu: {
+    //     sections: [
+    //       {
+    //         title: 'Departments',
+    //         links: [
+    //           { label: 'Courses', href: '/departments/bachelor-of-animation-and-visual-effects' },
+    //           { label: 'Faculty of Information Technology', href: '/departments/faculty-of-information-technology' },
+    //         ]
+    //       }
+    //     ]
+    //   }
+    // },
     {
       id: 'admissions',
       label: 'Admissions',
@@ -194,6 +209,10 @@ const Header = () => {
               { label: 'Discover Programs', href: '/admissions' },
               { label: 'Entrance Exam – KALSEE/KALMAT', href: '/entrance-exam' },
               { label: 'Scholarships', href: '/scholarships' },
+              { label: 'Kalinga Plus', href: 'https://kalingaplus.kalingauniversity.ac.in/' },
+              { label: 'B.Voc Admission', href: 'https://bvoc.kalingauniversity.ac.in/' },
+              { label: 'Apply Now', href: 'https://admissions.kalingauniversity.ac.in/' },
+              
 
             ],
           },
@@ -202,6 +221,7 @@ const Header = () => {
             links: [
               { label: 'Value Additions', href: '/value-additions' },
               { label: 'Download Admission Form', href: '#' },
+              { label: 'Document verification', href: '/document-verification' },
               { label: 'Pay your Fees', href: '/pay-your-fees' },
             ]
           }
@@ -219,21 +239,22 @@ const Header = () => {
             links: [
               { label: 'Life @ KU', href: '/campuslife' },
               { label: 'Student Support', href: '/student-support' },
-              { label: 'Campus Tour', href: '/campus-facilities' },
+              { label: 'Campus Tour', href: 'https://virtualtour.kalingauniversity.ac.in/' },
               { label: 'Student Welfare', href: '/student-welfare' },
               { label: 'Library', href: '/library' },
               { label: 'Clubs & Societies', href: '/student-clubs' },
             ]
           },
-          // {
-          //   title: 'Resources',
-          //   links: [
-          //     { label: 'Student Support', href: '/student-support' },
-          //     { label: 'Student Welfare', href: '/student-welfare' },
-          //     { label: 'Student Counselling', href: '/students-counselling-cell' },
-          //     { label: 'Downloads', href: '/downloads' },
-          //   ]
-          // }
+          {
+            title: 'Facilities',
+            links: [
+              { label: 'Academic Facilities', href: '/academic-facilities' },
+              { label: 'Campus Facilities', href: '/campus-facilities' },
+              { label: 'Sports & Wellness Centre', href: '/sports-and-wellness-centre' },
+              { label: 'Student Counselling', href: '/students-counselling-cell' },
+              { label: 'Downloads', href: '/downloads' },
+            ]
+          }
         ]
       }
     },
@@ -294,6 +315,7 @@ const Header = () => {
             links: [
               { label: 'News & Events', href: '/news-and-events' },
               { label: 'Conferences & Events', href: '/conferences-and-events' },
+              { label: 'Alumni talk', href: '/news-and-events' },
             ]
           }
         ]

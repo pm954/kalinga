@@ -121,10 +121,9 @@ export default function ValueAddedPage() {
     <section className="research-welfare-intro">
         <MainIntro
           breadcrumbData={breadcrumbData}
-          title="Value Added Courses"
+          title="Get Ready To Future-Proof Your Resumes With Industry-Ready Skills"
           description={[
-            "Emerging trends in technical and professional education call for value addition, i.e., students must acquire something more than what is provided in the curriculum and develop skills in their chosen field of study.",
-            " Kalinga University offers a range of short-term certificate courses, which are conducted after class hours or during semester breaks. These courses are conducted by professionals and industry experts who help students stand out in the job market.",
+            "Emerging trends in technical and professional education call for value addition, i.e., students must acquire something more than what is provided in the curriculum and develop skills in their chosen field of study. Kalinga University offers a range of short-term value added certificate courses in trending topics like Foreign Exchange Market, Strategic Corporate Communication, Entrepreneurship in Teacher Education, Cloud Infrastructure, Full Stack Development, Health & Nutrition, Law of Right to Information, Apiclture, and more. These courses are conducted by professionals and industry experts who help students stand out in the job market",
           ]}
           imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/Value-Added-Courses/banner+(1).webp"
           imageAlt="Value-Added"
@@ -134,6 +133,10 @@ export default function ValueAddedPage() {
       </section>
 
      {/* ---------- YEAR WISE PDF SECTION ---------- */}
+     <SectionHeading 
+       title="Our Value Added Courses"
+       titleClassName="text-center mt-10"
+     />
 <section className="py-14">
   <div className="mx-auto max-w-6xl rounded-3xl bg-[#0d4a75] p-6">
     {/* <h3 className="text-white mb-6">
@@ -178,7 +181,8 @@ export default function ValueAddedPage() {
       {/* Video Slider */}
       <div className="px-2 md:px-0">
         <MediaCardSlider
-          categoryTitle="Our Student Experiences"
+          categoryTitle=""
+          title="Our Student Experiences"
           videoItems={videoItems}
           nameTextClass="text-[#A61E1E]"
           swiperClassName="value-added-video-slider"

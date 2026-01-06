@@ -177,7 +177,7 @@ export default function Page() {
       <MainIntro
         title="Student Clubs"
         description={[
-          "The vibrant clubs of KU encourage leadership, creativity, collaboration, and holistic development beyond classrooms.",
+          "The vibrant clubs of KU are filled with talented and passionate students who are always ready to showcase their creative skills and develop interests in engaging activities. Our academic clubs motivate students to learn and grow with confidence inside and outside their classrooms. With our clubs, students develop leadership qualities, learn new skills, work in teams, and make unforgettable memories.",
         ]}
         imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/campus-life-intro-1.webp"
         imageAlt="Student Clubs"
