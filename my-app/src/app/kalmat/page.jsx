@@ -172,7 +172,7 @@ export default function KalseePage() {
     },
     {
       title: "Exam Dates & Registration",
-      description: "BBA - Anytime within a week after registration, MBA - 8th March 2025",
+      description: "BBA - Anytime within a week after registration, MBA - Will be intimated by the University from time to time.",
       icon: <Image src="https://kalinga-university.s3.ap-south-1.amazonaws.com/kalsee/registration.png" alt="Exam Dates & Registration" width={64} height={64} className="object-contain" />
     },
     {
@@ -202,7 +202,7 @@ export default function KalseePage() {
     },
     {
       title: "Scholarships",
-      description: "Attractive scholarships to top scorers for BBA and MBA courses.",
+      description: "Attractive scholarships to top scorers for BBA and MBA courses",
       icon: <Image src="https://kalinga-university.s3.ap-south-1.amazonaws.com/kalsee/scholarship.png" alt="Scholarships" width={64} height={64} className="object-contain" />
     },
   ]
@@ -240,7 +240,7 @@ export default function KalseePage() {
         leftCardSecondButtonText="Register now"
         leftCardSecondButtonLink="#hero-banner"
         rightCardTitle="MBA"
-        rightCardDescription="22nd March 2025"
+        rightCardDescription="Will be intimated by the University from time to time."
         rightCardButtonText="Know more"
         rightCardButtonLink="/admissions"
         rightCardSecondButtonText="Register now"
@@ -305,7 +305,7 @@ export default function KalseePage() {
               id: 1,
               title: "BBA",
               specialization: "Bachelor of Business Administration",
-              duration: "4 Year",
+              duration: "3 Years",
               eligibility: "10+12",
               type: "UG",
               coursePageUrl: "/courses/bachelor-of-business-administration",
@@ -316,7 +316,7 @@ export default function KalseePage() {
               id: 2,
               title: "MBA",
               specialization: "Master of Business Administration",
-              duration: "2 Year",
+              duration: "2 Years",
               eligibility: "Graduation",
               type: "PG",
               coursePageUrl: "/courses/master-of-business-administration",
@@ -334,7 +334,7 @@ export default function KalseePage() {
       <AdmissionSteps
         steps={kifSteps}
         subtitleClassName="hidden"
-        title="Your Step-By-Step Startup Process"
+        title="Your Step-By-Step Admission Process"
         ctaLabel="Apply Now"
         showReadMore={true}
         showHeaderButton={false}
@@ -343,7 +343,9 @@ export default function KalseePage() {
         bgColor="bg-white"
       />
       {/* <Testimonials testimonials={testimonials} className="bg-[var(--light-gray)]" /> */}
-      <FAQ title="Frequently Asked Questions" items={faqItems} />
+      <FAQ title="Frequently Asked Questions"
+      subtitle=""
+       items={faqItems} />
       <AdmissionCareer />
     </>
   );

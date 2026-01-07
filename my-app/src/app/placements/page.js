@@ -344,6 +344,36 @@ export default function Research() {
       videoUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Shiwangi+Sinha+CCRC+Placement+Video.mp4",
       description: "Pharmachy department",
     },
+  ]
+  const videoItems1 = [
+    {
+      id: 1,
+      name: "SGS Technical Services Pvt Ltd ",
+      videoUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Campus+Drives/SGS+Technical+services+Pvt.+ltd+Campus+Drive.mp4",
+      thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Campus+Drives/campus-1.png",
+      description: "SGS Technical Services Pvt Ltd",
+    },
+    {
+      id: 2,
+      name: "9M India Limited",
+      videoUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Campus+Drives/9M+india+limited+Campus+Drive+CCRC.mp4",
+      thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Campus+Drives/campus-2.png",
+      description: "9M India Limited",
+    },
+    {
+      id: 3,
+      name: "Hirojet Campus Drive",
+      videoUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Campus+Drives/Hirojet+Campus+Drive.mp4",
+      thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Campus+Drives/campus-3.png",
+      description: "Pharmachy department",
+    },
+    {
+      id: 4,
+      name: "Airtel Campus Drive",
+      videoUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Campus+Drives/Airtel+Campus+Drive.mp4",
+      thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/Campus+Drives/campus-4.png",
+      description: "Pharmachy department",
+    },
   ];
 
   const placementColumns = [
@@ -416,12 +446,21 @@ export default function Research() {
         singleColumn={true}
         milestones={milestones}
         description="Maintaining the track record of providing students with the best job opportunities and rewarding salary packages at top companies."
-        footerText="Trusted by 500+ Global Recruiters"
+        footerText="Trusted by 400+ Global Recruiters"
         noContainer={true}
       />
-      <QuickLinks
-        links={links}
-        title="Training Initiatives Of Kalinga’s TnP Cell"
+      <MediaCardSlider
+        categoryTitle=""
+        title="Campus Drives"
+        videoItems={videoItems1}
+        cardBgClass="bg-white"
+        nameTextClass="text-[var(--button-red)]"
+        descriptionTextClass=""
+        swiperClassName="ccrc-video-slider"
+      />
+      <QuickLinks 
+        links={links} 
+        title="Training Initiatives Of Kalinga’s TnP Cell" 
         description="Kalinga University's placement program bridges academia and industry with 400+ recruitment partners, comprehensive training, and dedicated support to prepare students for successful careers in top companies."
         backgroundColor="bg-white"
         textColorClassName="text-black"

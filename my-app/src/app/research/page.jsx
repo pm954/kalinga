@@ -106,7 +106,7 @@ export default function Research() {
     <div>
       <AutoBreadcrumb data={breadcrumbData} />
       <MainIntro
-        title="Best Research Intensive University"
+        title="Research and Innovation"
         description={[
           "Kalinga University promotes research through a knowledge-sharing mechanism that goes beyond textbooks and classroom-based studies. The primary aim of our research department is to make the outcome impactful by collaborating with renowned universities and R&D institutions. Our research-ready curriculum is constantly updated with innovative programs to tackle real-world challenges, encouraging interdisciplinary and multidisciplinary education.",
           "Our IPR cell supports patent filing, technology development, and commercialisation, while our incubation cell connects us with local/national industry, research labs & institutions, civil society, and the Government. We conduct research work under our well-designed research policy, and to promote that, we have ample online study material, SPSS tools for research, and Drillbit to check plagiarism in research. We have extensive CIF labs with all the high-tech instruments that are not available anywhere else in Chhattisgarh. We don't just encourage students to ask questions, but we support them in finding answers on their own."

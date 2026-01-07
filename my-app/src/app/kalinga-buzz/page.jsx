@@ -140,7 +140,7 @@ export default function KalingaBuzz() {
   return (
     <>
       <MainIntro
-        title="Kalinga Buzz"
+        title="A One-Stop Update on Campus Life"
         subtitle="An Initiative By Kalinga University"
         description={["Stay connected and updated with our monthly newsletters! It highlights cultural events, ceremonies, research breakthroughs, sports achievements, academic achievements, students' and faculty achievements, and much more.",
         
@@ -148,22 +148,25 @@ export default function KalingaBuzz() {
       imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/kalinga-buzz.webp"
       imageAlt="Kalinga University Buzz"
       />
-      <h2 className="text-2xl text-center">Kalinga Buzz 2019</h2>
+      <h2 className="text-2xl text-center">Kalinga Buzz 2025</h2>
       <ResearchSixGridButtons
-      buttons={buttons}
-      />
-      <h2 className="text-2xl text-center">Kalinga Buzz 2020</h2>
-      <ResearchSixGridButtons
-      buttons={buttons2}
+      buttons={buttons4}
       />
       <h2 className="text-2xl text-center">Kalinga Buzz 2021</h2>
       <ResearchSixGridButtons
       buttons={buttons3}
       />
-      <h2 className="text-2xl text-center">Kalinga Buzz 2025</h2>
+      <h2 className="text-2xl text-center">Kalinga Buzz 2020</h2>
       <ResearchSixGridButtons
-      buttons={buttons4}
+      buttons={buttons2}
       />
+      <h2 className="text-2xl text-center">Kalinga Buzz 2019</h2>
+      <ResearchSixGridButtons
+      buttons={buttons}
+      />
+      
+      
+      
     </>
   );
 }
