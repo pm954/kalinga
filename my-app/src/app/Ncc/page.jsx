@@ -38,7 +38,6 @@ const page = () => {
         }
       }
     `}</style>
-<<<<<<< Updated upstream
       <NccIntro />
       <NccBenefits />
       <NccVisionMission />
@@ -49,13 +48,6 @@ const page = () => {
         fallback="hide"
       />
       <AdmissionCareer />
-=======
-    <NccIntro/>
-    <NccBenefits/>
-     <NccVisionMission/>
-    <NccHeadMessage/>
-    <AdmissionCareer/>
->>>>>>> Stashed changes
     </>
   )
 }
