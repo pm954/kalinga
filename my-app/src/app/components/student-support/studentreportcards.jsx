@@ -24,10 +24,7 @@ export default function Studentreportcards() {
                 "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ctcd.png",
             logoSrc: "",
             subtitle: "INDUSTRY EXPOSURE",
-<<<<<<< Updated upstream
             link: "/corporate-training-and-consultancy-division",
-=======
->>>>>>> Stashed changes
         },
         {
             title: "Academic Clubs & Non-Academic Clubs",
@@ -120,7 +117,6 @@ export default function Studentreportcards() {
             subtitle: "PARENT ENGAGEMENT",
         },
         {
-<<<<<<< Updated upstream
             title: "130+ Academic Programs",
             description:
                 "Choose from career options including commerce, management, arts, science, pharmacy, law, technology, information technology, and education.",
@@ -140,8 +136,6 @@ export default function Studentreportcards() {
             link: "/international-students#bridge-course"
         },
         {
-=======
->>>>>>> Stashed changes
             title: "Competitive Exams Coaching",
             description:
                 "We prepare students for national and international competitive exams such as GATE, GRE, GMAT, CAT, IAS, UPSC, IELTS, TOEFL, IBPS, PSC, SSC, NET, and more.",

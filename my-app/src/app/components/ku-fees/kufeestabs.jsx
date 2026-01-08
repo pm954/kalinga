@@ -3,9 +3,6 @@
 import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import HostelFeeTabs from "../hostel/hosteltabs";
-import GlobalArrowButton from "../general/global-arrow_button";
-import FlipbookTrigger from "../general/FlipbookTrigger";
-import { useFlipbook } from "../general/FlipbookContext";
 
 /** -----------------------------
  *  TABS (UPDATED)
@@ -33,8 +30,9 @@ const IQAC_TABS = [
 
     // ✅ Other Charges (only lateral entry)
     { id: "other", label: "Other Charges" },
-    { id: "value", label: "Value Additions" },
 
+    // ✅ Value Additions (DON'T REMOVE)
+    { id: "value", label: "Value Additions" },
 ];
 
 const FEES_COMMERCE = {
@@ -937,9 +935,7 @@ const FEES_PHARMACY = {
             "Total Fees (INR)": "2,53,450/-",
         },
     ],
-    notes: [
-        "Specialisations for M.Pharmacy: Pharmacology, Pharmaceutical Chemistry, Pharmaceutics",
-    ],
+    notes: ["Specialisations for M.Pharmacy: Pharmacology, Pharmaceutical Chemistry, Pharmaceutics"],
 };
 
 const FEES_EDUCATION = {
@@ -1079,12 +1075,12 @@ const VALUE_ADDITIONS = [
     "Foreign Trip for all courses (Optional with charges).",
     "Certification course of AIML/Data Science for IT & Engineering students with First Edu India Ltd.",
     "Certification course on Photography, Videography & Graphic Design with First Edu India Ltd.",
-    "Certification courses on Financial Planning, Self Finance Planning & Stock Market with First Edu India Ltd."
+    "Certification courses on Financial Planning, Self Finance Planning & Stock Market with First Edu India Ltd.",
 ];
 
 const OTHER_CHARGES = {
     lateralEntryFee: "One Time - Rs. 3,000/-",
-    creditTransfer: "(One time) - Rs. 5,000/-", // ✅ kept in code, just not shown in other tab now
+    creditTransfer: "(One time) - Rs. 5,000/-",
     transport: [
         { route: "From Dhamtari", fee: "INR 38,000/- Per Year" },
         { route: "From Kurud", fee: "INR 32,000/- Per Year" },
@@ -1105,8 +1101,7 @@ const OTHER_CHARGES = {
     ],
     scholarship:
         "Scholarships (General, Merit & Girl Student) are available on Tuition Fees. The above scholarships are not applicable to Pharmacy, Education, and Research Programs.",
-    uniformDetails:
-        "Uniform Includes - 2 Trousers, 2 Shirts, 1 Blazer, 1 T-Shirt, 1 Lower, 1 Tie, 1 Bag",
+    uniformDetails: "Uniform Includes - 2 Trousers, 2 Shirts, 1 Blazer, 1 T-Shirt, 1 Lower, 1 Tie, 1 Bag",
 };
 
 /** -----------------------------
@@ -1115,7 +1110,7 @@ const OTHER_CHARGES = {
 function ScrollTable({ columns, rows }) {
     return (
         <div className="mt-2 border border-gray-200 rounded-lg overflow-hidden">
-            <div className="w-full max-w-full overflow-x-auto overflow-y-auto max-h-[520px]">
+            <div className="w-full max-w-full overflow-x-auto overflow-y-auto max-h-[520px] scrollbar-hide">
                 <table className="w-max min-w-full border-collapse">
                     <thead className="sticky top-0 z-10">
                         <tr className="bg-[var(--dark-blue)] text-white">
@@ -1158,9 +1153,7 @@ function Notes({ items = [] }) {
 
     return (
         <div className="mt-4 text-left space-y-2">
-            <h4 className="font-plus-jakarta-sans font-semibold text-[var(--foreground)]">
-                Notes
-            </h4>
+            <h4 className="font-plus-jakarta-sans font-semibold text-[var(--foreground)]">Notes</h4>
             <ul className="list-disc pl-5 space-y-1">
                 {items.map((t, i) => (
                     <li
@@ -1180,12 +1173,7 @@ function Notes({ items = [] }) {
  *  ----------------------------*/
 export default function FeesTabSection() {
     const searchParams = useSearchParams();
-<<<<<<< Updated upstream
-    const [activeTab, setActiveTab] = useState("commerce");
-    const { openFlipbook } = useFlipbook();
-=======
-    const [activeTab, setActiveTab] = useState("arts"); // ✅ starts with first alphabetical faculty
->>>>>>> Stashed changes
+    const [activeTab, setActiveTab] = useState("arts");
 
     useEffect(() => {
         const tabParam = searchParams?.get("tab");
@@ -1207,6 +1195,9 @@ export default function FeesTabSection() {
         if (activeTab === "hostel") return { title: "Hostel Fees" };
         return null;
     }, [activeTab]);
+
+    // ✅ These tabs have their own custom content (so fallback should NEVER appear for them)
+    const CUSTOM_TABS = ["hostel", "scholarship", "transport", "other", "value"];
 
     return (
         <section className="w-full py-4 px-2 overflow-x-hidden">
@@ -1274,91 +1265,20 @@ export default function FeesTabSection() {
                     <div className="rounded-[16px] bg-white shadow-sm overflow-hidden h-full flex flex-col">
                         <div className="flex-1 overflow-y-auto px-4 md:px-5 pt-4 md:pt-5 pb-8">
                             {/* Faculty Tables */}
-                            {faculty && activeTab !== "hostel" && !["scholarship", "transport", "other"].includes(activeTab) && (
-                                <div>
-                                    <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-1">
-                                        {faculty.title}
-                                    </h2>
-
-                                    <ScrollTable columns={faculty.columns} rows={faculty.rows} />
-                                    <Notes items={faculty.notes} />
-                                </div>
-                            )}
-
-<<<<<<< Updated upstream
-                            {/* Other Charges */}
-                            {activeTab === "other" && (
-                                <div>
-                                    <div className="w-full min-w-0">
-                                        <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 mt-1 text-center w-full max-w-full min-w-0 px-2 !whitespace-normal !break-words !overflow-visible">
-                                            Other Charges / Transport / Scholarship
+                            {faculty &&
+                                activeTab !== "hostel" &&
+                                !["scholarship", "transport", "other", "value"].includes(activeTab) && (
+                                    <div>
+                                        <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-1">
+                                            {faculty.title}
                                         </h2>
+
+                                        <ScrollTable columns={faculty.columns} rows={faculty.rows} />
+                                        <Notes items={faculty.notes} />
                                     </div>
+                                )}
 
-                                    <div className="space-y-4 text-[var(--foreground)] font-plus-jakarta-sans text-sm md:text-base">
-                                        <div className="p-4 rounded-lg border border-gray-200 bg-gray-50">
-                                            <div className="font-semibold mb-2">Other Charges</div>
-                                            <ul className="list-disc pl-5 space-y-1">
-                                                <li>Lateral Entry Fees: {OTHER_CHARGES.lateralEntryFee}</li>
-                                                <li>Credit Transfer: {OTHER_CHARGES.creditTransfer}</li>
-                                            </ul>
-                                        </div>
-
-                                        <div className="p-4 rounded-lg border border-gray-200 bg-white">
-                                            <div className="font-semibold mb-2">Transport Charges (To &amp; From)</div>
-
-                                            <div className="border border-gray-200 rounded-lg overflow-hidden">
-                                                <div className="w-full max-w-full overflow-x-auto overflow-y-auto max-h-[360px]">
-                                                    <table className="w-max min-w-full border-collapse">
-                                                        <thead className="sticky top-0 z-10">
-                                                            <tr className="bg-[var(--dark-blue)] text-white">
-                                                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap">Route</th>
-                                                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap">Fee</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            {OTHER_CHARGES.transport.map((t, i) => (
-                                                                <tr key={i} className="border-b border-gray-200 hover:bg-gray-50">
-                                                                    <td className="px-4 py-3 whitespace-normal break-words min-w-[280px]">{t.route}</td>
-                                                                    <td className="px-4 py-3 whitespace-nowrap">{t.fee}</td>
-                                                                </tr>
-                                                            ))}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="p-4 rounded-lg border border-gray-200 bg-gray-50">
-                                            <div className="font-semibold mb-2">Scholarship Details</div>
-                                            <p className="whitespace-normal break-words mb-4">
-                                                Scholarships (General, Merit &amp; Girl Student) are available on Tuition Fees.{" "}
-                                                . The above scholarships are not applicable to Pharmacy, Education, and Research Programs.
-                                            </p>
-                                            <FlipbookTrigger
-                                                pdfUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/scholarships/SCHOLARSHIP_25-26+(4)+(1).pdf"
-                                                title="Scholarship Details"
-                                            >
-                                                <GlobalArrowButton
-                                                    onClick={() => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/scholarships/SCHOLARSHIP_25-26+(4)+(1).pdf", "Scholarship Details")}
-                                                    className=" !py-2"
-                                                >
-                                                    View Scholarship Details
-                                                </GlobalArrowButton>
-                                            </FlipbookTrigger>
-                                        </div>
-
-                                        <div className="p-4 rounded-lg border border-gray-200 bg-white">
-                                            <div className="font-semibold mb-2">Uniform Details</div>
-                                            <p className="whitespace-normal break-words">{OTHER_CHARGES.uniformDetails}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                            {/* {Hostel Tab} */}
-=======
                             {/* Hostel Tab */}
->>>>>>> Stashed changes
                             {activeTab === "hostel" && (
                                 <div className="w-full">
                                     <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-1">
@@ -1371,7 +1291,7 @@ export default function FeesTabSection() {
                                 </div>
                             )}
 
-                            {/* ✅ Scholarships Tab (moved content here, not removed) */}
+                            {/* Scholarships Tab */}
                             {activeTab === "scholarship" && (
                                 <div>
                                     <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 mt-1 text-center">
@@ -1395,7 +1315,7 @@ export default function FeesTabSection() {
                                 </div>
                             )}
 
-                            {/* ✅ Transport Tab (moved content here, not removed) */}
+                            {/* Transport Tab */}
                             {activeTab === "transport" && (
                                 <div>
                                     <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 mt-1 text-center">
@@ -1403,7 +1323,7 @@ export default function FeesTabSection() {
                                     </h2>
 
                                     <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
-                                        <div className="w-full max-w-full overflow-x-auto overflow-y-auto max-h-[520px]">
+                                        <div className="w-full max-w-full overflow-x-auto overflow-y-auto max-h-[520px] scrollbar-hide">
                                             <table className="w-max min-w-full border-collapse">
                                                 <thead className="sticky top-0 z-10">
                                                     <tr className="bg-[var(--dark-blue)] text-white">
@@ -1417,16 +1337,11 @@ export default function FeesTabSection() {
                                                 </thead>
                                                 <tbody>
                                                     {OTHER_CHARGES.transport.map((t, i) => (
-                                                        <tr
-                                                            key={i}
-                                                            className="border-b border-gray-200 hover:bg-gray-50"
-                                                        >
+                                                        <tr key={i} className="border-b border-gray-200 hover:bg-gray-50">
                                                             <td className="px-4 py-3 whitespace-normal break-words min-w-[280px]">
                                                                 {t.route}
                                                             </td>
-                                                            <td className="px-4 py-3 whitespace-nowrap">
-                                                                {t.fee}
-                                                            </td>
+                                                            <td className="px-4 py-3 whitespace-nowrap">{t.fee}</td>
                                                         </tr>
                                                     ))}
                                                 </tbody>
@@ -1436,7 +1351,7 @@ export default function FeesTabSection() {
                                 </div>
                             )}
 
-                            {/* ✅ Other Charges Tab (ONLY Lateral Entry) */}
+                            {/* Other Charges Tab */}
                             {activeTab === "other" && (
                                 <div>
                                     <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 mt-1 text-center">
@@ -1459,7 +1374,7 @@ export default function FeesTabSection() {
                                 </div>
                             )}
 
-                            {/* ✅ Value Additions (restored) */}
+                            {/* ✅ Value Additions (FIXED: no extra fallback now) */}
                             {activeTab === "value" && (
                                 <div>
                                     <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-1">
@@ -1476,63 +1391,17 @@ export default function FeesTabSection() {
                                 </div>
                             )}
 
-
-<<<<<<< Updated upstream
-
-                            {/* PDFs */}
-                            {activeTab === "pdfs" && (
+                            {/* ✅ fallback (FIXED: will NOT run for value additions anymore) */}
+                            {!faculty && !CUSTOM_TABS.includes(activeTab) && (
                                 <div>
                                     <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-1">
-                                        Department-wise Free Value-added Courses (PDFs)
+                                        {IQAC_TABS.find((t) => t.id === activeTab)?.label}
                                     </h2>
-
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                        {VALUE_ADDED_PDF_YEARS.map((y) => {
-                                            const yearPdfs = VALUE_ADDED_PDFS?.[y] || [];
-                                            return (
-                                                <div key={y} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
-                                                    <div className="font-semibold text-[var(--foreground)]">{y}</div>
-
-                                                    {yearPdfs.length > 0 ? (
-                                                        <div className="mt-3 grid grid-cols-1 gap-2">
-                                                            {yearPdfs.map((p, idx) => (
-                                                                <FlipbookTrigger
-                                                                    key={idx}
-                                                                    pdfUrl={p.href}
-                                                                    title={p.label}
-                                                                >
-                                                                    <GlobalArrowButton
-                                                                        onClick={() => openFlipbook(p.href, p.label)}
-                                                                        className="!w-full !py-2 !text-sm"
-                                                                        textClassName="!text-sm"
-                                                                    >
-                                                                        {p.label}
-                                                                    </GlobalArrowButton>
-                                                                </FlipbookTrigger>
-                                                            ))}
-                                                        </div>
-                                                    ) : (
-                                                        <div className="text-sm text-[var(--foreground)]/70 mt-2">
-                                                            PDFs will be added here.
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            );
-                                        })}
-=======
-                            {/* fallback */}
-                            {!faculty &&
-                                !["scholarship", "transport", "other", "value"].includes(activeTab) && (
-                                    <div>
-                                        <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-1">
-                                            {IQAC_TABS.find((t) => t.id === activeTab)?.label}
-                                        </h2>
-                                        <p className="text-[var(--foreground)] font-plus-jakarta-sans text-center">
-                                            Content will be added here.
-                                        </p>
->>>>>>> Stashed changes
-                                    </div>
-                                )}
+                                    <p className="text-[var(--foreground)] font-plus-jakarta-sans text-center">
+                                        Content will be added here.
+                                    </p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
