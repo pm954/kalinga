@@ -468,6 +468,8 @@ const Header = () => {
                 }
                 alt={getLogoAlt('primary')}
                 fill
+                sizes="168px"
+                loading="eager"
                 className="object-contain transition-all duration-300"
               />
             </div>
