@@ -53,6 +53,7 @@ import Breadcrumb from "./components/layout/Breadcrumb";
 import Footer from "./components/layout/Footer";
 import ClickSparkWrapper from "./components/layout/ClickSparkWrapper";
 import { BreadcrumbProvider } from "./components/layout/BreadcrumbContext";
+import ChatbotPopup from "./components/layout/ChatbotPopup";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -102,6 +103,7 @@ export default function RootLayout({ children }) {
               {children}
             </main>
             <Footer />
+            <ChatbotPopup />
           </ClickSparkWrapper>
         </BreadcrumbProvider>
       </body>

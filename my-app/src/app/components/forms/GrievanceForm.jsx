@@ -15,8 +15,36 @@ export default function GrievanceForm() {
         faculty: '',
         details: '',
     })
+    const [departments, setDepartments] = useState([])
+    const [committees, setCommittees] = useState([])
+    const [faculties, setFaculties] = useState([])
     const [loading, setLoading] = useState(false)
     const [status, setStatus] = useState({ type: '', message: '' })
+
+    const fetchData = async () => {
+        try {
+            const [deptRes, commRes, facRes] = await Promise.all([
+                fetch('https://kalinga.dupebox.com/api/departments/'),
+                fetch('https://kalinga.dupebox.com/api/committee-categories/'),
+                fetch('https://kalinga.dupebox.com/api/faculty/')
+            ])
+
+            const deptData = await deptRes.json()
+            const commData = await commRes.json()
+            const facData = await facRes.json()
+
+            setDepartments((deptData.results || deptData).map(d => ({ value: d.id.toString(), label: d.name })))
+            setCommittees((commData.results || commData).map(c => ({ value: c.id.toString(), label: c.name })))
+            setFaculties((facData.results || facData).map(f => ({ value: f.id.toString(), label: f.name })))
+
+        } catch (err) {
+            console.error("Failed to fetch form data", err)
+        }
+    }
+
+    React.useEffect(() => {
+        fetchData()
+    }, [])
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -51,27 +79,15 @@ export default function GrievanceForm() {
                     <InputField label="Phone Number" name="phone" value={formData.phone} onChange={handleChange} required />
                     <InputField
                         label="Department" name="department" type="select" value={formData.department} onChange={handleChange} required
-                        options={[
-                            { value: '1', label: 'Academic Affairs' },
-                            { value: '2', label: 'Examinations' },
-                            { value: '3', label: 'Administration' }
-                        ]}
+                        options={departments}
                     />
                     <InputField
                         label="Committee Category" name="committee_category" type="select" value={formData.committee_category} onChange={handleChange} required
-                        options={[
-                            { value: '1', label: 'Student Welfare' },
-                            { value: '2', label: 'Internal Quality' },
-                            { value: '3', label: 'Anti-Ragging' }
-                        ]}
+                        options={committees}
                     />
                     <InputField
                         label="Faculty" name="faculty" type="select" value={formData.faculty} onChange={handleChange} required
-                        options={[
-                            { value: '1', label: 'Faculty of Engineering' },
-                            { value: '2', label: 'Faculty of Management' },
-                            { value: '3', label: 'Faculty of Law' }
-                        ]}
+                        options={faculties}
                     />
                 </FormGrid>
                 <InputField label="Details of Grievance" name="details" type="textarea" value={formData.details} onChange={handleChange} required />
