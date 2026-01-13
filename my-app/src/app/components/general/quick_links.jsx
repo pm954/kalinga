@@ -59,6 +59,7 @@ const QuickLinks = ({
   titleClassName = "",
   gridClassName = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10",
   slider = false,
+  iconWrapperClassName,
 }) => {
   // Default description only if not provided
   const displayDescription = description;
@@ -115,6 +116,7 @@ const QuickLinks = ({
                       showReadMore={showReadMore}
                       showDescriptionReadMore={showDescriptionReadMore}
                       href={link.href || link.link}
+                      iconWrapperClassName={iconWrapperClassName}
                     />
                   </div>
                 </SwiperSlide>
@@ -173,6 +175,7 @@ const QuickLinks = ({
                 showReadMore={showReadMore}
                 showDescriptionReadMore={showDescriptionReadMore}
                 href={link.href || link.link}
+                iconWrapperClassName={iconWrapperClassName}
               />
             ))}
           </div>

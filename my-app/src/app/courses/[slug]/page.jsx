@@ -566,23 +566,75 @@ export default function DynamicCoursePage() {
       }))
   } : null;
 
-  const quickLinksContent = courseData?.curriculum_btc && courseData.curriculum_btc.length > 0 ? {
-    title: "Beyond The Curriculum ",
-    description: "",
-    links: courseData.curriculum_btc
-      .sort((a, b) => (a.display_order || 0) - (b.display_order || 0))
-      .filter((item, index, self) =>
-        index === self.findIndex(t =>
-          t.heading?.toLowerCase() === item.heading?.toLowerCase()
-        )
-      )
-      .map(item => ({
-        id: item.id,
-        icon: item.icon_image || undefined,
-        title: item.heading || "",
-        description: parseHtmlToText(item.description) || "",
-      }))
-  } : null;
+  const quickLinksContent = (() => {
+    // 1. Try courseData.clubs (Primary API source)
+    if (courseData?.clubs && courseData.clubs.length > 0) {
+      return {
+        title: "Beyond The Curriculum ",
+        description: "Beyond the classroom, Kalinga provides platforms for students to develop useful skills, explore concepts, and get ready for opportunities in the real world. Through industry-focused training, career counseling, and entrepreneurship support, students are encouraged to develop both personally and professionally.",
+        links: courseData.clubs
+          .sort((a, b) => (a.id || 0) - (b.id || 0)) // Optional sorting
+          .map(item => ({
+            id: item.id,
+            icon: item.image || null,
+            title: item.heading || "",
+            description: parseHtmlToText(item.description) || "",
+            href: item.link || "#"
+          }))
+      };
+    }
+
+    // 2. Try courseData.curriculum_btc (Secondary/Legacy API source)
+    if (courseData?.curriculum_btc && courseData.curriculum_btc.length > 0) {
+      return {
+        title: "Beyond The Curriculum ",
+        description: "",
+        links: courseData.curriculum_btc
+          .sort((a, b) => (a.display_order || 0) - (b.display_order || 0))
+          .filter((item, index, self) =>
+            index === self.findIndex(t =>
+              t.heading?.toLowerCase() === item.heading?.toLowerCase()
+            )
+          )
+          .map(item => ({
+            id: item.id,
+            icon: item.icon_image || undefined,
+            title: item.heading || "",
+            description: parseHtmlToText(item.description) || "",
+            href: "#" // curriculum_btc items didn't have link in previous code
+          }))
+      };
+    }
+
+    // 3. Fallback (Static Data)
+    return {
+      title: "Beyond The Curriculum ",
+      description: "Beyond the classroom, Kalinga provides platforms for students to develop useful skills, explore concepts, and get ready for opportunities in the real world. Through industry-focused training, career counseling, and entrepreneurship support, students are encouraged to develop both personally and professionally.",
+      links: [
+        {
+          id: 2,
+          icon: "https://kalinga-university.s3.amazonaws.com/kalinga_backend/files/clubs/kif_2.webp",
+          title: "Kalinga Incubation Foundation (KIF)",
+          description: parseHtmlToText("<p>KIF converts students&#39; bold and unique entrepreneurial ideas into ACTION by providing all-around support.</p>\r\n\r\n<p>&nbsp;</p>"),
+          href: "/kif"
+        },
+        {
+          id: 3,
+          icon: null,
+          title: "Student Clubs",
+          description: parseHtmlToText("<p>The vibrant clubs of KU are filled with talented and passionate students who are always ready to showcase their creative skills and develop interests in engaging activities.</p>\r\n\r\n<p>&nbsp;</p>"),
+          href: "/student-clubs"
+        },
+        {
+          id: 4,
+          icon: null,
+          title: "Student Welfare Services",
+          description: parseHtmlToText("<p>The Department of Student Welfare (DSW) at KU organises various activities, events, and cultural programs that create a balanced educational environment.</p>"),
+          href: "/student-welfare"
+        }
+      ]
+    };
+  })();
 
   // Build navigation tabs based on available sections
   const navigationTabs = (() => {
@@ -784,6 +836,7 @@ export default function DynamicCoursePage() {
         description={quickLinksContent.description}
         links={quickLinksContent.links}
         titleClassName="text-white"
+        iconWrapperClassName="w-24 h-24 sm:w-24 sm:h-24"
       />
       {faqContent && faqContent.items && faqContent.items.length > 0 && (
         <FAQ
