@@ -378,7 +378,7 @@ export default function FacultyOfInformationTechnology() {
   const programsImageAlt = departmentData?.programs_image_alt || "Programs Offered";
   const programsOverview = departmentData?.programs_offered_overview
     ? parseHtmlToText(departmentData.programs_offered_overview)
-    : "Explore our comprehensive range of undergraduate, postgraduate, and diploma programs designed to equip you with cutting-edge IT skills. From Artificial Intelligence and Machine Learning to Cybersecurity and Data Science, our programs are tailored to meet the demands of the rapidly evolving tech industry.";
+    : "Future-ready programs in AI, Cybersecurity, and Data Science designed to equip you with cutting-edge IT skills.";
 
   // Show loading state
   if (loading) {
@@ -425,7 +425,7 @@ export default function FacultyOfInformationTechnology() {
         <ProgramsOffered
           programs={programsOffered}
           title="Programs Offered"
-          description={programsOverview}
+          description={programsOverview || ""}
           backgroundImage={programsImage || "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/programs-offered.webp"}
           imageAlt={programsImageAlt}
         />

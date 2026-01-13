@@ -272,7 +272,7 @@ export default function DynamicDepartmentPage() {
   const programSyllabusImage = departmentData?.program_syllabus_images?.[0];
   const programsImage = programSyllabusImage?.image || programSyllabusImage?.image_url || departmentData?.programs_image || null;
   const programsImageAlt = programSyllabusImage?.image_alt || departmentData?.programs_image_alt || "Programs Offered";
-  const programsOverview = programSyllabusImage?.programs_offered_overview || departmentData?.programs_offered_overview || "";
+  const programsOverview = programSyllabusImage?.programs_offered_overview || departmentData?.programs_offered_overview || "Explore our diverse academic programs designed to empower your future.";
 
   const placementData = {
     placement_info: departmentData?.placement_info || [],
@@ -448,15 +448,6 @@ export default function DynamicDepartmentPage() {
         />
       )}
 
-      {/* Course Eligibility & Admission CTA */}
-      <EligibilityCriteria
-        duration={departmentData?.duration || "Multiple Years"}
-        title="Eligibility Criteria"
-        criteria={parseHtmlListItems(departmentData?.eligibility_criteria || departmentData?.eligibility || "")}
-        admissionTitle={departmentData?.admission_title || "Your Next Big Chapter Starts With One Click"}
-        admissionButtonLabel="Admission Open"
-        href="https://admissions.kalingauniversity.ac.in/"
-      />
 
       {/* Career Pathways */}
       {departmentData?.career_pathways && departmentData.career_pathways.length > 0 && (
@@ -472,8 +463,8 @@ export default function DynamicDepartmentPage() {
         />
       )}
 
-      <Placements placementData={placementData} bgColor="bg-white" />
-      <Facility />
+      <Placements placementData={placementData} bgColor="bg-white" title="Placements" />
+      <Facility subtitle="Facilities" />
       {whyStudyContent && whyStudyContent.items && whyStudyContent.items.length > 0 && (
         <WhyStudy
           sectionTitle={whyStudyContent.sectionTitle}

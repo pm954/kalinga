@@ -54,11 +54,11 @@ const defaultPrograms = [
   },
 ];
 
-export default function ProgramsOffered({ 
+export default function ProgramsOffered({
   programs = defaultPrograms,
   title = "Programs Offered",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi",
-  backgroundImage = "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/programs-offered.webp",
+  description = "Explore our diverse academic programs designed to empower your future.",
+  backgroundImage = "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/placements-silder-1.webp",
   imageAlt = "Students"
 }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -137,32 +137,32 @@ export default function ProgramsOffered({
                         {program.title}
                       </h3>
                       <div className="flex items-center gap-2 flex-wrap">
-                      <p className="text-[var(--light-text-gray)] !font-[500]">
-                        Duration: {program.duration}
-                      </p>
-                      <Link
-                      href={program.slug ? `/courses/${program.slug}` : "/admissions"}
-                      className="font-[500] flex items-center gap-1 hover:gap-2 transition-all md:ml-4 text-[var(--foreground)] hover:text-[var(--button-red)]/80"
-                    >
-                      Explore Program
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="text-[var(--button-red)]"
-                      >
-                        <path
-                          d="M4 12L12 4M12 4H6M12 4V10"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </Link>
-                    </div>
+                        <p className="text-[var(--light-text-gray)] !font-[500]">
+                          Duration: {program.duration}
+                        </p>
+                        <Link
+                          href={program.slug ? `/courses/${program.slug}` : "/admissions"}
+                          className="font-[500] flex items-center gap-1 hover:gap-2 transition-all md:ml-4 text-[var(--foreground)] hover:text-[var(--button-red)]/80"
+                        >
+                          Explore Program
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="text-[var(--button-red)]"
+                          >
+                            <path
+                              d="M4 12L12 4M12 4H6M12 4V10"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
