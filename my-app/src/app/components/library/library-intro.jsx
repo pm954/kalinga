@@ -15,7 +15,7 @@ export default function LibraryIntro() {
       `}</style>
 
       <MainIntro
-        title="KU Library"
+        title="Discover KU Library"
         subtitle="A Silent Powerhouse Of Knowledge"
         description={[
           "The Library at Kalinga University, Naya Raipur, is the biggest learning platform that offers a large number of books, magazines, Indian & International journals, and other online resources, providing students and faculty members with an outstanding learning experience. It has a reading room capacity for 400 students, which is divided into 2 halls of 200 students each. With modern infrastructure and facilities, students get the highest level of comfort and academic support throughout their journey.",

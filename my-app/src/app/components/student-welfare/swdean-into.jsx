@@ -6,11 +6,11 @@ const swDeanText =
   "From my perspective, students should be heard, and their opinions matter the most. They should always feel valued so that they can share their academic goals and personal aspirations. To meet this, our DSW department works closely with every student and develops innovative solutions to provide our students with an extraordinary college experience. The main aim of our department is to bring a smile to their face by lowering their academic pressure through various co-curricular and extracurricular initiatives. As the Dean of Students’ Welfare, we are always committed to delivering the highest form of student comfort and satisfaction, and we continuously schedule and organise events and programs that empower each student to follow their passion and talent by creating lifelong memories.";
 
 export default function SwdeanIntro({
-  imageSrc = "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png", // replace with actual image
+  imageSrc = "https://kalinga-university.s3.ap-south-1.amazonaws.com/ncc/Ncc-Coordinator-Image.webp", // replace with actual image
   subtitle = "A Message From the Dean of Students’ Welfare",
   name = "Lt Vibha Chandrakar",
   designation = "Dean of Student Welfare",
-  quote = swDeanText,
+  quote = "Students grow best in spaces where they are understood, supported, and respected.",
 }) {
   const items = [
     {
@@ -20,7 +20,9 @@ export default function SwdeanIntro({
       department: designation,
       imageSrc,
       imageAlt: name,
-      message: [quote], // popup content
+      message: [swDeanText], // popup content
+      quote,
+
     },
   ];
 

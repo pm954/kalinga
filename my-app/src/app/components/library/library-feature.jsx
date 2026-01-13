@@ -13,10 +13,11 @@ export default function LibraryGrid() {
           description: "Extensive collection of printed books across all disciplines.",
         },
         {
-          title: "Journals",
-          value: "20+",
-          description: "National and international journals supporting academic research.",
+          title: "Research Publications",
+          value: "3360+",
+          description: "Scholarly research publications by faculty and researchers.",
         },
+        
         {
           title: "E-Books",
           value: "86L+",
@@ -28,9 +29,9 @@ export default function LibraryGrid() {
           description: "Online journals covering diverse research domains.",
         },
         {
-          title: "Research Publications",
-          value: "3360+",
-          description: "Scholarly research publications by faculty and researchers.",
+          title: "Journals",
+          value: "20+",
+          description: "National and international journals supporting academic research.",
         },
       ]}
     />

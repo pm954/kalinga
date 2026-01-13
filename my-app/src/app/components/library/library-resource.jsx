@@ -8,7 +8,7 @@ const eResources = [
     id: 1,
     title: "Scopus",
     description:
-      "Scopus is a comprehensive abstract and citation database used for academic research across various disciplines. Developed by Elsevier, it is widely utilized by researchers, academics, and institutions to access a broad range of scientific literature and track research impact. A total of 49,037 journals from various disciplines are indexed in this database.",
+      "Scopus is a comprehensive abstract and citation database used for academic research across various disciplines. Developed by Elsevier, it is widely utilized by researchers, academics, and institutions to access a broad range of scientific literature and track research impact. A total of over 2900+ academic journals from various disciplines are indexed in this database.",
     image:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/library/library-eresourse-scopus.jpg",
     href: "https://www.elsevier.com/en-in/products/scopus",
@@ -53,7 +53,7 @@ const eResources = [
     id: 6,
     title: "NPTEL",
     description:
-      "Initiated by seven Indian Institutes of Technology. The main goal of NPTEL Phase II was to build on the engineering and core science courses launched previously in NPTEL Phase I. An additional 600 web and video courses were created in all major branches of engineering, physical sciences at the undergraduate and postgraduate levels and management courses at the postgraduate level. Several improvements such as indexing of all video and web courses and keyword search were implemented 3000+Courses Available for Self-study.",
+      "NPTEL serves as one of the world's largest online repositories for engineering, basic sciences, and humanities courseware. It is a joint venture of the IITs and IISc, funded by the Ministry of Education (MoE), Government of India, and was launched in 2003. NPTEL offers over 70,000 hours of video content and more than 3,200 unique courses for self-study in various disciplines at both undergraduate and postgraduate levels.",
     image:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/library/library-eresourse-nptel.jpg",
     href: "https://nptel.ac.in/",
@@ -62,7 +62,7 @@ const eResources = [
     id: 7,
     title: "NDLI",
     description:
-      "NDLI is a project under Ministry of Human Resource Development, India. The objective is to collect and collate metadata and provide full text index from several national and international digital libraries, as well as other relevant sources. It is a digital repository containing textbooks, articles, videos, audio books, lectures, simulations, fiction and all other kinds of learning media. The NDLI provides access to many books in English and various Indian languages NDL host over 4,58,715+ Item in Repository.",
+      "The National Digital Library of India (NDLI) is a virtual repository of learning resources, including textbooks, articles, videos, audio books, lectures, simulations, and fiction, sponsored by the Ministry of Education under the National Mission on Education through Information and Communication Technology (NMEICT).  It provides a single-window search facility and its interface supports 10–12 major Indian languages.",
     image:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/library/library-eresourse-ndli.jpg",
     href: "https://club.ndl.iitkgp.ac.in/club-home",

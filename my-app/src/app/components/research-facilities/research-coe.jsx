@@ -14,7 +14,7 @@ export default function ResearchCE() {
       {
         id: 1,
         name: "Electric Vehicles Training Centre",
-        title: "In collaboration with Godawari Electric Motors Pvt. Ltd. (Eblu)",
+        title: "Students learn the A-Z manufacturing and functioning of two-wheeler and three-wheeler electric vehicles from industry experts. ",
         image:
           "https://kalinga-university.s3.ap-south-1.amazonaws.com/research-facilities/researchfacilities-godawari.jpg",
         href: "/centresofexcellence/godawari",
@@ -22,7 +22,7 @@ export default function ResearchCE() {
       {
         id: 2,
         name: "IIoT Training Centre",
-        title: "In collaboration with Technoviz Automation",
+        title: "The IIoT training centre provides students with a practical learning experience in IoT applications and big data analysis. ",
         image:
           "https://kalinga-university.s3.ap-south-1.amazonaws.com/research-facilities/researchfacilities-technoviz.jpg",
         href: "/centresofexcellence/iiot",
@@ -30,7 +30,7 @@ export default function ResearchCE() {
       {
         id: 3,
         name: "Robotics, Coding, & Drones Training Centre",
-        title: "In collaboration with BDS Education",
+        title: "Students master futuristic skills like coding, robotics, AI, and drone systems.",
         image:
           "https://kalinga-university.s3.ap-south-1.amazonaws.com/research-facilities/researchfacilities-bds.jpg",
         href: "/centresofexcellence/robotics",
@@ -38,7 +38,7 @@ export default function ResearchCE() {
       {
         id: 4,
         name: "MSME Training Centre",
-        title: "In collaboration with IamSMEofIndia",
+        title: "It trains students to develop business strategies for small-scale and large-scale enterprises. ",
         image:
           "https://kalinga-university.s3.ap-south-1.amazonaws.com/research-facilities/researchfacilities-iamsmeofindia.jpg",
         href: "/centresofexcellence/msme",
@@ -46,7 +46,7 @@ export default function ResearchCE() {
       {
         id: 5,
         name: "BRIDGE Courses Training Centre",
-        title: "In collaboration with BOSCH",
+        title: "We have signed an MoU with Bosch to offer BRIDGE Courses for school dropout students (18-25 years) in their academic campus.",
         image:
           "https://kalinga-university.s3.ap-south-1.amazonaws.com/research-facilities/researchfacilities-bosch.jpg",
         href: "/centresofexcellence/bosch",
@@ -54,7 +54,7 @@ export default function ResearchCE() {
       {
         id: 6,
         name: "AI-ML Courses Training Centre",
-        title: "In collaboration with IBM Innovation Centre for Education",
+        title: "We have partnered with a leading technology company that offers a specialised course on B.Tech CS in AI-ML.",
         image:
           "https://kalinga-university.s3.ap-south-1.amazonaws.com/research-facilities/researchfacilities-IBM.jpg",
         href: "/centresofexcellence/ai-ml",
@@ -62,7 +62,7 @@ export default function ResearchCE() {
       {
         id: 7,
         name: "Automobile Training Centre",
-        title: "In collaboration with JustAuto Solutions",
+        title: "We have signed an MoU with an ISO-certified company that provides training in the repair & maintenance of 2 & 3-wheelers.",
         image:
           "https://kalinga-university.s3.ap-south-1.amazonaws.com/research-facilities/researchfacilities-justauto.jpg",
         href: "/centresofexcellence/automobile",
