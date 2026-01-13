@@ -582,31 +582,7 @@ export default function DynamicCoursePage() {
         title: item.heading || "",
         description: parseHtmlToText(item.description) || "",
       }))
-  } : {
-    title: "Beyond The Curriculum ",
-    description: "Beyond the classroom, Kalinga provides platforms for students to develop useful skills, explore concepts, and get ready for opportunities in the real world. Through industry-focused training, career counseling, and entrepreneurship support, students are encouraged to develop both personally and professionally.",
-    links: [
-      {
-        id: 1,
-        title: "Kalinga Incubation Foundation (KIF)",
-        href: "/kif",
-        description: "KIF converts students' bold and unique entrepreneurial ideas into ACTION by providing all-around support.",
-      },
-      {
-        id: 2,
-        title: "Student Clubs",
-        href: "/student-clubs",
-        description: "The vibrant clubs of KU are filled with talented and passionate students who are always ready to showcase their creative skills and develop interests in engaging activities.",
-      },
-      {
-        id: 3,
-        title: "Student Welfare Services ",
-        href: "/student-welfare",
-
-        description: "It is a student-centric department that facilitates an inspirational learning environment where they can develop their hobbies and interests and even participate in other in-house programs apart from academic learning.",
-      },
-    ],
-  };
+  } : null;
 
   // Build navigation tabs based on available sections
   const navigationTabs = (() => {
