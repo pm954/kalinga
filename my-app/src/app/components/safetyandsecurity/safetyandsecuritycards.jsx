@@ -48,14 +48,6 @@ function Safetyandsecuritycards() {
             logoSrc: "",
             subtitle: "CAMPUS SAFETY & SECURITY",
         },
-        {
-            title: "Drug-Free Campus",
-            description:
-                "Our professional security guards are on duty all the time to ensure that no drug is entered into our campus and take strict action against students who get involved in such activities.",
-            imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/drug-free.jpg",
-            logoSrc: "",
-            subtitle: "CAMPUS SAFETY & SECURITY",
-        },
     ];
 
     // ✅ Hide "Know More" BEFORE first paint (no flash)

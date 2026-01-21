@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import Academicmainintro from "@/app/components/academic-facilities/academicmainintro";
 import Academiccards from "@/app/components/academic-facilities/academiccards";
 import AdmissionCareer from "@/app/components/general/admission_cta";
+import Academicvideo from "../components/academic-facilities/academicvideo";
 
 // Breadcrumb configuration (same pattern as AboutUs)
 const breadcrumbData = {
@@ -38,6 +39,7 @@ export default function AcademicFacilities() {
 `}</style>
             <Academicmainintro />
             <Academiccards />
+            <Academicvideo />
             <AdmissionCareer />
         </>
     );

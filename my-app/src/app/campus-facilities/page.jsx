@@ -5,6 +5,7 @@ import Campusfacilitymainintro from '@/app/components/campus-facilities/campusfa
 import AdmissionCareer from '../components/general/admission_cta'
 import { useEffect } from 'react'
 import Campusfacilitiescard from '../components/campus-facilities/campusfacilitiescard';
+import Campusfacilityvideo from '../components/campus-facilities/campusfacilityvideo';
 
 const breadcrumbData = {
     heroImage:
@@ -39,6 +40,7 @@ function CampusFacilities() {
 `}</style>
 
             <Campusfacilitymainintro />
+            <Campusfacilityvideo />
             <Campusfacilitiescard />
             <AdmissionCareer />
         </>

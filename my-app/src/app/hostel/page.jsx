@@ -7,6 +7,7 @@ import Hostelwarden from '../components/hostel/hostelwarden';
 import AdmissionCareer from '../components/general/admission_cta';
 import HostelFeeTabs from '../components/hostel/hosteltabs';
 import Hostelrules from '../components/hostel/hostelrules';
+import Hostelvideo from '../components/hostel/hostelvideo';
 
 const breadcrumbData = {
   heroImage:
@@ -38,6 +39,7 @@ function Hostel() {
 `}</style>
       <Hostelmainintro />
       <Hostelgrid />
+      <Hostelvideo />
       <Hostelfacilities />
       <Hostelwarden />
       <HostelFeeTabs />
