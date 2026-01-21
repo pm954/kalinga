@@ -1,330 +1,286 @@
 "use client";
 
 import { useState } from "react";
-import { submitForm } from "../../config/api";
 import FlipbookTrigger from "../general/FlipbookTrigger";
 
-
 const SDG_TABS = [
-  { id: "measures", label: "Energy Conservation Measures" },
-  { id: "waste", label: "Waste Management" },
-  { id: "water", label: "Water Management" },
-  { id: "environmental", label: "Environmental Sustainability" },
-  { id: "initiatives", label: "Green Initiatives" },
-  { id: "audits", label: "Quality Audits" },
-  { id: "reports", label: "Audit Reports" },
-  { id: "equity", label: "Gender Equity" },
-  { id: "programs", label: "Gender Equity Programs Held At KU" },
-  { id: "disabled", label: "Disabled-Friendly Environment"},
-  { id: "obligations", label: "Constitutional Obligations"},
-  { id: "celebrations", label: "Important Day Celebrations" },
-  { id: "conduct", label: "Code Of Conduct" },
-  { id: "promotion", label: "Environmental Promotion and Sustainability Activities" },
-  { id: "social", label: "Institutional Social Responsibility (ISR) and Extension Activities" },
-  { id: "csr", label: "CSR at Kalinga University" },
-  { id: "bp1", label: "Best Practice - 1" },
-  { id: "bp2", label: "Best Practice - 2" },
-  { id: "contributions", label: "Our Contributions in Sustainable and Social Development" },
-
+    { id: "measures", label: "Energy Conservation Measures" },
+    { id: "waste", label: "Waste Management" },
+    { id: "water", label: "Water Management" },
+    { id: "environmental", label: "Environmental Sustainability" },
+    { id: "initiatives", label: "Green Initiatives" },
+    { id: "audits", label: "Quality Audits" },
+    { id: "reports", label: "Audit Reports" },
+    { id: "equity", label: "Gender Equity" },
+    { id: "programs", label: "Gender Equity Programs Held At KU" },
+    { id: "disabled", label: "Disabled-Friendly Environment" },
+    { id: "obligations", label: "Constitutional Obligations" },
+    { id: "celebrations", label: "Important Day Celebrations" },
+    { id: "conduct", label: "Code Of Conduct" },
+    { id: "promotion", label: "Environmental Promotion and Sustainability Activities" },
+    { id: "social", label: "Institutional Social Responsibility (ISR) and Extension Activities" },
+    { id: "csr", label: "CSR at Kalinga University" },
+    { id: "bp1", label: "Best Practice - 1" },
+    { id: "bp2", label: "Best Practice - 2" },
+    { id: "contributions", label: "Our Contributions in Sustainable and Social Development" },
 ];
 
-// IQAC Committee Data
-const SDG_COMMITTEE = [
-  { sno: 1, designation: "Vice-Chancellor", position: "Chairperson" },
-  { sno: 2, designation: "Director General", position: "Member" },
-  { sno: 3, designation: "Registrar", position: "Member" },
-  { sno: 4, designation: "Director IQAC", position: "Director IQAC" },
-  { sno: 5, designation: "Dean, Academic Affairs", position: "Member" },
-  { sno: 6, designation: "Deputy Registrar", position: "Member" },
-  { sno: 7, designation: "Dean, Faculty of Technology", position: "Member" },
-  { sno: 8, designation: "Dean, Faculty of CS & IT", position: "Member" },
-  { sno: 9, designation: "Dean, Faculty of Science", position: "Member" },
-  { sno: 10, designation: "Dean, Faculty of Arts & Humanities", position: "Member" },
-  { sno: 11, designation: "Dean, Faculty of Education", position: "Member" },
-  { sno: 12, designation: "Dean, Faculty of Pharmacy", position: "Member" },
-  { sno: 13, designation: "Dean, Faculty of Commerce & Management", position: "Member" },
-  { sno: 14, designation: "Dean, Faculty of Law", position: "Member" },
-  { sno: 15, designation: "Director Corporate Relations", position: "Member" },
-  { sno: 16, designation: "IQAC Coordinator", position: "Member" },
-  { sno: 17, designation: "IQAC Coordinator", position: "Member" },
-  { sno: 18, designation: "IQAC Coordinator", position: "Member" },
-  { sno: 19, designation: "IQAC Coordinator", position: "Member" },
-  { sno: 20, designation: "Research Associate", position: "Member" },
-  { sno: 21, designation: "IQAC Office Assistant", position: "Member" },
-  { sno: 22, designation: "IQAC Office Assistant", position: "Member" },
+const ENERGY_CONSERVATION_MEASURES = [
+    "We have installed Rooftop Solar Power Panels that convert sunlight into electricity, which reduces the usage of traditional power sources.",
+    "LED lights have been installed throughout the campus, which minimises energy consumption and enhances lighting quality.",
+    "We conduct workshops and awareness programs throughout the year, educating students and staff members about sustainable solutions.",
 ];
 
-// SDG Measures Data
-const SDG_MEASURES = [
-    { sno: 1, measure: "We have installed Rooftop Solar Power Panels that convert sunlight into electricity, which reduces the usage of traditional power sources."},
-    { sno: 2, measure: "LED lights have been installed throughout the campus, which minimises energy consumption and enhances lighting quality."},
-    { sno: 3, measure: "We conduct workshops and awareness programs throughout the year, educating students and staff members about sustainable solutions."},
+const WASTE_MANAGEMENT_MEASURES = [
+    "Our Waste Management System focuses on biodegradable and non-biodegradable waste materials, including the collection of waste paper, chemicals, and biomedical waste.",
+    "An MoU has been signed with certified vendors, ensuring that waste materials are carefully disposed of and recycled.",
+    "Our students practice waste classification outside the classroom, helping them develop sustainable habits.",
 ];
 
+const WATER_MANAGEMENT_MEASURES = [
+    "With our Water Management Policy, we continuously monitor and minimise the consumption of water and use alternative solutions like rainwater harvesting.",
+    "Every building on our campus is equipped with a rainwater harvesting system that is linked to recharge wells.",
+    "We have planted less water-consuming plants on our campus to minimise water usage and to improve biodiversity.",
+];
 
-
-// IQAC Initiatives Data
-const IQAC_INITIATIVES = {
-  "2023-24": [
-    { sno: 1, initiative: "Academic Audit", year: "2023-24" },
-    { sno: 2, initiative: "Initiated the installation of a Biogas plant in the University", year: "2023-24" },
-    { sno: 3, initiative: "Audit of Non-teaching Departments", year: "2023-24" },
-    { sno: 4, initiative: "Conduction of activities and reporting of IIC 5.0 & IIC 6.0", year: "2023-24" },
-    { sno: 5, initiative: "Initiated Project/ live model exhibition for all departments", year: "2023-24" },
-    { sno: 6, initiative: "Updation of Patents to receive funds under the KAPILA Scheme", year: "2023-24" },
-    { sno: 7, initiative: "NABL-related work for CIF Lab", year: "2023-24" },
-    { sno: 8, initiative: "Provided training on PO, CO, PSO mapping and use of POCO software to newly joined faculty.", year: "2023-24" },
-    { sno: 9, initiative: "Initiation towards Kalinga University Journal", year: "2023-24" },
-    { sno: 10, initiative: "Participated in GU Ranking, London", year: "2023-24" },
-    { sno: 11, initiative: "Conducted Laboratory Internal Re Audit for checking compliance", year: "2023-24" },
-    { sno: 12, initiative: "Participated in College Dunia Excellence Ranking", year: "2023-24" },
-    { sno: 13, initiative: "Conducted Training on MS Office for the government. employees", year: "2023-24" },
-    { sno: 14, initiative: "Ensuring effective maintenance of department-level files", year: "2023-24" },
-    { sno: 15, initiative: "Criteria-wise maintenance of data and files for NAAC", year: "2023-24" },
-    { sno: 16, initiative: "Collection and maintenance of monthly data from departments", year: "2023-24" },
-    { sno: 17, initiative: "Updation/revision of various policies", year: "2023-24" },
-    { sno: 18, initiative: "Updation of the Environment, Health and Safety policy at the University", year: "2023-24" },
-    { sno: 19, initiative: "Formulated a strategy for fire and natural hazards", year: "2023-24" },
-    { sno: 20, initiative: "Guidance and maintenance of research-related data", year: "2023-24" },
-    { sno: 21, initiative: "Collection of department-level club activity reports", year: "2023-24" },
-    { sno: 22, initiative: "Maintenance of the University-level conference proceedings", year: "2023-24" },
-    { sno: 23, initiative: "Collection and analysis of feedback", year: "2023-24" },
-  ],
-  "2022-23": [
-    { sno: 24, initiative: "Teaching Faculty Audit", year: "2022-23" },
-    { sno: 25, initiative: "Conducted Laboratory Internal Audit", year: "2022-23" },
-    { sno: 26, initiative: "Conducted a 2-Day NAAC-sponsored workshop entitled \"Role of IQAC in achieving quality and excellence in higher education by promoting Research, Innovation and Extension activities\"", year: "2022-23" },
-    { sno: 27, initiative: "Formed department-level IQAC coordinators", year: "2022-23" },
-    { sno: 28, initiative: "Collection and maintenance of monthly data from departments", year: "2022-23" },
-    { sno: 29, initiative: "Involved in research work and publications", year: "2022-23" },
-    { sno: 30, initiative: "Guest Lecture on \"NEEDO Education\"", year: "2022-23" },
-    { sno: 31, initiative: "Audit of Non-Teaching Departments", year: "2022-23" },
-    { sno: 32, initiative: "Initiated a green and energy audit for the campus", year: "2022-23" },
-    { sno: 33, initiative: "Development of CO-PO-PSO mapping software", year: "2022-23" },
-    { sno: 34, initiative: "Audit of e-content", year: "2022-23" },
-    { sno: 35, initiative: "Update of Innovation-related activities in the IIC portal", year: "2022-23" },
-    { sno: 36, initiative: "Initiated rainwater harvesting on the campus", year: "2022-23" },
-    { sno: 37, initiative: "Applied for the India Today Ranking", year: "2022-23" },
-    { sno: 38, initiative: "Initiated the process of CSR funding", year: "2022-23" },
-    { sno: 39, initiative: "Conducted a session on \"Preparation of Department-level Files\"", year: "2022-23" },
-    { sno: 40, initiative: "Unnat Bharat Abhiyan", year: "2022-23" },
-    { sno: 41, initiative: "Infrastructure (basic amenities) development of the Government Schools in rural areas", year: "2022-23" },
-    { sno: 42, initiative: "Feedback collection and analysis of conferences", year: "2022-23" },
-    { sno: 43, initiative: "Feedback collection and analysis of Campus Recruitment Training", year: "2022-23" },
-    { sno: 44, initiative: "Standardisation of event report format", year: "2022-23" },
-    { sno: 45, initiative: "NEP-2020 implementation", year: "2022-23" },
-  ],
-  "2021-22": [
-    { sno: 46, initiative: "One-Week FDP on Outcome-Based Education in collaboration with VMedulife", year: "2021-22" },
-    { sno: 47, initiative: "Development of Research Ecosystem", year: "2021-22" },
-    { sno: 48, initiative: "Conducted a workshop on NAAC accreditation", year: "2021-22" },
-    { sno: 49, initiative: "Applied for ARIIA-2022", year: "2021-22" },
-    { sno: 50, initiative: "Initiated Institution Innovation Council (IIC)", year: "2021-22" },
-    { sno: 51, initiative: "Modification of the question paper format as per OBE", year: "2021-22" },
-    { sno: 52, initiative: "Started working on the NBA accreditation of the CSE department", year: "2021-22" },
-    { sno: 53, initiative: "Mentoring other HEIs towards accreditation", year: "2021-22" },
-    { sno: 54, initiative: "Implementation of Seed money", year: "2021-22" },
-    { sno: 55, initiative: "AQAR submission", year: "2021-22" },
-  ],
-  "2020-21": [
-    { sno: 56, initiative: "Faculty Development Programme on Outcome-Based Education (24th- 29th August 2020)", year: "2020-21" },
-    { sno: 57, initiative: "Faculty Development Programme on Research Methodology & Latest Advances in Teaching Methodologies (29th June-12th July 2021)", year: "2020-21" },
-    { sno: 58, initiative: "Webinar on How to Write a Research Paper (16th March 2021)", year: "2020-21" },
-    { sno: 59, initiative: "Webinar on \"Research Paper Writing Skills\" (20th March 2021)", year: "2020-21" },
-    { sno: 60, initiative: "Seminar on Implementation of New Education Policy 2020 Under AICTE Theme \"Reinvigorating Human Capital Through Excellence in Education and Multilingualism\" (11th May 2021)", year: "2020-21" },
-  ],
-  "2019-20": [
-    { sno: 61, initiative: "Training Program on Time Management and Stress Management", year: "2019-20" },
-    { sno: 62, initiative: "Training Program on Best Practices in Office Administration", year: "2019-20" },
-    { sno: 63, initiative: "Training Program on skill development: To implement self-management, develop interpersonal & managerial skills and enhance the administrative capabilities", year: "2019-20" },
-    { sno: 64, initiative: "Training Program on Use of animation & presentation skills", year: "2019-20" },
-    { sno: 65, initiative: "Training Program on the use of IT in the workplace", year: "2019-20" },
-    { sno: 66, initiative: "Adopted the semester pattern for the forthcoming session", year: "2019-20" },
-    { sno: 67, initiative: "Started conducting remedial classes for weak learners and competitive coaching classes.", year: "2019-20" },
-    { sno: 68, initiative: "As an IQAC initiative, it was discussed and accepted to go for NAAC accreditation in the forthcoming session", year: "2019-20" },
-    { sno: 69, initiative: "Adoption of five villages in and around the University was done", year: "2019-20" },
-  ],
-  "2018-19": [
-    { sno: 70, initiative: "Establishment of a medicinal garden on the university campus", year: "2018-19" },
-    { sno: 71, initiative: "An MoU with Career Launcher was signed to promote awareness amongst students regarding competitive exams", year: "2018-19" },
-    { sno: 72, initiative: "Extension activities in nearby villages", year: "2018-19" },
-    { sno: 73, initiative: "Publishing University journals", year: "2018-19" },
-    { sno: 74, initiative: "Procured e-resources like Delnet and Manupatra for library enrichment", year: "2018-19" },
-    { sno: 75, initiative: "Started advanced English coaching for remedial classes", year: "2018-19" },
-    { sno: 76, initiative: "The student grievance cell was directed to make a decision regarding grievances at the earliest", year: "2018-19" },
-    { sno: 77, initiative: "Established rainwater harvesting system", year: "2018-19" },
-    { sno: 78, initiative: "MoUs with various companies were signed for waste disposal", year: "2018-19" },
-    { sno: 79, initiative: "Feedback from parents was taken regarding the University", year: "2018-19" },
-    { sno: 80, initiative: "The form for UGC 12B was filled out and applied for approval", year: "2018-19" },
-  ],
-  "2017-18": [
-    { sno: 81, initiative: "Procurement of ERP", year: "2017-18" },
-    { sno: 82, initiative: "The mass plantation drive was initiated", year: "2017-18" },
-    { sno: 83, initiative: "Celebrate World Ozone Day every year", year: "2017-18" },
-    { sno: 84, initiative: "Organised National and International-level seminars, conferences and workshops to enhance the research environment in the University", year: "2017-18" },
-    { sno: 85, initiative: "Increased the guest lectures in each department, and expert faculty members were invited from various walks of life", year: "2017-18" },
-    { sno: 86, initiative: "Procured the advanced software for the computer laboratories", year: "2017-18" },
-    { sno: 87, initiative: "Procurement of computers with higher configurations to match the student-to-computer ratio", year: "2017-18" },
-    { sno: 88, initiative: "Provided incentives to the faculty for research paper publication to promote research activity in the University", year: "2017-18" },
-    { sno: 89, initiative: "Student feedback regarding curriculum, faculty and facilities on campus", year: "2017-18" },
-    { sno: 90, initiative: "Procurement of more research journals and textbooks for the library", year: "2017-18" },
-  ],
-  "2016-17": [
-    { sno: 91, initiative: "Heads of Department and faculty members of the university were given autonomy in academics and related activities", year: "2016-17" },
-    { sno: 92, initiative: "Academic and administrative activities were strictly monitored by the IQAC", year: "2016-17" },
-    { sno: 93, initiative: "Review of the teaching learning process and methods of operation", year: "2016-17" },
-    { sno: 94, initiative: "The bi-annual meetings of the IQAC were initiated", year: "2016-17" },
-    { sno: 95, initiative: "Celebration of Pharmacy Week, along with health check-up camps and a model-making workshop", year: "2016-17" },
-  ],
+const WATER_MANAGEMENT_PDF = {
+    title: "Water Management Action Plan (PDF)",
+    url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Water+Management/water-mgmt.pdf",
 };
 
-// Minutes of Meeting Data
-const MINUTES_OF_MEETING = {
-  "2022-23": [
-    { title: "Minutes of Meeting (18-09-2022)", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/18-09-2022-mom.pdf" },
-  ],
-  "2021-22": [],
-  "2020-21": [],
-  "2019-20": [
-    { title: "Minutes of Meeting (16-01-2020)", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/16-01-2020-mom.pdf" },
-    { title: "Minutes of Meeting (23-07-2019)", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/23-07-2019-mom.pdf" },
-  ],
-  "2018-19": [
-    { title: "Minutes of Meeting 2018-19", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/iqac+minutes-+2018-19-mom.pdf" },
-  ],
-  "2017-18": [
-    { title: "Minutes of Meeting 2018-19", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/iqac+minutes-+2017-18-mom.pdf" },
-  ],
-  "2016-17": [
-    { title: "Minutes of Meeting 2016-17", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/iqac+minutes-2016-17-mom.pdf" },
-  ],
+const ENVIRONMENTAL_SUSTAINABILITY_CONTENT = `
+We’re committed to maximising positive environmental impact by incorporating sustainability lessons into our academic programs, encouraging research work related to eco-friendly solutions, promoting sustainable practices in day-to-day activities, and working towards our short-term and long-term environmental goals. 
+`;
+
+const ENVIRONMENTAL_SUSTAINABILITY_PDF = {
+    title: "Policy Guidelines For Environmental Sustainability (PDF)",
+    url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Environmental+Sustainability+/Environmental-Sustainability.pdf",
 };
 
-// Feedback Analysis Data
-const FEEDBACK_ANALYSIS = {
-  "2023-24": [
-    { title: "Students Feedback Report 2023-2024", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Students+Feedback+Report-2023-2024.pdf" },
-    { title: "Faculty Feedback 2023-2024", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Faculty+Feedback-2023-2024.pdf" },
-    { title: "Employer Feedback Report 2023-2024", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Employer+Feedback+Report-2023-2024.pdf" },
-    { title: "Alumni Feedback Report 2023-2024", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Alumni+Feedback+Report-2023-2024.pdf" },
-  ],
-  "2022-23": [
-    { title: "Students Feedback Report 2022-23", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Students-Feedback-2022-23.pdf" },
-    { title: "Faculty Feedback 2022-23", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Faculty-Feedback-2022-23.pdf" },
-    { title: "Employer Feedback 2022-23", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Employer-Feedback-2022-23.pdf" },
-    { title: "Alumni Feedback 2022-23", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Alumni-Feedback-2022-23.pdf" },
-  ],
-  "2021-22": [
-    { title: "Student Feedback Report 2021-22", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Student-Feedback-Report-2021-22.pdf" },
-    { title: "Faculty Feedback 2021-22", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Faculty-Feedback-2021-22.pdf" },
-    { title: "Employer Feedback 2021-22", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/EMPLOYER-FEEDBACK-updated-2021-22.pdf" },
-    { title: "Alumni Feedback Report 2021-22", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/ALUMNI-FEEDBACK-REPORT-2021-22.pdf" },
-  ],
-  "2020-21": [
-    { title: "Student 2020-2021", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/1.4.1-STUDENT-2020-2021.pdf" },
-    { title: "Faculty 2020-2021", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/1.4.1-FACULTY-2020-2021.pdf" },
-    { title: "Employer 2020-2021", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/1.4.1-EMPLOYER-2020-2021.pdf" },
-    { title: "Alumni 2020-2021", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/1.4.1-ALUMNI-2020-2021.pdf" },
-  ],
-  "2019-20": [
-    { title: "Student Feedback Report 2019-20", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Student-Feedback-Report-2019-20.pdf" },
-    { title: "Faculty Feedback 2019-20", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Faculty-Feedback-2019-20.pdf" },
-    { title: "Employer Feedback 2019-20", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/EMPLOYER-FEEDBACK-updated-2019-20.pdf" },
-    { title: "Alumni Feedback Report 2019-20", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/ALUMNI-FEEDBACK-REPORT-2019-20.pdf" },
-  ],
-  "2018-19": [
-    { title: "Student 2018-19", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/STUDENT2018-19.pdf" },
-    { title: "Faculty 2018-19", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/FACULTY2018-19.pdf" },
-    { title: "Employer 2018-19", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/EMPLOYER2018-19.pdf" },
-    { title: "Alumni 2018-19", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/ALUMNI-2018-19.pdf" },
-  ],
-  "2017-18": [
-    { title: "Student 2017-18", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/STUDENT-2017-18.pdf" },
-    { title: "Faculty 2017-18", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/FACULTY-2017-18.pdf" },
-    { title: "Employer 2017-18", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/EMPLOYER-2017-18.pdf" },
-    { title: "Alumni 2017-18", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/ALUMNI-2017-18.pdf" },
-  ],
-  "2016-17": [
-    { title: "Student 2016-17", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/STUDENT2016-17-2-5.pdf" },
-    { title: "Faculty 2016-17", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/FACULTY-2016-17.pdf" },
-    { title: "Employer 2016-17", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/EMPLOYER-2016-17-7-16.pdf" },
-    { title: "Alumni 2016-17", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/ALUMNI-2016-17-17-18.pdf" },
-  ],
-  "2015-16": [
-    { title: "Student 2015-16", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/STUDENT-2015-16.pdf" },
-    { title: "Faculty 2015-16", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Faculty-2015-16.pdf" },
-    { title: "Employer 2015-16", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/EMPLOYER-2015-16.pdf" },
-    { title: "Alumni 2015-16", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/ALUMNI-2015-16.pdf" },
-  ],
-  "2014-15": [
-    { title: "Student 2014-15", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/STUDENT-14-15.pdf" },
-    { title: "Faculty 2014-15", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/FACULTY-2014-15-4.pdf" },
-    { title: "Employer 2014-15", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/EMPLOYER-2014-15-5-14.pdf" },
-    { title: "Alumani 2014-15", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/ALUMANI-2014-15-15.pdf" },
-  ],
+const GREEN_INITIATIVES_CONTENT = `
+Kalinga’s green campus promotes sustainable practices and develops a sense of awareness and responsibility among young students. It uses sustainable practices like vermicomposting, apiculture, organic farming, nursery, greenhouse, and electric vehicles. 
+`;
+
+const QUALITY_AUDITS_CONTENT = `
+We regularly conduct Green Audits and promote environmental ethics to ensure that our campus is using sustainable practices in the most efficient manner. We even encourage our students and staff members to adopt sustainable habits and become responsible citizens. 
+`;
+
+const AUDIT_REPORTS = [
+    { title: "Audit Report 2022-23", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Audit+Reports/2022-23.pdf" },
+    { title: "Audit Report 2021-22", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Audit+Reports/2021-22.pdf" },
+    { title: "Audit Report 2020-21", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Audit+Reports/2020-21.pdf" },
+    { title: "Audit Report 2019-20", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Audit+Reports/2019-20.pdf" },
+    { title: "Audit Report 2018-19", url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Audit+Reports/2018-19.pdf" },
+];
+
+const GENDER_EQUITY_CONTENT = `
+Our education system includes the concept of gender sensitivity to eliminate gender discrimination and provide equal opportunities to our students. Our inclusive programs challenge stereotypes and create a supportive learning environment for both male and female candidates, where they learn and grow with a positive attitude and behaviour. We have designed a curriculum that recognises the needs of men and women and meets their rights and needs in terms of content, language, and teaching style. Female child are supported with additional funding and materials to ensure their full participation. 
+`;
+
+const GENDER_EQUITY_PROGRAMS = {
+    "2024-25": [
+        { sno: 1, event: "CATC-134 & TSC-I", category: "Camp", date: "16.06.2025 to 25.06.2025", department: "NCC" },
+        { sno: 2, event: "CATC-02, Selection Shooting Training & Launch Camp", category: "Camp", date: "15.05.2025 to 24.05.2025", department: "NCC" },
+        { sno: 3, event: "ANO Duty as Committee Member for the Selection of ANO", category: "Camp", date: "24.03.2025", department: "NCC" },
+        { sno: 4, event: "International Women’s Day", category: "Guest Lecture", date: "08.03.2025", department: "IEEE & DSW" },
+        { sno: 5, event: "NCC “B” Certificate Exam", category: "Other", date: "01.03.2025 to 02.03.2025", department: "NCC" },
+        { sno: 6, event: "NCC “B” Certificate Exam Practice Session", category: "Other", date: "25.02.2025", department: "NCC" },
+        { sno: 7, event: "NCC “C” Certificate Exam", category: "Other", date: "15.02.2025 to 16.02.2025", department: "NCC" },
+        { sno: 8, event: "Asmita Khelo India Pencak Silat Women’s League (East Zone)", category: "Sports", date: "31.01.2025 to 02.02.2025", department: "Sports" },
+        { sno: 9, event: "KAWACH - An Awareness Program on Self Defence", category: "Awareness", date: "24.01.2025", department: "DSW" },
+        { sno: 10, event: "Trainers Training Certification Course on the Prevention of Sexual Harassment (POSH) Act, 2013", category: "Training", date: "11.01.2025 to 02.02.2025", department: "Law" },
+        { sno: 11, event: "NCC Rank Ceremony 2024-25", category: "Other", date: "10.10.2024", department: "NCC" },
+        { sno: 12, event: "Workshop on Self-Defence Techniques", category: "Workshop", date: "19.09.2024", department: "NCC" },
+        { sno: 13, event: "NCC Selection Process Day", category: "Other", date: "17.09.2024", department: "NCC" },
+        { sno: 14, event: "Awareness session on Fundamental Right", category: "Awareness", date: "14.09.2024", department: "Law" },
+        { sno: 15, event: "IGC - Best Cadet Camp", category: "Other", date: "21.08.2024 to 30.08.2024", department: "NCC" },
+        { sno: 16, event: "Working mechanism of Usha Sewing Machine", category: "Training", date: "28.08.2024", department: "FD" },
+        { sno: 17, event: "CATC-XI CAMP", category: "Camp", date: "12.08.2024 to 21.08.2024", department: "8CG Girls Battalion, Kota" },
+        { sno: 18, event: "ANOs & CTOs Conference (2024-25)", category: "Camp", date: "31.07.2025", department: "8CG Girls Battalion, Kota" },
+        { sno: 19, event: "ANO Duty as Committee Member for the Selection of ANO", category: "Camp", date: "29.07.2025", department: "8CG Girls Battalion, Kota" },
+        { sno: 20, event: "Redefining Menstrual Stigma as a Matter of Menstrual Health Hygiene: Behaviour Shift to Empower Skilful Youth", category: "Guest Lecture", date: "15.07.2024", department: "Arts & Humanities" },
+        { sno: 21, event: "One Day State Level Women Program Officer Training Workshop", category: "Workshop", date: "10.07.2024", department: "NSS" },
+        { sno: 22, event: "CATC-VIII (Group Level TSC Selection Camp)", category: "Camp", date: "02.07.2024 to 12.07.2024", department: "NCC" },
+    ],
+
+    "2023-24": [
+        { sno: 1, event: "International Women's Day", category: "Cultural", date: "10.03.2024", department: "DSW" },
+        { sno: 2, event: "A Talk on Cervical Cancer", category: "Guest Lecture", date: "01.07.2023", department: "DSW" },
+        { sno: 3, event: "Cancer Awareness talk and screening Camp", category: "Guest Lecture", date: "18.11.2023", department: "DSW" },
+        { sno: 4, event: "International Girls Child Day", category: "Guest Lecture", date: "11.10.2023", department: "NSS Unit of Kalinga" },
+        { sno: 5, event: "Unrecognised Areas Relating to Same-Sex Couples: A Way Forward", category: "Guest Lecture", date: "09.08.2023", department: "Faculty of Law" },
+        { sno: 6, event: "CATC-XII CAMP", category: "Camp", date: "18.08.2023 to 27.08.2023", department: "NCC Army Wing" },
+        { sno: 7, event: "CATC-XI CAMP", category: "Camp", date: "21.07.2023 to 30.07.2023", department: "NCC Army Wing" },
+        { sno: 8, event: "Attempt Guinness Book World Records", category: "Sports", date: "11.09.2023", department: "DSW" },
+        { sno: 9, event: "Two Days Workshop on Mental Health aspects of Gender Based Violence", category: "Workshop", date: "14.07.2023 to 15.07.2023", department: "NIMHANS, Bangalore" },
+    ],
+
+    "2022-23": [
+        { sno: 1, event: "Global Tribal Queen Contest 2022", category: "Cultural", date: "13.10.2022 to 15.10.2022", department: "DSW" },
+        { sno: 2, event: "Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act, 2013", category: "Other", date: "29.10.2022", department: "Law" },
+        { sno: 3, event: "Cricket Knockout Matches Girls", category: "Sport", date: "13.02.2023", department: "Sport/DSW" },
+        { sno: 4, event: "Cricket Knockout Matches Girls", category: "Sport", date: "14.02.2023", department: "Sport/DSW" },
+        { sno: 5, event: "Cricket Knockout Matches Girls", category: "Sport", date: "15.02.2023", department: "Sport/DSW" },
+        { sno: 6, event: "State Level Workshop on Creating Awareness about State Women Commission, Cyber Crime, Human Trafficking and Sexual Victimization of Women at Works Place", category: "Workshop", date: "12.03.2023", department: "Forensic Science" },
+        { sno: 7, event: "Guest Lecture: From Tradition to Modernity: The Changing Role of Women in India", category: "Guest Lecture", date: "17.04.2023", department: "Arts & Humanities" },
+    ],
+
+    "2021-22": [
+        { sno: 1, event: "Walk a Cause for Zero Tolerance towards Crime Against Women", category: "Walkathon", date: "13.03.2022", department: "DSW" },
+        { sno: 2, event: "WINGS: Women Ideation Network for Growth & Support", category: "Startup Ideas", date: "01.04.2022, 15.04.2022, 22.04.2022", department: "Commerce & Management" },
+        { sno: 3, event: "Professional Awards \"Naari Shakti Ko Salam\" on International Women's Day", category: "Cultural", date: "07.03.2022", department: "Anil Jotsinghani" },
+    ],
+
+    "2020-21": [
+        { sno: 1, event: "Aarogyam - a way to a healthy life - Health Talk", category: "Other", date: "19.02.2021", department: "Women Cell" },
+        { sno: 2, event: "Panel Discussion: Indian Women's Emergence to Uprising, Celebrating International Women's Day", category: "Important Day Celebration", date: "08.03.2021", department: "Women Cell" },
+        { sno: 3, event: "National Webinar on Women Empowerment on When Dreams Come True", category: "Webinar", date: "03.04.2021", department: "Women Cell" },
+        { sno: 4, event: "A Legal Session on The Shadow Pandemic: Exploring the Intersectional impact of Covid on Girls and Women", category: "Webinar", date: "24.04.2021", department: "Women Cell" },
+        { sno: 5, event: "Webinar on Women Feed the World-Disseminating Women's Role in Agriculture", category: "Webinar", date: "15.05.2021", department: "Women Cell" },
+    ],
+
+    "2019-20": [
+        { sno: 1, event: "Dazzling Divas - A Fashion Show, Ambuja Mall, City Centre Mall, Raipur", category: "Cultural", date: "18.08.2019", department: "DSW" },
+        { sno: 2, event: "Fashion Workshop at SIDI Campus, VIP Estate, Raipur (Mr. Kanwaljeet Singh)", category: "Cultural", date: "15.10.2019", department: "DSW" },
+        { sno: 3, event: "Participation in Design (Workshop for design aspirants), Hotel Maurya, Patna", category: "Cultural", date: "17.11.2019", department: "DSW" },
+        { sno: 4, event: "Mr. & Miss Face of Central India 2019, Auditorium Kalinga University", category: "Cultural", date: "20.11.2019", department: "DSW" },
+        { sno: 5, event: "Fashionista exhibition visit at Hotel Sayaji, Raipur", category: "Other", date: "17.01.2020 to 19.01.2020", department: "FD" },
+        { sno: 6, event: "Health Awareness Programme \"Healthy Heart\" organised by NSS Unit of Kalinga University", category: "NSS", date: "14.02.2020", department: "NSS" },
+        { sno: 7, event: "Nail Arts Session by Ms. Anubhooti Khanna at Seminar Hall", category: "Seminar/Workshop", date: "05.03.2020", department: "FD" },
+        { sno: 8, event: "Celebration of International Women's Day, Auditorium, Kalinga University", category: "Celebration", date: "08.03.2020", department: "DSW" },
+    ],
+
+    "2018-19": [
+        { sno: 1, event: "Dazzling Divas - A Fashion Show", category: "Cultural", date: "18.08.2019", department: "DSW" },
+        { sno: 2, event: "Fashion Workshop at SIDI Campus (Mr. Kanwaljeet Singh)", category: "Cultural", date: "15.10.2019", department: "DSW" },
+        { sno: 3, event: "Participation in Design (Workshop for design aspirants), Hotel Maurya, Patna", category: "Cultural", date: "17.11.2019", department: "DSW" },
+        { sno: 4, event: "Mr. & Miss Face of Central India 2019, Auditorium Kalinga University", category: "Cultural", date: "20.11.2019", department: "DSW" },
+        { sno: 5, event: "Fashionista exhibition visit at Hotel Sayaji, Raipur", category: "Other", date: "17.01.2020 to 19.01.2020", department: "FD" },
+        { sno: 6, event: "Health Awareness Programme \"Healthy Heart\" organised by NSS Unit of Kalinga University", category: "NSS", date: "14.02.2020", department: "NSS" },
+        { sno: 7, event: "Nail Arts Session by Ms. Anubhooti Khanna at Seminar Hall", category: "Seminar/Workshop", date: "05.03.2020", department: "FD" },
+        { sno: 8, event: "Celebration of International Women's Day, Auditorium, Kalinga University", category: "Celebration", date: "08.03.2020", department: "DSW" },
+    ],
 };
 
-// Strategic Plan Content
-const STRATEGIC_PLAN_CONTENT = `Kalinga University promotes knowledge development through innovation & research, hands-on learning, and student startups. It provides a platform for students to experiment, work on real-world projects, and bring their innovative ideas. It has also established an incubation centre to support and transform the brilliant startup ideas of young students into successful businesses.
+const GENDER_SENSITISATION_PDF = {
+    title: "Gender Sensitisation Action Plan (PDF)",
+    url: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Gender-Equity.pdf",
+};
 
-KU is supporting people from five villages, including Kotni, Palaud, Kuhera, Parsada, and Kotrabhata, and provides effective teaching and learning in model classrooms. Scholarships for SC/ST/OBC students improve the knowledge pool and inclusivity in the nearby communities. The university is also utilising its talent pool through Skill Pathshala in Kotni Village, where youth are trained in cooking, sewing, and security services. Kalinga also offers employment opportunities to people from nearby areas for their career growth.
 
-These initiatives prove the University's commitment to expanding its horizons and developing social responsibility.`;
+
+const getGenderYears = () =>
+    Object.keys(GENDER_EQUITY_PROGRAMS).sort((a, b) => b.localeCompare(a));
+
+
+/** ✅ IMAGE PROVISIONS (leave src blank, you will fill) */
+const ENERGY_IMAGES = [
+    { src: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/sgd-ecm-solar.webp", alt: "Energy measure image 1" },
+    { src: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/sgd-ecm-bulb.webp", alt: "Energy measure image 2" },
+    { src: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/sdg-ecm-workshop.webp", alt: "Energy measure image 3" },
+];
+
+const WASTE_IMAGES = [
+    { src: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Waste+Management/sdg-wsmgmt-1.webp", alt: "Waste management image 1" },
+    { src: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Waste+Management/sdg-wsmgmt-2.webp", alt: "Waste management image 2" },
+    { src: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Waste+Management/sdg-wsmgmt-3.webp", alt: "Waste management image 3" },
+    { src: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Waste+Management/sdg-wsmgmt-4.webp", alt: "Waste management image 4" },
+];
+
+const WATER_IMAGES = [
+    { src: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Water+Management/sdg-wa-mgmt-1.webp", alt: "Water management image 1" },
+    { src: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Water+Management/sdg-wtmgmt-2.webp", alt: "Water management image 2" },
+    { src: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Water+Management/sdg-wtmgmt-3.webp", alt: "Water management image 3" },
+    { src: "https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/Water+Management/sdg-wtmgmt-4.webp", alt: "Water management image 4" },
+];
+
+const ENVIRONMENT_IMAGES = [
+    { src: "", alt: "ES image 1" },
+    { src: "", alt: "ES image 2" },
+    { src: "", alt: "ES image 3" },
+    { src: "", alt: "ES image 4" },
+    { src: "", alt: "ES image 5" },
+    { src: "", alt: "ES image 6" },
+];
+
+const GREEN_INITIATIVES_IMAGES = [
+    { src: "", alt: "GI image 1" },
+    { src: "", alt: "GI image 2" },
+    { src: "", alt: "GI image 3" },
+    { src: "", alt: "GI image 4" },
+    { src: "", alt: "GI image 5" },
+    { src: "", alt: "GI image 6" },
+    { src: "", alt: "GI image 7" },
+];
+
+const GENDER_EQUITY_IMAGES = [
+    { src: "", alt: "GE image 1" },
+];
+
+/** Reusable Image Grid */
+function ImageGrid({ images = [] }) {
+    const visibleImages = images.filter((img) => img?.src?.trim()); // only show if you filled URL
+
+    // If you haven't filled any URLs yet, show placeholders (optional)
+    if (visibleImages.length === 0) {
+        return (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {images.map((_, idx) => (
+                    <div
+                        key={idx}
+                        className="w-full h-[180px] md:h-[200px] rounded-xl bg-gray-100 border border-dashed border-gray-300 flex items-center justify-center text-gray-400 text-sm"
+                    >
+                        Image {idx + 1}
+                    </div>
+                ))}
+            </div>
+        );
+    }
+
+    return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {images.map((img, idx) => {
+                const hasSrc = img?.src?.trim();
+                return hasSrc ? (
+                    <div key={idx} className="w-full overflow-hidden rounded-xl border border-gray-200">
+                        <img
+                            src={img.src}
+                            alt={img.alt || `Image ${idx + 1}`}
+                            className="w-full h-[180px] md:h-[200px] object-cover"
+                            loading="lazy"
+                        />
+                    </div>
+                ) : (
+                    <div
+                        key={idx}
+                        className="w-full h-[180px] md:h-[200px] rounded-xl bg-gray-100 border border-dashed border-gray-300 flex items-center justify-center text-gray-400 text-sm"
+                    >
+                        Image {idx + 1}
+                    </div>
+                );
+            })}
+        </div>
+    );
+}
 
 export default function SdgTabSection() {
-  const [activeTab, setActiveTab] = useState("initiatives");
-  const [expandedYears, setExpandedYears] = useState({
-    "2023-24": true,
-    "2022-23": false,
-    "2021-22": false,
-    "2020-21": false,
-    "2019-20": false,
-    "2018-19": false,
-    "2017-18": false,
-    "2016-17": false,
-  });
-  const [activeFeedbackModal, setActiveFeedbackModal] = useState(null);
+    const [activeTab, setActiveTab] = useState("measures");
 
-  const handleTabClick = (tabId) => {
-    setActiveTab(tabId);
-  };
+    const [expandedYears, setExpandedYears] = useState({});
 
-  const toggleYear = (year) => {
-    setExpandedYears((prev) => {
-      // If the clicked year is already expanded, close it
-      if (prev[year]) {
-        // Close all years
-        const newState = {};
-        Object.keys(prev).forEach((y) => {
-          newState[y] = false;
+    const toggleYear = (year) => {
+        setExpandedYears((prev) => {
+            const isOpen = !!prev[year];
+            const next = {};
+            Object.keys(prev).forEach((k) => (next[k] = false));
+            if (!isOpen) next[year] = true;
+            return next;
         });
-        return newState;
-      } else {
-        // Close all years and open only the clicked year
-        const newState = {};
-        Object.keys(prev).forEach((y) => {
-          newState[y] = y === year;
-        });
-        return newState;
-      }
-    });
-  };
+    };
 
-  // Get available years based on active tab
-  const getAvailableYears = () => {
-    if (activeTab === "initiatives") {
-      return ["2023-24", "2022-23", "2021-22", "2020-21", "2019-20", "2018-19", "2017-18", "2016-17"];
-    } else if (activeTab === "minutes") {
-      return ["2022-23", "2021-22", "2020-21", "2019-20", "2018-19", "2017-18", "2016-17"];
-    } else if (activeTab === "feedback") {
-      return ["2023-24", "2022-23", "2021-22", "2020-21", "2019-20", "2018-19", "2017-18", "2016-17", "2015-16", "2014-15"];
-    }
-    return [];
-  };
-
-  return (
-    <section className="w-full py-4 px-2">
-      <style jsx>{`
+    return (
+        <section className="w-full py-4 px-2">
+            <style jsx>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }
@@ -333,373 +289,296 @@ export default function SdgTabSection() {
           scrollbar-width: none;
         }
       `}</style>
-      <div className="">
-        <div className="flex flex-col lg:flex-row gap-4 bg-[var(--dark-blue)] py-16 md:px-10 px-4 rounded-xl">
-          {/* Vertical Tabs on Left (Horizontal Scroll on Mobile) */}
-          <div className="w-full lg:w-80 flex-shrink-0">
-            <div className="rounded-[16px] bg-[var(--dark-blue)]">
-              <nav className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0 scrollbar-hide">
-                {IQAC_TABS.map((tab) => {
-                  const isActive = activeTab === tab.id;
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => handleTabClick(tab.id)}
-                      className={`
-                        flex-shrink-0 lg:w-full text-left px-4 py-5 rounded-[8px] 
-                        font-plus-jakarta-sans text-sm md:text-base font-semibold
-                        transition-all duration-200
-                        ${isActive
-                          ? "bg-[var(--button-red)] text-white font-semibold"
-                          : "bg-[var(--lite-sand)] text-[var(--foreground)] hover:opacity-90"
-                        }
-                      `}
-                    >
-                      {tab.label}
-                    </button>
-                  );
-                })}
-              </nav>
+
+            <div className="flex flex-col lg:flex-row gap-4 bg-[var(--dark-blue)] py-16 md:px-10 px-4 rounded-xl">
+                {/* Left Tabs */}
+                <div className="w-full lg:w-80 flex-shrink-0">
+                    <nav className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible scrollbar-hide">
+                        {SDG_TABS.map((tab) => {
+                            const isActive = activeTab === tab.id;
+                            return (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`
+                    flex-shrink-0 lg:w-full text-left px-4 py-5 rounded-[8px]
+                    font-plus-jakarta-sans text-sm md:text-base font-semibold
+                    transition-all duration-200
+                    ${isActive
+                                            ? "bg-[var(--button-red)] text-white"
+                                            : "bg-[var(--lite-sand)] text-[var(--foreground)] hover:opacity-90"
+                                        }
+                  `}
+                                >
+                                    {tab.label}
+                                </button>
+                            );
+                        })}
+                    </nav>
+                </div>
+
+                {/* Right Content */}
+                <div className="flex-1 w-full">
+                    <div className="rounded-[16px] bg-white p-4 md:p-6 shadow-sm h-full">
+                        <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-6 text-center">
+                            {SDG_TABS.find((t) => t.id === activeTab)?.label}
+                        </h2>
+
+                        {/* Energy Conservation */}
+                        {activeTab === "measures" && (
+                            <div className="space-y-6">
+                                <ul className="list-disc pl-6 space-y-3 text-[var(--foreground)] font-plus-jakarta-sans text-sm md:text-base leading-relaxed">
+                                    {ENERGY_CONSERVATION_MEASURES.map((point, idx) => (
+                                        <li key={idx}>{point}</li>
+                                    ))}
+                                </ul>
+
+                                {/* ✅ 3 Images */}
+                                <ImageGrid images={ENERGY_IMAGES} />
+                            </div>
+                        )}
+
+                        {/* Waste Management */}
+                        {activeTab === "waste" && (
+                            <div className="space-y-6">
+                                <ul className="list-disc pl-6 space-y-3 text-[var(--foreground)] font-plus-jakarta-sans text-sm md:text-base leading-relaxed">
+                                    {WASTE_MANAGEMENT_MEASURES.map((point, idx) => (
+                                        <li key={idx}>{point}</li>
+                                    ))}
+                                </ul>
+
+                                {/* ✅ 4 Images */}
+                                <ImageGrid images={WASTE_IMAGES} />
+                            </div>
+                        )}
+
+                        {/* Water Management */}
+                        {activeTab === "water" && (
+                            <div className="space-y-6">
+                                <ul className="list-disc pl-6 space-y-3 text-[var(--foreground)] font-plus-jakarta-sans text-sm md:text-base leading-relaxed">
+                                    {WATER_MANAGEMENT_MEASURES.map((point, idx) => (
+                                        <li key={idx}>{point}</li>
+                                    ))}
+                                </ul>
+
+                                {/* ✅ PDF Link */}
+                                <div className="pt-2">
+                                    <FlipbookTrigger pdfUrl={WATER_MANAGEMENT_PDF.url} title={WATER_MANAGEMENT_PDF.title}>
+                                        <a
+                                            href={WATER_MANAGEMENT_PDF.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[var(--button-red)] text-white font-plus-jakarta-sans text-sm md:text-base font-semibold hover:opacity-90 transition"
+                                        >
+                                            View Water Management Action Plan
+                                            <span aria-hidden="true">↗</span>
+                                        </a>
+                                    </FlipbookTrigger>
+                                </div>
+
+                                {/* ✅ 5 Images */}
+                                <ImageGrid images={WATER_IMAGES} />
+                            </div>
+                        )}
+
+                        {/* Environmental Sustainability */}
+                        {activeTab === "environmental" && (
+                            <div className="space-y-6">
+                                <p className="text-[var(--foreground)] font-plus-jakarta-sans text-sm md:text-base leading-relaxed">
+                                    {ENVIRONMENTAL_SUSTAINABILITY_CONTENT}
+                                </p>
+
+                                {/* ✅ PDF Link */}
+                                <div className="pt-2">
+                                    <FlipbookTrigger pdfUrl={ENVIRONMENTAL_SUSTAINABILITY_PDF.url} title={ENVIRONMENTAL_SUSTAINABILITY_PDF.title}>
+                                        <a
+                                            href={ENVIRONMENTAL_SUSTAINABILITY_PDF.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[var(--button-red)] text-white font-plus-jakarta-sans text-sm md:text-base font-semibold hover:opacity-90 transition"
+                                        >
+                                            Policy Guidelines For Environmental Sustainability
+                                            <span aria-hidden="true">↗</span>
+                                        </a>
+                                    </FlipbookTrigger>
+                                </div>
+
+                                {/* ✅ 6 Images */}
+                                <ImageGrid images={ENVIRONMENT_IMAGES} />
+                            </div>
+                        )}
+
+                        {/* Green Initiatives */}
+                        {activeTab === "initiatives" && (
+                            <div className="space-y-6">
+                                <p className="text-[var(--foreground)] font-plus-jakarta-sans text-sm md:text-base leading-relaxed">
+                                    {GREEN_INITIATIVES_CONTENT}
+                                </p>
+
+                                {/* ✅ 7 Images */}
+                                <ImageGrid images={GREEN_INITIATIVES_IMAGES} />
+                            </div>
+                        )}
+
+                        {/* Quality Audits */}
+                        {activeTab === "audits" && (
+                            <div className="space-y-6">
+                                <p className="text-[var(--foreground)] font-plus-jakarta-sans text-sm md:text-base leading-relaxed">
+                                    {QUALITY_AUDITS_CONTENT}
+                                </p>
+                            </div>
+                        )}
+
+                        {/* Audit Reports */}
+                        {activeTab === "reports" && (
+                            <div className="space-y-4">
+                                {AUDIT_REPORTS.length > 0 ? (
+                                    <div className="space-y-3">
+                                        {AUDIT_REPORTS.map((report, idx) => (
+                                            <FlipbookTrigger key={idx} pdfUrl={report.url} title={report.title}>
+                                                <a
+                                                    href={report.url || "#"}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className={`block px-4 py-3 rounded-lg border font-plus-jakarta-sans text-sm md:text-base transition
+                ${report.url?.trim()
+                                                            ? "bg-gray-50 hover:bg-gray-100 border-gray-200 text-[var(--foreground)]"
+                                                            : "bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed pointer-events-none"
+                                                        }`}
+                                                >
+                                                    {report.title}
+                                                </a>
+                                            </FlipbookTrigger>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <p className="text-center text-[var(--foreground)]/70 font-plus-jakarta-sans text-sm md:text-base">
+                                        No audit reports added yet.
+                                    </p>
+                                )}
+                            </div>
+                        )}
+
+                        {/* Gender Equity */}
+                        {activeTab === "equity" && (
+                            <div className="space-y-6">
+                                <p className="text-[var(--foreground)] font-plus-jakarta-sans text-sm md:text-base leading-relaxed">
+                                    {GENDER_EQUITY_CONTENT}
+                                </p>
+
+                                {/* ✅ 7 Images */}
+                                <ImageGrid images={GENDER_EQUITY_IMAGES} />
+                            </div>
+                        )}
+
+
+                        {/* Gender Equity Programs at KU */}
+                        {activeTab === "programs" && (
+
+                            <div className="flex-1">
+
+                                {/* Accordion */}
+                                <div className="space-y-2 text-left">
+                                    {getGenderYears().map((year) => {
+                                        const isExpanded = expandedYears[year] || false;
+                                        const rows = GENDER_EQUITY_PROGRAMS[year] || [];
+
+                                        return (
+                                            <div key={year} className="border-b border-[var(--button-red)] pb-2 last:border-b-0">
+                                                <button
+                                                    onClick={() => toggleYear(year)}
+                                                    className="w-full flex items-center gap-2 py-1 hover:opacity-80 transition-opacity justify-between pr-3"
+                                                    aria-label={`Toggle ${year}`}
+                                                >
+                                                    <h3 className="font-plus-jakarta-sans text-sm md:text-base text-[var(--foreground)]">
+                                                        {year}
+                                                    </h3>
+                                                    <div
+                                                        className={`text-[var(--background)] bg-[var(--button-red)] rounded-sm p-3 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""
+                                                            }`}
+                                                    >
+                                                        <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                        </svg>
+                                                    </div>
+                                                </button>
+
+                                                {isExpanded && rows.length > 0 && (
+                                                    <div className="mt-2 overflow-x-auto overflow-y-auto max-h-[350px] border border-gray-200 rounded-lg">
+                                                        <table className="w-full border-collapse min-w-[900px]">
+                                                            <thead className="sticky top-0 z-10">
+                                                                <tr className="bg-[var(--dark-blue)] text-white">
+                                                                    <th className="px-4 py-3 text-left font-plus-jakarta-sans text-sm md:text-base font-semibold whitespace-nowrap">
+                                                                        S.No.
+                                                                    </th>
+                                                                    <th className="px-4 py-3 text-left font-plus-jakarta-sans text-sm md:text-base font-semibold whitespace-nowrap">
+                                                                        Event
+                                                                    </th>
+                                                                    <th className="px-4 py-3 text-left font-plus-jakarta-sans text-sm md:text-base font-semibold whitespace-nowrap">
+                                                                        Category
+                                                                    </th>
+                                                                    <th className="px-4 py-3 text-left font-plus-jakarta-sans text-sm md:text-base font-semibold whitespace-nowrap">
+                                                                        Date
+                                                                    </th>
+                                                                    <th className="px-4 py-3 text-left font-plus-jakarta-sans text-sm md:text-base font-semibold whitespace-nowrap">
+                                                                        Department / Managed by
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody>
+                                                                {rows.map((r) => (
+                                                                    <tr key={`${year}-${r.sno}`} className="border-b border-gray-200 hover:bg-gray-50 transition-colors bg-white">
+                                                                        <td className="px-4 py-3 text-[var(--foreground)] whitespace-nowrap">{r.sno}</td>
+                                                                        <td className="px-4 py-3 text-[var(--foreground)]">{r.event}</td>
+                                                                        <td className="px-4 py-3 text-[var(--foreground)] whitespace-nowrap">{r.category}</td>
+                                                                        <td className="px-4 py-3 text-[var(--foreground)] whitespace-nowrap">{r.date}</td>
+                                                                        <td className="px-4 py-3 text-[var(--foreground)]">{r.department}</td>
+                                                                    </tr>
+                                                                ))}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                )}
+
+                                                {isExpanded && rows.length === 0 && (
+                                                    <p className="px-4 py-2 text-[var(--foreground)]/60 text-sm">
+                                                        No records available for this year.
+                                                    </p>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+
+                                {/* PDF */}
+                                <div className="flex justify-center mb-6">
+                                    <FlipbookTrigger pdfUrl={GENDER_SENSITISATION_PDF.url} title={GENDER_SENSITISATION_PDF.title}>
+                                        <a
+                                            href={GENDER_SENSITISATION_PDF.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[var(--button-red)] text-white font-plus-jakarta-sans text-sm md:text-base font-semibold hover:opacity-90 transition"
+                                        >
+                                            View Gender Sensitisation Action Plan
+                                            <span aria-hidden="true">↗</span>
+                                        </a>
+                                    </FlipbookTrigger>
+                                </div>
+                            </div>
+                        )}
+
+
+
+                        {/* Placeholder for other tabs */}
+                        {!["measures", "waste", "water", "environmental", "initiatives", "audits", "reports", "equity", "programs"].includes(activeTab) && (
+                            <p className="text-center text-[var(--foreground)]/70 font-plus-jakarta-sans text-sm md:text-base">
+                                Content will be added for this section.
+                            </p>
+                        )}
+                    </div>
+                </div>
             </div>
-          </div>
-
-          {/* Content Area - White Background */}
-          <div className="flex-1 w-full">
-            <div className="rounded-[16px] bg-white p-4 md:p-5 shadow-sm h-full flex flex-col">
-              {/* IQAC Committee Tab */}
-              {activeTab === "committee" && (
-                <div className="flex-1">
-                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-3">
-                    IQAC Committee
-                  </h2>
-                  <div className="overflow-x-auto overflow-y-auto max-h-[500px] border border-gray-200 rounded-lg">
-                    <table className="w-full border-collapse min-w-[600px]">
-                      <thead className="sticky top-0 z-10">
-                        <tr className="bg-[var(--dark-blue)] text-white">
-                          <th className="px-4 py-3 text-left font-plus-jakarta-sans text-sm md:text-base font-semibold whitespace-nowrap">
-                            S.No.
-                          </th>
-                          <th className="px-4 py-3 text-left font-plus-jakarta-sans text-sm md:text-base font-semibold whitespace-nowrap">
-                            Designation
-                          </th>
-                          <th className="px-4 py-3 text-left font-plus-jakarta-sans text-sm md:text-base font-semibold whitespace-nowrap">
-                            Position in IQAC
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {IQAC_COMMITTEE.map((member) => (
-                          <tr
-                            key={member.sno}
-                            className="border-b border-gray-200 hover:bg-gray-50 transition-colors bg-white"
-                          >
-                            <td className="px-4 py-3 text-[var(--foreground)] whitespace-nowrap">
-                              {member.sno}
-                            </td>
-                            <td className="px-4 py-3 text-[var(--foreground)]">
-                              {member.designation}
-                            </td>
-                            <td className="px-4 py-3 text-[var(--foreground)]">
-                              {member.position}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              )}
-
-              {/* IQAC Initiatives Tab */}
-              {activeTab === "initiatives" && (
-                <div className="flex-1 text-center">
-                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4">
-                    IQAC Initiatives
-                  </h2>
-                  <div className="space-y-2 text-left">
-                    {getAvailableYears().map((year) => {
-                      const isExpanded = expandedYears[year] || false;
-                      const initiatives = IQAC_INITIATIVES[year] || [];
-                      return (
-                        <div key={year} className="border-b border-[var(--button-red)] pb-2 last:border-b-0">
-                          <button
-                            onClick={() => toggleYear(year)}
-                            className="w-full flex items-center gap-2 py-1 hover:opacity-80 transition-opacity justify-between pr-3"
-                            aria-label={`Toggle ${year}`}
-                          >
-                            <h3 className="font-plus-jakarta-sans text-sm md:text-base text-[var(--foreground)]">
-                              {year}
-                            </h3>
-                            <div className={`text-[var(--background)] bg-[var(--button-red)] rounded-sm p-3 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
-                              <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                              </svg>
-                            </div>
-                          </button>
-                          {isExpanded && initiatives.length > 0 && (
-                            <div className="mt-2 overflow-x-auto overflow-y-auto max-h-[300px] border border-gray-200 rounded-lg">
-                              <table className="w-full border-collapse min-w-[600px]">
-                                <thead className="sticky top-0 z-10">
-                                  <tr className="bg-[var(--dark-blue)] text-white">
-                                    <th className="px-4 py-3 text-left font-plus-jakarta-sans text-sm md:text-base font-semibold whitespace-nowrap">
-                                      S.No
-                                    </th>
-                                    <th className="px-4 py-3 text-left font-plus-jakarta-sans text-sm md:text-base font-semibold whitespace-nowrap">
-                                      IQAC Initiatives
-                                    </th>
-                                    <th className="px-4 py-3 text-left font-plus-jakarta-sans text-sm md:text-base font-semibold whitespace-nowrap">
-                                      Year
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {initiatives.map((item) => (
-                                    <tr key={item.sno} className="border-b border-gray-200 hover:bg-gray-50 transition-colors bg-white">
-                                      <td className="px-4 py-3 text-[var(--foreground)] whitespace-nowrap">{item.sno}</td>
-                                      <td className="px-4 py-3 text-[var(--foreground)]">{item.initiative}</td>
-                                      <td className="px-4 py-3 text-[var(--foreground)] whitespace-nowrap">{item.year}</td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {/* Minutes of Meeting Tab */}
-              {activeTab === "minutes" && (
-                <div className="flex-1">
-                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-3">
-                    IQAC Minutes Of Meeting
-                  </h2>
-                  <div className="space-y-2 text-left">
-                    {getAvailableYears().map((year) => {
-                      const isExpanded = expandedYears[year] || false;
-                      const minutes = MINUTES_OF_MEETING[year] || [];
-                      return (
-                        <div key={year} className="border-b border-[var(--button-red)] pb-2 last:border-b-0">
-                          <button
-                            onClick={() => toggleYear(year)}
-                            className="w-full flex items-center gap-2 py-1 hover:opacity-80 transition-opacity justify-between pr-3"
-                            aria-label={`Toggle ${year}`}
-                          >
-                            <h3 className="font-plus-jakarta-sans text-sm md:text-base text-[var(--foreground)]">
-                              {year}
-                            </h3>
-                            <div className={`text-[var(--background)] bg-[var(--button-red)] rounded-sm p-3 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
-                              <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                              </svg>
-                            </div>
-                          </button>
-                          {isExpanded && (
-                            <div className="mt-2 space-y-2">
-                              {minutes.length > 0 ? (
-                                minutes.map((minute, idx) => (
-                                  <FlipbookTrigger key={idx} pdfUrl={minute.url} title={minute.title}>
-                                    <a
-                                      href={minute.url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="block px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors text-[var(--foreground)] border border-gray-200"
-                                    >
-                                      <span className="font-plus-jakarta-sans text-sm md:text-base">{minute.title}</span>
-                                    </a>
-                                  </FlipbookTrigger>
-                                ))
-                              ) : (
-                                <p className="px-4 py-2 text-[var(--foreground)]/60 text-sm">No minutes available for this year.</p>
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {/* Feedback Analysis Tab */}
-              {activeTab === "feedback" && (
-                <div className="flex-1">
-                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-3">
-                    Feedback Analysis & Action Taken Report
-                  </h2>
-                  <div className="space-y-2 text-left">
-                    {getAvailableYears().map((year) => {
-                      const isExpanded = expandedYears[year] || false;
-                      const feedbacks = FEEDBACK_ANALYSIS[year] || [];
-                      return (
-                        <div key={year} className="border-b border-[var(--button-red)] pb-2 last:border-b-0">
-                          <button
-                            onClick={() => toggleYear(year)}
-                            className="w-full flex items-center gap-2 py-1 hover:opacity-80 transition-opacity justify-between pr-3"
-                            aria-label={`Toggle ${year}`}
-                          >
-                            <h3 className="font-plus-jakarta-sans text-sm md:text-base text-[var(--foreground)]">
-                              {year}
-                            </h3>
-                            <div className={`text-[var(--background)] bg-[var(--button-red)] rounded-sm p-3 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
-                              <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                              </svg>
-                            </div>
-                          </button>
-                          {isExpanded && (
-                            <div className="mt-2 space-y-2">
-                              {feedbacks.length > 0 ? (
-                                feedbacks.map((feedback, idx) => (
-                                  <FlipbookTrigger key={idx} pdfUrl={feedback.url} title={feedback.title}>
-                                    <a
-                                      href={feedback.url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="block px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors text-[var(--foreground)] border border-gray-200"
-                                    >
-                                      <span className="font-plus-jakarta-sans text-sm md:text-base">{feedback.title}</span>
-                                    </a>
-                                  </FlipbookTrigger>
-                                ))
-                              ) : (
-                                <p className="px-4 py-2 text-[var(--foreground)]/60 text-sm">No feedback reports available for this year.</p>
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {/* Strategic Plan Tab */}
-              {activeTab === "strategic" && (
-                <div className="flex-1">
-                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-3">
-                    Strategic Plan & Deployment
-                  </h2>
-                  {/* <div className="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {[1, 2, 3].map((num) => (
-                      <div key={num} className="bg-gray-200 rounded-lg aspect-video flex items-center justify-center">
-                        <span className="text-gray-400 text-sm">Image {num}</span>
-                      </div>
-                    ))}
-                  </div> */}
-                  <div className="text-left space-y-4">
-                    {STRATEGIC_PLAN_CONTENT.split('\n\n').map((paragraph, idx) => (
-                      <p key={idx} className="text-[var(--foreground)] font-plus-jakarta-sans text-sm md:text-base leading-relaxed">
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Student Satisfaction Survey Tab */}
-              {activeTab === "satisfaction" && (
-                <div className="flex-1">
-                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-3">
-                    Student Satisfaction Survey
-                  </h2>
-                  <div className="flex justify-center mt-6">
-                    <FlipbookTrigger pdfUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Students+Satisfaction+Survey+2021-22.pdf" title="Student Satisfaction Survey 2021-22">
-                      <a
-                        href="https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Students+Satisfaction+Survey+2021-22.pdf"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-6 py-3 bg-[var(--button-red)] text-white rounded-lg hover:bg-[var(--button-red)]/90 transition-colors font-plus-jakarta-sans text-sm md:text-base font-semibold"
-                      >
-                        View Student Satisfaction Survey 2021-22
-                      </a>
-                    </FlipbookTrigger>
-                  </div>
-                </div>
-              )}
-
-              {/* Feedback Form Tab */}
-              {activeTab === "feedback-form" && (
-                <div className="flex-1">
-                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-6 text-center mt-3">
-                    Feedback Form
-                  </h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {[
-                      { id: "student", label: "Student Feedback" },
-                      { id: "alumni", label: "Alumni Feedback" },
-                      { id: "faculty", label: "Faculty Feedback" },
-                      { id: "employer", label: "Employer Feedback" },
-                      { id: "parents", label: "Parents Feedback" },
-                    ].map((feedback) => (
-                      <button
-                        key={feedback.id}
-                        onClick={() => setActiveFeedbackModal(feedback.id)}
-                        className="px-6 py-4 bg-[var(--button-red)] text-white rounded-lg hover:bg-[var(--button-red)]/90 transition-colors font-plus-jakarta-sans text-sm md:text-base font-semibold text-center"
-                      >
-                        {feedback.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Placeholder content for other tabs */}
-              {!["committee", "initiatives", "minutes", "feedback", "strategic", "satisfaction", "feedback-form"].includes(activeTab) && (
-                <div className="flex-1">
-                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-3">
-                    {IQAC_TABS.find((tab) => tab.id === activeTab)?.label}
-                  </h2>
-                  {/* <p className="text-[var(--foreground)] font-plus-jakarta-sans text-center">
-                    Content for this section will be added here.
-                  </p> */}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Feedback Form Modals */}
-      {activeFeedbackModal && (
-        <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
-          onClick={() => setActiveFeedbackModal(null)}
-        >
-          <div
-            className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setActiveFeedbackModal(null)}
-              className="absolute top-6 right-6 z-50 bg-white rounded-full p-2 shadow-lg text-gray-600 hover:text-gray-900 transition-colors"
-              aria-label="Close modal"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M18 6L6 18M6 6L18 18"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-
-            <div className="p-6 md:p-8">
-              {activeFeedbackModal === "student" && <StudentFeedbackForm onClose={() => setActiveFeedbackModal(null)} />}
-              {activeFeedbackModal === "alumni" && <AlumniFeedbackForm onClose={() => setActiveFeedbackModal(null)} />}
-              {activeFeedbackModal === "faculty" && <FacultyFeedbackForm onClose={() => setActiveFeedbackModal(null)} />}
-              {activeFeedbackModal === "employer" && <EmployerFeedbackForm onClose={() => setActiveFeedbackModal(null)} />}
-              {activeFeedbackModal === "parents" && <ParentsFeedbackForm onClose={() => setActiveFeedbackModal(null)} />}
-            </div>
-          </div>
-        </div>
-      )}
-    </section>
-  );
+        </section>
+    );
 }
-

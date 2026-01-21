@@ -5,7 +5,6 @@ import FAQ from "../components/general/faq";
 import { useBreadcrumbData } from "../components/layout/BreadcrumbContext";
 import ImageContent from "../components/ccrc/imagecontent";
 import MainIntro from "../components/about/main_intro";
-import React from "react";
 import SdgTabSection from "../components/sdg-cell/sdg-tab-section";
 
 // Breadcrumb configuration
@@ -162,9 +161,9 @@ const faqItems = [
     title: "SDG Cell Establishment and Mission",
     description: (
       <div className="space-y-4">
-        <p>The University has established a Sustainable Development Goals (SDGs) cell to promote, implement, and monitor initiatives related to the SDGs. The cell serves as a dynamic hub dedicated to advancing the principles and objectives outlined in the United Nations' 2030 Agenda for Sustainable Development. This specialised unit operates at the intersection of education, research, and community engagement, embodying the University's commitment to providing a more sustainable and equitable world.</p>
+        <p>The University has established a Sustainable Development Goals (SDGs) cell to promote, implement, and monitor initiatives related to the SDGs. The cell serves as a dynamic hub dedicated to advancing the principles and objectives outlined in the United Nations 2030 Agenda for Sustainable Development. This specialised unit operates at the intersection of education, research, and community engagement, embodying the Universitys commitment to providing a more sustainable and equitable world.</p>
         <p>One of the primary functions of this cell is to cultivate awareness and advocacy for the SDGs within the university community. Through targeted campaigns, educational programs, and outreach initiatives, the cell endeavours to instil a deep understanding of the global challenges addressed by the SDGs and the imperative for collective action.</p>
-        <p>Integral to its mission is the integration of sustainable development principles into the university's academic landscape. The SDGs cell collaborates with faculty to infuse relevant content into diverse courses, ensuring that students from various disciplines are equipped with the knowledge and skills needed to contribute meaningfully to sustainable development.</p>
+        <p>Integral to its mission is the integration of sustainable development principles into the universitys academic landscape. The SDGs cell collaborates with faculty to infuse relevant content into diverse courses, ensuring that students from various disciplines are equipped with the knowledge and skills needed to contribute meaningfully to sustainable development.</p>
       </div>
     ),
     buttons: [],
@@ -244,19 +243,14 @@ export default function SDGCell() {
       <MainIntro
         title="KU’s Commitment Towards SDGs"
         description={[
-          "The Sustainable Development Goals (SDGs), also known as the Global Goals, were adopted by the United Nations in 2015. The SDGs' 17 goals aim to protect the planet, end poverty, and ensure peace and prosperity by 2030. These goals are well-connected, so if one area progresses or struggles, it will impact others, too. ",
+          "The Sustainable Development Goals (SDGs), also known as the Global Goals, were adopted by the United Nations in 2015. The SDGs' 17 goals aim to protect the planet, end poverty, and ensure peace and prosperity by 2030. These goals are well-connected, so if one area progresses or struggles, it will impact others, too.",
           "Kalinga University has adopted all 17 practices to address global needs and work towards impactful solutions by balancing social, economic, and environmental needs. We integrate sustainable practices into our University’s academic, social, cultural, research, administrative, and community engagement activities."
         ]}
         imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/sdg-cell/sdg-goals.webp"
         imageAlt="SDG Goals"
         showKnowMore={true}
         initialVisibleParagraphs={1}
-      />
-      <ImageListItem
-        items={Items}
-        imageSrc=""
-        title="Objectives Of the SDGs"
-        description=""
+          
       />
       <SdgTabSection />
       <FAQ
