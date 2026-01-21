@@ -9,10 +9,10 @@ const listStyle = { fontFamily: 'Plus Jakarta Sans, sans-serif', fontSize: '14px
 
 const breadcrumbData = {
   heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/contact-us/contact-us-banner.webp",
-  pageTitle: "Chairs and their Activities",
+  pageTitle: "Chairs",
   customBreadcrumbs: [
     { label: 'Home', href: '/' },
-    { label: 'Chairs and Their Activities', href: '/Chair-activities' }
+    { label: 'Chairs', href: '/Chair-activities' }
   ]
 };
 
@@ -141,7 +141,7 @@ export default function Kalingachair() {
 
 
       <MainIntro
-        title="Chairs and Their Activities"
+        title="Chairs"
         subtitle=""
         description={["At the heart of Kalinga University’s research and innovation, our distinguished chairs play a crucial role in knowledge advancement in different areas and in creating solutions that remove societal challenges. The chairs offer a platform to students, faculty members, researchers, and experts where they can share their unique ideas and conduct project works, presentations, competitions, guest lectures, training, and workshops. They not only contribute to the growth of the institution but also to the overall betterment of society.",
 

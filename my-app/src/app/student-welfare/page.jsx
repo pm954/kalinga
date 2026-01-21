@@ -10,6 +10,7 @@ import { useMemo, useState } from "react";
 import Gallery from "../components/general/gallery";
 import SectionHeading from "../components/general/SectionHeading";
 import DataTable from "@/app/components/general/data-table";
+import MediaCardSlider from '../components/general/media-card-slider';
 
 const page = () => {
   const breadcrumbData = {
@@ -111,6 +112,30 @@ const page = () => {
       image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/student-welfare/sports6.jpg",
       alt: "Gallery-8"
     }
+  ];
+
+  const videoItems = [
+    {
+      id: 1,
+      title: "Holi",
+      description: "",
+      videoUrl: "https://youtu.be/r0tBeANR5fQ?si=5AkLqQsjdDWPyPb_",
+      thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/student-welfare/Holi.png",
+    },
+    {
+      id: 2,
+      title: "Yoga",
+      description: "",
+      videoUrl: "https://youtu.be/EEI7mF68lwA?si=AQDVjiG6q7r49uez",
+      thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/student-welfare/yoga.png",
+    },
+    {
+      id: 3,
+      title: "Sports Fest",
+      description: "",
+      videoUrl: "https://youtu.be/YFK7EXdNd70?si=g1CllsrYuGzTGKBT",
+      thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/student-welfare/sports-fest.png",
+    },
   ];
 
   return (
@@ -1218,9 +1243,22 @@ const page = () => {
         overflowX={false}
 
       />
+      <MediaCardSlider
+        categoryTitle=""
+        title="Videos"
+        description=""
+        videoItems={videoItems}
+        cardBgClass="bg-white"
+        nameTextClass="text-[var(--button-red)]"
+        descriptionTextClass=""
+        swiperClassName="ccrc-video-slider"
+      />
 
-
-      <Gallery images={defaultGalleryImages} />
+      <Gallery
+        images={defaultGalleryImages}
+        title="Glimpses"
+        titleClassName="text-center"
+      />
     </>
   );
 };
