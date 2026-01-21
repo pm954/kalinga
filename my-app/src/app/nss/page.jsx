@@ -8,6 +8,7 @@ import VisionMission from "@/app/components/about/vision-mission";
 import ImageListItem from "@/app/components/ccrc/imagelistitem";
 import WeStandOut from "@/app/components/department/we_stand_out";
 import AdmissionCareer from "@/app/components/general/admission_cta";
+import NewsEvents from "@/app/components/home/news_and_events";
 
 const breadcrumbData = {
   heroImage:
@@ -137,6 +138,7 @@ export default function NSSPage() {
 
       <WeStandOut title="Learning Outcomes" cards={learningOutcomeCards} />
 
+      <NewsEvents categoryId="7" title="NCC Events" titleClassName="text-center" hideCalendar={true} />
       <AdmissionCareer />
 
       {/* ✅ FIXED + WORKING GLOBAL CSS */}
