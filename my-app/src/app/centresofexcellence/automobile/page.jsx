@@ -1,24 +1,11 @@
 "use client";
 
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import ImageContent from "@/app/components/ccrc/imagecontent";
 import CareerPath from "@/app/components/course/career_path";
 import AdmissionCareer from "@/app/components/general/admission_cta";
 import Gallery from "@/app/components/general/gallery";
-
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/automobile/automobile-banner.webp",
-  pageTitle: "Automobile Training Centre",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Centres of Excellence", href: "/centres-of-excellence" },
-    {
-      label: "Automobile Training Centre",
-      href: "/centresofexcellence/automobile-training-centre",
-    },
-  ],
-};
 
 const aboutText = [
   "JustAuto Solutions Pvt. Ltd. is an ISO-certified company that specialises in automotive training and the supply of tools and equipment. Kalinga University has partnered with JustAuto Solutions to provide industry-focused training in the repair and maintenance of 2 & 3-wheelers. This collaboration provides hands-on training on modern tools and equipment used in vehicles. Their experienced instructors conduct customised training programs, interactive workshops, expert-led sessions, and certification programs at Kalinga University that enhance their technical knowledge and make them employable in one of the most demanding sectors of the automotive industry.",
@@ -101,6 +88,34 @@ const galleryImages = glimpses.map((g) => ({
 }));
 
 export default function AutomobileTrainingCentrePage() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/automobile/automobile-banner.webp",
+      pageTitle: "Automobile Training Centre",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Centres of Excellence", href: "/centresofexcellence" },
+        {
+          label: "Automobile Training Centre",
+          href: "/centresofexcellence/automobile",
+        },
+      ],
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   useLayoutEffect(() => {
     if (typeof window !== "undefined") window.__breadcrumbData = breadcrumbData;
     return () => {

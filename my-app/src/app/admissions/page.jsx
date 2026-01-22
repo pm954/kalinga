@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import OurPrograms from "../components/admissions/our_programs";
 import ScholarshipsSlider from "../components/admissions/scholarships_slider";
 import AdmissionSteps from "../components/admissions/admission-steps";
@@ -11,22 +12,30 @@ import FAQ from "../components/general/faq";
 import AdmissionCareer from "../components/general/admission_cta";
 import OrganogramOfKalinga from "../components/about/organogram_of_kalinga";
 
-// Breadcrumb configuration
-const breadcrumbData = {
-  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/student-gathered.webp",
-  pageTitle: "Admissions",
-  customBreadcrumbs: [
-    { label: 'Home', href: '/' },
-    { label: 'Admissions', href: '/admissions' }
-  ]
-};
-
 export default function Admissions() {
+  const pathname = usePathname();
+
   useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/student-gathered.webp",
+      pageTitle: "Admissions",
+      customBreadcrumbs: [
+        { label: 'Home', href: '/' },
+        { label: 'Admissions', href: '/admissions' }
+      ]
+    };
+    
     if (typeof window !== 'undefined') {
       window.__breadcrumbData = breadcrumbData;
     }
-  }, []);
+    
+    return () => {
+      if (typeof window !== 'undefined' && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
 
   // Handle scrolling to program search section when hash is present
   useEffect(() => {

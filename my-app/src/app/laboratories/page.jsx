@@ -1,21 +1,12 @@
 "use client";
 
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import MainIntro from "@/app/components/about/main_intro";
 import ResearchCE from '../components/research-facilities/research-coe'
 import FAQ from "@/app/components/general/faq"; // adjust path if your FAQ is elsewhere
 import Gallery from "@/app/components/general/gallery";
 import AdmissionCareer from "@/app/components/general/admission_cta";
-
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/laboratories/laboratories-heroimage.webp",
-  pageTitle: "Laboratories",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Laboratories", href: "/laboratories" },
-  ],
-};
 
 const aboutP1 =
   "Kalinga University has research labs, including the Central Instrumentation Facility (CIF), Language Lab, Business Lab, and computer Labs that will fulfil all the research needs by providing students and research scholars with comprehensive resources, tools, and technologies.";
@@ -211,6 +202,30 @@ const galleryImages = [
 ];
 
 export default function LaboratoriesPage() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/laboratories/laboratories-heroimage.webp",
+      pageTitle: "Laboratories",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Laboratories", href: "/laboratories" },
+      ],
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   useLayoutEffect(() => {
     if (typeof window !== "undefined") window.__breadcrumbData = breadcrumbData;
     return () => {

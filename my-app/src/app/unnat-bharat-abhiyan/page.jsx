@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/general/tab";
 import FAQ from "../components/general/faq";
 import ImageContent from "@/app/components/ccrc/imagecontent";
@@ -62,19 +64,6 @@ const ubaSteps = [
     icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/unnat-bharat-abhiyan/check-box.png",
   },
 ];
-/* ---------------- Breadcrumb ---------------- */
-const breadcrumbData = {
-  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/kif/kif-banner.webp",
-  pageTitle: "Unnat Bharat Abhiyan",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Unnat Bharat Abhiyan", href: "/unnat-bharat-abhiyan" },
-  ],
-};
-
-if (typeof window !== "undefined") {
-  window.__breadcrumbData = breadcrumbData;
-}
 
 /* ---------------- Vision & Mission ---------------- */
 const visionMissionData = [
@@ -151,6 +140,29 @@ const ubaImages = [
 
 /* ---------------- Page ---------------- */
 export default function UnnatBharatAbhiyanPage() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/kif/kif-banner.webp",
+      pageTitle: "Unnat Bharat Abhiyan",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Unnat Bharat Abhiyan", href: "/unnat-bharat-abhiyan" },
+      ],
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
 
 
   return (

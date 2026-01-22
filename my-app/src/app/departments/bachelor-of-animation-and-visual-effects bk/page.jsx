@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import MainIntro from "../../components/about/main_intro";
 import PublicationGrid from "../../components/research/publication-grid";
 import Facility from "../../components/admissions/facility";
@@ -14,22 +16,31 @@ import AdmissionCareer from "@/app/components/general/admission_cta";
 import CourseNavigation from "@/app/components/general/course-navigation";
 import QuickLinks from "@/app/components/general/quick_links";
 
-// Breadcrumb configuration
-const breadcrumbData = {
-  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/student-computer-course.webp",
-  pageTitle: "Bachelor of Animation and Visual Effects",
-  customBreadcrumbs: [
-    { label: 'Home', href: '/' },
-    { label: 'Bachelor of Animation and Visual Effects', href: '/departments/bachelor-of-animation-and-visual-effects' }
-  ]
-};
-
-// Register breadcrumb data globally
-if (typeof window !== 'undefined') {
-  window.__breadcrumbData = breadcrumbData;
-}
 
 function Courses() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/student-computer-course.webp",
+      pageTitle: "Bachelor of Animation and Visual Effects",
+      customBreadcrumbs: [
+        { label: 'Home', href: '/' },
+        { label: 'Bachelor of Animation and Visual Effects', href: '/departments/bachelor-of-animation-and-visual-effects' }
+      ]
+    };
+    
+    if (typeof window !== 'undefined') {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== 'undefined' && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   // MainIntro content
   const mainIntroContent = {
     title: "Have you ever wondered how impossible visuals are used in movies and games?",

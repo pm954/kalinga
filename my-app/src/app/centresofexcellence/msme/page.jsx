@@ -1,24 +1,11 @@
 "use client";
 
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import ImageContent from "@/app/components/ccrc/imagecontent";
 import AdmissionCareer from "@/app/components/general/admission_cta";
 import CareerPath from "@/app/components/course/career_path";
 import Gallery from "@/app/components/general/gallery";
-
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/msme/msme-banner.webp",
-  pageTitle: "MSME Training Centre",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Centres of Excellence", href: "/centres-of-excellence" },
-    {
-      label: "MSME Training Centre",
-      href: "/centresofexcellence/msme",
-    },
-  ],
-};
 
 const learnCards = [
   {
@@ -96,6 +83,34 @@ const galleryImages = glimpsesImageItems.map((g) => ({
 }));
 
 export default function MSMETrainingCentrePage() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/msme/msme-banner.webp",
+      pageTitle: "MSME Training Centre",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Centres of Excellence", href: "/centresofexcellence" },
+        {
+          label: "MSME Training Centre",
+          href: "/centresofexcellence/msme",
+        },
+      ],
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   useLayoutEffect(() => {
     if (typeof window !== "undefined") window.__breadcrumbData = breadcrumbData;
     return () => {

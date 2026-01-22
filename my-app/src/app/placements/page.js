@@ -1,5 +1,6 @@
 "use client"
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { useFlipbook } from "../components/general/FlipbookContext";
 import PublicationGrid from "../components/research/publication-grid";
 import UGCLogo from "../components/research/ugc_logo";
@@ -22,25 +23,33 @@ import Partner from "../components/ccrc/partner";
 import ImageListItem from '@/app/components/ccrc/imagelistitem'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/app/components/general/tab'
 import CareerPath from '@/app/components/course/career_path'
-// Breadcrumb configuration
-const breadcrumbData = {
-  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/alumini/alumini.webp",
-  imageposition: "object-center",
-  pageTitle: "Placements",
-  customBreadcrumbs: [
-    { label: 'Home', href: '/' },
-    { label: 'Placements', href: '/placements' }
-  ]
-};
-
 
 export default function Research() {
   const { openFlipbook } = useFlipbook();
+  const pathname = usePathname();
+
   useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/alumini/alumini.webp",
+      imageposition: "object-center",
+      pageTitle: "Placements",
+      customBreadcrumbs: [
+        { label: 'Home', href: '/' },
+        { label: 'Placements', href: '/placements' }
+      ]
+    };
+    
     if (typeof window !== 'undefined') {
       window.__breadcrumbData = breadcrumbData;
     }
-  }, []);
+    
+    return () => {
+      if (typeof window !== 'undefined' && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
 
   const blueItems = [
     {

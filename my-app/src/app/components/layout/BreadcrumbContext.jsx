@@ -88,14 +88,20 @@ export function useBreadcrumbData(data) {
     useEffect(() => {
         if (!setBreadcrumbData || !isMountedRef.current) return;
 
+        // Add pathname to data if it's an object and doesn't already have one
+        let dataWithPathname = data;
+        if (typeof data === 'object' && data !== null && !data.pathname) {
+            dataWithPathname = { ...data, pathname };
+        }
+
         // Use a simple reference check first for performance
-        if (data === prevDataRef.current) return;
+        if (dataWithPathname === prevDataRef.current) return;
 
         // Only do the expensive serialization check if references are different
         // and data is an object (to catch deep changes)
-        if (typeof data === 'object' && data !== null && typeof prevDataRef.current === 'object' && prevDataRef.current !== null) {
+        if (typeof dataWithPathname === 'object' && dataWithPathname !== null && typeof prevDataRef.current === 'object' && prevDataRef.current !== null) {
             try {
-                const currentDataStr = JSON.stringify(data);
+                const currentDataStr = JSON.stringify(dataWithPathname);
                 const prevDataStr = JSON.stringify(prevDataRef.current);
                 if (currentDataStr === prevDataStr) {
                     return;
@@ -105,13 +111,13 @@ export function useBreadcrumbData(data) {
             }
         }
 
-        setBreadcrumbData(data || null);
-        prevDataRef.current = data;
+        setBreadcrumbData(dataWithPathname || null);
+        prevDataRef.current = dataWithPathname;
 
         if (setIsLoading) {
-            setIsLoading(data === null || data === undefined);
+            setIsLoading(dataWithPathname === null || dataWithPathname === undefined);
         }
-    }, [data, setBreadcrumbData, setIsLoading]);
+    }, [data, pathname, setBreadcrumbData, setIsLoading]);
 
     // Cleanup: reset when component unmounts - REMOVED to prevent race conditions
     // The Breadcrumb component in layout handles clearing state on pathname change.

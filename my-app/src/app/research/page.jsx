@@ -1,4 +1,6 @@
 "use client"
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import PublicationGrid from "../components/research/publication-grid";
 import UGCLogo from "../components/research/ugc_logo";
 import UpcomingConference from "../components/research/upcoming_conference";
@@ -19,21 +21,31 @@ import ResearchLab from '../components/research-facilities/research-lab'
 import ImageListItem from "@/app/components/ccrc/imagelistitem";
 import ImageContent from "@/app/components/ccrc/imagecontent";
 
-const breadcrumbData = {
-  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/research/reserarch-banner.webp",
-  pageTitle: "Research",
-  imageposition: "object-center",
-  customBreadcrumbs: [
-    { label: 'Home', href: '/' },
-    { label: 'Research', href: '/research' }
-  ]
-};
-
-if (typeof window !== "undefined") {
-  window.__breadcrumbData = breadcrumbData;
-}
-
 export default function Research() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/research/reserarch-banner.webp",
+      pageTitle: "Research",
+      imageposition: "object-center",
+      customBreadcrumbs: [
+        { label: 'Home', href: '/' },
+        { label: 'Research', href: '/research' }
+      ]
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
 
   const newsConferences = [
     {

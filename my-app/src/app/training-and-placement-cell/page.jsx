@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import MainIntro from '@/app/components/about/main_intro'
 import ImageContent from '@/app/components/ccrc/imagecontent'
 import ImageListItem from '@/app/components/ccrc/imagelistitem'
@@ -12,23 +13,31 @@ import Testimonials from '@/app/components/home/Testimonials'
 import Gallery from '@/app/components/campuslife/campusgallery'
 import CustomGallery from '@/app/components/general/gallery'
 
-
-
-const breadcrumbData = {
-  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-intro.jpg",
-  imageposition: "object-center",
-  pageTitle: "Training and Placement Cell",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Training and Placement Cell", href: "/training-and-placement-cell" },
-  ],
-}
 const TrainingAndPlacementCell = () => {
+  const pathname = usePathname();
+
   useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-intro.jpg",
+      imageposition: "object-center",
+      pageTitle: "Training and Placement Cell",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Training and Placement Cell", href: "/training-and-placement-cell" },
+      ],
+    };
+    
     if (typeof window !== 'undefined') {
       window.__breadcrumbData = breadcrumbData;
     }
-  }, []);
+    
+    return () => {
+      if (typeof window !== 'undefined' && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   const blueItems = [
     {
       imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-training-cell/pt-1.webp",

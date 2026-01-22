@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import DataTable from "@/app/components/general/data-table";
 import ImageContent from "@/app/components/ccrc/imagecontent";
@@ -12,21 +13,6 @@ import FlipbookTrigger from "../components/general/FlipbookTrigger";
 import MasterClassTab from "../components/ctcd/master_class_tab";
 import Gallery from "@/app/components/general/gallery";
 import PdfThumbnail from "../components/general/PdfThumbnail";
-
-/* ---------------- Breadcrumb ---------------- */
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/contact-us/contact-us-banner.webp",
-  pageTitle: "Institution Innovation Council",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Institution Innovation Council", href: "/institution-innovation-council" },
-  ],
-};
-
-if (typeof window !== "undefined") {
-  window.__breadcrumbData = breadcrumbData;
-}
 
 /* ---------------- Goals ---------------- */
 const objectives = [
@@ -206,6 +192,30 @@ const iicfounds = [
 
 
 export default function InstitutionInnovationCouncil() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/contact-us/contact-us-banner.webp",
+      pageTitle: "Institution Innovation Council",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Institution Innovation Council", href: "/institution-innovation-council" },
+      ],
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   return (
     <div className="bg-white">
 

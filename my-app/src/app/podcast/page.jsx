@@ -1,20 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import MainIntro from "@/app/components/about/main_intro";
 import MediaCardSlider from '../components/general/media-card-slider';
-
-
-// Breadcrumb configuration
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/contact-us/contact-us-banner.webp",
-  pageTitle: "Kalinga Podcast",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Podcast", href: "/podcast" },
-  ],
-};
 
 const videoItems = [
   {
@@ -40,14 +29,31 @@ const videoItems = [
   },
 ]
 
-
-// Register breadcrumb data globally
-if (typeof window !== "undefined") {
-  window.__breadcrumbData = breadcrumbData;
-}
-
-
 const Podcast = () => {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/contact-us/contact-us-banner.webp",
+      pageTitle: "Kalinga Podcast",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Podcast", href: "/podcast" },
+      ],
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   return (
     <div>
       <MainIntro

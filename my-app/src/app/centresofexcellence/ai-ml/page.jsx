@@ -1,21 +1,11 @@
 "use client";
 
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import ImageContent from "@/app/components/ccrc/imagecontent";
 import CareerPath from "@/app/components/course/career_path";
 import AdmissionCareer from "@/app/components/general/admission_cta";
 import Gallery from "@/app/components/general/gallery";
-
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/aiml/aiml-banner.webp",
-  pageTitle: "AI & ML Courses Training Centre",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Centres of Excellence", href: "/centres-of-excellence" },
-    { label: "AI & ML Courses Training Centre", href: "/centresofexcellence/ai-ml" },
-  ],
-};
 
 const aboutCentreDescription = [
   "IBM is a global leader in technology and innovation, and we have partnered with the IBM Innovation Centre for Education to offer a specialised course on B.Tech CS in AI-ML. Their industry-relevant curriculum empowers students to excel in the booming tech industry and get jobs in high-demand roles.",
@@ -92,6 +82,31 @@ const galleryImages = glimpses.map((g) => ({
 }));
 
 export default function AIMLCentrePage() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/aiml/aiml-banner.webp",
+      pageTitle: "AI & ML Courses Training Centre",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Centres of Excellence", href: "/centresofexcellence" },
+        { label: "AI & ML Courses Training Centre", href: "/centresofexcellence/ai-ml" },
+      ],
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   useLayoutEffect(() => {
     if (typeof window !== "undefined") window.__breadcrumbData = breadcrumbData;
     return () => {

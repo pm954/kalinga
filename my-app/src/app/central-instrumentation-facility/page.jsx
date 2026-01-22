@@ -1,6 +1,7 @@
 "use client";
 
-import React from 'react'
+import React, { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import MainIntro from '../components/about/main_intro'
 import VisionMission from '../components/about/vision-mission'
 import ImageListItem from '../components/ccrc/imagelistitem'
@@ -17,22 +18,31 @@ import OpenPositions from '../components/careers/OpenPositions';
 import SampleTesting from '../components/cif/sample_testing';
 import ProgramsTabs from '../components/cif/programs_tabs';
 import MediaCardSlider from "@/app/components/general/media-card-slider";
-// Breadcrumb configuration
-const breadcrumbData = {
-  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/about-banner.webp",
-  pageTitle: "Central Instrumentation Facility",
-  customBreadcrumbs: [
-    { label: 'Home', href: '/' },
-    { label: 'Central Instrumentation Facility', href: '/central-instrumentation-facility' }
-  ]
-};
-
-// Register breadcrumb data globally
-if (typeof window !== 'undefined') {
-  window.__breadcrumbData = breadcrumbData;
-}
 
 const CentralInstrumentationFacilityPage = () => {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/about-banner.webp",
+      pageTitle: "Central Instrumentation Facility",
+      customBreadcrumbs: [
+        { label: 'Home', href: '/' },
+        { label: 'Central Instrumentation Facility', href: '/central-instrumentation-facility' }
+      ]
+    };
+    
+    if (typeof window !== 'undefined') {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== 'undefined' && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   const videoItems2 = [
     {
       id: 1,

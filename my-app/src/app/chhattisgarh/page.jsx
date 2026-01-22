@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import FeatureCards from "@/app/components/home/featurecard";
 import RaipurMainIntro from '@/app/components/about-raipur/raipur_main_intro'
 import SectionHeading from "../components/general/SectionHeading";
@@ -156,17 +157,31 @@ const cards = [
 
 
 ];
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/contact-us/contact-us-banner.webp",
-  pageTitle: "Chhattisgarh",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Chhattisgarh", href: "/chhattisgarh" },
-  ],
-};
-
   export default function Chhattisgarh() {
+    const pathname = usePathname();
+
+    useEffect(() => {
+      const breadcrumbData = {
+        pathname: pathname,
+        heroImage:
+          "https://kalinga-university.s3.ap-south-1.amazonaws.com/contact-us/contact-us-banner.webp",
+        pageTitle: "Chhattisgarh",
+        customBreadcrumbs: [
+          { label: "Home", href: "/" },
+          { label: "Chhattisgarh", href: "/chhattisgarh" },
+        ],
+      };
+      
+      if (typeof window !== "undefined") {
+        window.__breadcrumbData = breadcrumbData;
+      }
+      
+      return () => {
+        if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+          delete window.__breadcrumbData;
+        }
+      };
+    }, [pathname]);
     return (
       <div>
          <RaipurMainIntro 

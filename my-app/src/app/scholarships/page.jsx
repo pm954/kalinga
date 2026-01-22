@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import MainIntro from "@/app/components/about/main_intro";
 import WhyStudy from "@/app/components/department/why-study";
 import ScholarshipsSlider from "../components/admissions/scholarships_slider";
@@ -8,21 +9,31 @@ import CenterOfExcellence from "../components/about/center_of_excellence";
 import FAQ from "../components/general/faq";
 import AdmissionCareer from "../components/general/admission_cta";
 
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/library/Library-1.webp",
-  pageTitle: "Scholarships",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Scholarships", href: "/scholarships" },
-  ],
-};
-
-if (typeof window !== "undefined") {
-  window.__breadcrumbData = breadcrumbData;
-}
-
 export default function ScholarshipsPage() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/library/Library-1.webp",
+      pageTitle: "Scholarships",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Scholarships", href: "/scholarships" },
+      ],
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   useEffect(() => {
     const el = document.querySelector(".why-study-swiper .swiper");
     const sw = el?.swiper;

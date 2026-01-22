@@ -1,6 +1,7 @@
 "use client";
 
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import ImageContent from "@/app/components/ccrc/imagecontent";
 import MentorIntro from "@/app/components/department/dept_head_intro";
 import DataTable from "@/app/components/general/data-table";
@@ -10,15 +11,6 @@ import AdmissionCareer from "@/app/components/general/admission_cta";
 import FlipbookTrigger from "@/app/components/general/FlipbookTrigger";
 import APITable from "../components/general/api-table";
 import CtcdTrainingTabs from "../components/ctcd/ctcd_training_tabs";
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/alumini/alumini.webp",
-  pageTitle: "IPR Cell",
-  breadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "IPR Cell", href: "/ipr-cell" },
-  ],
-};
 
 const aboutP1 =
   "The National IPR Policy was launched by the Government of India on 12th May 2016, which lays down seven objectives, including the Administration and Management of IPRs. It endeavours to promote a stable IP regime in the country and encourages innovation to achieve the country’s industrial and economic development goals.";
@@ -74,12 +66,30 @@ const committeeMembers = [
 ];
 
 export default function IPRCellPage() {
-  useLayoutEffect(() => {
-    if (typeof window !== "undefined") window.__breadcrumbData = breadcrumbData;
-    return () => {
-      if (typeof window !== "undefined") delete window.__breadcrumbData;
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/alumini/alumini.webp",
+      pageTitle: "IPR Cell",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "IPR Cell", href: "/ipr-cell" },
+      ],
     };
-  }, []);
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
 
   const columns = [
     { key: "sno", label: "S. No.", width: "w-24" },

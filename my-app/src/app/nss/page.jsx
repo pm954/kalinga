@@ -1,6 +1,7 @@
 "use client";
 
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import CareerPath from "@/app/components/course/career_path";
 import MainIntro from "@/app/components/about/main_intro";
@@ -11,16 +12,6 @@ import MentorIntro from "@/app/components/department/dept_head_intro";
 import WeStandOut from "@/app/components/department/we_stand_out";
 import AdmissionCareer from "@/app/components/general/admission_cta";
 import NewsEvents from "@/app/components/home/news_and_events";
-
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/nss/nss-benefits-new.webp",
-  pageTitle: "NSS",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "NSS", href: "/nss" },
-  ],
-};
 
 const aboutP1 =
   "The National Service Scheme has been promoted by the Sports Ministry & Youth Welfare Department, Government of India, and was initiated with the hope that the students engaged in higher education ought to have a sense of respect towards labour with self-motivated discipline. The motto of NSS is “Not Me, But You”, which means putting the community’s needs before individual needs.";
@@ -120,12 +111,30 @@ const learningOutcomeCards = [
 ];
 
 export default function NSSPage() {
-  useLayoutEffect(() => {
-    if (typeof window !== "undefined") window.__breadcrumbData = breadcrumbData;
-    return () => {
-      if (typeof window !== "undefined") delete window.__breadcrumbData;
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/nss/nss-benefits-new.webp",
+      pageTitle: "NSS",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "NSS", href: "/nss" },
+      ],
     };
-  }, []);
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
 
   return (
     <>

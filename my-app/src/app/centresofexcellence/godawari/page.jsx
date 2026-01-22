@@ -1,24 +1,11 @@
 "use client";
 
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import ImageContent from "@/app/components/ccrc/imagecontent";
 import CareerPath from "@/app/components/course/career_path";
 import AdmissionCareer from "@/app/components/general/admission_cta";
 import Gallery from "@/app/components/general/gallery";
-
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/godawari/godawari-banner.webp",
-  pageTitle: "Electric Vehicles Training Centre",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Centres of Excellence", href: "/centresofexcellence" },
-    {
-      label: "Electric Vehicles Training Centre",
-      href: "/centresofexcellence/godawari",
-    },
-  ],
-};
 
 const aboutCentreDescription = [
   "Eblu by Godawari Electric Motors Pvt. Ltd. is one of the leading electric vehicle brands, offering a wide range of EVs, including E-Auto, E-Cycle, E-Scooter, and E-Cargo vehicles. They design these vehicles from scratch by focusing on consumer needs such as safety, comfort, and performance. ",
@@ -101,6 +88,34 @@ const galleryImages = glimpses.map((g) => ({
 }));
 
 export default function ElectricVehiclesTrainingCentrePage() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/godawari/godawari-banner.webp",
+      pageTitle: "Electric Vehicles Training Centre",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Centres of Excellence", href: "/centresofexcellence" },
+        {
+          label: "Electric Vehicles Training Centre",
+          href: "/centresofexcellence/godawari",
+        },
+      ],
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   useLayoutEffect(() => {
     if (typeof window !== "undefined") window.__breadcrumbData = breadcrumbData;
     return () => {

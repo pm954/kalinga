@@ -1,25 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import AdmissionCareer from "../components/general/admission_cta";
 import CenterOfExcellence from "../components/about/center_of_excellence";
-
-/* ---------------- Breadcrumb ---------------- */
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/campuslife.webp",
-  pageTitle: "Academic and Industry Collaborations",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    {
-      label: "Academic and Industry Collaborations",
-      href: "academic-and-industry-collaborations",
-    },
-  ],
-};
-
-if (typeof window !== "undefined") {
-  window.__breadcrumbData = breadcrumbData;
-}
 
 /* ---------------- DATA (Easy to Update) ---------------- */
 const clubSections = [
@@ -263,6 +247,33 @@ const clubSections = [
 
 /* ---------------- PAGE ---------------- */
 export default function Page() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/campuslife.webp",
+      pageTitle: "Academic and Industry Collaborations",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        {
+          label: "Academic and Industry Collaborations",
+          href: "/academic-and-industry-collaborations",
+        },
+      ],
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   return (
     <>
       {/* Breadcrumb */}

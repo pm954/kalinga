@@ -127,23 +127,34 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
     // Check immediately for new data
     if (typeof window !== 'undefined' && window.__breadcrumbData) {
       const data = window.__breadcrumbData;
-      // Verify the data is for current pathname by checking if it's fresh
-      breadcrumbContext.setBreadcrumbData(data);
-      delete window.__breadcrumbData;
-      if (setIsLoading) {
-        setIsLoading(false);
+      // Verify the data is for current pathname - only use if pathname matches or not specified
+      if (!data.pathname || data.pathname === pathname) {
+        breadcrumbContext.setBreadcrumbData(data);
+        delete window.__breadcrumbData;
+        if (setIsLoading) {
+          setIsLoading(false);
+        }
+        return;
+      } else {
+        // Data doesn't match current pathname, ignore it
+        delete window.__breadcrumbData;
       }
-      return;
     }
 
     // Also check after a microtask to catch data set in useEffect
     const timeoutId = setTimeout(() => {
       if (typeof window !== 'undefined' && window.__breadcrumbData) {
         const data = window.__breadcrumbData;
-        breadcrumbContext.setBreadcrumbData(data);
-        delete window.__breadcrumbData;
-        if (setIsLoading) {
-          setIsLoading(false);
+        // Verify the data is for current pathname
+        if (!data.pathname || data.pathname === pathname) {
+          breadcrumbContext.setBreadcrumbData(data);
+          delete window.__breadcrumbData;
+          if (setIsLoading) {
+            setIsLoading(false);
+          }
+        } else {
+          // Data doesn't match current pathname, ignore it
+          delete window.__breadcrumbData;
         }
       } else if (!contextData && !heroImage && !pageTitle) {
         // If no data arrives and no props provided, stop loading after a reasonable timeout
@@ -174,14 +185,17 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   // Don't show breadcrumb on kalmat page
   if (pathname === '/kalmat') return null;
 
+  // Validate contextData belongs to current pathname
+  const validContextData = contextData && (!contextData.pathname || contextData.pathname === pathname) ? contextData : null;
+
   // Prioritize props over static data over context data for immediate rendering
   const staticData = STATIC_PAGE_DATA[pathname];
-  const finalHeroImage = heroImage ?? staticData?.image ?? contextData?.heroImage;
+  const finalHeroImage = heroImage ?? staticData?.image ?? validContextData?.heroImage;
   // For pageTitle: if contextData exists, prioritize it to preserve exact casing
   // Otherwise use props > static > context priority
-  const finalPageTitle = pageTitle ?? (contextData?.pageTitle ? contextData.pageTitle : (staticData?.title ?? contextData?.pageTitle));
-  const finalCustomBreadcrumbs = customBreadcrumbs ?? contextData?.customBreadcrumbs;
-  const finalImagePosition = contextData?.imageposition ?? imageposition;
+  const finalPageTitle = pageTitle ?? (validContextData?.pageTitle ? validContextData.pageTitle : (staticData?.title ?? validContextData?.pageTitle));
+  const finalCustomBreadcrumbs = customBreadcrumbs ?? validContextData?.customBreadcrumbs;
+  const finalImagePosition = validContextData?.imageposition ?? imageposition;
 
   // Generate breadcrumbs from path or use custom ones
   const generateBreadcrumbs = () => {
@@ -215,7 +229,8 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   const isDynamicRoute = pathname.includes('/academics/') || pathname.includes('/courses/') || pathname.includes('/departments/');
   const hasAnyData = finalHeroImage || finalPageTitle || (finalCustomBreadcrumbs && finalCustomBreadcrumbs.length > 0);
   // Only show loading if we truly have no data and context indicates loading
-  const isLoading = contextLoading && !hasAnyData;
+  // Also check if contextData is invalid (wrong pathname)
+  const isLoading = contextLoading && !hasAnyData && !validContextData;
 
   // Apply lowercase restrictions only for department or course pages
   const applyLowercaseRestrictions = isDynamicRoute;

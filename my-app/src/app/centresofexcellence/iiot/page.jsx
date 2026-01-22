@@ -1,24 +1,11 @@
 "use client";
 
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import ImageContent from "@/app/components/ccrc/imagecontent";
 import CareerPath from "@/app/components/course/career_path";
 import AdmissionCareer from "@/app/components/general/admission_cta";
 import Gallery from "@/app/components/general/gallery";
-
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/iiot/iiot-banner.webp",
-  pageTitle: "IIOT Training Centre",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Centres of Excellence", href: "/centresofexcellence" },
-    {
-      label: "IIOT Training Centre",
-      href: "/centresofexcellence/iiot",
-    },
-  ],
-};
 
 const aboutCentreDescription = [
   "Technoviz Automation is one of the leading technology companies that provides industrial automation, software development, and Industrial Internet of Things (IIoT) solutions.",
@@ -101,6 +88,34 @@ const galleryImages = glimpses.map((g) => ({
 }));
 
 export default function IIoTTrainingCentrePage() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/iiot/iiot-banner.webp",
+      pageTitle: "IIOT Training Centre",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Centres of Excellence", href: "/centresofexcellence" },
+        {
+          label: "IIOT Training Centre",
+          href: "/centresofexcellence/iiot",
+        },
+      ],
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   useLayoutEffect(() => {
     if (typeof window !== "undefined") window.__breadcrumbData = breadcrumbData;
     return () => {

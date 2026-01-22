@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import MainIntro from '../components/about/main_intro'
 import PublicationGrid from '../components/research/publication-grid'
 import DeptHeadIntro from '../components/department/dept_head_intro'
@@ -10,22 +11,30 @@ import AdmissionCareer from '../components/general/admission_cta'
 import IQACTabSection from '../components/iqac/iqac_tab_section'
 import QuickLinks from "../components/general/quick_links";
 
-// Breadcrumb configuration
-const breadcrumbData = {
-  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/about-banner.webp",
-  pageTitle: "IQAC",
-  customBreadcrumbs: [
-    { label: 'Home', href: '/' },
-    { label: 'IQAC', href: '/internal-quality-assurance-cell' }
-  ]
-};
-
 const IQACPage = () => {
+  const pathname = usePathname();
+
   useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/about-banner.webp",
+      pageTitle: "IQAC",
+      customBreadcrumbs: [
+        { label: 'Home', href: '/' },
+        { label: 'IQAC', href: '/internal-quality-assurance-cell' }
+      ]
+    };
+    
     if (typeof window !== 'undefined') {
       window.__breadcrumbData = breadcrumbData;
     }
-  }, []);
+    
+    return () => {
+      if (typeof window !== 'undefined' && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
 
   const MentorIntroProps = [
     {

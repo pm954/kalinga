@@ -1,26 +1,36 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import StudentReportmainintro from '@/app/components/student-support/studentreportmainintro'
 import AdmissionCareer from '@/app/components/general/admission_cta'
 import Studentreportservices from '@/app/components/student-support/studentreportservices'
 import Studentreportcards from '@/app/components/student-support/studentreportcards'
 
-
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/student-support/studentsupportmain.webp",
-  pageTitle: "Student Support",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Student Support", href: "/student-support" },
-  ],
-};
-
-if (typeof window !== "undefined") {
-  window.__breadcrumbData = breadcrumbData;
-}
-
 function StudentReport() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/student-support/studentsupportmain.webp",
+      pageTitle: "Student Support",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Student Support", href: "/student-support" },
+      ],
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   return (
     <>
       <style jsx global>{`

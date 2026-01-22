@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import StudentWelfareIntro from "../components/student-welfare/studentwelfare-intro";
 import SwdeanIntro from "../components/student-welfare/swdean-into";
 import SwCards from "../components/student-welfare/sw-cards";
@@ -13,19 +14,29 @@ import DataTable from "@/app/components/general/data-table";
 import MediaCardSlider from '../components/general/media-card-slider';
 
 const page = () => {
-  const breadcrumbData = {
-    heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/alumini/alumini.webp",
-    pageTitle: "Student Welfare",
-    customBreadcrumbs: [
-      { label: 'Home', href: '/' },
-      { label: 'Student Welfare', href: '/student-welfare' }
-    ]
-  };
+  const pathname = usePathname();
 
-  // Register breadcrumb data globally
-  if (typeof window !== 'undefined') {
-    window.__breadcrumbData = breadcrumbData;
-  }
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/alumini/alumini.webp",
+      pageTitle: "Student Welfare",
+      customBreadcrumbs: [
+        { label: 'Home', href: '/' },
+        { label: 'Student Welfare', href: '/student-welfare' }
+      ]
+    };
+    
+    if (typeof window !== 'undefined') {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== 'undefined' && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
 
 
   const kifAdditionalContent = [

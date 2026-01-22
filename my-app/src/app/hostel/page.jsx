@@ -1,5 +1,6 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import Hostelmainintro from '../components/hostel/hostelmainintro'
 import Hostelgrid from '../components/hostel/hostelgrid';
 import Hostelfacilities from '../components/hostel/hostelfacilities';
@@ -10,21 +11,31 @@ import Hostelrules from '../components/hostel/hostelrules';
 import Hostelvideo from '../components/hostel/hostelvideo';
 import Specialization from '../components/department/specialization';
 
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/facilities/hostel.webp",
-  pageTitle: "Hostel",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Hostel", href: "/hostel" },
-  ],
-};
-
-if (typeof window !== "undefined") {
-  window.__breadcrumbData = breadcrumbData;
-}
-
 function Hostel() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/facilities/hostel.webp",
+      pageTitle: "Hostel",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Hostel", href: "/hostel" },
+      ],
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   const specializationItems = [
     {
       id: 1,

@@ -18,16 +18,10 @@ import Image from "next/image";
 import SectionHeading from "@/app/components/general/SectionHeading";
 import WhyStudy from "@/app/components/department/why-study";
 import Gallery from "@/app/components/general/gallery";
-// Just define your breadcrumb data as a const - Breadcrumb will automatically use it
-// No imports needed for breadcrumb! Just define the const and it works.
-const breadcrumbData = {
-  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/kif/kif-banner.webp",
-  pageTitle: "Corporate Social Responsibility",
-  customBreadcrumbs: [
-    { label: 'Home', href: '/' },
-    { label: 'CSR', href: '/csr' }
-  ]
-};
+'use client';
+
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function KIFPage({
   visionMissionData: visionMissionDataProp,
@@ -35,6 +29,29 @@ export default function KIFPage({
 
   centres: centresProp,
 } = {}) {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/kif/kif-banner.webp",
+      pageTitle: "Corporate Social Responsibility",
+      customBreadcrumbs: [
+        { label: 'Home', href: '/' },
+        { label: 'CSR', href: '/csr' }
+      ]
+    };
+    
+    if (typeof window !== 'undefined') {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== 'undefined' && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
   const visionMissionData = visionMissionDataProp ?? [{
     visionTitle: "Core Values",
     missionTitle: "Mission",

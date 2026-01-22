@@ -1,25 +1,36 @@
 "use client"
 
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import KUFeesTabSection from '../components/ku-fees/kufeestabs'
 
 import AdmissionCareer from '../components/general/admission_cta';
 
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/contact-us/contact-us-banner.webp",
-  pageTitle: "KU Fees",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "KU Fees", href: "/ku-fees" },
-  ],
-};
-
-if (typeof window !== "undefined") {
-  window.__breadcrumbData = breadcrumbData;
-}
-
 function KuFees() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/contact-us/contact-us-banner.webp",
+      pageTitle: "KU Fees",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "KU Fees", href: "/ku-fees" },
+      ],
+    };
+    
+    if (typeof window !== "undefined") {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
 
   return (
     <div>

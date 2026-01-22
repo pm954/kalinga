@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import MainIntro from "../components/about/main_intro";
 import VisionMission from "../components/about/vision-mission";
 import ImageListItem from "../components/ccrc/imagelistitem";
@@ -8,17 +9,6 @@ import DataTable from "@/app/components/general/data-table";
 import GlobalArrowButton from "../components/general/global-arrow_button";
 import FlipbookTrigger from "../components/general/FlipbookTrigger";
 import Gallery from "../components/campuslife/campusgallery";
-/* ---------------- BREADCRUMB CONFIG ---------------- */
-
-const breadcrumbData = {
-  heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/academics/academics-banner.webp",
-  pageTitle: "Anti-Ragging Cell",
-  customBreadcrumbs: [
-    { label: "Home", href: "/" },
-    { label: "Anti Ragging Cell", href: "/anti-ragging-cell" },
-  ],
-};
 
 /* ---------------- VISION & MISSION ---------------- */
 
@@ -122,11 +112,30 @@ const AntiImages = [
 /* ---------------- PAGE COMPONENT ---------------- */
 
 export default function Page() {
+  const pathname = usePathname();
+
   useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage:
+        "https://kalinga-university.s3.ap-south-1.amazonaws.com/academics/academics-banner.webp",
+      pageTitle: "Anti-Ragging Cell",
+      customBreadcrumbs: [
+        { label: "Home", href: "/" },
+        { label: "Anti Ragging Cell", href: "/anti-ragging-cell" },
+      ],
+    };
+    
     if (typeof window !== "undefined") {
       window.__breadcrumbData = breadcrumbData;
     }
-  }, []);
+    
+    return () => {
+      if (typeof window !== "undefined" && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
 
   return (
     <>

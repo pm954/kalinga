@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import ImageContent from "@/app/components/ccrc/imagecontent";
 import VisionMission from "@/app/components/about/vision-mission";
@@ -15,24 +16,6 @@ import AdmissionCareer from "@/app/components/general/admission_cta";
 import Gallery from '../components/campuslife/campusgallery';
 
 
-// Model breradcrumb
-
-const breadcrumbData = {
-  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/kif/k4.jpg",
-  pageTitle: "Kalinga Incubation Foundation",
-  imageposition: "center",
-  customBreadcrumbs: [
-    { label: 'Home', href: '/' },
-    { label: 'Kif', href: '/kif' }
-  ]
-};
-
-// Register it globally (no import needed - this pattern works automatically)
-if (typeof window !== 'undefined') {
-  window.__breadcrumbData = breadcrumbData;
-}
-
-
 const defaultMission = [
   'The primary purpose of Kalinga University is to become a global education hub in which faculty, staff, and students can discover, examine critically, preserve, and transmit the knowledge, wisdom, and values that will ensure the survival of future generations and improve the quality of life for all.',
   'The University seeks to help students develop an understanding and appreciation for the complex cultural and physical worlds in which they live and to realise their highest potential of intellectual, physical, and human development.',
@@ -43,15 +26,36 @@ export default function KIFPage({
   boxItems: boxItemsProp,
   testimonials: testimonialsProp,
   links: linksProp,
+}) {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const breadcrumbData = {
+      pathname: pathname,
+      heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/kif/k4.jpg",
+      pageTitle: "Kalinga Incubation Foundation",
+      imageposition: "center",
+      customBreadcrumbs: [
+        { label: 'Home', href: '/' },
+        { label: 'Kif', href: '/kif' }
+      ]
+    };
+    
+    if (typeof window !== 'undefined') {
+      window.__breadcrumbData = breadcrumbData;
+    }
+    
+    return () => {
+      if (typeof window !== 'undefined' && window.__breadcrumbData?.pathname === pathname) {
+        delete window.__breadcrumbData;
+      }
+    };
+  }, [pathname]);
+
   kifSteps: kifStepsProp,
   organogram: organogramProp,
   centres: centresProp,
 } = {}) {
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.__breadcrumbData = breadcrumbData;
-    }
-  }, []);
 
   const visionMissionData = visionMissionDataProp ?? [{
     visionTitle: "Vision",
