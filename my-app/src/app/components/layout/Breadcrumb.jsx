@@ -87,8 +87,7 @@ const STATIC_PAGE_DATA = {
   '/contact-us': { title: 'Contact Us' },
   '/careers': { title: 'Careers' },
   '/career-and-corporate-resource-centre': {
-    title: 'Career and Corporate Resource Centre',
-    image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/kif/kif-banner.webp'
+    title: 'Career and Corporate Resource Centre'
   },
   '/ccrc': { title: 'CCRC' },
   '/anti-ragging-cell': { title: 'Anti Ragging Cell' },
@@ -178,7 +177,9 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   // Prioritize props over static data over context data for immediate rendering
   const staticData = STATIC_PAGE_DATA[pathname];
   const finalHeroImage = heroImage ?? staticData?.image ?? contextData?.heroImage;
-  const finalPageTitle = pageTitle ?? staticData?.title ?? contextData?.pageTitle;
+  // For pageTitle: if contextData exists, prioritize it to preserve exact casing
+  // Otherwise use props > static > context priority
+  const finalPageTitle = pageTitle ?? (contextData?.pageTitle ? contextData.pageTitle : (staticData?.title ?? contextData?.pageTitle));
   const finalCustomBreadcrumbs = customBreadcrumbs ?? contextData?.customBreadcrumbs;
   const finalImagePosition = contextData?.imageposition ?? imageposition;
 
@@ -219,8 +220,12 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   // Apply lowercase restrictions only for department or course pages
   const applyLowercaseRestrictions = isDynamicRoute;
 
-  // Use finalPageTitle (which includes props, static data, or context)
-  const currentPageTitle = toTitleCase(finalPageTitle || breadcrumbs[breadcrumbs.length - 1]?.label || '', applyLowercaseRestrictions);
+  // Preserve exact casing if pageTitle comes from contextData (useBreadcrumbData)
+  // Otherwise apply toTitleCase transformation
+  const pageTitleFromContext = contextData?.pageTitle && !pageTitle;
+  const currentPageTitle = pageTitleFromContext 
+    ? contextData.pageTitle 
+    : toTitleCase(finalPageTitle || breadcrumbs[breadcrumbs.length - 1]?.label || '', applyLowercaseRestrictions);
 
   // Use pathname as key to force re-render when route changes
   return (

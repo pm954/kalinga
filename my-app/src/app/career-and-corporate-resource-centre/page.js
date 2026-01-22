@@ -12,27 +12,24 @@ import AdmissionCareer from "@/app/components/general/admission_cta";
 import MediaCardSlider from "@/app/components/general/media-card-slider";
 import { title } from "process";
 import SectionHeading from "../components/general/SectionHeading";
+import { useBreadcrumbData } from "@/app/components/layout/BreadcrumbContext";
 
 const breadcrumbData = {
-  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/kif/kif-banner.webp",
+  heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/IMG-20250409-WA0032-Picsart-AiImageEnhancer.jpg",
   pageTitle: "Career and Corporate Resource Centre",
+  imageposition: "object-center",
   customBreadcrumbs: [
     { label: 'Home', href: '/' },
     { label: 'Career and Corporate Resource Centre', href: '/career-and-corporate-resource-centre' }
   ]
 };
 
-// Register it globally (no import needed - this pattern works automatically)
-if (typeof window !== 'undefined') {
-  window.__breadcrumbData = breadcrumbData;
-}
-
 
 
 const cards = [
   {
-    title: "Corporate Training And Consultancy Division (CTCD)",
-    description: "Due to increasing competition in the domestic and international markets, political influence, and technological advancements, organisations find it difficult to compete in the marketplace.",
+    title: "Corporate Training and Consultancy Division (CTCD)",
+    description: "CTCD helps businesses effectively utilise their most valuable asset, i.e., THEIR PEOPLE, through one-on-one consultancy services and training programs using experiential methods.",
     imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ctcd.png",
     logoSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/logo-ctcd.svg",
     subtitle: "CORPORATE TRAINING & CONSULTANCY DIVISION",
@@ -40,7 +37,7 @@ const cards = [
   },
   {
     title: "Corporate Social Responsibility (CSR) ",
-    description: "Companies today understand the importance of giving back by being socially responsible towards society, but with a lack of time, planning, and expertise, they fail to develop effective programs.",
+    description: "The CSR initiatives at Kalinga come under Bhagwan Shri Bala Sai Educational and Charitable Society, which assists organisations in staying ahead in sustainable and social welfare.",
     imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/csr.png",
     logoSrc: "",
     subtitle: "CORPORATE TRAINING & CONSULTANCY DIVISION",
@@ -56,7 +53,7 @@ const cards = [
   },
   {
     title: "Training & Placements",
-    description: "The Career and Corporate Centre of Kalinga University is a hub for career guidance, training and corporate partnerships. With modern infrastructure and resources, the centre meets industry standards and has even received appreciation from top organisations.",
+    description: "CCRC is a hub for career guidance, training, and corporate partnerships. With modern infrastructure and resources, the centre meets industry standards and has even received appreciation from top organisations.",
     imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/placement.png",
     logoSrc: "",
     subtitle: "CORPORATE TRAINING & CONSULTANCY DIVISION",
@@ -120,31 +117,19 @@ const sliderItems = [
 const Items = [
   {
     id: 1,
-    text: "Improved performance and output"
+    text: "Collaborative [Industry + Academia Expertise]"
   },
   {
     id: 2,
-    text: "Better decision-making"
+    text: "Customized [Solutions for the Industry]"
   },
   {
     id: 3,
-    text: "Enhanced employee engagement rate"
+    text: "Result-Oriented [Turn Key Execution]"
   },
   {
     id: 4,
-    text: "Increased competitiveness"
-  },
-  {
-    id: 5,
-    text: "Improved leadership and team collaboration"
-  },
-  {
-    id: 6,
-    text: "Improved client/customer satisfaction"
-  },
-  {
-    id: 7,
-    text: "Stronger work culture and long-term profitability"
+    text: "Comprehensive [Single Window Solution on HR Consultancy, Training and Development, Recruitment]"
   }
 ]
 const blueItems = [
@@ -340,6 +325,8 @@ const MentorIntroProps = [
   }
 ]
 export default function CCRCPage() {
+  useBreadcrumbData(breadcrumbData);
+  
   return <>
 
     <ImageContent
@@ -355,11 +342,14 @@ export default function CCRCPage() {
       title="Our Domains"
       titleClassName="text-center mt-10"
     />
+    <p className="text-center text-gray-600 max-w-6xl mx-auto mt-4 mb-8">
+      Explore our customised solutions designed to strengthen corporate systems and improve student employability.
+    </p>
     <Cards cards={cards} />
     <Hearfrom items={sliderItems} title="From Our Clients" />
     <MediaCardSlider
       categoryTitle=""
-      title="Video Interviews"
+      title="Featured Expert Talks"
       description=""
       videoItems={videoItems}
       cardBgClass="bg-white"

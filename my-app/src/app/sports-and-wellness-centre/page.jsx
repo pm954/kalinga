@@ -5,7 +5,6 @@ import SportsandwellnessMainIntro from '@/app/components/sports-and-wellness-cen
 import SportsFacilitiesTabs from '@/app/components/sports-and-wellness-centre/sportsfacilitiestabs'
 import NewsEvents from '@/app/components/home/news_and_events'
 import AdmissionCareer from '@/app/components/general/admission_cta'
-<<<<<<< Updated upstream
 import Gallery from '@/app/components/general/gallery'
 import Sportsandwellnesshighlightvideo from '../components/sports-and-wellness-centre/sportsandwellnesshighlightvideo'
 import Sportsandwellnessvideo from '../components/sports-and-wellness-centre/sportsandwellnessvideo'
@@ -148,10 +147,6 @@ const galleryItems = [
     description: "Fitness Centre",
   },
 ]
-=======
-import Sportsandwellnesshighlightvideo from '../components/sports-and-wellness-centre/sportsandwellnesshighlightvideo'
-import Sportsandwellnessvideo from '../components/sports-and-wellness-centre/sportsandwellnessvideo'
->>>>>>> Stashed changes
 
 const breadcrumbData = {
   heroImage:
