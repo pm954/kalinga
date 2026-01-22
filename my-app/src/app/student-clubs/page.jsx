@@ -222,8 +222,8 @@ export default function Page() {
                     title=""
                     image={club.image}
                     usePTagForName={true}
-                    imageFit="contain"
-                    imageContainerClassName="aspect-square"
+                    imageFit="contain  p-20"
+                    imageContainerClassName="aspect-square bg-white"
                   />
                 </div>
               ))}

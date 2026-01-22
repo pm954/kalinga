@@ -264,7 +264,7 @@ export default function DynamicCoursePage() {
   const mainIntroContent = courseData?.about_sections?.[0] ? {
     title: courseData.about_sections[0].heading,
     subtitle: "About The Program",
-    description: parseHtmlToParagraphs(courseData.about_sections[0].content),
+    description: courseData.about_sections[0].content, // Keep HTML intact for ul/li support
     imageUrl: courseData.about_sections[0].image,
     imageAlt: courseData.about_sections[0].alt,
   } : null;
@@ -632,7 +632,7 @@ export default function DynamicCoursePage() {
             description={mainIntroContent.description}
             imageUrl={mainIntroContent.imageUrl}
             imageAlt={mainIntroContent.imageAlt}
-            showKnowMore={false}
+            showKnowMore={true}
           />
         </div>
       )}

@@ -1,72 +1,39 @@
 'use client';
 
-import React from 'react';
-import FlipbookTrigger from '../components/general/FlipbookTrigger';
+import CustomScrollCard from '../components/gsap/CustomScrollCard';
 
-const pdfLinks = [
-    {
-        title: 'Pharmacy Magazine',
-        url: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/pharmacy_magazine.pdf',
-        color: 'from-blue-600 to-indigo-700'
-    },
-    {
-        title: 'NCC Newsletter',
-        url: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/ncc_newsletter.pdf',
-        color: 'from-emerald-600 to-teal-700'
-    },
-    {
-        title: 'University Prospectus',
-        url: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/prospectus.pdf',
-        color: 'from-orange-500 to-red-600'
-    },
-    {
-        title: 'Academic Calendar',
-        url: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/academic_calendar.pdf',
-        color: 'from-purple-600 to-pink-600'
-    }
-];
+export default function TestPage() {
+    const cardData = [
+        {
+            icon: (
+                <svg className="w-16 h-16 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l9-5-9-5-9 5 9 5z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                </svg>
+            ),
+            title: "Become Tech-Savvy",
+            description: "The world needs new technologies, and companies are hunting for skilled professionals who generate code or are good problem solvers. We'll help you turn your ideas into a viral application."
+        },
+        {
+            icon: (
+                <svg className="w-16 h-16 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+            ),
+            title: "Innovation & Creativity",
+            description: "Transform your innovative ideas into reality with cutting-edge technology and creative problem-solving approaches that make a real impact in the digital world."
+        },
+        {
+            icon: (
+                <svg className="w-16 h-16 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+            ),
+            title: "Fast-Track Your Career",
+            description: "Accelerate your professional growth with industry-relevant skills and hands-on experience that employers are actively seeking in today's competitive market."
+        }
+    ];
 
-export default function FlipbookDemoPage() {
-    return (
-        <div className="min-h-screen bg-gray-50 py-20 px-4">
-            <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-stix text-gray-900 mb-4">University Publications</h1>
-                    <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                        Explore our latest magazines, newsletters, and academic documents in our interactive 3D flipbook viewer.
-                    </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {pdfLinks.map((pdf, index) => (
-                        <FlipbookTrigger
-                            key={index}
-                            pdfUrl={pdf.url}
-                            title={pdf.title}
-                        >
-                            <button className={`group relative h-48 w-full rounded-2xl bg-gradient-to-br ${pdf.color} p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex flex-col justify-between text-left overflow-hidden ring-1 ring-white/20`}>
-                                <div className="relative z-10">
-                                    <div className="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-md flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                        </svg>
-                                    </div>
-                                    <h2 className="text-xl font-bold text-white leading-tight">{pdf.title}</h2>
-                                </div>
-                                <div className="relative z-10 flex items-center text-white/80 text-sm font-medium group-hover:text-white transition-colors">
-                                    <span>Read Magazine</span>
-                                    <svg className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                    </svg>
-                                </div>
-
-                                {/* Decorative elements */}
-                                <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-500"></div>
-                            </button>
-                        </FlipbookTrigger>
-                    ))}
-                </div>
-            </div>
-        </div>
-    );
+    return <CustomScrollCard cards={cardData} />;
 }

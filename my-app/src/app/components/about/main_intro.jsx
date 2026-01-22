@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import GlobalArrowButton from "../general/global-arrow_button";
 import SectionHeading from "../general/SectionHeading";
 import FlipbookTrigger from "../general/FlipbookTrigger";
+import "./main_intro.css";
 
 const defaultContent = {
   title: "Transforming futures with knowledge & innovation",
@@ -94,11 +95,45 @@ export default function MainIntro({
             />
 
             <div className="space-y-4">
-              {visibleParagraphs.map((paragraph, idx) => (
-                <p key={idx} className={`${descriptionClassName} leading-relaxed break-words overflow-visible text-justify`}>
-                  {paragraph}
-                </p>
-              ))}
+              {Array.isArray(description) ? (
+                // Array format - render as paragraphs
+                visibleParagraphs.map((paragraph, idx) => (
+                  <p key={idx} className={`${descriptionClassName} leading-relaxed break-words overflow-visible text-justify`}>
+                    {paragraph}
+                  </p>
+                ))
+              ) : (
+                // HTML string format - render with dangerouslySetInnerHTML to support ul/li
+                (() => {
+                  // Parse HTML to extract sections (p, ul, ol tags)
+                  if (typeof window === 'undefined' || !description) {
+                    return (
+                      <div
+                        className={`main-intro-content ${descriptionClassName} leading-relaxed break-words overflow-visible text-justify max-w-none`}
+                        dangerouslySetInnerHTML={{ __html: description }}
+                      />
+                    );
+                  }
+
+                  // Parse the HTML
+                  const parser = new DOMParser();
+                  const doc = parser.parseFromString(description, 'text/html');
+                  const sections = Array.from(doc.body.children);
+
+                  // Determine visible sections based on showAll state
+                  const visibleSections = showAll ? sections : sections.slice(0, initialVisibleParagraphs);
+
+                  // Reconstruct HTML from visible sections
+                  const visibleHtml = visibleSections.map(el => el.outerHTML).join('');
+
+                  return (
+                    <div
+                      className={`main-intro-content ${descriptionClassName} leading-relaxed break-words overflow-visible text-justify max-w-none`}
+                      dangerouslySetInnerHTML={{ __html: visibleHtml }}
+                    />
+                  );
+                })()
+              )}
 
               {/* Points List */}
               {points && Array.isArray(points) && points.length > 0 && (!hidePointsUntilExpanded || showAll) && (
@@ -121,24 +156,44 @@ export default function MainIntro({
                 </ul>
               )}
 
-              {showKnowMore && (descriptionArray.length > initialVisibleParagraphs || (hidePointsUntilExpanded && points && points.length > 0) || (knowMoreHref && knowMoreHref !== "#")) && (
-                <div className="pt-2">
-                  {knowMoreHref && knowMoreHref !== "#" ? (
-                    (() => {
-                      const isPdf = knowMoreHref.toLowerCase().endsWith(".pdf");
-                      const buttonEl = (
-                        <GlobalArrowButton
-                          className="w-fit !bg-white !text-white gap-2 !px-0 !py-0"
-                          textClassName="!text-[var(--button-red)] !font-semibold !px-0"
-                          arrowClassName="p-[3px] !px-1 mr-2 !py-1 !bg-[var(--button-red)]"
-                          arrowIconClassName="!text-white"
-                        >
-                          {knowMoreLabel}
-                        </GlobalArrowButton>
-                      );
+              {showKnowMore && (
+                (Array.isArray(description) && descriptionArray.length > initialVisibleParagraphs) ||
+                (!Array.isArray(description) && typeof window !== 'undefined' && (() => {
+                  const parser = new DOMParser();
+                  const doc = parser.parseFromString(description || '', 'text/html');
+                  return doc.body.children.length > initialVisibleParagraphs;
+                })()) ||
+                (hidePointsUntilExpanded && points && points.length > 0) ||
+                (knowMoreHref && knowMoreHref !== "#")
+              ) && (
+                  <div className="pt-2">
+                    {knowMoreHref && knowMoreHref !== "#" ? (
+                      (() => {
+                        const isPdf = knowMoreHref.toLowerCase().endsWith(".pdf");
+                        const buttonEl = (
+                          <GlobalArrowButton
+                            className="w-fit !bg-white !text-white gap-2 !px-0 !py-0"
+                            textClassName="!text-[var(--button-red)] !font-semibold !px-0"
+                            arrowClassName="p-[3px] !px-1 mr-2 !py-1 !bg-[var(--button-red)]"
+                            arrowIconClassName="!text-white"
+                          >
+                            {knowMoreLabel}
+                          </GlobalArrowButton>
+                        );
 
-                      return isPdf ? (
-                        <FlipbookTrigger pdfUrl={knowMoreHref} title={knowMoreLabel}>
+                        return isPdf ? (
+                          <FlipbookTrigger pdfUrl={knowMoreHref} title={knowMoreLabel}>
+                            <a
+                              href={knowMoreHref}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={onKnowMore}
+                              className="inline-block"
+                            >
+                              {buttonEl}
+                            </a>
+                          </FlipbookTrigger>
+                        ) : (
                           <a
                             href={knowMoreHref}
                             target="_blank"
@@ -148,32 +203,21 @@ export default function MainIntro({
                           >
                             {buttonEl}
                           </a>
-                        </FlipbookTrigger>
-                      ) : (
-                        <a
-                          href={knowMoreHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={onKnowMore}
-                          className="inline-block"
-                        >
-                          {buttonEl}
-                        </a>
-                      );
-                    })()
-                  ) : (
-                    <GlobalArrowButton
-                      className="w-fit !bg-white !text-white gap-2 !px-0 !py-0"
-                      textClassName="!text-[var(--button-red)] !font-semibold !px-0"
-                      arrowClassName="p-[3px] !px-1 mr-2 !py-1 !bg-[var(--button-red)]"
-                      arrowIconClassName="!text-white"
-                      onClick={() => setShowAll(!showAll)}
-                    >
-                      {showAll ? "Show Less" : knowMoreLabel}
-                    </GlobalArrowButton>
-                  )}
-                </div>
-              )}
+                        );
+                      })()
+                    ) : (
+                      <GlobalArrowButton
+                        className="w-fit !bg-white !text-white gap-2 !px-0 !py-0"
+                        textClassName="!text-[var(--button-red)] !font-semibold !px-0"
+                        arrowClassName="p-[3px] !px-1 mr-2 !py-1 !bg-[var(--button-red)]"
+                        arrowIconClassName="!text-white"
+                        onClick={() => setShowAll(!showAll)}
+                      >
+                        {showAll ? "Show Less" : knowMoreLabel}
+                      </GlobalArrowButton>
+                    )}
+                  </div>
+                )}
             </div>
           </div>
 
