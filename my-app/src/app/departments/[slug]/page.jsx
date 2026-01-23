@@ -31,6 +31,8 @@ import CareerPath from "@/app/components/course/career_path";
 import { fetchAllDepartments, fetchDepartmentCompleteDetail, fetchAllDepartmentsCourses, parseHtmlToParagraphs, parseHtmlToText, parseHtmlListItems } from "@/app/lib/api";
 import { useBreadcrumbData } from "@/app/components/layout/BreadcrumbContext";
 import Gallery from "@/app/components/general/gallery";
+import CustomScrollCard from "@/app/components/gsap/CustomScrollCard";
+import Image from "next/image";
 
 // Generate slug from department name if slug is not available
 const generateSlug = (name) => {
@@ -493,6 +495,45 @@ export default function DynamicDepartmentPage() {
           items={whyStudyContent.items}
         />
       )}
+
+      {/* Specializations Section with CustomScrollCard */}
+      {departmentData?.benefits && departmentData.benefits.length > 0 && (
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="mb-12 text-center">
+              <SectionHeading
+                title="Specializations"
+                subtitle="Explore Our Areas of Expertise"
+                titleClassName="text-center"
+                subtitleClassName="text-center"
+              />
+            </div>
+            <CustomScrollCard
+              cards={departmentData.benefits
+                .sort((a, b) => (a.display_order || 0) - (b.display_order || 0))
+                .map((benefit) => ({
+                  icon: benefit.image ? (
+                    <Image
+                      src={benefit.image}
+                      alt={benefit.heading || 'Specialization'}
+                      width={64}
+                      height={64}
+                      className="w-16 h-16 object-contain"
+                    />
+                  ) : (
+                    <svg className="w-16 h-16 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l9-5-9-5-9 5 9 5z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                    </svg>
+                  ),
+                  title: benefit.heading || '',
+                  description: parseHtmlToText(benefit.text) || '',
+                }))}
+            />
+          </div>
+        </section>
+      )}
+
       {departmentData?.how_we_stand_items && departmentData.how_we_stand_items.length > 0 && (
         <WeStandOut
           cards={departmentData.how_we_stand_items
