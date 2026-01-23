@@ -14,31 +14,31 @@ const coreValues = [
     id: 1,
     title: "Holistic Development",
     subtitle: "We at Kalinga University are committed to all round development of each and every student. We believe that learning should not remain confined to the classroom and aim at holistic development.",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Holistic+Development.svg"
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/values/tree-with-many-leaves.svg"
   },
   {
     id: 2,
     title: "Team Spirit & Bonding",
     subtitle: "Kalinga University is an extended family where students are integrated into one family with a close bond and team spirit.",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Community+Services.svg"
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/values/partners.svg"
   },
   {
     id: 3,
     title: "Multicultural Environment",
     subtitle: "We believe that students learn in multicultural and multinational environment as their train of thought is broadened and they are exposed to different ideologies, practices and culture.",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Cultural+Celebrations.svg"
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/values/tree-new.svg"
   },
   {
     id: 4,
     title: "Global Diversity",
     subtitle: "We warmly welcome students from all over the world and offer them a safe and nurturing place to live, study and also get engaged in a community that is multinational.",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Global.svg"
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/values/citizens.svg"
   },
   {
     id: 5,
     title: "Illuminating The World With Light Of Knowledge",
     subtitle: "We aim to support learning that will advance human knowledge to develop and educate the leaders of tomorrow and research that tackles the most pressing problems of the global community.",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/icons/Experienced+Faculties.svg"
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/values/ideas.svg"
   }
 ];
 
