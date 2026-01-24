@@ -1,7 +1,24 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+
+// Helper function to normalize strings for flexible searching (removes punctuation, filler words, and extra spaces)
+const normalizeString = (str) => {
+  if (!str) return "";
+
+  // List of common filler words to ignore in search
+  const fillerWords = ["in", "of", "and", "the", "for", "to", "at", "by", "with", "special"];
+
+  return str
+    .toLowerCase()
+    // Replace all punctuation including brackets, braces, and symbols with space
+    .replace(/[.\-&(),\[\]{}:|]/g, " ")
+    .split(/\s+/)              // Split into words
+    .filter(word => word && !fillerWords.includes(word)) // Remove empty strings and filler words
+    .join("")                  // Join back with no spaces for dense comparison
+    .trim();
+};
 
 const defaultPrograms = [
   {
@@ -63,9 +80,51 @@ export default function ProgramsOffered({
 }) {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredPrograms = programs.filter((program) =>
-    program.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredPrograms = useMemo(() => {
+    if (!searchQuery.trim()) return programs;
+
+    const query = searchQuery.trim().toLowerCase();
+    const normalizedQuery = normalizeString(query);
+    const queryTokens = query.split(/\s+/).filter(t => t.length > 1);
+
+    return programs
+      .map(program => {
+        let score = 0;
+        const title = program.title || "";
+        const shortName = program.shortName || "";
+
+        const normTitle = normalizeString(title);
+        const normShort = normalizeString(shortName);
+
+        // 1. Exact matches in normalized strings (Highest priority)
+        if (normShort === normalizedQuery) score += 100;
+        else if (normShort.includes(normalizedQuery)) score += 80;
+
+        if (normTitle === normalizedQuery) score += 90;
+        else if (normTitle.includes(normalizedQuery)) score += 60;
+
+        // 2. Token based matching
+        if (queryTokens.length > 0) { // Changed from > 1 to > 0 to handle single token queries
+          let tokensMatched = 0;
+          queryTokens.forEach(token => {
+            const normToken = normalizeString(token);
+            if (normTitle.includes(normToken) || normShort.includes(normToken)) {
+              tokensMatched++;
+              score += 10;
+            }
+          });
+          if (tokensMatched === queryTokens.length) score += 30;
+        }
+
+        // 3. Simple fuzzy/typo tolerance
+        if (title.toLowerCase().startsWith(query)) score += 25;
+        if (shortName.toLowerCase().startsWith(query)) score += 35;
+
+        return { ...program, searchScore: score };
+      })
+      .filter(program => program.searchScore > 0)
+      .sort((a, b) => b.searchScore - a.searchScore);
+  }, [programs, searchQuery]);
 
   return (
     <section className="bg-[var(--dark-blue)] relative mx-2 rounded-xl pt-16">
@@ -93,7 +152,7 @@ export default function ProgramsOffered({
           {/* Right Column */}
           <div className="flex flex-col justify-start order-2 lg:order-2">
             {/* Search Bar */}
-            <div className="relative pb-4">
+            <div className="relative pb-4 px-3 lg:px-0">
               <input
                 type="text"
                 placeholder="Search Programs...."
@@ -118,6 +177,11 @@ export default function ProgramsOffered({
 
             {/* Program List */}
             <div className="max-h-[620px] overflow-y-auto custom-scrollbar p-3">
+              {filteredPrograms.length === 0 && (
+                <div className="text-white/70 text-center py-10 bg-white/5 rounded-lg border border-white/10">
+                  No programs found matching your search.
+                </div>
+              )}
               {filteredPrograms.map((program) => (
                 <div
                   key={program.id}
@@ -133,9 +197,18 @@ export default function ProgramsOffered({
                   {/* Content */}
                   <div className="relative z-10 flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-[var(--button-red)] text-xl md:text-2xl lg:text-3xl !font-medium mb-2 font-plus-jakarta-sans normal-case  !text-base md:!text-lg lg:!text-xl">
-                        {program.title}
+                      {/* Red Heading - Short Name */}
+                      <h3 className="text-[var(--button-red)] text-xl md:text-2xl lg:text-3xl !font-medium mb-1 font-plus-jakarta-sans normal-case  !text-base md:!text-lg lg:!text-xl">
+                        {program.shortName || program.title}
                       </h3>
+
+                      {/* Full Name - Next line */}
+                      {program.shortName && (
+                        <p className="text-gray-600 text-xs md:text-sm font-medium mb-3 font-plus-jakarta-sans">
+                          {program.title}
+                        </p>
+                      )}
+
                       <div className="flex items-center gap-2 flex-wrap">
                         <p className="text-[var(--light-text-gray)] !font-[500]">
                           Duration: {program.duration}

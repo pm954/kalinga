@@ -367,6 +367,7 @@ export default function FacultyOfInformationTechnology() {
       return {
         id: course.id,
         title: course.name || "",
+        shortName: course.short_name || "",
         duration: duration,
         level: level,
       };

@@ -284,6 +284,7 @@ export default function DynamicDepartmentPage() {
       return {
         id: course.id,
         title: course.name || "",
+        shortName: course.short_name || "",
         duration: duration,
         level: level,
         slug: course.slug || null,
