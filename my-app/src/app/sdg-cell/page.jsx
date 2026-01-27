@@ -283,7 +283,7 @@ export default function SDGCell() {
         imageObjectFit="contain"
       />
       <SdgTabSection />
-      <FacilitySlider />
+      {/* <FacilitySlider /> */}
       {/* <SpecializationCard /> */}
       <FAQ
         title=""
